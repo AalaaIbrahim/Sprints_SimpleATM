@@ -17,7 +17,7 @@
 /*************************************************************************************************************
  * 												Global Variables
  ************************************************************************************************************/
-Uchar8_t keys_arr [] = {'+','-','=','~','0','6','7','8','9'};
+//Uchar8_t keys_arr [] = {'+','-','=','~','0','6','7','8','9'};
 
 /*************************************************************************************************************
  * 											Function Implementation
@@ -33,8 +33,7 @@ void KEYPAD_init()
 	DIO_s8SETPinDir(C2,INPUT);
 	DIO_s8SETPinDir(C3,INPUT);
 	
-	//KEYPAD_DIR &=~(1<<C1) | (1<<C2) | (1<<C3); // COLUMNS ARE INPUTS
-	//KEYPAD_DIR |= (1<<R1) | (1<<R2) | (1<<R3); // ROWS ARE OUTPUTS
+	
 }
 EN_KEYPAD_BTNS checkR1()
 {
@@ -44,8 +43,7 @@ EN_KEYPAD_BTNS checkR1()
 	DIO_s8SETPinVal(R2,HIGH);
 	DIO_s8SETPinVal(R3,HIGH);
 	DIO_s8SETPinVal(R1,LOW);
-	//KEYPAD_PORT |= (1<<C1) | (1<<C2) |(1<<C3) | (1<<R2) | (1<<R3);
-	//KEYPAD_PORT &=~ (1<<R1);
+	
 	Uchar8_t val = 1;
 	DIO_s8GETPinVal(C1,&val);
 	if(val == 0)
@@ -54,7 +52,7 @@ EN_KEYPAD_BTNS checkR1()
 		{
 			DIO_s8GETPinVal(C1,&val);
 		}
-		return KEY_INCREAMENT;
+		return KEY_1;
 	}
 	val = 1;
 	DIO_s8GETPinVal(C2,&val);
@@ -64,7 +62,7 @@ EN_KEYPAD_BTNS checkR1()
 		{
 			DIO_s8GETPinVal(C2,&val);
 		}
-		return KEY_DECREAMENT;
+		return KEY_2;
 	}
 	val = 1;
 	DIO_s8GETPinVal(C3,&val);
@@ -74,15 +72,14 @@ EN_KEYPAD_BTNS checkR1()
 		{
 			DIO_s8GETPinVal(C3,&val);
 		}
-		return KEY_SET;
+		return KEY_3;
 	}
 	return KEY_NOTHING;
 	
 }
 EN_KEYPAD_BTNS checkR2()
 {
-	//KEYPAD_PORT |= (1<<C1) | (1<<C2) |(1<<C3) | (1<<R1) | (1<<R3);
-	//KEYPAD_PORT &=~ (1<<R2);
+	
 	DIO_s8SETPinVal(C1,HIGH);
 	DIO_s8SETPinVal(C2,HIGH);
 	DIO_s8SETPinVal(C3,HIGH);
@@ -98,7 +95,7 @@ EN_KEYPAD_BTNS checkR2()
 		{
 			DIO_s8GETPinVal(C1,&val);
 		}
-		return KEY_ADJUST;
+		return KEY_4;
 	}
 	val = 1;
 	DIO_s8GETPinVal(C2,&val);
@@ -108,7 +105,7 @@ EN_KEYPAD_BTNS checkR2()
 		{
 			DIO_s8GETPinVal(C2,&val);
 		}
-		return KEY_RESET;
+		return KEY_5;
 	}
 	val = 1;
 	DIO_s8GETPinVal(C3,&val);
@@ -125,8 +122,7 @@ EN_KEYPAD_BTNS checkR2()
 }
 EN_KEYPAD_BTNS checkR3()
 {
-	//KEYPAD_PORT |= (1<<C1) | (1<<C2) |(1<<C3) | (1<<R1) | (1<<R2);
-	//KEYPAD_PORT &=~ (1<<R3);
+	
 	DIO_s8SETPinVal(C1,HIGH);
 	DIO_s8SETPinVal(C2,HIGH);
 	DIO_s8SETPinVal(C3,HIGH);

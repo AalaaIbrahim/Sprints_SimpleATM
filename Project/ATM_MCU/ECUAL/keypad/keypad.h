@@ -20,9 +20,7 @@
 #define C2     DIO_PINC_6
 #define C3     DIO_PINC_7
 
-//#define KEYPAD_PORT *PORTC_REG
-//#define KEYPAD_DIR  *DDRC_REG
-//#define KEYPAD_PIN  *PINC_REG
+
 
 
 /*************************************************************************************************************
@@ -30,16 +28,16 @@
  ************************************************************************************************************/
 typedef enum EN_KEYPAD_BTNS
 {
-	KEY_INCREAMENT=0,
-	KEY_DECREAMENT,
-	KEY_SET,
-	KEY_ADJUST,
-	KEY_RESET,
+	KEY_NOTHING=0,
+	KEY_1,
+	KEY_2,
+	KEY_3,
+	KEY_4,
+	KEY_5,
 	KEY_6,
 	KEY_7,
 	KEY_8,
-	KEY_9,
-	KEY_NOTHING
+	KEY_9
 	
 }EN_KEYPAD_BTNS;
 
