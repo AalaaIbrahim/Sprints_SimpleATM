@@ -1,0 +1,699 @@
+
+CARD_MCU.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000003ba  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000010  00800060  000003ba  0000044e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000016  00800070  00800070  0000045e  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000045e  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000490  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000120  00000000  00000000  000004cc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000014c1  00000000  00000000  000005ec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000912  00000000  00000000  00001aad  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000096e  00000000  00000000  000023bf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  0000028c  00000000  00000000  00002d30  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000008b2  00000000  00000000  00002fbc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000be2  00000000  00000000  0000386e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000000e0  00000000  00000000  00004450  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 77 01 	jmp	0x2ee	; 0x2ee <__vector_12>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ea eb       	ldi	r30, 0xBA	; 186
+  68:	f3 e0       	ldi	r31, 0x03	; 3
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 37       	cpi	r26, 0x70	; 112
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a0 e7       	ldi	r26, 0x70	; 112
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a6 38       	cpi	r26, 0x86	; 134
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 7d 00 	call	0xfa	; 0xfa <main>
+  8a:	0c 94 db 01 	jmp	0x3b6	; 0x3b6 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <HSPI_SlaveInit>:
+	{
+		return HSPI_NOK;
+	}
+	
+	return HSPI_OK;
+}
+  92:	60 e0       	ldi	r22, 0x00	; 0
+  94:	8d e0       	ldi	r24, 0x0D	; 13
+  96:	0e 94 cc 00 	call	0x198	; 0x198 <DIO_s8SETPinDir>
+  9a:	60 e0       	ldi	r22, 0x00	; 0
+  9c:	8f e0       	ldi	r24, 0x0F	; 15
+  9e:	0e 94 cc 00 	call	0x198	; 0x198 <DIO_s8SETPinDir>
+  a2:	60 e0       	ldi	r22, 0x00	; 0
+  a4:	8c e0       	ldi	r24, 0x0C	; 12
+  a6:	0e 94 cc 00 	call	0x198	; 0x198 <DIO_s8SETPinDir>
+  aa:	61 e0       	ldi	r22, 0x01	; 1
+  ac:	8c e0       	ldi	r24, 0x0C	; 12
+  ae:	0e 94 0c 01 	call	0x218	; 0x218 <DIO_s8SETPinVal>
+  b2:	61 e0       	ldi	r22, 0x01	; 1
+  b4:	8e e0       	ldi	r24, 0x0E	; 14
+  b6:	0e 94 cc 00 	call	0x198	; 0x198 <DIO_s8SETPinDir>
+  ba:	61 e0       	ldi	r22, 0x01	; 1
+  bc:	88 e0       	ldi	r24, 0x08	; 8
+  be:	0e 94 cc 00 	call	0x198	; 0x198 <DIO_s8SETPinDir>
+  c2:	0e 94 6b 01 	call	0x2d6	; 0x2d6 <SPI_SlaveInit>
+  c6:	61 e0       	ldi	r22, 0x01	; 1
+  c8:	8c e0       	ldi	r24, 0x0C	; 12
+  ca:	0e 94 0c 01 	call	0x218	; 0x218 <DIO_s8SETPinVal>
+  ce:	08 95       	ret
+
+000000d0 <HSPI_SlaveRequest>:
+* \return void
+*/
+void HSPI_SlaveRequest(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize)
+{
+	/* Reset transmission data index */
+	u8_g_SlaveTxIndex = 0;
+  d0:	10 92 82 00 	sts	0x0082, r1	; 0x800082 <u8_g_SlaveTxIndex>
+	
+	u8_g_SlaveTxLen = u8_a_DataSize;
+  d4:	60 93 85 00 	sts	0x0085, r22	; 0x800085 <u8_g_SlaveTxLen>
+	
+	/* Set global transmission data ptr to point to given data */
+	pu8_g_SlaveTxPtr = pu8_a_dataPtr;
+  d8:	90 93 80 00 	sts	0x0080, r25	; 0x800080 <pu8_g_SlaveTxPtr+0x1>
+  dc:	80 93 7f 00 	sts	0x007F, r24	; 0x80007f <pu8_g_SlaveTxPtr>
+	
+	/* Set the Data register with value */
+	SPI_SetValue(pu8_g_SlaveTxPtr[u8_g_SlaveTxIndex]);
+  e0:	fc 01       	movw	r30, r24
+  e2:	80 81       	ld	r24, Z
+  e4:	0e 94 75 01 	call	0x2ea	; 0x2ea <SPI_SetValue>
+	u8_g_SlaveTxIndex++;
+  e8:	80 91 82 00 	lds	r24, 0x0082	; 0x800082 <u8_g_SlaveTxIndex>
+  ec:	8f 5f       	subi	r24, 0xFF	; 255
+  ee:	80 93 82 00 	sts	0x0082, r24	; 0x800082 <u8_g_SlaveTxIndex>
+
+	/* Send Request to Master */
+	DIO_s8TOGPinVal(SLAVE_SEND_REQUEST_PIN);
+  f2:	88 e0       	ldi	r24, 0x08	; 8
+  f4:	0e 94 4c 01 	call	0x298	; 0x298 <DIO_s8TOGPinVal>
+  f8:	08 95       	ret
+
+000000fa <main>:
+	else if(d == 1) SPI_SetValue('b');
+	
+	d ^= 1;
+}
+int main(void)
+{
+  fa:	cf 93       	push	r28
+  fc:	df 93       	push	r29
+  fe:	00 d0       	rcall	.+0      	; 0x100 <main+0x6>
+ 100:	00 d0       	rcall	.+0      	; 0x102 <main+0x8>
+ 102:	cd b7       	in	r28, 0x3d	; 61
+ 104:	de b7       	in	r29, 0x3e	; 62
+	DIO_s8SETPortDir(DIO_PORTA, OUTPUT);
+ 106:	61 e0       	ldi	r22, 0x01	; 1
+ 108:	80 e0       	ldi	r24, 0x00	; 0
+ 10a:	0e 94 95 00 	call	0x12a	; 0x12a <DIO_s8SETPortDir>
+	Uchar8_t arr[] = {0b00010000,0b00010000,0b00010000,0b00010000};
+ 10e:	80 e1       	ldi	r24, 0x10	; 16
+ 110:	89 83       	std	Y+1, r24	; 0x01
+ 112:	8a 83       	std	Y+2, r24	; 0x02
+ 114:	8b 83       	std	Y+3, r24	; 0x03
+ 116:	8c 83       	std	Y+4, r24	; 0x04
+    HSPI_SlaveInit();
+ 118:	0e 94 49 00 	call	0x92	; 0x92 <HSPI_SlaveInit>
+	sei();
+ 11c:	78 94       	sei
+	
+	//Uchar8_t received = 0;
+	HSPI_SlaveRequest(arr, 4);
+ 11e:	64 e0       	ldi	r22, 0x04	; 4
+ 120:	ce 01       	movw	r24, r28
+ 122:	01 96       	adiw	r24, 0x01	; 1
+ 124:	0e 94 68 00 	call	0xd0	; 0xd0 <HSPI_SlaveRequest>
+ 128:	ff cf       	rjmp	.-2      	; 0x128 <main+0x2e>
+
+0000012a <DIO_s8SETPortDir>:
+	else
+	{
+		errStatus = E_NOK;
+	}
+	return errStatus;
+}
+ 12a:	84 30       	cpi	r24, 0x04	; 4
+ 12c:	f8 f4       	brcc	.+62     	; 0x16c <DIO_s8SETPortDir+0x42>
+ 12e:	62 30       	cpi	r22, 0x02	; 2
+ 130:	f8 f4       	brcc	.+62     	; 0x170 <DIO_s8SETPortDir+0x46>
+ 132:	61 11       	cpse	r22, r1
+ 134:	0c c0       	rjmp	.+24     	; 0x14e <DIO_s8SETPortDir+0x24>
+ 136:	e8 2f       	mov	r30, r24
+ 138:	f0 e0       	ldi	r31, 0x00	; 0
+ 13a:	ee 0f       	add	r30, r30
+ 13c:	ff 1f       	adc	r31, r31
+ 13e:	e0 5a       	subi	r30, 0xA0	; 160
+ 140:	ff 4f       	sbci	r31, 0xFF	; 255
+ 142:	01 90       	ld	r0, Z+
+ 144:	f0 81       	ld	r31, Z
+ 146:	e0 2d       	mov	r30, r0
+ 148:	10 82       	st	Z, r1
+ 14a:	80 e0       	ldi	r24, 0x00	; 0
+ 14c:	08 95       	ret
+ 14e:	61 30       	cpi	r22, 0x01	; 1
+ 150:	89 f4       	brne	.+34     	; 0x174 <DIO_s8SETPortDir+0x4a>
+ 152:	e8 2f       	mov	r30, r24
+ 154:	f0 e0       	ldi	r31, 0x00	; 0
+ 156:	ee 0f       	add	r30, r30
+ 158:	ff 1f       	adc	r31, r31
+ 15a:	e0 5a       	subi	r30, 0xA0	; 160
+ 15c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 15e:	01 90       	ld	r0, Z+
+ 160:	f0 81       	ld	r31, Z
+ 162:	e0 2d       	mov	r30, r0
+ 164:	8f ef       	ldi	r24, 0xFF	; 255
+ 166:	80 83       	st	Z, r24
+ 168:	80 e0       	ldi	r24, 0x00	; 0
+ 16a:	08 95       	ret
+ 16c:	8f ef       	ldi	r24, 0xFF	; 255
+ 16e:	08 95       	ret
+ 170:	8f ef       	ldi	r24, 0xFF	; 255
+ 172:	08 95       	ret
+ 174:	80 e0       	ldi	r24, 0x00	; 0
+ 176:	08 95       	ret
+
+00000178 <DIO_s8SETPortVal>:
+ 178:	84 30       	cpi	r24, 0x04	; 4
+ 17a:	60 f4       	brcc	.+24     	; 0x194 <DIO_s8SETPortVal+0x1c>
+ 17c:	e8 2f       	mov	r30, r24
+ 17e:	f0 e0       	ldi	r31, 0x00	; 0
+ 180:	ee 0f       	add	r30, r30
+ 182:	ff 1f       	adc	r31, r31
+ 184:	e8 59       	subi	r30, 0x98	; 152
+ 186:	ff 4f       	sbci	r31, 0xFF	; 255
+ 188:	01 90       	ld	r0, Z+
+ 18a:	f0 81       	ld	r31, Z
+ 18c:	e0 2d       	mov	r30, r0
+ 18e:	60 83       	st	Z, r22
+ 190:	80 e0       	ldi	r24, 0x00	; 0
+ 192:	08 95       	ret
+ 194:	8f ef       	ldi	r24, 0xFF	; 255
+ 196:	08 95       	ret
+
+00000198 <DIO_s8SETPinDir>:
+{
+	Uchar8_t errStatus = E_OK;
+	Uchar8_t portID;
+	Uchar8_t pinID;
+
+	if (enPinCopy < PIN_INVALID && enPortDir< DIR_INVALID)
+ 198:	80 32       	cpi	r24, 0x20	; 32
+ 19a:	c0 f5       	brcc	.+112    	; 0x20c <DIO_s8SETPinDir+0x74>
+ 19c:	62 30       	cpi	r22, 0x02	; 2
+ 19e:	c0 f5       	brcc	.+112    	; 0x210 <DIO_s8SETPinDir+0x78>
+	{
+		portID = enPinCopy/8;
+ 1a0:	e8 2f       	mov	r30, r24
+ 1a2:	e6 95       	lsr	r30
+ 1a4:	e6 95       	lsr	r30
+ 1a6:	e6 95       	lsr	r30
+		pinID  = enPinCopy%8;
+ 1a8:	87 70       	andi	r24, 0x07	; 7
+
+		if (enPortDir == INPUT)
+ 1aa:	61 11       	cpse	r22, r1
+ 1ac:	17 c0       	rjmp	.+46     	; 0x1dc <DIO_s8SETPinDir+0x44>
+		{
+			CLEAR_BIT(*ddrReg[portID],pinID);
+ 1ae:	f0 e0       	ldi	r31, 0x00	; 0
+ 1b0:	ee 0f       	add	r30, r30
+ 1b2:	ff 1f       	adc	r31, r31
+ 1b4:	e0 5a       	subi	r30, 0xA0	; 160
+ 1b6:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1b8:	01 90       	ld	r0, Z+
+ 1ba:	f0 81       	ld	r31, Z
+ 1bc:	e0 2d       	mov	r30, r0
+ 1be:	40 81       	ld	r20, Z
+ 1c0:	21 e0       	ldi	r18, 0x01	; 1
+ 1c2:	30 e0       	ldi	r19, 0x00	; 0
+ 1c4:	b9 01       	movw	r22, r18
+ 1c6:	02 c0       	rjmp	.+4      	; 0x1cc <DIO_s8SETPinDir+0x34>
+ 1c8:	66 0f       	add	r22, r22
+ 1ca:	77 1f       	adc	r23, r23
+ 1cc:	8a 95       	dec	r24
+ 1ce:	e2 f7       	brpl	.-8      	; 0x1c8 <DIO_s8SETPinDir+0x30>
+ 1d0:	cb 01       	movw	r24, r22
+ 1d2:	80 95       	com	r24
+ 1d4:	84 23       	and	r24, r20
+ 1d6:	80 83       	st	Z, r24
+
+
+
+Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
+{
+	Uchar8_t errStatus = E_OK;
+ 1d8:	80 e0       	ldi	r24, 0x00	; 0
+ 1da:	08 95       	ret
+
+		if (enPortDir == INPUT)
+		{
+			CLEAR_BIT(*ddrReg[portID],pinID);
+		}
+		else if(enPortDir == OUTPUT)
+ 1dc:	61 30       	cpi	r22, 0x01	; 1
+ 1de:	d1 f4       	brne	.+52     	; 0x214 <DIO_s8SETPinDir+0x7c>
+		{
+			SET_BIT(*ddrReg[portID],pinID);
+ 1e0:	f0 e0       	ldi	r31, 0x00	; 0
+ 1e2:	ee 0f       	add	r30, r30
+ 1e4:	ff 1f       	adc	r31, r31
+ 1e6:	e0 5a       	subi	r30, 0xA0	; 160
+ 1e8:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1ea:	01 90       	ld	r0, Z+
+ 1ec:	f0 81       	ld	r31, Z
+ 1ee:	e0 2d       	mov	r30, r0
+ 1f0:	40 81       	ld	r20, Z
+ 1f2:	21 e0       	ldi	r18, 0x01	; 1
+ 1f4:	30 e0       	ldi	r19, 0x00	; 0
+ 1f6:	b9 01       	movw	r22, r18
+ 1f8:	02 c0       	rjmp	.+4      	; 0x1fe <DIO_s8SETPinDir+0x66>
+ 1fa:	66 0f       	add	r22, r22
+ 1fc:	77 1f       	adc	r23, r23
+ 1fe:	8a 95       	dec	r24
+ 200:	e2 f7       	brpl	.-8      	; 0x1fa <DIO_s8SETPinDir+0x62>
+ 202:	cb 01       	movw	r24, r22
+ 204:	84 2b       	or	r24, r20
+ 206:	80 83       	st	Z, r24
+
+
+
+Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
+{
+	Uchar8_t errStatus = E_OK;
+ 208:	80 e0       	ldi	r24, 0x00	; 0
+ 20a:	08 95       	ret
+			/* do nothing */
+		}
+	}
+	else
+	{
+		errStatus = E_NOK;
+ 20c:	8f ef       	ldi	r24, 0xFF	; 255
+ 20e:	08 95       	ret
+ 210:	8f ef       	ldi	r24, 0xFF	; 255
+ 212:	08 95       	ret
+
+
+
+Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
+{
+	Uchar8_t errStatus = E_OK;
+ 214:	80 e0       	ldi	r24, 0x00	; 0
+	else
+	{
+		errStatus = E_NOK;
+	}
+	return errStatus;
+}
+ 216:	08 95       	ret
+
+00000218 <DIO_s8SETPinVal>:
+{
+	Uchar8_t errStatus = E_OK;
+	Uchar8_t portID;
+	Uchar8_t pinID;
+
+	if (enPinCopy < PIN_INVALID && enPortVal< VAL_INVALID)
+ 218:	80 32       	cpi	r24, 0x20	; 32
+ 21a:	c0 f5       	brcc	.+112    	; 0x28c <DIO_s8SETPinVal+0x74>
+ 21c:	62 30       	cpi	r22, 0x02	; 2
+ 21e:	c0 f5       	brcc	.+112    	; 0x290 <DIO_s8SETPinVal+0x78>
+	{
+		portID = enPinCopy/8;
+ 220:	e8 2f       	mov	r30, r24
+ 222:	e6 95       	lsr	r30
+ 224:	e6 95       	lsr	r30
+ 226:	e6 95       	lsr	r30
+		pinID  = enPinCopy%8;
+ 228:	87 70       	andi	r24, 0x07	; 7
+
+		if (enPortVal == LOW)
+ 22a:	61 11       	cpse	r22, r1
+ 22c:	17 c0       	rjmp	.+46     	; 0x25c <DIO_s8SETPinVal+0x44>
+		{
+			CLEAR_BIT(*portReg[portID],pinID);
+ 22e:	f0 e0       	ldi	r31, 0x00	; 0
+ 230:	ee 0f       	add	r30, r30
+ 232:	ff 1f       	adc	r31, r31
+ 234:	e8 59       	subi	r30, 0x98	; 152
+ 236:	ff 4f       	sbci	r31, 0xFF	; 255
+ 238:	01 90       	ld	r0, Z+
+ 23a:	f0 81       	ld	r31, Z
+ 23c:	e0 2d       	mov	r30, r0
+ 23e:	40 81       	ld	r20, Z
+ 240:	21 e0       	ldi	r18, 0x01	; 1
+ 242:	30 e0       	ldi	r19, 0x00	; 0
+ 244:	b9 01       	movw	r22, r18
+ 246:	02 c0       	rjmp	.+4      	; 0x24c <DIO_s8SETPinVal+0x34>
+ 248:	66 0f       	add	r22, r22
+ 24a:	77 1f       	adc	r23, r23
+ 24c:	8a 95       	dec	r24
+ 24e:	e2 f7       	brpl	.-8      	; 0x248 <DIO_s8SETPinVal+0x30>
+ 250:	cb 01       	movw	r24, r22
+ 252:	80 95       	com	r24
+ 254:	84 23       	and	r24, r20
+ 256:	80 83       	st	Z, r24
+}
+
+
+Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
+{
+	Uchar8_t errStatus = E_OK;
+ 258:	80 e0       	ldi	r24, 0x00	; 0
+ 25a:	08 95       	ret
+
+		if (enPortVal == LOW)
+		{
+			CLEAR_BIT(*portReg[portID],pinID);
+		}
+		else if(enPortVal == HIGH)
+ 25c:	61 30       	cpi	r22, 0x01	; 1
+ 25e:	d1 f4       	brne	.+52     	; 0x294 <DIO_s8SETPinVal+0x7c>
+		{
+			SET_BIT(*portReg[portID],pinID);
+ 260:	f0 e0       	ldi	r31, 0x00	; 0
+ 262:	ee 0f       	add	r30, r30
+ 264:	ff 1f       	adc	r31, r31
+ 266:	e8 59       	subi	r30, 0x98	; 152
+ 268:	ff 4f       	sbci	r31, 0xFF	; 255
+ 26a:	01 90       	ld	r0, Z+
+ 26c:	f0 81       	ld	r31, Z
+ 26e:	e0 2d       	mov	r30, r0
+ 270:	40 81       	ld	r20, Z
+ 272:	21 e0       	ldi	r18, 0x01	; 1
+ 274:	30 e0       	ldi	r19, 0x00	; 0
+ 276:	b9 01       	movw	r22, r18
+ 278:	02 c0       	rjmp	.+4      	; 0x27e <DIO_s8SETPinVal+0x66>
+ 27a:	66 0f       	add	r22, r22
+ 27c:	77 1f       	adc	r23, r23
+ 27e:	8a 95       	dec	r24
+ 280:	e2 f7       	brpl	.-8      	; 0x27a <DIO_s8SETPinVal+0x62>
+ 282:	cb 01       	movw	r24, r22
+ 284:	84 2b       	or	r24, r20
+ 286:	80 83       	st	Z, r24
+}
+
+
+Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
+{
+	Uchar8_t errStatus = E_OK;
+ 288:	80 e0       	ldi	r24, 0x00	; 0
+ 28a:	08 95       	ret
+			/* do nothing */
+		}
+	}
+	else
+	{
+		errStatus = E_NOK;
+ 28c:	8f ef       	ldi	r24, 0xFF	; 255
+ 28e:	08 95       	ret
+ 290:	8f ef       	ldi	r24, 0xFF	; 255
+ 292:	08 95       	ret
+}
+
+
+Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
+{
+	Uchar8_t errStatus = E_OK;
+ 294:	80 e0       	ldi	r24, 0x00	; 0
+	else
+	{
+		errStatus = E_NOK;
+	}
+	return errStatus;
+}
+ 296:	08 95       	ret
+
+00000298 <DIO_s8TOGPinVal>:
+{
+	Uchar8_t errStatus = E_OK;
+	Uchar8_t portID;
+	Uchar8_t pinID;
+
+	if (enPinCopy < PIN_INVALID)
+ 298:	80 32       	cpi	r24, 0x20	; 32
+ 29a:	d8 f4       	brcc	.+54     	; 0x2d2 <DIO_s8TOGPinVal+0x3a>
+	{
+		portID = enPinCopy/8;
+ 29c:	e8 2f       	mov	r30, r24
+ 29e:	e6 95       	lsr	r30
+ 2a0:	e6 95       	lsr	r30
+ 2a2:	e6 95       	lsr	r30
+		pinID  = enPinCopy%8;
+ 2a4:	87 70       	andi	r24, 0x07	; 7
+
+		TOGGLE_BIT(*portReg[portID],pinID);
+ 2a6:	f0 e0       	ldi	r31, 0x00	; 0
+ 2a8:	ee 0f       	add	r30, r30
+ 2aa:	ff 1f       	adc	r31, r31
+ 2ac:	e8 59       	subi	r30, 0x98	; 152
+ 2ae:	ff 4f       	sbci	r31, 0xFF	; 255
+ 2b0:	01 90       	ld	r0, Z+
+ 2b2:	f0 81       	ld	r31, Z
+ 2b4:	e0 2d       	mov	r30, r0
+ 2b6:	40 81       	ld	r20, Z
+ 2b8:	21 e0       	ldi	r18, 0x01	; 1
+ 2ba:	30 e0       	ldi	r19, 0x00	; 0
+ 2bc:	b9 01       	movw	r22, r18
+ 2be:	02 c0       	rjmp	.+4      	; 0x2c4 <DIO_s8TOGPinVal+0x2c>
+ 2c0:	66 0f       	add	r22, r22
+ 2c2:	77 1f       	adc	r23, r23
+ 2c4:	8a 95       	dec	r24
+ 2c6:	e2 f7       	brpl	.-8      	; 0x2c0 <DIO_s8TOGPinVal+0x28>
+ 2c8:	cb 01       	movw	r24, r22
+ 2ca:	84 27       	eor	r24, r20
+ 2cc:	80 83       	st	Z, r24
+}
+
+
+Uchar8_t DIO_s8TOGPinVal (enu_pin enPinCopy)
+{
+	Uchar8_t errStatus = E_OK;
+ 2ce:	80 e0       	ldi	r24, 0x00	; 0
+ 2d0:	08 95       	ret
+
+		TOGGLE_BIT(*portReg[portID],pinID);
+	}
+	else
+	{
+		errStatus = E_NOK;
+ 2d2:	8f ef       	ldi	r24, 0xFF	; 255
+	}
+	return errStatus;
+
+}
+ 2d4:	08 95       	ret
+
+000002d6 <SPI_SlaveInit>:
+	{
+		return SPI_NOK;
+	}
+	
+	return SPI_OK;
+}
+ 2d6:	8d b1       	in	r24, 0x0d	; 13
+ 2d8:	8f 7e       	andi	r24, 0xEF	; 239
+ 2da:	8d b9       	out	0x0d, r24	; 13
+ 2dc:	8d b1       	in	r24, 0x0d	; 13
+ 2de:	80 68       	ori	r24, 0x80	; 128
+ 2e0:	8d b9       	out	0x0d, r24	; 13
+ 2e2:	8d b1       	in	r24, 0x0d	; 13
+ 2e4:	80 64       	ori	r24, 0x40	; 64
+ 2e6:	8d b9       	out	0x0d, r24	; 13
+ 2e8:	08 95       	ret
+
+000002ea <SPI_SetValue>:
+ 2ea:	8f b9       	out	0x0f, r24	; 15
+ 2ec:	08 95       	ret
+
+000002ee <__vector_12>:
+
+/*************************************************************************************************************
+ * 													  ISRs
+ ************************************************************************************************************/
+ISR(SPI_STC_INT)
+{
+ 2ee:	1f 92       	push	r1
+ 2f0:	0f 92       	push	r0
+ 2f2:	0f b6       	in	r0, 0x3f	; 63
+ 2f4:	0f 92       	push	r0
+ 2f6:	11 24       	eor	r1, r1
+ 2f8:	2f 93       	push	r18
+ 2fa:	3f 93       	push	r19
+ 2fc:	4f 93       	push	r20
+ 2fe:	5f 93       	push	r21
+ 300:	6f 93       	push	r22
+ 302:	7f 93       	push	r23
+ 304:	8f 93       	push	r24
+ 306:	9f 93       	push	r25
+ 308:	af 93       	push	r26
+ 30a:	bf 93       	push	r27
+ 30c:	ef 93       	push	r30
+ 30e:	ff 93       	push	r31
+	/*------------------------ Reception ------------------------*/
+	u8_g_SlaveReceive = SPDR;
+ 310:	8f b1       	in	r24, 0x0f	; 15
+ 312:	80 93 83 00 	sts	0x0083, r24	; 0x800083 <u8_g_SlaveReceive>
+	if(u8_g_SlaveRxIndex == SPI_BUFFER_SIZE) u8_g_SlaveRxIndex = 0;
+ 316:	90 91 81 00 	lds	r25, 0x0081	; 0x800081 <u8_g_SlaveRxIndex>
+ 31a:	9f 30       	cpi	r25, 0x0F	; 15
+ 31c:	11 f4       	brne	.+4      	; 0x322 <__vector_12+0x34>
+ 31e:	10 92 81 00 	sts	0x0081, r1	; 0x800081 <u8_g_SlaveRxIndex>
+	if(u8_g_SlaveReceive != DATA_END)
+ 322:	83 32       	cpi	r24, 0x23	; 35
+ 324:	59 f0       	breq	.+22     	; 0x33c <__vector_12+0x4e>
+	{
+		/* Store received byte in buffer */
+		arr_g_SlaveRxBuffer[u8_g_SlaveRxIndex] = u8_g_SlaveReceive;
+ 326:	90 91 81 00 	lds	r25, 0x0081	; 0x800081 <u8_g_SlaveRxIndex>
+ 32a:	e9 2f       	mov	r30, r25
+ 32c:	f0 e0       	ldi	r31, 0x00	; 0
+ 32e:	e0 59       	subi	r30, 0x90	; 144
+ 330:	ff 4f       	sbci	r31, 0xFF	; 255
+ 332:	80 83       	st	Z, r24
+		u8_g_SlaveRxIndex++;
+ 334:	9f 5f       	subi	r25, 0xFF	; 255
+ 336:	90 93 81 00 	sts	0x0081, r25	; 0x800081 <u8_g_SlaveRxIndex>
+ 33a:	04 c0       	rjmp	.+8      	; 0x344 <__vector_12+0x56>
+	}
+	else
+	{	// Get the number of received bytes
+		u8_g_SlaveRxLen = u8_g_SlaveRxIndex;
+ 33c:	80 91 81 00 	lds	r24, 0x0081	; 0x800081 <u8_g_SlaveRxIndex>
+ 340:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <u8_g_SlaveRxLen>
+	}
+	
+	/*------------------------- Sending -------------------------*/
+	DIO_s8SETPortVal(DIO_PORTA, pu8_g_SlaveTxPtr[u8_g_SlaveTxIndex-1]);
+ 344:	e0 91 82 00 	lds	r30, 0x0082	; 0x800082 <u8_g_SlaveTxIndex>
+ 348:	f0 e0       	ldi	r31, 0x00	; 0
+ 34a:	31 97       	sbiw	r30, 0x01	; 1
+ 34c:	80 91 7f 00 	lds	r24, 0x007F	; 0x80007f <pu8_g_SlaveTxPtr>
+ 350:	90 91 80 00 	lds	r25, 0x0080	; 0x800080 <pu8_g_SlaveTxPtr+0x1>
+ 354:	e8 0f       	add	r30, r24
+ 356:	f9 1f       	adc	r31, r25
+ 358:	60 81       	ld	r22, Z
+ 35a:	80 e0       	ldi	r24, 0x00	; 0
+ 35c:	0e 94 bc 00 	call	0x178	; 0x178 <DIO_s8SETPortVal>
+	if((u8_g_SlaveTxIndex < u8_g_SlaveTxLen) && (pu8_g_SlaveTxPtr != NULL))
+ 360:	80 91 82 00 	lds	r24, 0x0082	; 0x800082 <u8_g_SlaveTxIndex>
+ 364:	90 91 85 00 	lds	r25, 0x0085	; 0x800085 <u8_g_SlaveTxLen>
+ 368:	89 17       	cp	r24, r25
+ 36a:	90 f4       	brcc	.+36     	; 0x390 <__vector_12+0xa2>
+ 36c:	20 91 7f 00 	lds	r18, 0x007F	; 0x80007f <pu8_g_SlaveTxPtr>
+ 370:	30 91 80 00 	lds	r19, 0x0080	; 0x800080 <pu8_g_SlaveTxPtr+0x1>
+ 374:	21 15       	cp	r18, r1
+ 376:	31 05       	cpc	r19, r1
+ 378:	59 f0       	breq	.+22     	; 0x390 <__vector_12+0xa2>
+	{
+		SPDR = pu8_g_SlaveTxPtr[u8_g_SlaveTxIndex];
+ 37a:	f9 01       	movw	r30, r18
+ 37c:	e8 0f       	add	r30, r24
+ 37e:	f1 1d       	adc	r31, r1
+ 380:	80 81       	ld	r24, Z
+ 382:	8f b9       	out	0x0f, r24	; 15
+		u8_g_SlaveTxIndex++;
+ 384:	80 91 82 00 	lds	r24, 0x0082	; 0x800082 <u8_g_SlaveTxIndex>
+ 388:	8f 5f       	subi	r24, 0xFF	; 255
+ 38a:	80 93 82 00 	sts	0x0082, r24	; 0x800082 <u8_g_SlaveTxIndex>
+ 38e:	02 c0       	rjmp	.+4      	; 0x394 <__vector_12+0xa6>
+	}
+	else
+	{	
+		SPDR = DATA_END;
+ 390:	83 e2       	ldi	r24, 0x23	; 35
+ 392:	8f b9       	out	0x0f, r24	; 15
+	}
+ 394:	ff 91       	pop	r31
+ 396:	ef 91       	pop	r30
+ 398:	bf 91       	pop	r27
+ 39a:	af 91       	pop	r26
+ 39c:	9f 91       	pop	r25
+ 39e:	8f 91       	pop	r24
+ 3a0:	7f 91       	pop	r23
+ 3a2:	6f 91       	pop	r22
+ 3a4:	5f 91       	pop	r21
+ 3a6:	4f 91       	pop	r20
+ 3a8:	3f 91       	pop	r19
+ 3aa:	2f 91       	pop	r18
+ 3ac:	0f 90       	pop	r0
+ 3ae:	0f be       	out	0x3f, r0	; 63
+ 3b0:	0f 90       	pop	r0
+ 3b2:	1f 90       	pop	r1
+ 3b4:	18 95       	reti
+
+000003b6 <_exit>:
+ 3b6:	f8 94       	cli
+
+000003b8 <__stop_program>:
+ 3b8:	ff cf       	rjmp	.-2      	; 0x3b8 <__stop_program>
