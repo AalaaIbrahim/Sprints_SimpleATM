@@ -9,8 +9,8 @@
 #ifndef USART_H_
 #define USART_H_
 
-#include "STD_Types.h"
-#include "BIT_Math.h"
+#include "../../Common/STD_Types.h"
+#include "../../Common/BIT_Math.h"
 #include "usart_config.h"
 
 
