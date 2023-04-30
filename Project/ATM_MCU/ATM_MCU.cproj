@@ -147,6 +147,12 @@
     <Compile Include="ECUAL\h_ext_int\h_ext_int.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ECUAL\keypad\keypad.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\keypad\keypad.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -191,6 +197,7 @@
     <Folder Include="Common\" />
     <Folder Include="ECUAL\hspi\" />
     <Folder Include="ECUAL\h_ext_int\" />
+    <Folder Include="ECUAL\keypad" />
     <Folder Include="MCAL" />
     <Folder Include="ECUAL" />
     <Folder Include="MCAL\dio\" />

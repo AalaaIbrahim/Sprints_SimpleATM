@@ -23,23 +23,28 @@ Discarded input sections
  .text.timer_ovfCount
                 0x00000000        0xc APP/app.o
  .text.Button_enStatus
-                0x00000000       0x56 APP/app.o
+                0x00000000       0x5a APP/app.o
+ .text.Get_pin  0x00000000       0x42 APP/app.o
+ .text.validate_pin
+                0x00000000       0x2c APP/app.o
  .text.APP_Init
-                0x00000000       0x14 APP/app.o
+                0x00000000       0x18 APP/app.o
  .text.APP_Start
                 0x00000000       0x1c APP/app.o
+ .bss.ZeroFlag  0x00000000        0x1 APP/app.o
+ .bss.ATMpin    0x00000000        0x8 APP/app.o
  .bss.global_u8OVFCounter
                 0x00000000        0x1 APP/app.o
- .debug_info    0x00000000      0x325 APP/app.o
- .debug_abbrev  0x00000000      0x100 APP/app.o
- .debug_loc     0x00000000       0x40 APP/app.o
+ .debug_info    0x00000000      0x487 APP/app.o
+ .debug_abbrev  0x00000000      0x18f APP/app.o
+ .debug_loc     0x00000000      0x157 APP/app.o
  .debug_aranges
-                0x00000000       0x38 APP/app.o
- .debug_ranges  0x00000000       0x28 APP/app.o
- .debug_line    0x00000000      0x192 APP/app.o
- .debug_str     0x00000000      0x3f5 APP/app.o
+                0x00000000       0x48 APP/app.o
+ .debug_ranges  0x00000000       0x38 APP/app.o
+ .debug_line    0x00000000      0x25b APP/app.o
+ .debug_str     0x00000000      0x4c5 APP/app.o
  .comment       0x00000000       0x31 APP/app.o
- .debug_frame   0x00000000       0x5c APP/app.o
+ .debug_frame   0x00000000       0x8c APP/app.o
  COMMON         0x00000000        0x2 APP/app.o
  .text          0x00000000        0x0 ECUAL/hspi/hspi_program.o
  .data          0x00000000        0x0 ECUAL/hspi/hspi_program.o
@@ -93,6 +98,26 @@ Discarded input sections
  .debug_str     0x00000000      0x289 ECUAL/h_ext_int/h_ext_int.o
  .comment       0x00000000       0x31 ECUAL/h_ext_int/h_ext_int.o
  .debug_frame   0x00000000       0x34 ECUAL/h_ext_int/h_ext_int.o
+ .text          0x00000000        0x0 ECUAL/keypad/keypad.o
+ .data          0x00000000        0x0 ECUAL/keypad/keypad.o
+ .bss           0x00000000        0x0 ECUAL/keypad/keypad.o
+ .text.KEYPAD_init
+                0x00000000       0x32 ECUAL/keypad/keypad.o
+ .text.checkR1  0x00000000       0xcc ECUAL/keypad/keypad.o
+ .text.checkR2  0x00000000       0xcc ECUAL/keypad/keypad.o
+ .text.checkR3  0x00000000       0xcc ECUAL/keypad/keypad.o
+ .text.KEYPAD_GetButton
+                0x00000000       0x16 ECUAL/keypad/keypad.o
+ .debug_info    0x00000000      0x74d ECUAL/keypad/keypad.o
+ .debug_abbrev  0x00000000      0x11a ECUAL/keypad/keypad.o
+ .debug_loc     0x00000000      0x10d ECUAL/keypad/keypad.o
+ .debug_aranges
+                0x00000000       0x40 ECUAL/keypad/keypad.o
+ .debug_ranges  0x00000000       0x30 ECUAL/keypad/keypad.o
+ .debug_line    0x00000000      0x30f ECUAL/keypad/keypad.o
+ .debug_str     0x00000000      0x406 ECUAL/keypad/keypad.o
+ .comment       0x00000000       0x31 ECUAL/keypad/keypad.o
+ .debug_frame   0x00000000       0x94 ECUAL/keypad/keypad.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
@@ -217,6 +242,7 @@ LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/
 LOAD APP/app.o
 LOAD ECUAL/hspi/hspi_program.o
 LOAD ECUAL/h_ext_int/h_ext_int.o
+LOAD ECUAL/keypad/keypad.o
 LOAD main.o
 LOAD MCAL/dio/dio_prog.o
 LOAD MCAL/extint/extinterrupt.o

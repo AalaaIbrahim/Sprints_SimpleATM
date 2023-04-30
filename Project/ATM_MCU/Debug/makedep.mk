@@ -8,6 +8,8 @@ ECUAL\hspi\hspi_program.c
 
 ECUAL\h_ext_int\h_ext_int.c
 
+ECUAL\keypad\keypad.c
+
 main.c
 
 MCAL\dio\dio_prog.c
