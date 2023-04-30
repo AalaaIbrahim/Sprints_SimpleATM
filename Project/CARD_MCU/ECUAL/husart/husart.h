@@ -9,6 +9,7 @@
 #ifndef HUSART_H_
 #define HUSART_H_
 
+#include "../../MCAL/usart/usart.h"
 
 EN_USART_ERROR HUSART_enInit(void);
 EN_USART_ERROR HUSART_enSendData(Uchar8_t Copy_u8DataH);

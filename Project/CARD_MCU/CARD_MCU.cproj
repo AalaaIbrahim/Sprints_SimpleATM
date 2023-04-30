@@ -175,18 +175,6 @@
     <Compile Include="MCAL\dio\dio_prog.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="MCAL\iic\MI2C_Config.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\iic\MI2C_Interface.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\iic\MI2C_Private.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\iic\MI2C_Program.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="MCAL\spi\spi_config.h">
       <SubType>compile</SubType>
     </Compile>
@@ -222,7 +210,6 @@
     <Folder Include="ECUAL\husart" />
     <Folder Include="MCAL\" />
     <Folder Include="MCAL\dio\" />
-    <Folder Include="MCAL\iic" />
     <Folder Include="MCAL\usart" />
     <Folder Include="MCAL\spi\" />
     <Folder Include="APP" />

@@ -6,7 +6,7 @@
  */ 
 
 #include "../../Common/STD_Types.h"
-#include "../../MCAL/usart/usart.h"
+
 #include "husart.h"
 
 

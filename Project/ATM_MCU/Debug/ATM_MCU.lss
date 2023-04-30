@@ -3,40 +3,40 @@ ATM_MCU.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000006a0  00000000  00000000  00000094  2**1
+  0 .text         000001e0  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000010  00800060  000006a0  00000734  2**0
+  1 .data         00000000  00800060  00800060  00000254  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000018  00800070  00800070  00000744  2**0
+  2 .bss          00000008  00800060  00800060  00000254  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000744  2**0
+  3 .comment      00000030  00000000  00000000  00000254  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000774  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000284  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000188  00000000  00000000  000007b0  2**0
+  5 .debug_aranges 000000b0  00000000  00000000  000002c0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001c4c  00000000  00000000  00000938  2**0
+  6 .debug_info   00000adf  00000000  00000000  00000370  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000b25  00000000  00000000  00002584  2**0
+  7 .debug_abbrev 0000071e  00000000  00000000  00000e4f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000d38  00000000  00000000  000030a9  2**0
+  8 .debug_line   000005c3  00000000  00000000  0000156d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000418  00000000  00000000  00003de4  2**2
+  9 .debug_frame  00000238  00000000  00000000  00001b30  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000009f8  00000000  00000000  000041fc  2**0
+ 10 .debug_str    0000072a  00000000  00000000  00001d68  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000109c  00000000  00000000  00004bf4  2**0
+ 11 .debug_loc    00000567  00000000  00000000  00002492  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000140  00000000  00000000  00005c90  2**0
+ 12 .debug_ranges 00000080  00000000  00000000  000029f9  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
-   4:	0c 94 72 02 	jmp	0x4e4	; 0x4e4 <__vector_1>
-   8:	0c 94 9b 02 	jmp	0x536	; 0x536 <__vector_2>
-   c:	0c 94 c4 02 	jmp	0x588	; 0x588 <__vector_3>
+   4:	0c 94 4a 00 	jmp	0x94	; 0x94 <__vector_1>
+   8:	0c 94 73 00 	jmp	0xe6	; 0xe6 <__vector_2>
+   c:	0c 94 9c 00 	jmp	0x138	; 0x138 <__vector_3>
   10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -45,7 +45,7 @@ Disassembly of section .text:
   24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  30:	0c 94 25 03 	jmp	0x64a	; 0x64a <__vector_12>
+  30:	0c 94 c5 00 	jmp	0x18a	; 0x18a <__vector_12>
   34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -67,18 +67,18 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e0 ea       	ldi	r30, 0xA0	; 160
-  68:	f6 e0       	ldi	r31, 0x06	; 6
+  66:	e0 ee       	ldi	r30, 0xE0	; 224
+  68:	f1 e0       	ldi	r31, 0x01	; 1
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
-  70:	a0 37       	cpi	r26, 0x70	; 112
+  70:	a0 36       	cpi	r26, 0x60	; 96
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
 
 00000076 <__do_clear_bss>:
   76:	20 e0       	ldi	r18, 0x00	; 0
-  78:	a0 e7       	ldi	r26, 0x70	; 112
+  78:	a0 e6       	ldi	r26, 0x60	; 96
   7a:	b0 e0       	ldi	r27, 0x00	; 0
   7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
@@ -86,1195 +86,190 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	a8 38       	cpi	r26, 0x88	; 136
+  80:	a8 36       	cpi	r26, 0x68	; 104
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
-  86:	0e 94 a5 00 	call	0x14a	; 0x14a <main>
-  8a:	0c 94 4e 03 	jmp	0x69c	; 0x69c <_exit>
+  86:	0e 94 49 00 	call	0x92	; 0x92 <main>
+  8a:	0c 94 ee 00 	jmp	0x1dc	; 0x1dc <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-00000092 <HSPI_MasterInit>:
-	{
-		return HSPI_NOK;
-	}
-	
-	return HSPI_OK;
-}
-  92:	61 e0       	ldi	r22, 0x01	; 1
-  94:	8d e0       	ldi	r24, 0x0D	; 13
-  96:	0e 94 28 01 	call	0x250	; 0x250 <DIO_s8SETPinDir>
-  9a:	61 e0       	ldi	r22, 0x01	; 1
-  9c:	8f e0       	ldi	r24, 0x0F	; 15
-  9e:	0e 94 28 01 	call	0x250	; 0x250 <DIO_s8SETPinDir>
-  a2:	61 e0       	ldi	r22, 0x01	; 1
-  a4:	8c e0       	ldi	r24, 0x0C	; 12
-  a6:	0e 94 28 01 	call	0x250	; 0x250 <DIO_s8SETPinDir>
-  aa:	61 e0       	ldi	r22, 0x01	; 1
-  ac:	8c e0       	ldi	r24, 0x0C	; 12
-  ae:	0e 94 68 01 	call	0x2d0	; 0x2d0 <DIO_s8SETPinVal>
-  b2:	60 e0       	ldi	r22, 0x00	; 0
-  b4:	8e e0       	ldi	r24, 0x0E	; 14
-  b6:	0e 94 28 01 	call	0x250	; 0x250 <DIO_s8SETPinDir>
-  ba:	63 e0       	ldi	r22, 0x03	; 3
-  bc:	8a e0       	ldi	r24, 0x0A	; 10
-  be:	0e 94 d2 01 	call	0x3a4	; 0x3a4 <EXTINT_init>
-  c2:	0e 94 ed 02 	call	0x5da	; 0x5da <SPI_MasterInit>
-  c6:	08 95       	ret
+00000092 <main>:
+ * Author : ME
+ */ 
 
-000000c8 <HSPI_ReceiveChar>:
- * \param pu8_a_character pointer to variable to store
- *						  received character
- * \return en_HSPI_ErrorState_t
- */
-en_HSPI_ErrorState_t HSPI_ReceiveChar(Uchar8_t* pu8_a_character)
-{
-  c8:	cf 93       	push	r28
-  ca:	df 93       	push	r29
-	if(pu8_a_character != NULL)
-  cc:	00 97       	sbiw	r24, 0x00	; 0
-  ce:	39 f4       	brne	.+14     	; 0xde <HSPI_ReceiveChar+0x16>
-		DIO_s8SETPinVal(HSPI_SS, HIGH);
-		
-	}
-	else
-	{
-		return HSPI_NOK;
-  d0:	81 e0       	ldi	r24, 0x01	; 1
-  d2:	1d c0       	rjmp	.+58     	; 0x10e <HSPI_ReceiveChar+0x46>
- */
-en_HSPI_ErrorState_t HSPI_ReceiveChar(Uchar8_t* pu8_a_character)
-{
-	if(pu8_a_character != NULL)
-	{
-		for(Uint32_t i=0; i<100000; i++);
-  d4:	4f 5f       	subi	r20, 0xFF	; 255
-  d6:	5f 4f       	sbci	r21, 0xFF	; 255
-  d8:	6f 4f       	sbci	r22, 0xFF	; 255
-  da:	7f 4f       	sbci	r23, 0xFF	; 255
-  dc:	03 c0       	rjmp	.+6      	; 0xe4 <HSPI_ReceiveChar+0x1c>
-  de:	40 e0       	ldi	r20, 0x00	; 0
-  e0:	50 e0       	ldi	r21, 0x00	; 0
-  e2:	ba 01       	movw	r22, r20
-  e4:	40 3a       	cpi	r20, 0xA0	; 160
-  e6:	26 e8       	ldi	r18, 0x86	; 134
-  e8:	52 07       	cpc	r21, r18
-  ea:	21 e0       	ldi	r18, 0x01	; 1
-  ec:	62 07       	cpc	r22, r18
-  ee:	71 05       	cpc	r23, r1
-  f0:	88 f3       	brcs	.-30     	; 0xd4 <HSPI_ReceiveChar+0xc>
-  f2:	ec 01       	movw	r28, r24
-		DIO_s8SETPinVal(HSPI_SS, LOW);
-  f4:	60 e0       	ldi	r22, 0x00	; 0
-  f6:	8c e0       	ldi	r24, 0x0C	; 12
-  f8:	0e 94 68 01 	call	0x2d0	; 0x2d0 <DIO_s8SETPinVal>
-		SPI_TranscieveChar(DATA_END, pu8_a_character);
-  fc:	be 01       	movw	r22, r28
-  fe:	83 e2       	ldi	r24, 0x23	; 35
- 100:	0e 94 ff 02 	call	0x5fe	; 0x5fe <SPI_TranscieveChar>
-		
-		DIO_s8SETPinVal(HSPI_SS, HIGH);
- 104:	61 e0       	ldi	r22, 0x01	; 1
- 106:	8c e0       	ldi	r24, 0x0C	; 12
- 108:	0e 94 68 01 	call	0x2d0	; 0x2d0 <DIO_s8SETPinVal>
-	else
-	{
-		return HSPI_NOK;
-	}
-	
-	return HSPI_OK;	
- 10c:	80 e0       	ldi	r24, 0x00	; 0
-}
- 10e:	df 91       	pop	r29
- 110:	cf 91       	pop	r28
- 112:	08 95       	ret
-
-00000114 <H_EXTINT_create>:
-ARGS        : takes the EXINT_NUMBER( INT0,INT1 OR INT2) and sense control and and pointer to the function we want to execute when interrupt occurs.
-return      : return EXTINT_OK if the EXINT_NUMBER initializes correctly, EXTINT_NOT_OK otherwise
-*/
-
-EN_EXTINT_ERROR H_EXTINT_create(EN_EXINT_NUMBER INTx ,EN_Sence_Control INTxSense,void(*ptrfunc)(void))
-{
- 114:	0f 93       	push	r16
- 116:	1f 93       	push	r17
- 118:	cf 93       	push	r28
- 11a:	c8 2f       	mov	r28, r24
- 11c:	8a 01       	movw	r16, r20
-	if(!EXTINT_init(INTx,INTxSense) && !EXTINT_CallBack(INTx,ptrfunc)) return EXTINT_OK;
- 11e:	0e 94 d2 01 	call	0x3a4	; 0x3a4 <EXTINT_init>
- 122:	81 11       	cpse	r24, r1
- 124:	07 c0       	rjmp	.+14     	; 0x134 <H_EXTINT_create+0x20>
- 126:	b8 01       	movw	r22, r16
- 128:	8c 2f       	mov	r24, r28
- 12a:	0e 94 59 02 	call	0x4b2	; 0x4b2 <EXTINT_CallBack>
- 12e:	81 11       	cpse	r24, r1
- 130:	03 c0       	rjmp	.+6      	; 0x138 <H_EXTINT_create+0x24>
- 132:	03 c0       	rjmp	.+6      	; 0x13a <H_EXTINT_create+0x26>
-	return EXTINT_NOT_OK;
- 134:	81 e0       	ldi	r24, 0x01	; 1
- 136:	01 c0       	rjmp	.+2      	; 0x13a <H_EXTINT_create+0x26>
- 138:	81 e0       	ldi	r24, 0x01	; 1
-	
- 13a:	cf 91       	pop	r28
- 13c:	1f 91       	pop	r17
- 13e:	0f 91       	pop	r16
- 140:	08 95       	ret
-
-00000142 <SlaveTrigger>:
-Uchar8_t flag = 0;
-
-void SlaveTrigger(void)
-{
-	//DIO_s8SETPinVal(DIO_PIND_4, HIGH);
-	flag = 1;
- 142:	81 e0       	ldi	r24, 0x01	; 1
- 144:	80 93 7f 00 	sts	0x007F, r24	; 0x80007f <flag>
- 148:	08 95       	ret
-
-0000014a <main>:
-}
 
 int main(void)
 {
- 14a:	cf 93       	push	r28
- 14c:	df 93       	push	r29
- 14e:	1f 92       	push	r1
- 150:	cd b7       	in	r28, 0x3d	; 61
- 152:	de b7       	in	r29, 0x3e	; 62
-	Uchar8_t ch;
-    /* Replace with your application code */
-	DIO_s8SETPinDir(DIO_PIND_4, OUTPUT);
- 154:	61 e0       	ldi	r22, 0x01	; 1
- 156:	8c e1       	ldi	r24, 0x1C	; 28
- 158:	0e 94 28 01 	call	0x250	; 0x250 <DIO_s8SETPinDir>
-	DIO_s8SETPinDir(DIO_PIND_5, OUTPUT);
- 15c:	61 e0       	ldi	r22, 0x01	; 1
- 15e:	8d e1       	ldi	r24, 0x1D	; 29
- 160:	0e 94 28 01 	call	0x250	; 0x250 <DIO_s8SETPinDir>
-	DIO_s8SETPortDir(DIO_PORTA, OUTPUT);
- 164:	61 e0       	ldi	r22, 0x01	; 1
- 166:	80 e0       	ldi	r24, 0x00	; 0
- 168:	0e 94 f1 00 	call	0x1e2	; 0x1e2 <DIO_s8SETPortDir>
-	
-	H_EXTINT_create(EXTINT0, ANY_LOGICAL_CHANGE, SlaveTrigger);
- 16c:	41 ea       	ldi	r20, 0xA1	; 161
- 16e:	50 e0       	ldi	r21, 0x00	; 0
- 170:	63 e0       	ldi	r22, 0x03	; 3
- 172:	80 e0       	ldi	r24, 0x00	; 0
- 174:	0e 94 8a 00 	call	0x114	; 0x114 <H_EXTINT_create>
-	HSPI_MasterInit();
- 178:	0e 94 49 00 	call	0x92	; 0x92 <HSPI_MasterInit>
-	sei();
- 17c:	78 94       	sei
-	
-    while (1) 
-    {
-		if(flag)
- 17e:	80 91 7f 00 	lds	r24, 0x007F	; 0x80007f <flag>
- 182:	88 23       	and	r24, r24
- 184:	e1 f3       	breq	.-8      	; 0x17e <main+0x34>
-		{
-			flag = 0;
- 186:	10 92 7f 00 	sts	0x007F, r1	; 0x80007f <flag>
-			DIO_s8TOGPinVal(DIO_PIND_4);
- 18a:	8c e1       	ldi	r24, 0x1C	; 28
- 18c:	0e 94 a8 01 	call	0x350	; 0x350 <DIO_s8TOGPinVal>
+  92:	ff cf       	rjmp	.-2      	; 0x92 <main>
 
-			HSPI_ReceiveChar(&ch);
- 190:	ce 01       	movw	r24, r28
- 192:	01 96       	adiw	r24, 0x01	; 1
- 194:	0e 94 64 00 	call	0xc8	; 0xc8 <HSPI_ReceiveChar>
-			DIO_s8SETPortVal(DIO_PORTA, ch);
- 198:	69 81       	ldd	r22, Y+1	; 0x01
- 19a:	80 e0       	ldi	r24, 0x00	; 0
- 19c:	0e 94 18 01 	call	0x230	; 0x230 <DIO_s8SETPortVal>
-			HSPI_ReceiveChar(&ch);
- 1a0:	ce 01       	movw	r24, r28
- 1a2:	01 96       	adiw	r24, 0x01	; 1
- 1a4:	0e 94 64 00 	call	0xc8	; 0xc8 <HSPI_ReceiveChar>
-			DIO_s8SETPortVal(DIO_PORTA, ch);
- 1a8:	69 81       	ldd	r22, Y+1	; 0x01
- 1aa:	80 e0       	ldi	r24, 0x00	; 0
- 1ac:	0e 94 18 01 	call	0x230	; 0x230 <DIO_s8SETPortVal>
-			HSPI_ReceiveChar(&ch);
- 1b0:	ce 01       	movw	r24, r28
- 1b2:	01 96       	adiw	r24, 0x01	; 1
- 1b4:	0e 94 64 00 	call	0xc8	; 0xc8 <HSPI_ReceiveChar>
-			DIO_s8SETPortVal(DIO_PORTA, ch);
- 1b8:	69 81       	ldd	r22, Y+1	; 0x01
- 1ba:	80 e0       	ldi	r24, 0x00	; 0
- 1bc:	0e 94 18 01 	call	0x230	; 0x230 <DIO_s8SETPortVal>
-			//HSPI_ReceiveChar(&arr_g_MasterRxBuffer[3]);			
-			//DIO_s8SETPortVal(DIO_PORTA, arr_g_MasterRxBuffer[1]);
-			if(arr_g_MasterRxBuffer[0] == 'a') DIO_s8SETPinVal(DIO_PIND_4, HIGH);
- 1c0:	80 91 70 00 	lds	r24, 0x0070	; 0x800070 <__data_end>
- 1c4:	81 36       	cpi	r24, 0x61	; 97
- 1c6:	21 f4       	brne	.+8      	; 0x1d0 <main+0x86>
- 1c8:	61 e0       	ldi	r22, 0x01	; 1
- 1ca:	8c e1       	ldi	r24, 0x1C	; 28
- 1cc:	0e 94 68 01 	call	0x2d0	; 0x2d0 <DIO_s8SETPinVal>
-			if(arr_g_MasterRxBuffer[1] == 'b') DIO_s8SETPinVal(DIO_PIND_5, HIGH);
- 1d0:	80 91 71 00 	lds	r24, 0x0071	; 0x800071 <__data_end+0x1>
- 1d4:	82 36       	cpi	r24, 0x62	; 98
- 1d6:	99 f6       	brne	.-90     	; 0x17e <main+0x34>
- 1d8:	61 e0       	ldi	r22, 0x01	; 1
- 1da:	8d e1       	ldi	r24, 0x1D	; 29
- 1dc:	0e 94 68 01 	call	0x2d0	; 0x2d0 <DIO_s8SETPinVal>
- 1e0:	ce cf       	rjmp	.-100    	; 0x17e <main+0x34>
+00000094 <__vector_1>:
+  94:	1f 92       	push	r1
+  96:	0f 92       	push	r0
+  98:	0f b6       	in	r0, 0x3f	; 63
+  9a:	0f 92       	push	r0
+  9c:	11 24       	eor	r1, r1
+  9e:	2f 93       	push	r18
+  a0:	3f 93       	push	r19
+  a2:	4f 93       	push	r20
+  a4:	5f 93       	push	r21
+  a6:	6f 93       	push	r22
+  a8:	7f 93       	push	r23
+  aa:	8f 93       	push	r24
+  ac:	9f 93       	push	r25
+  ae:	af 93       	push	r26
+  b0:	bf 93       	push	r27
+  b2:	ef 93       	push	r30
+  b4:	ff 93       	push	r31
+  b6:	e0 91 64 00 	lds	r30, 0x0064	; 0x800064 <ptrINT0>
+  ba:	f0 91 65 00 	lds	r31, 0x0065	; 0x800065 <ptrINT0+0x1>
+  be:	30 97       	sbiw	r30, 0x00	; 0
+  c0:	09 f0       	breq	.+2      	; 0xc4 <__vector_1+0x30>
+  c2:	09 95       	icall
+  c4:	ff 91       	pop	r31
+  c6:	ef 91       	pop	r30
+  c8:	bf 91       	pop	r27
+  ca:	af 91       	pop	r26
+  cc:	9f 91       	pop	r25
+  ce:	8f 91       	pop	r24
+  d0:	7f 91       	pop	r23
+  d2:	6f 91       	pop	r22
+  d4:	5f 91       	pop	r21
+  d6:	4f 91       	pop	r20
+  d8:	3f 91       	pop	r19
+  da:	2f 91       	pop	r18
+  dc:	0f 90       	pop	r0
+  de:	0f be       	out	0x3f, r0	; 63
+  e0:	0f 90       	pop	r0
+  e2:	1f 90       	pop	r1
+  e4:	18 95       	reti
 
-000001e2 <DIO_s8SETPortDir>:
-	else
-	{
-		errStatus = E_NOK;
-	}
-	return errStatus;
-}
- 1e2:	84 30       	cpi	r24, 0x04	; 4
- 1e4:	f8 f4       	brcc	.+62     	; 0x224 <DIO_s8SETPortDir+0x42>
- 1e6:	62 30       	cpi	r22, 0x02	; 2
- 1e8:	f8 f4       	brcc	.+62     	; 0x228 <DIO_s8SETPortDir+0x46>
- 1ea:	61 11       	cpse	r22, r1
- 1ec:	0c c0       	rjmp	.+24     	; 0x206 <DIO_s8SETPortDir+0x24>
- 1ee:	e8 2f       	mov	r30, r24
- 1f0:	f0 e0       	ldi	r31, 0x00	; 0
- 1f2:	ee 0f       	add	r30, r30
- 1f4:	ff 1f       	adc	r31, r31
- 1f6:	e0 5a       	subi	r30, 0xA0	; 160
- 1f8:	ff 4f       	sbci	r31, 0xFF	; 255
- 1fa:	01 90       	ld	r0, Z+
- 1fc:	f0 81       	ld	r31, Z
- 1fe:	e0 2d       	mov	r30, r0
- 200:	10 82       	st	Z, r1
- 202:	80 e0       	ldi	r24, 0x00	; 0
- 204:	08 95       	ret
- 206:	61 30       	cpi	r22, 0x01	; 1
- 208:	89 f4       	brne	.+34     	; 0x22c <DIO_s8SETPortDir+0x4a>
- 20a:	e8 2f       	mov	r30, r24
- 20c:	f0 e0       	ldi	r31, 0x00	; 0
- 20e:	ee 0f       	add	r30, r30
- 210:	ff 1f       	adc	r31, r31
- 212:	e0 5a       	subi	r30, 0xA0	; 160
- 214:	ff 4f       	sbci	r31, 0xFF	; 255
- 216:	01 90       	ld	r0, Z+
- 218:	f0 81       	ld	r31, Z
- 21a:	e0 2d       	mov	r30, r0
- 21c:	8f ef       	ldi	r24, 0xFF	; 255
- 21e:	80 83       	st	Z, r24
- 220:	80 e0       	ldi	r24, 0x00	; 0
- 222:	08 95       	ret
- 224:	8f ef       	ldi	r24, 0xFF	; 255
- 226:	08 95       	ret
- 228:	8f ef       	ldi	r24, 0xFF	; 255
- 22a:	08 95       	ret
- 22c:	80 e0       	ldi	r24, 0x00	; 0
- 22e:	08 95       	ret
+000000e6 <__vector_2>:
+  e6:	1f 92       	push	r1
+  e8:	0f 92       	push	r0
+  ea:	0f b6       	in	r0, 0x3f	; 63
+  ec:	0f 92       	push	r0
+  ee:	11 24       	eor	r1, r1
+  f0:	2f 93       	push	r18
+  f2:	3f 93       	push	r19
+  f4:	4f 93       	push	r20
+  f6:	5f 93       	push	r21
+  f8:	6f 93       	push	r22
+  fa:	7f 93       	push	r23
+  fc:	8f 93       	push	r24
+  fe:	9f 93       	push	r25
+ 100:	af 93       	push	r26
+ 102:	bf 93       	push	r27
+ 104:	ef 93       	push	r30
+ 106:	ff 93       	push	r31
+ 108:	e0 91 62 00 	lds	r30, 0x0062	; 0x800062 <ptrINT1>
+ 10c:	f0 91 63 00 	lds	r31, 0x0063	; 0x800063 <ptrINT1+0x1>
+ 110:	30 97       	sbiw	r30, 0x00	; 0
+ 112:	09 f0       	breq	.+2      	; 0x116 <__vector_2+0x30>
+ 114:	09 95       	icall
+ 116:	ff 91       	pop	r31
+ 118:	ef 91       	pop	r30
+ 11a:	bf 91       	pop	r27
+ 11c:	af 91       	pop	r26
+ 11e:	9f 91       	pop	r25
+ 120:	8f 91       	pop	r24
+ 122:	7f 91       	pop	r23
+ 124:	6f 91       	pop	r22
+ 126:	5f 91       	pop	r21
+ 128:	4f 91       	pop	r20
+ 12a:	3f 91       	pop	r19
+ 12c:	2f 91       	pop	r18
+ 12e:	0f 90       	pop	r0
+ 130:	0f be       	out	0x3f, r0	; 63
+ 132:	0f 90       	pop	r0
+ 134:	1f 90       	pop	r1
+ 136:	18 95       	reti
 
-00000230 <DIO_s8SETPortVal>:
- 230:	84 30       	cpi	r24, 0x04	; 4
- 232:	60 f4       	brcc	.+24     	; 0x24c <DIO_s8SETPortVal+0x1c>
- 234:	e8 2f       	mov	r30, r24
- 236:	f0 e0       	ldi	r31, 0x00	; 0
- 238:	ee 0f       	add	r30, r30
- 23a:	ff 1f       	adc	r31, r31
- 23c:	e8 59       	subi	r30, 0x98	; 152
- 23e:	ff 4f       	sbci	r31, 0xFF	; 255
- 240:	01 90       	ld	r0, Z+
- 242:	f0 81       	ld	r31, Z
- 244:	e0 2d       	mov	r30, r0
- 246:	60 83       	st	Z, r22
- 248:	80 e0       	ldi	r24, 0x00	; 0
- 24a:	08 95       	ret
- 24c:	8f ef       	ldi	r24, 0xFF	; 255
- 24e:	08 95       	ret
+00000138 <__vector_3>:
+ 138:	1f 92       	push	r1
+ 13a:	0f 92       	push	r0
+ 13c:	0f b6       	in	r0, 0x3f	; 63
+ 13e:	0f 92       	push	r0
+ 140:	11 24       	eor	r1, r1
+ 142:	2f 93       	push	r18
+ 144:	3f 93       	push	r19
+ 146:	4f 93       	push	r20
+ 148:	5f 93       	push	r21
+ 14a:	6f 93       	push	r22
+ 14c:	7f 93       	push	r23
+ 14e:	8f 93       	push	r24
+ 150:	9f 93       	push	r25
+ 152:	af 93       	push	r26
+ 154:	bf 93       	push	r27
+ 156:	ef 93       	push	r30
+ 158:	ff 93       	push	r31
+ 15a:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 15e:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 162:	30 97       	sbiw	r30, 0x00	; 0
+ 164:	09 f0       	breq	.+2      	; 0x168 <__vector_3+0x30>
+ 166:	09 95       	icall
+ 168:	ff 91       	pop	r31
+ 16a:	ef 91       	pop	r30
+ 16c:	bf 91       	pop	r27
+ 16e:	af 91       	pop	r26
+ 170:	9f 91       	pop	r25
+ 172:	8f 91       	pop	r24
+ 174:	7f 91       	pop	r23
+ 176:	6f 91       	pop	r22
+ 178:	5f 91       	pop	r21
+ 17a:	4f 91       	pop	r20
+ 17c:	3f 91       	pop	r19
+ 17e:	2f 91       	pop	r18
+ 180:	0f 90       	pop	r0
+ 182:	0f be       	out	0x3f, r0	; 63
+ 184:	0f 90       	pop	r0
+ 186:	1f 90       	pop	r1
+ 188:	18 95       	reti
 
-00000250 <DIO_s8SETPinDir>:
-{
-	Uchar8_t errStatus = E_OK;
-	Uchar8_t portID;
-	Uchar8_t pinID;
+0000018a <__vector_12>:
+ 18a:	1f 92       	push	r1
+ 18c:	0f 92       	push	r0
+ 18e:	0f b6       	in	r0, 0x3f	; 63
+ 190:	0f 92       	push	r0
+ 192:	11 24       	eor	r1, r1
+ 194:	2f 93       	push	r18
+ 196:	3f 93       	push	r19
+ 198:	4f 93       	push	r20
+ 19a:	5f 93       	push	r21
+ 19c:	6f 93       	push	r22
+ 19e:	7f 93       	push	r23
+ 1a0:	8f 93       	push	r24
+ 1a2:	9f 93       	push	r25
+ 1a4:	af 93       	push	r26
+ 1a6:	bf 93       	push	r27
+ 1a8:	ef 93       	push	r30
+ 1aa:	ff 93       	push	r31
+ 1ac:	e0 91 66 00 	lds	r30, 0x0066	; 0x800066 <SPI_CallbackFn>
+ 1b0:	f0 91 67 00 	lds	r31, 0x0067	; 0x800067 <SPI_CallbackFn+0x1>
+ 1b4:	30 97       	sbiw	r30, 0x00	; 0
+ 1b6:	09 f0       	breq	.+2      	; 0x1ba <__vector_12+0x30>
+ 1b8:	09 95       	icall
+ 1ba:	ff 91       	pop	r31
+ 1bc:	ef 91       	pop	r30
+ 1be:	bf 91       	pop	r27
+ 1c0:	af 91       	pop	r26
+ 1c2:	9f 91       	pop	r25
+ 1c4:	8f 91       	pop	r24
+ 1c6:	7f 91       	pop	r23
+ 1c8:	6f 91       	pop	r22
+ 1ca:	5f 91       	pop	r21
+ 1cc:	4f 91       	pop	r20
+ 1ce:	3f 91       	pop	r19
+ 1d0:	2f 91       	pop	r18
+ 1d2:	0f 90       	pop	r0
+ 1d4:	0f be       	out	0x3f, r0	; 63
+ 1d6:	0f 90       	pop	r0
+ 1d8:	1f 90       	pop	r1
+ 1da:	18 95       	reti
 
-	if (enPinCopy < PIN_INVALID && enPortDir< DIR_INVALID)
- 250:	80 32       	cpi	r24, 0x20	; 32
- 252:	c0 f5       	brcc	.+112    	; 0x2c4 <DIO_s8SETPinDir+0x74>
- 254:	62 30       	cpi	r22, 0x02	; 2
- 256:	c0 f5       	brcc	.+112    	; 0x2c8 <DIO_s8SETPinDir+0x78>
-	{
-		portID = enPinCopy/8;
- 258:	e8 2f       	mov	r30, r24
- 25a:	e6 95       	lsr	r30
- 25c:	e6 95       	lsr	r30
- 25e:	e6 95       	lsr	r30
-		pinID  = enPinCopy%8;
- 260:	87 70       	andi	r24, 0x07	; 7
+000001dc <_exit>:
+ 1dc:	f8 94       	cli
 
-		if (enPortDir == INPUT)
- 262:	61 11       	cpse	r22, r1
- 264:	17 c0       	rjmp	.+46     	; 0x294 <DIO_s8SETPinDir+0x44>
-		{
-			CLEAR_BIT(*ddrReg[portID],pinID);
- 266:	f0 e0       	ldi	r31, 0x00	; 0
- 268:	ee 0f       	add	r30, r30
- 26a:	ff 1f       	adc	r31, r31
- 26c:	e0 5a       	subi	r30, 0xA0	; 160
- 26e:	ff 4f       	sbci	r31, 0xFF	; 255
- 270:	01 90       	ld	r0, Z+
- 272:	f0 81       	ld	r31, Z
- 274:	e0 2d       	mov	r30, r0
- 276:	40 81       	ld	r20, Z
- 278:	21 e0       	ldi	r18, 0x01	; 1
- 27a:	30 e0       	ldi	r19, 0x00	; 0
- 27c:	b9 01       	movw	r22, r18
- 27e:	02 c0       	rjmp	.+4      	; 0x284 <DIO_s8SETPinDir+0x34>
- 280:	66 0f       	add	r22, r22
- 282:	77 1f       	adc	r23, r23
- 284:	8a 95       	dec	r24
- 286:	e2 f7       	brpl	.-8      	; 0x280 <DIO_s8SETPinDir+0x30>
- 288:	cb 01       	movw	r24, r22
- 28a:	80 95       	com	r24
- 28c:	84 23       	and	r24, r20
- 28e:	80 83       	st	Z, r24
-
-
-
-Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
-{
-	Uchar8_t errStatus = E_OK;
- 290:	80 e0       	ldi	r24, 0x00	; 0
- 292:	08 95       	ret
-
-		if (enPortDir == INPUT)
-		{
-			CLEAR_BIT(*ddrReg[portID],pinID);
-		}
-		else if(enPortDir == OUTPUT)
- 294:	61 30       	cpi	r22, 0x01	; 1
- 296:	d1 f4       	brne	.+52     	; 0x2cc <DIO_s8SETPinDir+0x7c>
-		{
-			SET_BIT(*ddrReg[portID],pinID);
- 298:	f0 e0       	ldi	r31, 0x00	; 0
- 29a:	ee 0f       	add	r30, r30
- 29c:	ff 1f       	adc	r31, r31
- 29e:	e0 5a       	subi	r30, 0xA0	; 160
- 2a0:	ff 4f       	sbci	r31, 0xFF	; 255
- 2a2:	01 90       	ld	r0, Z+
- 2a4:	f0 81       	ld	r31, Z
- 2a6:	e0 2d       	mov	r30, r0
- 2a8:	40 81       	ld	r20, Z
- 2aa:	21 e0       	ldi	r18, 0x01	; 1
- 2ac:	30 e0       	ldi	r19, 0x00	; 0
- 2ae:	b9 01       	movw	r22, r18
- 2b0:	02 c0       	rjmp	.+4      	; 0x2b6 <DIO_s8SETPinDir+0x66>
- 2b2:	66 0f       	add	r22, r22
- 2b4:	77 1f       	adc	r23, r23
- 2b6:	8a 95       	dec	r24
- 2b8:	e2 f7       	brpl	.-8      	; 0x2b2 <DIO_s8SETPinDir+0x62>
- 2ba:	cb 01       	movw	r24, r22
- 2bc:	84 2b       	or	r24, r20
- 2be:	80 83       	st	Z, r24
-
-
-
-Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
-{
-	Uchar8_t errStatus = E_OK;
- 2c0:	80 e0       	ldi	r24, 0x00	; 0
- 2c2:	08 95       	ret
-			/* do nothing */
-		}
-	}
-	else
-	{
-		errStatus = E_NOK;
- 2c4:	8f ef       	ldi	r24, 0xFF	; 255
- 2c6:	08 95       	ret
- 2c8:	8f ef       	ldi	r24, 0xFF	; 255
- 2ca:	08 95       	ret
-
-
-
-Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
-{
-	Uchar8_t errStatus = E_OK;
- 2cc:	80 e0       	ldi	r24, 0x00	; 0
-	else
-	{
-		errStatus = E_NOK;
-	}
-	return errStatus;
-}
- 2ce:	08 95       	ret
-
-000002d0 <DIO_s8SETPinVal>:
-{
-	Uchar8_t errStatus = E_OK;
-	Uchar8_t portID;
-	Uchar8_t pinID;
-
-	if (enPinCopy < PIN_INVALID && enPortVal< VAL_INVALID)
- 2d0:	80 32       	cpi	r24, 0x20	; 32
- 2d2:	c0 f5       	brcc	.+112    	; 0x344 <DIO_s8SETPinVal+0x74>
- 2d4:	62 30       	cpi	r22, 0x02	; 2
- 2d6:	c0 f5       	brcc	.+112    	; 0x348 <DIO_s8SETPinVal+0x78>
-	{
-		portID = enPinCopy/8;
- 2d8:	e8 2f       	mov	r30, r24
- 2da:	e6 95       	lsr	r30
- 2dc:	e6 95       	lsr	r30
- 2de:	e6 95       	lsr	r30
-		pinID  = enPinCopy%8;
- 2e0:	87 70       	andi	r24, 0x07	; 7
-
-		if (enPortVal == LOW)
- 2e2:	61 11       	cpse	r22, r1
- 2e4:	17 c0       	rjmp	.+46     	; 0x314 <DIO_s8SETPinVal+0x44>
-		{
-			CLEAR_BIT(*portReg[portID],pinID);
- 2e6:	f0 e0       	ldi	r31, 0x00	; 0
- 2e8:	ee 0f       	add	r30, r30
- 2ea:	ff 1f       	adc	r31, r31
- 2ec:	e8 59       	subi	r30, 0x98	; 152
- 2ee:	ff 4f       	sbci	r31, 0xFF	; 255
- 2f0:	01 90       	ld	r0, Z+
- 2f2:	f0 81       	ld	r31, Z
- 2f4:	e0 2d       	mov	r30, r0
- 2f6:	40 81       	ld	r20, Z
- 2f8:	21 e0       	ldi	r18, 0x01	; 1
- 2fa:	30 e0       	ldi	r19, 0x00	; 0
- 2fc:	b9 01       	movw	r22, r18
- 2fe:	02 c0       	rjmp	.+4      	; 0x304 <DIO_s8SETPinVal+0x34>
- 300:	66 0f       	add	r22, r22
- 302:	77 1f       	adc	r23, r23
- 304:	8a 95       	dec	r24
- 306:	e2 f7       	brpl	.-8      	; 0x300 <DIO_s8SETPinVal+0x30>
- 308:	cb 01       	movw	r24, r22
- 30a:	80 95       	com	r24
- 30c:	84 23       	and	r24, r20
- 30e:	80 83       	st	Z, r24
-}
-
-
-Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
-{
-	Uchar8_t errStatus = E_OK;
- 310:	80 e0       	ldi	r24, 0x00	; 0
- 312:	08 95       	ret
-
-		if (enPortVal == LOW)
-		{
-			CLEAR_BIT(*portReg[portID],pinID);
-		}
-		else if(enPortVal == HIGH)
- 314:	61 30       	cpi	r22, 0x01	; 1
- 316:	d1 f4       	brne	.+52     	; 0x34c <DIO_s8SETPinVal+0x7c>
-		{
-			SET_BIT(*portReg[portID],pinID);
- 318:	f0 e0       	ldi	r31, 0x00	; 0
- 31a:	ee 0f       	add	r30, r30
- 31c:	ff 1f       	adc	r31, r31
- 31e:	e8 59       	subi	r30, 0x98	; 152
- 320:	ff 4f       	sbci	r31, 0xFF	; 255
- 322:	01 90       	ld	r0, Z+
- 324:	f0 81       	ld	r31, Z
- 326:	e0 2d       	mov	r30, r0
- 328:	40 81       	ld	r20, Z
- 32a:	21 e0       	ldi	r18, 0x01	; 1
- 32c:	30 e0       	ldi	r19, 0x00	; 0
- 32e:	b9 01       	movw	r22, r18
- 330:	02 c0       	rjmp	.+4      	; 0x336 <DIO_s8SETPinVal+0x66>
- 332:	66 0f       	add	r22, r22
- 334:	77 1f       	adc	r23, r23
- 336:	8a 95       	dec	r24
- 338:	e2 f7       	brpl	.-8      	; 0x332 <DIO_s8SETPinVal+0x62>
- 33a:	cb 01       	movw	r24, r22
- 33c:	84 2b       	or	r24, r20
- 33e:	80 83       	st	Z, r24
-}
-
-
-Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
-{
-	Uchar8_t errStatus = E_OK;
- 340:	80 e0       	ldi	r24, 0x00	; 0
- 342:	08 95       	ret
-			/* do nothing */
-		}
-	}
-	else
-	{
-		errStatus = E_NOK;
- 344:	8f ef       	ldi	r24, 0xFF	; 255
- 346:	08 95       	ret
- 348:	8f ef       	ldi	r24, 0xFF	; 255
- 34a:	08 95       	ret
-}
-
-
-Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
-{
-	Uchar8_t errStatus = E_OK;
- 34c:	80 e0       	ldi	r24, 0x00	; 0
-	else
-	{
-		errStatus = E_NOK;
-	}
-	return errStatus;
-}
- 34e:	08 95       	ret
-
-00000350 <DIO_s8TOGPinVal>:
-{
-	Uchar8_t errStatus = E_OK;
-	Uchar8_t portID;
-	Uchar8_t pinID;
-
-	if (enPinCopy < PIN_INVALID)
- 350:	80 32       	cpi	r24, 0x20	; 32
- 352:	d8 f4       	brcc	.+54     	; 0x38a <DIO_s8TOGPinVal+0x3a>
-	{
-		portID = enPinCopy/8;
- 354:	e8 2f       	mov	r30, r24
- 356:	e6 95       	lsr	r30
- 358:	e6 95       	lsr	r30
- 35a:	e6 95       	lsr	r30
-		pinID  = enPinCopy%8;
- 35c:	87 70       	andi	r24, 0x07	; 7
-
-		TOGGLE_BIT(*portReg[portID],pinID);
- 35e:	f0 e0       	ldi	r31, 0x00	; 0
- 360:	ee 0f       	add	r30, r30
- 362:	ff 1f       	adc	r31, r31
- 364:	e8 59       	subi	r30, 0x98	; 152
- 366:	ff 4f       	sbci	r31, 0xFF	; 255
- 368:	01 90       	ld	r0, Z+
- 36a:	f0 81       	ld	r31, Z
- 36c:	e0 2d       	mov	r30, r0
- 36e:	40 81       	ld	r20, Z
- 370:	21 e0       	ldi	r18, 0x01	; 1
- 372:	30 e0       	ldi	r19, 0x00	; 0
- 374:	b9 01       	movw	r22, r18
- 376:	02 c0       	rjmp	.+4      	; 0x37c <DIO_s8TOGPinVal+0x2c>
- 378:	66 0f       	add	r22, r22
- 37a:	77 1f       	adc	r23, r23
- 37c:	8a 95       	dec	r24
- 37e:	e2 f7       	brpl	.-8      	; 0x378 <DIO_s8TOGPinVal+0x28>
- 380:	cb 01       	movw	r24, r22
- 382:	84 27       	eor	r24, r20
- 384:	80 83       	st	Z, r24
-}
-
-
-Uchar8_t DIO_s8TOGPinVal (enu_pin enPinCopy)
-{
-	Uchar8_t errStatus = E_OK;
- 386:	80 e0       	ldi	r24, 0x00	; 0
- 388:	08 95       	ret
-
-		TOGGLE_BIT(*portReg[portID],pinID);
-	}
-	else
-	{
-		errStatus = E_NOK;
- 38a:	8f ef       	ldi	r24, 0xFF	; 255
-	}
-	return errStatus;
-
-}
- 38c:	08 95       	ret
-
-0000038e <SET_GLOBAL_INTERRUPT>:
-void (*ptrINT2)(void) = 0;
-
-EN_EXTINT_ERROR SET_GLOBAL_INTERRUPT(EN_GLOBAL_INT state)
-{
-	
-	if(state == ENABLE)
- 38e:	81 30       	cpi	r24, 0x01	; 1
- 390:	19 f4       	brne	.+6      	; 0x398 <SET_GLOBAL_INTERRUPT+0xa>
-	sei();
- 392:	78 94       	sei
-    else if (state == DISABLE)
-	cli();
-	else return EXTINT_NOT_OK;
-	return EXTINT_OK;
- 394:	80 e0       	ldi	r24, 0x00	; 0
- 396:	08 95       	ret
-EN_EXTINT_ERROR SET_GLOBAL_INTERRUPT(EN_GLOBAL_INT state)
-{
-	
-	if(state == ENABLE)
-	sei();
-    else if (state == DISABLE)
- 398:	81 11       	cpse	r24, r1
- 39a:	02 c0       	rjmp	.+4      	; 0x3a0 <SET_GLOBAL_INTERRUPT+0x12>
-	cli();
- 39c:	f8 94       	cli
- 39e:	08 95       	ret
-	else return EXTINT_NOT_OK;
- 3a0:	81 e0       	ldi	r24, 0x01	; 1
-	return EXTINT_OK;
-}
- 3a2:	08 95       	ret
-
-000003a4 <EXTINT_init>:
-
-EN_EXTINT_ERROR EXTINT_init(EN_EXINT_NUMBER INTx ,EN_Sence_Control INTxSense)
-{
- 3a4:	cf 93       	push	r28
- 3a6:	df 93       	push	r29
- 3a8:	c8 2f       	mov	r28, r24
- 3aa:	d6 2f       	mov	r29, r22
-	
-	SET_GLOBAL_INTERRUPT(ENABLE); // SET GLOBAL INTERRUPT
- 3ac:	81 e0       	ldi	r24, 0x01	; 1
- 3ae:	0e 94 c7 01 	call	0x38e	; 0x38e <SET_GLOBAL_INTERRUPT>
-	switch(INTx)
- 3b2:	c1 30       	cpi	r28, 0x01	; 1
- 3b4:	99 f1       	breq	.+102    	; 0x41c <__EEPROM_REGION_LENGTH__+0x1c>
- 3b6:	20 f0       	brcs	.+8      	; 0x3c0 <EXTINT_init+0x1c>
- 3b8:	c2 30       	cpi	r28, 0x02	; 2
- 3ba:	09 f4       	brne	.+2      	; 0x3be <EXTINT_init+0x1a>
- 3bc:	5d c0       	rjmp	.+186    	; 0x478 <__EEPROM_REGION_LENGTH__+0x78>
- 3be:	72 c0       	rjmp	.+228    	; 0x4a4 <__EEPROM_REGION_LENGTH__+0xa4>
-	{
-		case EXTINT0:
-		  if(INTxSense == LOW_LEVEL)
- 3c0:	d1 11       	cpse	r29, r1
- 3c2:	07 c0       	rjmp	.+14     	; 0x3d2 <EXTINT_init+0x2e>
-		  {
-			  CLEAR_BIT(MCUCR,ISC00);
- 3c4:	85 b7       	in	r24, 0x35	; 53
- 3c6:	8e 7f       	andi	r24, 0xFE	; 254
- 3c8:	85 bf       	out	0x35, r24	; 53
-			  CLEAR_BIT(MCUCR,ISC01);
- 3ca:	85 b7       	in	r24, 0x35	; 53
- 3cc:	8d 7f       	andi	r24, 0xFD	; 253
- 3ce:	85 bf       	out	0x35, r24	; 53
- 3d0:	20 c0       	rjmp	.+64     	; 0x412 <__EEPROM_REGION_LENGTH__+0x12>
-		  }
-		  else if(INTxSense == FALLING_EDGE)
- 3d2:	d1 30       	cpi	r29, 0x01	; 1
- 3d4:	39 f4       	brne	.+14     	; 0x3e4 <EXTINT_init+0x40>
-		  {
-			  CLEAR_BIT(MCUCR,ISC00);
- 3d6:	85 b7       	in	r24, 0x35	; 53
- 3d8:	8e 7f       	andi	r24, 0xFE	; 254
- 3da:	85 bf       	out	0x35, r24	; 53
-			  SET_BIT(MCUCR,ISC01);
- 3dc:	85 b7       	in	r24, 0x35	; 53
- 3de:	82 60       	ori	r24, 0x02	; 2
- 3e0:	85 bf       	out	0x35, r24	; 53
- 3e2:	17 c0       	rjmp	.+46     	; 0x412 <__EEPROM_REGION_LENGTH__+0x12>
-		  }
-		  else if(INTxSense == RISING_EDGE)
- 3e4:	d2 30       	cpi	r29, 0x02	; 2
- 3e6:	39 f4       	brne	.+14     	; 0x3f6 <EXTINT_init+0x52>
-		  {
-			  SET_BIT(MCUCR,ISC00);
- 3e8:	85 b7       	in	r24, 0x35	; 53
- 3ea:	81 60       	ori	r24, 0x01	; 1
- 3ec:	85 bf       	out	0x35, r24	; 53
-			  SET_BIT(MCUCR,ISC01);
- 3ee:	85 b7       	in	r24, 0x35	; 53
- 3f0:	82 60       	ori	r24, 0x02	; 2
- 3f2:	85 bf       	out	0x35, r24	; 53
- 3f4:	0e c0       	rjmp	.+28     	; 0x412 <__EEPROM_REGION_LENGTH__+0x12>
-		  }
-		  else if(INTxSense == ANY_LOGICAL_CHANGE)
- 3f6:	d3 30       	cpi	r29, 0x03	; 3
- 3f8:	39 f4       	brne	.+14     	; 0x408 <__EEPROM_REGION_LENGTH__+0x8>
-		  {
-			  SET_BIT(MCUCR,ISC00);
- 3fa:	85 b7       	in	r24, 0x35	; 53
- 3fc:	81 60       	ori	r24, 0x01	; 1
- 3fe:	85 bf       	out	0x35, r24	; 53
-			  CLEAR_BIT(MCUCR,ISC01);
- 400:	85 b7       	in	r24, 0x35	; 53
- 402:	8d 7f       	andi	r24, 0xFD	; 253
- 404:	85 bf       	out	0x35, r24	; 53
- 406:	05 c0       	rjmp	.+10     	; 0x412 <__EEPROM_REGION_LENGTH__+0x12>
-		  }
-		  else   // handle sense option error
-		  {
-			  SET_GLOBAL_INTERRUPT(DISABLE);
- 408:	80 e0       	ldi	r24, 0x00	; 0
- 40a:	0e 94 c7 01 	call	0x38e	; 0x38e <SET_GLOBAL_INTERRUPT>
-			   return EXTINT_NOT_OK;
- 40e:	81 e0       	ldi	r24, 0x01	; 1
- 410:	4d c0       	rjmp	.+154    	; 0x4ac <__EEPROM_REGION_LENGTH__+0xac>
-		  }	   
-		  SET_BIT(GICR,INT0); //Enable External INT0  (PIE)
- 412:	8b b7       	in	r24, 0x3b	; 59
- 414:	80 64       	ori	r24, 0x40	; 64
- 416:	8b bf       	out	0x3b, r24	; 59
-		default: // handle wrong Choose for EXT Interrupt Number
-		  SET_GLOBAL_INTERRUPT(DISABLE);
-		  return EXTINT_NOT_OK;
-		  break;
-	}
-	return EXTINT_OK;
- 418:	80 e0       	ldi	r24, 0x00	; 0
-		  {
-			  SET_GLOBAL_INTERRUPT(DISABLE);
-			   return EXTINT_NOT_OK;
-		  }	   
-		  SET_BIT(GICR,INT0); //Enable External INT0  (PIE)
-		  break;
- 41a:	48 c0       	rjmp	.+144    	; 0x4ac <__EEPROM_REGION_LENGTH__+0xac>
-		case EXTINT1:
-		  if(INTxSense == LOW_LEVEL)
- 41c:	d1 11       	cpse	r29, r1
- 41e:	07 c0       	rjmp	.+14     	; 0x42e <__EEPROM_REGION_LENGTH__+0x2e>
-		  {
-			  CLEAR_BIT(MCUCR,ISC10);
- 420:	85 b7       	in	r24, 0x35	; 53
- 422:	8b 7f       	andi	r24, 0xFB	; 251
- 424:	85 bf       	out	0x35, r24	; 53
-			  CLEAR_BIT(MCUCR,ISC11);
- 426:	85 b7       	in	r24, 0x35	; 53
- 428:	87 7f       	andi	r24, 0xF7	; 247
- 42a:	85 bf       	out	0x35, r24	; 53
- 42c:	20 c0       	rjmp	.+64     	; 0x46e <__EEPROM_REGION_LENGTH__+0x6e>
-		  }
-		  else if(INTxSense == FALLING_EDGE)
- 42e:	d1 30       	cpi	r29, 0x01	; 1
- 430:	39 f4       	brne	.+14     	; 0x440 <__EEPROM_REGION_LENGTH__+0x40>
-		  {
-			  CLEAR_BIT(MCUCR,ISC10);
- 432:	85 b7       	in	r24, 0x35	; 53
- 434:	8b 7f       	andi	r24, 0xFB	; 251
- 436:	85 bf       	out	0x35, r24	; 53
-			  SET_BIT(MCUCR,ISC11);
- 438:	85 b7       	in	r24, 0x35	; 53
- 43a:	88 60       	ori	r24, 0x08	; 8
- 43c:	85 bf       	out	0x35, r24	; 53
- 43e:	17 c0       	rjmp	.+46     	; 0x46e <__EEPROM_REGION_LENGTH__+0x6e>
-		  }
-		  else if(INTxSense == RISING_EDGE)
- 440:	d2 30       	cpi	r29, 0x02	; 2
- 442:	39 f4       	brne	.+14     	; 0x452 <__EEPROM_REGION_LENGTH__+0x52>
-		  {
-			  SET_BIT(MCUCR,ISC10);
- 444:	85 b7       	in	r24, 0x35	; 53
- 446:	84 60       	ori	r24, 0x04	; 4
- 448:	85 bf       	out	0x35, r24	; 53
-			  SET_BIT(MCUCR,ISC11);
- 44a:	85 b7       	in	r24, 0x35	; 53
- 44c:	88 60       	ori	r24, 0x08	; 8
- 44e:	85 bf       	out	0x35, r24	; 53
- 450:	0e c0       	rjmp	.+28     	; 0x46e <__EEPROM_REGION_LENGTH__+0x6e>
-		  }
-		  else if(INTxSense == ANY_LOGICAL_CHANGE)
- 452:	d3 30       	cpi	r29, 0x03	; 3
- 454:	39 f4       	brne	.+14     	; 0x464 <__EEPROM_REGION_LENGTH__+0x64>
-		  {
-			  SET_BIT(MCUCR,ISC10);
- 456:	85 b7       	in	r24, 0x35	; 53
- 458:	84 60       	ori	r24, 0x04	; 4
- 45a:	85 bf       	out	0x35, r24	; 53
-			  CLEAR_BIT(MCUCR,ISC11);
- 45c:	85 b7       	in	r24, 0x35	; 53
- 45e:	87 7f       	andi	r24, 0xF7	; 247
- 460:	85 bf       	out	0x35, r24	; 53
- 462:	05 c0       	rjmp	.+10     	; 0x46e <__EEPROM_REGION_LENGTH__+0x6e>
-		  }
-		  else   // handle sense option error
-		  {
-		 	 SET_GLOBAL_INTERRUPT(DISABLE);
- 464:	80 e0       	ldi	r24, 0x00	; 0
- 466:	0e 94 c7 01 	call	0x38e	; 0x38e <SET_GLOBAL_INTERRUPT>
-		 	 return EXTINT_NOT_OK;
- 46a:	81 e0       	ldi	r24, 0x01	; 1
- 46c:	1f c0       	rjmp	.+62     	; 0x4ac <__EEPROM_REGION_LENGTH__+0xac>
-		  }
-		  SET_BIT(GICR,INT1); //Enable External INT1  (PIE)
- 46e:	8b b7       	in	r24, 0x3b	; 59
- 470:	80 68       	ori	r24, 0x80	; 128
- 472:	8b bf       	out	0x3b, r24	; 59
-		default: // handle wrong Choose for EXT Interrupt Number
-		  SET_GLOBAL_INTERRUPT(DISABLE);
-		  return EXTINT_NOT_OK;
-		  break;
-	}
-	return EXTINT_OK;
- 474:	80 e0       	ldi	r24, 0x00	; 0
-		  {
-		 	 SET_GLOBAL_INTERRUPT(DISABLE);
-		 	 return EXTINT_NOT_OK;
-		  }
-		  SET_BIT(GICR,INT1); //Enable External INT1  (PIE)
-		  break;
- 476:	1a c0       	rjmp	.+52     	; 0x4ac <__EEPROM_REGION_LENGTH__+0xac>
-		case EXTINT2:
-		 
-		  if(INTxSense == FALLING_EDGE)
- 478:	d1 30       	cpi	r29, 0x01	; 1
- 47a:	21 f4       	brne	.+8      	; 0x484 <__EEPROM_REGION_LENGTH__+0x84>
-		  {
-			  CLEAR_BIT(MCUCSR,ISC2);
- 47c:	84 b7       	in	r24, 0x34	; 52
- 47e:	8f 7b       	andi	r24, 0xBF	; 191
- 480:	84 bf       	out	0x34, r24	; 52
- 482:	0b c0       	rjmp	.+22     	; 0x49a <__EEPROM_REGION_LENGTH__+0x9a>
-		  }
-		  else if(INTxSense == RISING_EDGE)
- 484:	d2 30       	cpi	r29, 0x02	; 2
- 486:	21 f4       	brne	.+8      	; 0x490 <__EEPROM_REGION_LENGTH__+0x90>
-		  {
-			  SET_BIT(MCUCSR,ISC2);
- 488:	84 b7       	in	r24, 0x34	; 52
- 48a:	80 64       	ori	r24, 0x40	; 64
- 48c:	84 bf       	out	0x34, r24	; 52
- 48e:	05 c0       	rjmp	.+10     	; 0x49a <__EEPROM_REGION_LENGTH__+0x9a>
-		  }
-		  else   // handle sense option error
-		  {
-		 	 SET_GLOBAL_INTERRUPT(DISABLE);
- 490:	80 e0       	ldi	r24, 0x00	; 0
- 492:	0e 94 c7 01 	call	0x38e	; 0x38e <SET_GLOBAL_INTERRUPT>
-		 	 return EXTINT_NOT_OK;
- 496:	81 e0       	ldi	r24, 0x01	; 1
- 498:	09 c0       	rjmp	.+18     	; 0x4ac <__EEPROM_REGION_LENGTH__+0xac>
-		  }
-		  SET_BIT(GICR,INT2); //Enable External INT1  (PIE)
- 49a:	8b b7       	in	r24, 0x3b	; 59
- 49c:	80 62       	ori	r24, 0x20	; 32
- 49e:	8b bf       	out	0x3b, r24	; 59
-		default: // handle wrong Choose for EXT Interrupt Number
-		  SET_GLOBAL_INTERRUPT(DISABLE);
-		  return EXTINT_NOT_OK;
-		  break;
-	}
-	return EXTINT_OK;
- 4a0:	80 e0       	ldi	r24, 0x00	; 0
-		  {
-		 	 SET_GLOBAL_INTERRUPT(DISABLE);
-		 	 return EXTINT_NOT_OK;
-		  }
-		  SET_BIT(GICR,INT2); //Enable External INT1  (PIE)
-		  break;
- 4a2:	04 c0       	rjmp	.+8      	; 0x4ac <__EEPROM_REGION_LENGTH__+0xac>
-		default: // handle wrong Choose for EXT Interrupt Number
-		  SET_GLOBAL_INTERRUPT(DISABLE);
- 4a4:	80 e0       	ldi	r24, 0x00	; 0
- 4a6:	0e 94 c7 01 	call	0x38e	; 0x38e <SET_GLOBAL_INTERRUPT>
-		  return EXTINT_NOT_OK;
- 4aa:	81 e0       	ldi	r24, 0x01	; 1
-		  break;
-	}
-	return EXTINT_OK;
-}
- 4ac:	df 91       	pop	r29
- 4ae:	cf 91       	pop	r28
- 4b0:	08 95       	ret
-
-000004b2 <EXTINT_CallBack>:
-
-EN_EXTINT_ERROR EXTINT_CallBack(EN_EXINT_NUMBER INTx,void(*ptrfunc)(void))
-{
-	if(INTx == EXTINT0 ) ptrINT0 = ptrfunc;
- 4b2:	81 11       	cpse	r24, r1
- 4b4:	05 c0       	rjmp	.+10     	; 0x4c0 <EXTINT_CallBack+0xe>
- 4b6:	70 93 85 00 	sts	0x0085, r23	; 0x800085 <ptrINT0+0x1>
- 4ba:	60 93 84 00 	sts	0x0084, r22	; 0x800084 <ptrINT0>
- 4be:	08 95       	ret
-	else if(INTx == EXTINT1 ) ptrINT1 = ptrfunc;
- 4c0:	81 30       	cpi	r24, 0x01	; 1
- 4c2:	31 f4       	brne	.+12     	; 0x4d0 <EXTINT_CallBack+0x1e>
- 4c4:	70 93 83 00 	sts	0x0083, r23	; 0x800083 <ptrINT1+0x1>
- 4c8:	60 93 82 00 	sts	0x0082, r22	; 0x800082 <ptrINT1>
-	else if(INTx == EXTINT2 ) ptrINT2 = ptrfunc;
-	else return EXTINT_NOT_OK;
-	return EXTINT_OK;
- 4cc:	80 e0       	ldi	r24, 0x00	; 0
- 4ce:	08 95       	ret
-
-EN_EXTINT_ERROR EXTINT_CallBack(EN_EXINT_NUMBER INTx,void(*ptrfunc)(void))
-{
-	if(INTx == EXTINT0 ) ptrINT0 = ptrfunc;
-	else if(INTx == EXTINT1 ) ptrINT1 = ptrfunc;
-	else if(INTx == EXTINT2 ) ptrINT2 = ptrfunc;
- 4d0:	82 30       	cpi	r24, 0x02	; 2
- 4d2:	31 f4       	brne	.+12     	; 0x4e0 <EXTINT_CallBack+0x2e>
- 4d4:	70 93 81 00 	sts	0x0081, r23	; 0x800081 <ptrINT2+0x1>
- 4d8:	60 93 80 00 	sts	0x0080, r22	; 0x800080 <ptrINT2>
-	else return EXTINT_NOT_OK;
-	return EXTINT_OK;
- 4dc:	80 e0       	ldi	r24, 0x00	; 0
- 4de:	08 95       	ret
-EN_EXTINT_ERROR EXTINT_CallBack(EN_EXINT_NUMBER INTx,void(*ptrfunc)(void))
-{
-	if(INTx == EXTINT0 ) ptrINT0 = ptrfunc;
-	else if(INTx == EXTINT1 ) ptrINT1 = ptrfunc;
-	else if(INTx == EXTINT2 ) ptrINT2 = ptrfunc;
-	else return EXTINT_NOT_OK;
- 4e0:	81 e0       	ldi	r24, 0x01	; 1
-	return EXTINT_OK;
-}
- 4e2:	08 95       	ret
-
-000004e4 <__vector_1>:
-
-
-ISR (EXT_INT_0)
-{
- 4e4:	1f 92       	push	r1
- 4e6:	0f 92       	push	r0
- 4e8:	0f b6       	in	r0, 0x3f	; 63
- 4ea:	0f 92       	push	r0
- 4ec:	11 24       	eor	r1, r1
- 4ee:	2f 93       	push	r18
- 4f0:	3f 93       	push	r19
- 4f2:	4f 93       	push	r20
- 4f4:	5f 93       	push	r21
- 4f6:	6f 93       	push	r22
- 4f8:	7f 93       	push	r23
- 4fa:	8f 93       	push	r24
- 4fc:	9f 93       	push	r25
- 4fe:	af 93       	push	r26
- 500:	bf 93       	push	r27
- 502:	ef 93       	push	r30
- 504:	ff 93       	push	r31
-	if(ptrINT0) ptrINT0();
- 506:	e0 91 84 00 	lds	r30, 0x0084	; 0x800084 <ptrINT0>
- 50a:	f0 91 85 00 	lds	r31, 0x0085	; 0x800085 <ptrINT0+0x1>
- 50e:	30 97       	sbiw	r30, 0x00	; 0
- 510:	09 f0       	breq	.+2      	; 0x514 <__vector_1+0x30>
- 512:	09 95       	icall
-}
- 514:	ff 91       	pop	r31
- 516:	ef 91       	pop	r30
- 518:	bf 91       	pop	r27
- 51a:	af 91       	pop	r26
- 51c:	9f 91       	pop	r25
- 51e:	8f 91       	pop	r24
- 520:	7f 91       	pop	r23
- 522:	6f 91       	pop	r22
- 524:	5f 91       	pop	r21
- 526:	4f 91       	pop	r20
- 528:	3f 91       	pop	r19
- 52a:	2f 91       	pop	r18
- 52c:	0f 90       	pop	r0
- 52e:	0f be       	out	0x3f, r0	; 63
- 530:	0f 90       	pop	r0
- 532:	1f 90       	pop	r1
- 534:	18 95       	reti
-
-00000536 <__vector_2>:
-
-ISR (EXT_INT_1)
-{
- 536:	1f 92       	push	r1
- 538:	0f 92       	push	r0
- 53a:	0f b6       	in	r0, 0x3f	; 63
- 53c:	0f 92       	push	r0
- 53e:	11 24       	eor	r1, r1
- 540:	2f 93       	push	r18
- 542:	3f 93       	push	r19
- 544:	4f 93       	push	r20
- 546:	5f 93       	push	r21
- 548:	6f 93       	push	r22
- 54a:	7f 93       	push	r23
- 54c:	8f 93       	push	r24
- 54e:	9f 93       	push	r25
- 550:	af 93       	push	r26
- 552:	bf 93       	push	r27
- 554:	ef 93       	push	r30
- 556:	ff 93       	push	r31
-	if(ptrINT1) ptrINT1();
- 558:	e0 91 82 00 	lds	r30, 0x0082	; 0x800082 <ptrINT1>
- 55c:	f0 91 83 00 	lds	r31, 0x0083	; 0x800083 <ptrINT1+0x1>
- 560:	30 97       	sbiw	r30, 0x00	; 0
- 562:	09 f0       	breq	.+2      	; 0x566 <__vector_2+0x30>
- 564:	09 95       	icall
-}
- 566:	ff 91       	pop	r31
- 568:	ef 91       	pop	r30
- 56a:	bf 91       	pop	r27
- 56c:	af 91       	pop	r26
- 56e:	9f 91       	pop	r25
- 570:	8f 91       	pop	r24
- 572:	7f 91       	pop	r23
- 574:	6f 91       	pop	r22
- 576:	5f 91       	pop	r21
- 578:	4f 91       	pop	r20
- 57a:	3f 91       	pop	r19
- 57c:	2f 91       	pop	r18
- 57e:	0f 90       	pop	r0
- 580:	0f be       	out	0x3f, r0	; 63
- 582:	0f 90       	pop	r0
- 584:	1f 90       	pop	r1
- 586:	18 95       	reti
-
-00000588 <__vector_3>:
-
-ISR (EXT_INT_2)
-{
- 588:	1f 92       	push	r1
- 58a:	0f 92       	push	r0
- 58c:	0f b6       	in	r0, 0x3f	; 63
- 58e:	0f 92       	push	r0
- 590:	11 24       	eor	r1, r1
- 592:	2f 93       	push	r18
- 594:	3f 93       	push	r19
- 596:	4f 93       	push	r20
- 598:	5f 93       	push	r21
- 59a:	6f 93       	push	r22
- 59c:	7f 93       	push	r23
- 59e:	8f 93       	push	r24
- 5a0:	9f 93       	push	r25
- 5a2:	af 93       	push	r26
- 5a4:	bf 93       	push	r27
- 5a6:	ef 93       	push	r30
- 5a8:	ff 93       	push	r31
-	if(ptrINT2) ptrINT2();
- 5aa:	e0 91 80 00 	lds	r30, 0x0080	; 0x800080 <ptrINT2>
- 5ae:	f0 91 81 00 	lds	r31, 0x0081	; 0x800081 <ptrINT2+0x1>
- 5b2:	30 97       	sbiw	r30, 0x00	; 0
- 5b4:	09 f0       	breq	.+2      	; 0x5b8 <__vector_3+0x30>
- 5b6:	09 95       	icall
- 5b8:	ff 91       	pop	r31
- 5ba:	ef 91       	pop	r30
- 5bc:	bf 91       	pop	r27
- 5be:	af 91       	pop	r26
- 5c0:	9f 91       	pop	r25
- 5c2:	8f 91       	pop	r24
- 5c4:	7f 91       	pop	r23
- 5c6:	6f 91       	pop	r22
- 5c8:	5f 91       	pop	r21
- 5ca:	4f 91       	pop	r20
- 5cc:	3f 91       	pop	r19
- 5ce:	2f 91       	pop	r18
- 5d0:	0f 90       	pop	r0
- 5d2:	0f be       	out	0x3f, r0	; 63
- 5d4:	0f 90       	pop	r0
- 5d6:	1f 90       	pop	r1
- 5d8:	18 95       	reti
-
-000005da <SPI_MasterInit>:
-	{
-		return SPI_NOK;
-	}
-	
-	return SPI_OK;
-}
- 5da:	8d b1       	in	r24, 0x0d	; 13
- 5dc:	80 61       	ori	r24, 0x10	; 16
- 5de:	8d b9       	out	0x0d, r24	; 13
- 5e0:	8d b1       	in	r24, 0x0d	; 13
- 5e2:	9e b1       	in	r25, 0x0e	; 14
- 5e4:	8e 7f       	andi	r24, 0xFE	; 254
- 5e6:	9c 7f       	andi	r25, 0xFC	; 252
- 5e8:	9e b9       	out	0x0e, r25	; 14
- 5ea:	8d b9       	out	0x0d, r24	; 13
- 5ec:	8d b1       	in	r24, 0x0d	; 13
- 5ee:	9e b1       	in	r25, 0x0e	; 14
- 5f0:	81 60       	ori	r24, 0x01	; 1
- 5f2:	9e b9       	out	0x0e, r25	; 14
- 5f4:	8d b9       	out	0x0d, r24	; 13
- 5f6:	8d b1       	in	r24, 0x0d	; 13
- 5f8:	80 64       	ori	r24, 0x40	; 64
- 5fa:	8d b9       	out	0x0d, r24	; 13
- 5fc:	08 95       	ret
-
-000005fe <SPI_TranscieveChar>:
- 5fe:	61 15       	cp	r22, r1
- 600:	71 05       	cpc	r23, r1
- 602:	09 f1       	breq	.+66     	; 0x646 <SPI_TranscieveChar+0x48>
- 604:	8f b9       	out	0x0f, r24	; 15
- 606:	80 e0       	ldi	r24, 0x00	; 0
- 608:	90 e0       	ldi	r25, 0x00	; 0
- 60a:	dc 01       	movw	r26, r24
- 60c:	03 c0       	rjmp	.+6      	; 0x614 <SPI_TranscieveChar+0x16>
- 60e:	01 96       	adiw	r24, 0x01	; 1
- 610:	a1 1d       	adc	r26, r1
- 612:	b1 1d       	adc	r27, r1
- 614:	77 99       	sbic	0x0e, 7	; 14
- 616:	07 c0       	rjmp	.+14     	; 0x626 <SPI_TranscieveChar+0x28>
- 618:	80 3a       	cpi	r24, 0xA0	; 160
- 61a:	26 e8       	ldi	r18, 0x86	; 134
- 61c:	92 07       	cpc	r25, r18
- 61e:	21 e0       	ldi	r18, 0x01	; 1
- 620:	a2 07       	cpc	r26, r18
- 622:	b1 05       	cpc	r27, r1
- 624:	a0 f3       	brcs	.-24     	; 0x60e <SPI_TranscieveChar+0x10>
- 626:	80 3a       	cpi	r24, 0xA0	; 160
- 628:	96 48       	sbci	r25, 0x86	; 134
- 62a:	a1 40       	sbci	r26, 0x01	; 1
- 62c:	b1 05       	cpc	r27, r1
- 62e:	31 f4       	brne	.+12     	; 0x63c <SPI_TranscieveChar+0x3e>
- 630:	61 e0       	ldi	r22, 0x01	; 1
- 632:	8c e1       	ldi	r24, 0x1C	; 28
- 634:	0e 94 68 01 	call	0x2d0	; 0x2d0 <DIO_s8SETPinVal>
- 638:	81 e0       	ldi	r24, 0x01	; 1
- 63a:	08 95       	ret
- 63c:	8f b1       	in	r24, 0x0f	; 15
- 63e:	fb 01       	movw	r30, r22
- 640:	80 83       	st	Z, r24
- 642:	80 e0       	ldi	r24, 0x00	; 0
- 644:	08 95       	ret
- 646:	81 e0       	ldi	r24, 0x01	; 1
- 648:	08 95       	ret
-
-0000064a <__vector_12>:
-
-/*************************************************************************************************************
- * 													  ISRs
- ************************************************************************************************************/
-ISR(SPI_STC_INT)
-{
- 64a:	1f 92       	push	r1
- 64c:	0f 92       	push	r0
- 64e:	0f b6       	in	r0, 0x3f	; 63
- 650:	0f 92       	push	r0
- 652:	11 24       	eor	r1, r1
- 654:	2f 93       	push	r18
- 656:	3f 93       	push	r19
- 658:	4f 93       	push	r20
- 65a:	5f 93       	push	r21
- 65c:	6f 93       	push	r22
- 65e:	7f 93       	push	r23
- 660:	8f 93       	push	r24
- 662:	9f 93       	push	r25
- 664:	af 93       	push	r26
- 666:	bf 93       	push	r27
- 668:	ef 93       	push	r30
- 66a:	ff 93       	push	r31
-		case SPI_SLAVE_SEND_ARRAY:
-		{
-			break;
-		}
-	}
-	if(SPI_CallbackFn != NULL)
- 66c:	e0 91 86 00 	lds	r30, 0x0086	; 0x800086 <SPI_CallbackFn>
- 670:	f0 91 87 00 	lds	r31, 0x0087	; 0x800087 <SPI_CallbackFn+0x1>
- 674:	30 97       	sbiw	r30, 0x00	; 0
- 676:	09 f0       	breq	.+2      	; 0x67a <__vector_12+0x30>
-	{
-		SPI_CallbackFn();
- 678:	09 95       	icall
-	}	
- 67a:	ff 91       	pop	r31
- 67c:	ef 91       	pop	r30
- 67e:	bf 91       	pop	r27
- 680:	af 91       	pop	r26
- 682:	9f 91       	pop	r25
- 684:	8f 91       	pop	r24
- 686:	7f 91       	pop	r23
- 688:	6f 91       	pop	r22
- 68a:	5f 91       	pop	r21
- 68c:	4f 91       	pop	r20
- 68e:	3f 91       	pop	r19
- 690:	2f 91       	pop	r18
- 692:	0f 90       	pop	r0
- 694:	0f be       	out	0x3f, r0	; 63
- 696:	0f 90       	pop	r0
- 698:	1f 90       	pop	r1
- 69a:	18 95       	reti
-
-0000069c <_exit>:
- 69c:	f8 94       	cli
-
-0000069e <__stop_program>:
- 69e:	ff cf       	rjmp	.-2      	; 0x69e <__stop_program>
+000001de <__stop_program>:
+ 1de:	ff cf       	rjmp	.-2      	; 0x1de <__stop_program>
