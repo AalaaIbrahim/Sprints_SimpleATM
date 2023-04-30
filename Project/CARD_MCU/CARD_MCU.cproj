@@ -133,6 +133,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="APP\app.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="APP\app.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Common\BIT_Math.h">
       <SubType>compile</SubType>
     </Compile>
@@ -167,6 +173,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\dio\dio_prog.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\iic\MI2C_Config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\iic\MI2C_Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\iic\MI2C_Private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\iic\MI2C_Program.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\spi\spi_config.h">
@@ -204,8 +222,10 @@
     <Folder Include="ECUAL\husart" />
     <Folder Include="MCAL\" />
     <Folder Include="MCAL\dio\" />
+    <Folder Include="MCAL\iic" />
     <Folder Include="MCAL\usart" />
     <Folder Include="MCAL\spi\" />
+    <Folder Include="APP" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
