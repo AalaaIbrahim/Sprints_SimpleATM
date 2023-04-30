@@ -97,7 +97,7 @@ void i2c_repeated_start(void);
  * 					- Slave address that you want to write on it
  * @out       	: void
  ************************************************************************************/
-void i2c_send_slave_address_with_write_req(Uint8_t slave_address);
+void i2c_send_slave_address_with_write_req(Uchar8_t slave_address);
 
 /***********************************************************************************/
 /*			06- i2c_send_slave_address_with_read_req()									*/
@@ -107,7 +107,7 @@ void i2c_send_slave_address_with_write_req(Uint8_t slave_address);
  * 					- Slave address that you want to read from it
  * @out       	: void
  ************************************************************************************/
-void i2c_send_slave_address_with_read_req(Uint8_t slave_address);
+void i2c_send_slave_address_with_read_req(Uchar8_t slave_address);
 
 /***********************************************************************************/
 /*			07- i2c_write_byte()									*/
@@ -117,7 +117,7 @@ void i2c_send_slave_address_with_read_req(Uint8_t slave_address);
  * 					- write data that u need to send
  * @out       	: void
  ************************************************************************************/
-void i2c_write_byte(Uint8_t byte);
+void i2c_write_byte(Uchar8_t byte);
 
 /***********************************************************************************/
 /*			08- i2c_read_byte()									*/
@@ -126,7 +126,7 @@ void i2c_write_byte(Uint8_t byte);
  * @in	     	: void
  * @out       	: returned data
  ************************************************************************************/
-Uint8_t i2c_read_byte(void);
+Uchar8_t i2c_read_byte(void);
 
 /***********************************************************************************/
 /*			09- i2c_stop()									*/
@@ -165,7 +165,7 @@ void i2c_slave_check_slave_address_received_with_read_req(void);
  * @in	     	: void
  * @out       	: returned data
  ************************************************************************************/
-Uint8_t i2c_slave_read_byte(void);
+Uchar8_t i2c_slave_read_byte(void);
 
 /***********************************************************************************/
 /*			13- i2c_slave_write_byte()									*/
@@ -175,7 +175,7 @@ Uint8_t i2c_slave_read_byte(void);
  * 						- Data to be sent
  * @out       		: void
  ************************************************************************************/
-void i2c_slave_write_byte(Uint8_t byte);
+void i2c_slave_write_byte(Uchar8_t byte);
 
 
 #endif /* MCAL_I2C_V2_MI2C_INTERFACE_H_ */

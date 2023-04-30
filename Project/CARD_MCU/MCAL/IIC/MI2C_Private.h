@@ -34,11 +34,11 @@
 /****************************************************************************/
 /*								I2C Registers								*/
  /***************************************************************************/
-#define TWBR		(*((volatile Uint8_t*)(0x20)))
-#define TWSR		(*((volatile Uint8_t*)(0x21)))
-#define TWAR		(*((volatile Uint8_t*)(0x22)))
-#define TWDR		(*((volatile Uint8_t*)(0x23)))
-#define TWCR		(*((volatile Uint8_t*)(0x56)))
+#define TWBR		(*((volatile Uchar8_t*)(0x20)))
+#define TWSR		(*((volatile Uchar8_t*)(0x21)))
+#define TWAR		(*((volatile Uchar8_t*)(0x22)))
+#define TWDR		(*((volatile Uchar8_t*)(0x23)))
+#define TWCR		(*((volatile Uchar8_t*)(0x56)))
 
 
 

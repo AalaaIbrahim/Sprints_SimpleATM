@@ -23,7 +23,7 @@
 /*					Standard Types LIB								 */
 /*********************************************************************/
 #include "../../Common/std_types.h"
-#include "../../Common/Bit_Math.h"
+#include "../../Common/BIT_Math.h"
 /*********************************************************************/
 /*					Peripheral Files 								*/
 /*********************************************************************/
@@ -42,8 +42,8 @@
 void i2c_init_master(void)
 {
 	/* Set prescallar to 1 to get 400 KHz  */
-	ClrBit(TWSR, TWPS0);
-	ClrBit(TWSR, TWPS1);
+	CLEAR_BIT(TWSR, TWPS0);
+	CLEAR_BIT(TWSR, TWPS1);
 	/* According to this formula {SCL_freq = (CPU_freq)/(16 + (2(TWBR)*4^TWPS)) }
 	 * According to prescallar is 1 ----> TWPS = 0 , so wet put 0x02 to TWBR to get 400 kHz
 	 **/
@@ -51,7 +51,7 @@ void i2c_init_master(void)
 	/* Set Master Address */
 	TWAR = (MASTER_ADDRESS << 1);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 }
 
 
@@ -60,111 +60,111 @@ void i2c_init_slave (void)
 	/* Set Slave Address */
 	TWAR = (SLAVE_ADDRESS << 1);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 }
 
 
 void i2c_start(void)
 {
 	/* Clear TWINT flag */
-	SetBit(TWCR, TWINT);
+	SET_BIT(TWCR, TWINT);
 	/* Enable Start bit */
-	SetBit(TWCR, TWSTA);
+	SET_BIT(TWCR, TWSTA);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
-	while ( !(GetBit(TWCR,TWINT)) );
+	while ( !(GET_BIT(TWCR,TWINT)) );
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != START_ACK );
 	/* Disable Start bit */
-	ClrBit(TWCR, TWSTA);
+	CLEAR_BIT(TWCR, TWSTA);
 }
 
 
 void i2c_repeated_start(void)
 {
 	/* Clear TWINT flag */
-	SetBit(TWCR, TWINT);
+	SET_BIT(TWCR, TWINT);
 	/* Enable Start bit */
-	SetBit(TWCR, TWSTA);
+	SET_BIT(TWCR, TWSTA);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
-	while ( !(GetBit(TWCR,TWINT)) );
+	while ( !(GET_BIT(TWCR,TWINT)) );
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != REP_START_ACK );
 	/* Disable Start bit */
-	ClrBit(TWCR, TWSTA);
+	CLEAR_BIT(TWCR, TWSTA);
 
 }
 
 
-void i2c_send_slave_address_with_write_req(Uint8_t slave_address)
+void i2c_send_slave_address_with_write_req(Uchar8_t slave_address)
 {
 	/* Putting slave address to TWDR register to be transmitted */
 	TWDR = (slave_address<<1);
 	/* Set bit 0 on TWDR register to make write operation */
-	ClrBit(TWDR, R_W);
+	CLEAR_BIT(TWDR, R_W);
 	/* Clear TWINT flag */
-	SetBit(TWCR, TWINT);
+	SET_BIT(TWCR, TWINT);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
-	while ( !(GetBit(TWCR,TWINT)) );
+	while ( !(GET_BIT(TWCR,TWINT)) );
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != SLAVE_ADD_AND_WR_ACK );
 }
 
 
-void i2c_send_slave_address_with_read_req(Uint8_t slave_address)
+void i2c_send_slave_address_with_read_req(Uchar8_t slave_address)
 {
 	/* Putting slave address to TWDR register to be transmitted */
 	TWDR = (slave_address<<1);
 	/* Set bit 0 on TWDR register to make read operation */
-	SetBit(TWDR, R_W);
+	SET_BIT(TWDR, R_W);
 	/* Clear TWINT flag */
-	SetBit(TWCR, TWINT);
+	SET_BIT(TWCR, TWINT);
 /******************* If ACK enabled or not **************************************/
 #if MI2C_ACK_STATUS == MI2C_ACK_DISABLE
 	/* Disable ACK bit */
-	ClrBit(TWCR, TWEA);
+	CLEAR_BIT(TWCR, TWEA);
 #elif MI2C_ACK_STATUS == MI2C_ACK_ENABLE
 	/* Enable ACK bit */
-	SetBit(TWCR, TWEA);
+	SET_BIT(TWCR, TWEA);
 #endif
 /*********************************************************************************/
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
-	while ( !(GetBit(TWCR,TWINT)) );
+	while ( !(GET_BIT(TWCR,TWINT)) );
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != SLAVE_ADD_AND_RD_ACK );
 }
 
 
-void i2c_write_byte(Uint8_t byte)
+void i2c_write_byte(Uchar8_t byte)
 {
 	/* Putting data to TWDR register to be transmitted */
 	TWDR = byte;
 	/* Clear TWINT flag */
-	SetBit(TWCR, TWINT);
+	SET_BIT(TWCR, TWINT);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
-	while ( !(GetBit(TWCR,TWINT)) );
+	while ( !(GET_BIT(TWCR,TWINT)) );
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != WR_BYTE_ACK );
 }
 
 
-Uint8_t i2c_read_byte(void)
+Uchar8_t i2c_read_byte(void)
 {
 	/* Clear TWINT flag */
-	SetBit(TWCR, TWINT);
+	SET_BIT(TWCR, TWINT);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
-	while ( !(GetBit(TWCR,TWINT)) );
+	while ( !(GET_BIT(TWCR,TWINT)) );
 /******************* If ACK enabled or not **************************************/
 #if MI2C_ACK_STATUS == MI2C_ACK_DISABLE
 	/* Waiting if this condition becoming true */
@@ -181,11 +181,11 @@ Uint8_t i2c_read_byte(void)
 void i2c_stop(void)
 {
 	/* Clear TWINT flag */
-	SetBit(TWCR, TWINT);
+	SET_BIT(TWCR, TWINT);
 	/* Enable Stop bit */
-	SetBit(TWCR, TWSTO);
+	SET_BIT(TWCR, TWSTO);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 }
 
 
@@ -193,13 +193,13 @@ void i2c_stop(void)
 void i2c_slave_check_slave_address_received_with_write_req(void)
 {
 	/* Clear TWINT flag */
-	SetBit(TWCR, TWINT);
+	SET_BIT(TWCR, TWINT);
 	/* Enable ACK bit */
-	SetBit(TWCR, TWEA);
+	SET_BIT(TWCR, TWEA);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
-	while ( !(GetBit(TWCR,TWINT)) );
+	while ( !(GET_BIT(TWCR,TWINT)) );
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != SLAVE_ADD_RCVD_WR_REQ );
 }
@@ -208,28 +208,28 @@ void i2c_slave_check_slave_address_received_with_write_req(void)
 void i2c_slave_check_slave_address_received_with_read_req(void)
 {
 	/* Clear TWINT flag */
-	SetBit(TWCR, TWINT);
+	SET_BIT(TWCR, TWINT);
 	/* Enable ACK bit */
-	SetBit(TWCR, TWEA);
+	SET_BIT(TWCR, TWEA);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
-	while ( !(GetBit(TWCR,TWINT)) );
+	while ( !(GET_BIT(TWCR,TWINT)) );
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != SLAVE_ADD_RCVD_RD_REQ );
 }
 
 
-Uint8_t i2c_slave_read_byte(void)
+Uchar8_t i2c_slave_read_byte(void)
 {
 	/* Clear TWINT flag */
-	SetBit(TWCR, TWINT);
+	SET_BIT(TWCR, TWINT);
 	/* Enable ACK bit */
-	SetBit(TWCR, TWEA);
+	SET_BIT(TWCR, TWEA);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
-	while ( !(GetBit(TWCR,TWINT)) );
+	while ( !(GET_BIT(TWCR,TWINT)) );
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != SLAVE_DATA_RECEIVED );
 
@@ -237,18 +237,18 @@ Uint8_t i2c_slave_read_byte(void)
 }
 
 
-void i2c_slave_write_byte(Uint8_t byte)
+void i2c_slave_write_byte(Uchar8_t byte)
 {
 	/* Putting data to TWDR register to be transmitted */
 	TWDR = byte;
 	/* Clear TWINT flag */
-	SetBit(TWCR, TWINT);
+	SET_BIT(TWCR, TWINT);
 	/* Enable ACK bit */
-	SetBit(TWCR, TWEA);
+	SET_BIT(TWCR, TWEA);
 	/* Enable I2C peripheral */
-	SetBit(TWCR, TWEN);
+	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
-	while ( !(GetBit(TWCR,TWINT)) );
+	while ( !(GET_BIT(TWCR,TWINT)) );
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != SLAVE_BYTE_TRANSMITTED );
 }
