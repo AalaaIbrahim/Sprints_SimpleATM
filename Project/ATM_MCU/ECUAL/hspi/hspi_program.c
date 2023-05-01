@@ -10,11 +10,12 @@
 #include "../../Common/STD_Types.h"
 #include "../../Common/BIT_Math.h"
 
+#include <util/delay.h>
+
 #include "../../MCAL/dio/dio_interface.h"
 #include "../../MCAL/extint/extinterrupt.h"
 #include "../../MCAL/spi/spi_interface.h"
 
-//#include "spi_private.h"
 #include "hspi_interface.h"
 
 /*************************************************************************************************************
@@ -22,12 +23,7 @@
  ************************************************************************************************************/
 extern Uchar8_t *pu8_g_SlaveTxPtr;
 extern Uchar8_t u8_g_SlaveTxIndex;
-
-Uchar8_t arr_g_MasterTxBuffer[SPI_BUFFER_SIZE] = {NULL};
-Uchar8_t arr_g_MasterRxBuffer[SPI_BUFFER_SIZE] = {NULL};
-	
-//Uchar8_t arr_g_SlaveTxBuffer[SPI_BUFFER_SIZE] = {NULL};
-Uchar8_t arr_g_SlaveRxBuffer[SPI_BUFFER_SIZE] = {NULL};
+extern Uchar8_t u8_g_SlaveTxLen;
 
 /*************************************************************************************************************
  * 											Function Implementation
@@ -104,6 +100,7 @@ void HSPI_SendChar(Uchar8_t u8_a_character)
 	DIO_s8SETPinVal(HSPI_SS, LOW);
 	SPI_TranscieveChar(u8_a_character, &u8_l_dummyVar);
 	DIO_s8SETPinVal(HSPI_SS, HIGH);
+	
 }
 
 /**
@@ -134,15 +131,21 @@ void HSPI_SendString(const char* pchar_a_string)
  */
 en_HSPI_ErrorState_t HSPI_SendData(Uchar8_t* pu8_a_data, Uchar8_t u8_a_DataSize)
 {
-	Uchar8_t u8_l_DataIterator = 0;
+	Uchar8_t u8_l_DataIterator = 0, u8_l_dummyVar;
 	
 	if(pu8_a_data != NULL)
 	{
+		/* Select Slave */
+		DIO_s8SETPinVal(HSPI_SS, LOW);
+		
 		while(u8_l_DataIterator < u8_a_DataSize)
 		{
-			SPI_TranscieveChar(' ', &pu8_a_data[u8_l_DataIterator]);
+			SPI_TranscieveChar(pu8_a_data[u8_l_DataIterator], &u8_l_dummyVar);
 			u8_l_DataIterator ++;
 		}
+		
+		/* Deselect Slave */
+		DIO_s8SETPinVal(HSPI_SS, HIGH);
 	}
 	else
 	{
@@ -161,12 +164,20 @@ en_HSPI_ErrorState_t HSPI_SendData(Uchar8_t* pu8_a_data, Uchar8_t u8_a_DataSize)
  */
 en_HSPI_ErrorState_t HSPI_ReceiveChar(Uchar8_t* pu8_a_character)
 {
+	Uchar8_t u8_l_dummyVar;
+	
 	if(pu8_a_character != NULL)
 	{
-		for(Uint32_t i=0; i<100000; i++);
+		/* Select Slave */
 		DIO_s8SETPinVal(HSPI_SS, LOW);
+		
+		/* Initiate communication with dummy bit for synchronization */
+		SPI_TranscieveChar(DATA_END, &u8_l_dummyVar);
+			
+		/* Exchange char from slave with dummy char ('#') */
 		SPI_TranscieveChar(DATA_END, pu8_a_character);
 		
+		/* Deselect Slave */
 		DIO_s8SETPinVal(HSPI_SS, HIGH);
 		
 	}
@@ -186,37 +197,55 @@ en_HSPI_ErrorState_t HSPI_ReceiveChar(Uchar8_t* pu8_a_character)
  * 
  * \return en_HSPI_ErrorState_t
  */
-void HSPI_ReceiveData(void)
+void HSPI_ReceiveData(Uchar8_t *pu8_a_data, Uchar8_t u8_a_DataSize)
 {
-	Uchar8_t u8_l_DataIterator = 0;
+	Uchar8_t u8_l_DataIterator = 0, u8_l_dummyVar;
+
+	/* Select Slave */
+	DIO_s8SETPinVal(HSPI_SS, LOW);	
+
+	/* Initiate communication with dummy bit for synchronization */
+	SPI_TranscieveChar(DATA_END, &u8_l_dummyVar);
 	
-	HSPI_ReceiveChar(&arr_g_MasterRxBuffer[u8_l_DataIterator++]);
-	while((arr_g_MasterRxBuffer[u8_l_DataIterator] != DATA_END) && (u8_l_DataIterator < SPI_BUFFER_SIZE))
+	do
 	{
-		HSPI_ReceiveChar(&arr_g_MasterRxBuffer[u8_l_DataIterator]);
+		SPI_TranscieveChar(DATA_END, &pu8_a_data[u8_l_DataIterator]);
 		u8_l_DataIterator ++;
-	}
+				
+	}while((pu8_a_data[u8_l_DataIterator] != DATA_END) && (u8_l_DataIterator < u8_a_DataSize));
+	
+	/* Deselect Slave */
+	DIO_s8SETPinVal(HSPI_SS, HIGH);
 }
 
+
 /**
- * \brief Send given data byte by byte to selected slave 
- *		  and receive data in exchange into reception buffer
- * \param pu8_a_DataArr: Pointer to array of data to send
- * \param u8_a_DataLen: Length of data to exchange (in bytes)
- *					   (Must be less than or equal SPI_BUFFER_SIZE)
+ * \brief Send given data byte by byte to selected slave
+ *		  and receive data in exchange into given array
+ * \param pu8_a_TxDataArr: Reference to array of data to be transmitted
+ * \param pu8_a_RxDataArr: Reference to array to store received data
+ * \param u8_a_DataLen:	   Length of data to exchange (in bytes)
+ *					       (Must be less than or equal SPI_BUFFER_SIZE)
+ * 
  * \return en_HSPI_ErrorState_t
  */
-en_HSPI_ErrorState_t HSPI_ExchangeData(Uchar8_t* pu8_a_DataArr, Uchar8_t u8_a_DataLen)
+en_HSPI_ErrorState_t HSPI_ExchangeData(Uchar8_t* pu8_a_TxDataArr, Uchar8_t* pu8_a_RxDataArr, Uchar8_t u8_a_DataLen)
 {
 	Uchar8_t u8_l_DataIterator = 0;
 	
-	if((pu8_a_DataArr != NULL) && (u8_a_DataLen <= SPI_BUFFER_SIZE))
+	if((pu8_a_TxDataArr != NULL) && (pu8_a_RxDataArr != NULL) && (u8_a_DataLen <= SPI_BUFFER_SIZE))
 	{
+		/* Select Slave */
+		DIO_s8SETPinVal(HSPI_SS, LOW);
+			
 		while(u8_l_DataIterator < u8_a_DataLen)
 		{
-			SPI_TranscieveChar(pu8_a_DataArr[u8_l_DataIterator], &arr_g_MasterRxBuffer[u8_l_DataIterator]);
+			SPI_TranscieveChar(pu8_a_TxDataArr[u8_l_DataIterator], &pu8_a_RxDataArr[u8_l_DataIterator]);
 			u8_l_DataIterator ++;
 		}
+		
+		/* Deselect Slave */
+		DIO_s8SETPinVal(HSPI_SS, HIGH);
 	}
 	else
 	{
@@ -241,8 +270,10 @@ void HSPI_SlaveRequest(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize)
 	/* Set global transmission data ptr to point to given data */
 	pu8_g_SlaveTxPtr = pu8_a_dataPtr;
 	
+	u8_g_SlaveTxLen = u8_a_DataSize;
+	
 	/* Set the Data register with value */
-	SPI_SetValue(pu8_g_SlaveTxPtr[u8_g_SlaveTxIndex++]);
+	//SPI_SetValue(pu8_g_SlaveTxPtr[u8_g_SlaveTxIndex++]);
 
 	/* Send Request to Master */
 	DIO_s8TOGPinVal(SLAVE_SEND_REQUEST_PIN);

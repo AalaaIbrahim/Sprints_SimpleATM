@@ -74,9 +74,5 @@ en_SPI_ErrorState_t SPI_TranscieveChar(Uchar8_t u8_a_character, Uchar8_t* pu8_a_
  */
 en_SPI_ErrorState_t SPI_SetCallback(void (*pv_a_CallbackFn)(void));
 
-void SPI_SendString(const char* pchar_a_string);
-
-
-
 
 #endif /* SPI_INTERFACE_H_ */

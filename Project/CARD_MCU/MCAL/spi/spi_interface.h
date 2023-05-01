@@ -17,7 +17,6 @@
 #define SPI_BUFFER_SIZE		15
 
 #define DATA_END			'#'
-
 /*************************************************************************************************************
  * 											User-defined data types
  ************************************************************************************************************/
@@ -74,9 +73,6 @@ en_SPI_ErrorState_t SPI_TranscieveChar(Uchar8_t u8_a_character, Uchar8_t* pu8_a_
  * \return en_SPI_ErrorState_t
  */
 en_SPI_ErrorState_t SPI_SetCallback(void (*pv_a_CallbackFn)(void));
-
-void SPI_SendString(const char* pchar_a_string);
-
 
 
 

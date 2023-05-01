@@ -97,18 +97,20 @@ en_HSPI_ErrorState_t HSPI_ReceiveChar(Uchar8_t* pu8_a_character);
  * 
  * \return en_HSPI_ErrorState_t
  */
-void HSPI_ReceiveData(void);
+void HSPI_ReceiveData(Uchar8_t *pu8_a_data, Uchar8_t u8_a_DataSize);
 
 
 /**
- * \brief Send given data byte by byte to selected slave 
- *		  and receive data in exchange into reception buffer
- * \param pu8_a_DataArr: Pointer to array of data to send
- * \param u8_a_DataLen: Length of data to exchange (in bytes)
- *					   (Must be less than or equal SPI_BUFFER_SIZE)
+ * \brief Send given data byte by byte to selected slave
+ *		  and receive data in exchange into given array
+ * \param pu8_a_TxDataArr: Reference to array of data to be transmitted
+ * \param pu8_a_RxDataArr: Reference to array to store received data
+ * \param u8_a_DataLen:	   Length of data to exchange (in bytes)
+ *					       (Must be less than or equal SPI_BUFFER_SIZE)
+ * 
  * \return en_HSPI_ErrorState_t
  */
-en_HSPI_ErrorState_t HSPI_ExchangeData(Uchar8_t* pu8_a_DataArr, Uchar8_t u8_a_DataLen);
+en_HSPI_ErrorState_t HSPI_ExchangeData(Uchar8_t* pu8_a_TxDataArr, Uchar8_t* pu8_a_RxDataArr, Uchar8_t u8_a_DataLen);
 
 
 /**

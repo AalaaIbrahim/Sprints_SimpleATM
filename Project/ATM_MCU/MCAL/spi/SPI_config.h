@@ -20,7 +20,7 @@
  *			SPI_DIV_BY_64
  *			SPI_DIV_BY_128
 /************************************************************************/
-#define		SPI_CLK_SELECT			SPI_DIV_BY_2
+#define		SPI_CLK_SELECT			SPI_DIV_BY_64
 
 
 

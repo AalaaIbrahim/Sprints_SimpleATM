@@ -5,7 +5,7 @@
 /*************************************************************************************************************
  * 													Macros
  ************************************************************************************************************/
-
+#define PIN_LENGTH			4
 
 /*************************************************************************************************************
  * 											User-defined data types
@@ -37,8 +37,24 @@ void timer_ovfCount(void);
  */
 en_buttonStatus Button_enStatus(void);
 
+/**
+ * \brief Function to implement logic after approved transaction
+ * 
+ * \param f32_a_NewBalance: balance after transaction which will be
+ *							displayed on LCD
+ * \return void
+ */
+void ATM_ApprovedCard(float32_t f32_a_NewBalance) /* Get account data and transaction or just balance after transaction */
 
 
+/**
+ * \brief Function to get the card pin from the card MCU
+ * 
+ * \param pu8_a_CardPIN: reference to character array to
+ *						 store the PIN
+ * \return void
+ */
+void ATM_GetCardPIN(Uchar8_t *pu8_a_CardPIN);
 
 
 void APP_Init(void);

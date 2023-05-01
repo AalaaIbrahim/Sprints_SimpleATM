@@ -135,10 +135,37 @@
     <Compile Include="Common\vect_table.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ECUAL\button\button.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\button\button.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\buzzer\buzzer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\buzzer\buzzer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="ECUAL\hspi\hspi_interface.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="ECUAL\hspi\hspi_program.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\htimer0\htimer0.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\htimer0\htimer0.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\htimer0\htimer0_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\HTimer\HTimer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\HTimer\HTimer.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="ECUAL\h_ext_int\h_ext_int.c">
@@ -151,6 +178,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="ECUAL\keypad\keypad.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\lcd\lcd_config.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\lcd\lcd_config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\lcd\lcd_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\lcd\lcd_program.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
@@ -198,6 +237,11 @@
     <Folder Include="ECUAL\hspi\" />
     <Folder Include="ECUAL\h_ext_int\" />
     <Folder Include="ECUAL\keypad" />
+    <Folder Include="ECUAL\buzzer" />
+    <Folder Include="ECUAL\htimer0" />
+    <Folder Include="ECUAL\HTimer" />
+    <Folder Include="ECUAL\button" />
+    <Folder Include="ECUAL\lcd" />
     <Folder Include="MCAL" />
     <Folder Include="ECUAL" />
     <Folder Include="MCAL\dio\" />

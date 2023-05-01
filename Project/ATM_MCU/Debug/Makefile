@@ -37,6 +37,11 @@ SUBDIRS :=  \
 ../ECUAL/hspi/ \
 ../ECUAL/h_ext_int/ \
 ../ECUAL/keypad \
+../ECUAL/buzzer \
+../ECUAL/htimer0 \
+../ECUAL/HTimer \
+../ECUAL/button \
+../ECUAL/lcd \
 ../MCAL \
 ../ECUAL \
 ../MCAL/dio/ \
@@ -48,9 +53,15 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../APP/app.c \
+../ECUAL/button/button.c \
+../ECUAL/buzzer/buzzer.c \
 ../ECUAL/hspi/hspi_program.c \
+../ECUAL/htimer0/htimer0.c \
+../ECUAL/HTimer/HTimer.c \
 ../ECUAL/h_ext_int/h_ext_int.c \
 ../ECUAL/keypad/keypad.c \
+../ECUAL/lcd/lcd_config.c \
+../ECUAL/lcd/lcd_program.c \
 ../main.c \
 ../MCAL/dio/dio_prog.c \
 ../MCAL/extint/extinterrupt.c \
@@ -65,9 +76,15 @@ ASM_SRCS +=
 
 OBJS +=  \
 APP/app.o \
+ECUAL/button/button.o \
+ECUAL/buzzer/buzzer.o \
 ECUAL/hspi/hspi_program.o \
+ECUAL/htimer0/htimer0.o \
+ECUAL/HTimer/HTimer.o \
 ECUAL/h_ext_int/h_ext_int.o \
 ECUAL/keypad/keypad.o \
+ECUAL/lcd/lcd_config.o \
+ECUAL/lcd/lcd_program.o \
 main.o \
 MCAL/dio/dio_prog.o \
 MCAL/extint/extinterrupt.o \
@@ -75,9 +92,15 @@ MCAL/spi/spi_program.o
 
 OBJS_AS_ARGS +=  \
 APP/app.o \
+ECUAL/button/button.o \
+ECUAL/buzzer/buzzer.o \
 ECUAL/hspi/hspi_program.o \
+ECUAL/htimer0/htimer0.o \
+ECUAL/HTimer/HTimer.o \
 ECUAL/h_ext_int/h_ext_int.o \
 ECUAL/keypad/keypad.o \
+ECUAL/lcd/lcd_config.o \
+ECUAL/lcd/lcd_program.o \
 main.o \
 MCAL/dio/dio_prog.o \
 MCAL/extint/extinterrupt.o \
@@ -85,9 +108,15 @@ MCAL/spi/spi_program.o
 
 C_DEPS +=  \
 APP/app.d \
+ECUAL/button/button.d \
+ECUAL/buzzer/buzzer.d \
 ECUAL/hspi/hspi_program.d \
+ECUAL/htimer0/htimer0.d \
+ECUAL/HTimer/HTimer.d \
 ECUAL/h_ext_int/h_ext_int.d \
 ECUAL/keypad/keypad.d \
+ECUAL/lcd/lcd_config.d \
+ECUAL/lcd/lcd_program.d \
 main.d \
 MCAL/dio/dio_prog.d \
 MCAL/extint/extinterrupt.d \
@@ -95,9 +124,15 @@ MCAL/spi/spi_program.d
 
 C_DEPS_AS_ARGS +=  \
 APP/app.d \
+ECUAL/button/button.d \
+ECUAL/buzzer/buzzer.d \
 ECUAL/hspi/hspi_program.d \
+ECUAL/htimer0/htimer0.d \
+ECUAL/HTimer/HTimer.d \
 ECUAL/h_ext_int/h_ext_int.d \
 ECUAL/keypad/keypad.d \
+ECUAL/lcd/lcd_config.d \
+ECUAL/lcd/lcd_program.d \
 main.d \
 MCAL/dio/dio_prog.d \
 MCAL/extint/extinterrupt.d \
@@ -124,7 +159,35 @@ APP/app.o: ../APP/app.c
 	@echo Finished building: $<
 	
 
+ECUAL/button/button.o: ../ECUAL/button/button.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/buzzer/buzzer.o: ../ECUAL/buzzer/buzzer.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ECUAL/hspi/hspi_program.o: ../ECUAL/hspi/hspi_program.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/htimer0/htimer0.o: ../ECUAL/htimer0/htimer0.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/HTimer/HTimer.o: ../ECUAL/HTimer/HTimer.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -139,6 +202,20 @@ ECUAL/h_ext_int/h_ext_int.o: ../ECUAL/h_ext_int/h_ext_int.c
 	
 
 ECUAL/keypad/keypad.o: ../ECUAL/keypad/keypad.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/lcd/lcd_config.o: ../ECUAL/lcd/lcd_config.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/lcd/lcd_program.o: ../ECUAL/lcd/lcd_program.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

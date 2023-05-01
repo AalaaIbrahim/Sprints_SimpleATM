@@ -4,11 +4,23 @@
 
 APP\app.c
 
+ECUAL\button\button.c
+
+ECUAL\buzzer\buzzer.c
+
 ECUAL\hspi\hspi_program.c
+
+ECUAL\htimer0\htimer0.c
+
+ECUAL\HTimer\HTimer.c
 
 ECUAL\h_ext_int\h_ext_int.c
 
 ECUAL\keypad\keypad.c
+
+ECUAL\lcd\lcd_config.c
+
+ECUAL\lcd\lcd_program.c
 
 main.c
 
