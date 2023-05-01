@@ -331,6 +331,57 @@ void HLCD_vidCreatCustomChar(Uchar8_t* pu8custom, Uchar8_t u8Location)
 	}
 }
 
+
+/*
+ * function		: HLCD_vidCreatCustomChar
+ * description 	: function to display floating point number on lcd (2 decimal places)
+ * input param 	:
+ * 				  f32_a_number -> the floating point number to display
+ * return		: void
+ * */
+void HLCD_DisplayFloat(float32_t f32_a_number)
+{
+	Uchar8_t arr_l_NumString[12];
+	Uchar8_t u8_l_NumIterator = 3, u8_l_StrLen, u8_l_tempVar, u8_l_decimal;
+	Uint32_t u32_l_integer;
+
+	/* Get the integer part */
+	u32_l_integer = (Uint16_t)f32_a_number;
+	
+	/* Get the first two decimal places */
+	u8_l_decimal = (Uint16_t)((f32_a_number - u32_l_integer) * 100);
+
+	/* Get decimal digits as characters */
+	arr_l_NumString[0] = u8_l_decimal % 10 + '0';
+	arr_l_NumString[1] = u8_l_decimal / 10 + '0';
+	
+	arr_l_NumString[2] = '.';
+	
+	/* Get integer digits as characters */
+	while (u32_l_integer > 0) 
+	{
+		arr_l_NumString[u8_l_NumIterator] = (u32_l_integer % 10) + '0';
+		u32_l_integer /= 10;
+		u8_l_NumIterator++;
+	}
+	
+	/* Terminate String */
+	arr_l_NumString[u8_l_NumIterator] = '\0';
+	
+	u8_l_StrLen = u8_l_NumIterator;
+
+	/* Reverse String */
+	for (u8_l_NumIterator = 0; u8_l_NumIterator< u8_l_StrLen/2; u8_l_NumIterator++) 
+	{
+		u8_l_tempVar = arr_l_NumString[u8_l_NumIterator];
+		arr_l_NumString[u8_l_NumIterator] = arr_l_NumString[u8_l_StrLen - u8_l_NumIterator - 1];
+		arr_l_NumString[u8_l_StrLen - u8_l_NumIterator - 1] = u8_l_tempVar;
+	}
+
+	/* Display Number */
+	HLCD_WriteString(arr_l_NumString);
+}
+
 /**************************************************************************************************
  * 											END
  *************************************************************************************************/

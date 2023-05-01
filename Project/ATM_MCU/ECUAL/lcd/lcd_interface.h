@@ -134,6 +134,14 @@ void HLCD_WriteArabic(Uchar8_t u8ArCharCopy);
 void HLCD_vidCreatCustomChar(Uchar8_t* pu8custom, Uchar8_t u8Location);
 
 
+/*
+ * function		: HLCD_vidCreatCustomChar
+ * description 	: function to display floating point number on lcd (2 decimal places)
+ * input param 	:
+ * 				  f32_a_number -> the floating point number to display
+ * return		: void
+ * */
+void HLCD_DisplayFloat(float32_t f32_a_number);
 
 #endif /* HAL_HLCD_HLCD_INTERFACE_H_ */
 
