@@ -27,6 +27,11 @@
 #ifndef MCAL_I2C_V2_MI2C_INTERFACE_H_
 #define MCAL_I2C_V2_MI2C_INTERFACE_H_
 
+#include "../../Common/STD_Types.h"
+#include "../../Common/Bit_Math.h"
+#include "MI2C_Config.h"
+#include "MI2C_Private.h"
+
 /********************************************************************************************************/
 /*												MACROS      											*/
 /********************************************************************************************************/
