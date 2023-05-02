@@ -4,7 +4,7 @@
 
 APP\app.c
 
-APP\ATM_MODULE\atm.c
+ATM_MODULE\atm.c
 
 ECUAL\button\button.c
 

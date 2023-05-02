@@ -126,10 +126,10 @@
     <Compile Include="APP\app.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="APP\ATM_MODULE\atm.c">
+    <Compile Include="ATM_MODULE\atm.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="APP\ATM_MODULE\atm.h">
+    <Compile Include="ATM_MODULE\atm.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Common\BIT_Math.h">
@@ -239,7 +239,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="APP\ATM_MODULE" />
+    <Folder Include="ATM_MODULE\" />
     <Folder Include="Common\" />
     <Folder Include="ECUAL\hspi\" />
     <Folder Include="ECUAL\h_ext_int\" />

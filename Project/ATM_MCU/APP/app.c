@@ -17,7 +17,7 @@
 /*************************************************************************************************************
 * 												Global Variables
 ************************************************************************************************************/
-Uchar8_t global_u8OVFCounter = 0;
+//Uchar8_t global_u8OVFCounter = 0;
 // Uchar8_t buttonPressed;
 // en_buttonStatus myState;
 // 
@@ -25,6 +25,8 @@ Uchar8_t global_u8OVFCounter = 0;
 extern VUchar8_t  ATMpin[5] ;
 extern VUchar8_t ZeroFlag;
 extern VUchar8_t setFlag;
+
+extern VUchar8_t keys_arr [10];
 
 /*************************************************************************************************************
 * 											Function Implementation
@@ -36,11 +38,11 @@ extern VUchar8_t setFlag;
  * RETURN			: void
  */
 
-void timer_ovfCount(void)
-{
-	global_u8OVFCounter++;
-
-}
+//void timer_ovfCount(void)
+//{
+	//global_u8OVFCounter++;
+//
+//}
 
 // /*
 //  * AUTHOR			: Bassel Yasser Mahmoud
@@ -128,8 +130,8 @@ void timer_ovfCount(void)
 // 	HSPI_ReceiveData(pu8_a_CardPIN, PIN_LENGTH);
 // }
 // 
- void APP_Init(void)
- {
+void APP_Init(void)
+{
  
  	//(void)HButton_Init(DIO_PINB_2);
  	(void)KEYPAD_init();
@@ -140,10 +142,10 @@ void timer_ovfCount(void)
  
  
  }
-// 
-// 
- void APP_Start(void)
- {
+
+ 
+void APP_Start(void)
+{
  	//myState = Button_enStatus();
  	//if(myState == ZERO)
  	//{

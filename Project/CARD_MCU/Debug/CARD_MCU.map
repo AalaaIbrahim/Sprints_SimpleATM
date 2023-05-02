@@ -58,7 +58,7 @@ Discarded input sections
                 0x00000000       0x60 ECUAL/hspi/hspi_program.o
  .debug_ranges  0x00000000       0x50 ECUAL/hspi/hspi_program.o
  .debug_line    0x00000000      0x32a ECUAL/hspi/hspi_program.o
- .debug_str     0x00000000      0x549 ECUAL/hspi/hspi_program.o
+ .debug_str     0x00000000      0x571 ECUAL/hspi/hspi_program.o
  .comment       0x00000000       0x31 ECUAL/hspi/hspi_program.o
  .debug_frame   0x00000000      0x150 ECUAL/hspi/hspi_program.o
  .text          0x00000000        0x0 ECUAL/husart/husart.o
@@ -102,7 +102,7 @@ Discarded input sections
                 0x00000000       0x50 MCAL/dio/dio_prog.o
  .debug_ranges  0x00000000       0x40 MCAL/dio/dio_prog.o
  .debug_line    0x00000000      0x264 MCAL/dio/dio_prog.o
- .debug_str     0x00000000      0x46e MCAL/dio/dio_prog.o
+ .debug_str     0x00000000      0x496 MCAL/dio/dio_prog.o
  .comment       0x00000000       0x31 MCAL/dio/dio_prog.o
  .debug_frame   0x00000000       0x84 MCAL/dio/dio_prog.o
  .text          0x00000000        0x0 MCAL/spi/spi_program.o
@@ -597,19 +597,19 @@ END GROUP
  .debug_frame   0x00000104       0x9c MCAL/spi/spi_program.o
  .debug_frame   0x000001a0       0x88 MCAL/usart/usart.o
 
-.debug_str      0x00000000      0x6a1
+.debug_str      0x00000000      0x6c9
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_str     0x00000196      0x265 APP/app.o
-                                0x2a8 (size before relaxing)
- .debug_str     0x000003fb       0xb5 ECUAL/husart/husart.o
-                                0x297 (size before relaxing)
- .debug_str     0x000004b0       0x11 main.o
-                                0x1a3 (size before relaxing)
- .debug_str     0x000004c1      0x1c2 MCAL/spi/spi_program.o
-                                0x35c (size before relaxing)
- .debug_str     0x00000683       0x1e MCAL/usart/usart.o
-                                0x230 (size before relaxing)
+ .debug_str     0x00000196      0x28d APP/app.o
+                                0x2d0 (size before relaxing)
+ .debug_str     0x00000423       0xb5 ECUAL/husart/husart.o
+                                0x2bf (size before relaxing)
+ .debug_str     0x000004d8       0x11 main.o
+                                0x1cb (size before relaxing)
+ .debug_str     0x000004e9      0x1c2 MCAL/spi/spi_program.o
+                                0x384 (size before relaxing)
+ .debug_str     0x000006ab       0x1e MCAL/usart/usart.o
+                                0x258 (size before relaxing)
 
 .debug_loc      0x00000000      0x5e3
  *(.debug_loc)

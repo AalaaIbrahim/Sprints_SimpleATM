@@ -10,10 +10,10 @@
 #define ATM_H_
 
 #include <string.h>
-#include "../../Common/STD_Types.h"
-#include "../../ECUAL/buzzer/buzzer.h"
-#include "../../ECUAL/keypad/keypad.h"
-#include "../../ECUAL/lcd/lcd_interface.h"
+#include "../Common/STD_Types.h"
+#include "../ECUAL/buzzer/buzzer.h"
+#include "../ECUAL/keypad/keypad.h"
+#include "../ECUAL/lcd/lcd_interface.h"
 
 
 typedef enum

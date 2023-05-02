@@ -1,16 +1,26 @@
-APP/app.d APP/app.o: ../APP/app.c ../APP/../Common/STD_Types.h \
- ../APP/../Common/BIT_Math.h ../APP/../Common/vect_table.h \
- ../APP/../ECUAL/htimer0/htimer0.h ../APP/../ECUAL/HTimer/HTimer.h \
- ../APP/../ECUAL/keypad/keypad.h
+APP/app.d APP/app.o: ../APP/app.c ../APP/app.h ../APP/../ATM_MODULE/atm.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
+ ../APP/../ATM_MODULE/../Common/STD_Types.h \
+ ../APP/../ATM_MODULE/../ECUAL/buzzer/buzzer.h \
+ ../APP/../ATM_MODULE/../ECUAL/keypad/keypad.h \
+ ../APP/../ATM_MODULE/../ECUAL/lcd/lcd_interface.h \
+ ../APP/../ATM_MODULE/../ECUAL/lcd/../../Common/STD_Types.h
 
-../APP/../Common/STD_Types.h:
+../APP/app.h:
 
-../APP/../Common/BIT_Math.h:
+../APP/../ATM_MODULE/atm.h:
 
-../APP/../Common/vect_table.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:
 
-../APP/../ECUAL/htimer0/htimer0.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
-../APP/../ECUAL/HTimer/HTimer.h:
+../APP/../ATM_MODULE/../Common/STD_Types.h:
 
-../APP/../ECUAL/keypad/keypad.h:
+../APP/../ATM_MODULE/../ECUAL/buzzer/buzzer.h:
+
+../APP/../ATM_MODULE/../ECUAL/keypad/keypad.h:
+
+../APP/../ATM_MODULE/../ECUAL/lcd/lcd_interface.h:
+
+../APP/../ATM_MODULE/../ECUAL/lcd/../../Common/STD_Types.h:
