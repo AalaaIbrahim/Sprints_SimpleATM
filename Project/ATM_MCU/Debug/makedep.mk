@@ -4,6 +4,8 @@
 
 APP\app.c
 
+APP\ATM_MODULE\atm.c
+
 ECUAL\button\button.c
 
 ECUAL\buzzer\buzzer.c

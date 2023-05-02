@@ -1,19 +1,19 @@
 /*************************************************************************************************************
 * 													Includes
 ************************************************************************************************************/
-#include "../Common/STD_Types.h"
-#include "../Common/BIT_Math.h"
-#include "../Common/vect_table.h"
+//#include "../Common/STD_Types.h"
+//#include "../Common/BIT_Math.h"
+//#include "../Common/vect_table.h"
 
-#include "../ECUAL/htimer0/htimer0.h"
-#include "../ECUAL/HTimer/HTimer.h"
+//#include "../ECUAL/htimer0/htimer0.h"
+//#include "../ECUAL/HTimer/HTimer.h"
 // #include "../ECUAL/button/button.h"
-#include "../ECUAL/keypad/keypad.h"
+//#include "../ECUAL/keypad/keypad.h"
 // #include "../ECUAL/lcd/lcd_interface.h"
 // 
 // #include "../ECUAL/hspi/hspi_interface.h"
 // 
-// #include "app.h"
+#include "app.h"
 /*************************************************************************************************************
 * 												Global Variables
 ************************************************************************************************************/
@@ -22,7 +22,10 @@ Uchar8_t global_u8OVFCounter = 0;
 // en_buttonStatus myState;
 // 
 // Uchar8_t  ATMpin[4] = {NULL};
-Uchar8_t ZeroFlag = 0;
+extern VUchar8_t  ATMpin[5] ;
+extern VUchar8_t ZeroFlag;
+extern VUchar8_t setFlag;
+
 /*************************************************************************************************************
 * 											Function Implementation
 ************************************************************************************************************/
@@ -75,39 +78,7 @@ void timer_ovfCount(void)
 // 
 // 
 // 
- void Get_pin(Uchar8_t *enteredpin)
-{
-	Uchar8_t BTN,loc_counter=0;
-	while (loc_counter < 4 )
-	{
-		BTN = KEYPAD_GetButton();
-		if(BTN == KEY_NOTHING)continue;
-		else if(ZeroFlag == 1 )
-		{
-			enteredpin[loc_counter] = 0;
-			ZeroFlag = 0;
-			loc_counter++;
-		}
-		else
-		{
-			enteredpin[loc_counter] = BTN;
-			loc_counter++;
-		}
-		
-		
-	}
-}
-Uchar8_t validate_pin(Uchar8_t *enteredpin,Uchar8_t *cardpin)
-{
-	Uchar8_t loccounter = 0 ;
-	while (loccounter < 4 )
-	{
-		if(enteredpin[loccounter] != cardpin[loccounter]) return FALSE;
-		loccounter ++ ;
-	}
-	
-	return TRUE;
-}
+ 
 // 
 // 
 // /**
@@ -157,36 +128,38 @@ Uchar8_t validate_pin(Uchar8_t *enteredpin,Uchar8_t *cardpin)
 // 	HSPI_ReceiveData(pu8_a_CardPIN, PIN_LENGTH);
 // }
 // 
-// void APP_Init(void)
-// {
+ void APP_Init(void)
+ {
+ 
+ 	//(void)HButton_Init(DIO_PINB_2);
+ 	(void)KEYPAD_init();
+ 	//(void)HTimer_enInit();
+ 	//(void)HTimer_enCBF(timer_ovfCount);
+ 	(void)HLCD_vidInit();
+ 	//(void)HSPI_MasterInit();
+ 
+ 
+ }
 // 
-// 	(void)HButton_Init(DIO_PINB_2);
-// 	(void)KEYPAD_init();
-// 	(void)HTimer_enInit();
-// 	(void)HTimer_enCBF(timer_ovfCount);
-// 	(void)HLCD_vidInit();
-// 	(void)HSPI_MasterInit();
 // 
-// 
-// }
-// 
-// 
-// void APP_Start(void)
-// {
-// 	myState = Button_enStatus();
-// 	if(myState == ZERO)
-// 	{
-// 		global_u8OVFCounter = 0;
-// 
-// 		/*TODO*/
-// 
-// 	}
-// 	else if(myState == ENTER)
-// 	{
-// 		global_u8OVFCounter = 0;
-// 
-// 		/*TODO*/
-// 
-// 	}
-// 	
-// }
+ void APP_Start(void)
+ {
+ 	//myState = Button_enStatus();
+ 	//if(myState == ZERO)
+ 	//{
+ 		//global_u8OVFCounter = 0;
+ //
+ 		///*TODO*/
+ //
+ 	//}
+ 	//else if(myState == ENTER)
+ 	//{
+ 		//global_u8OVFCounter = 0;
+ //
+ 		///*TODO*/
+ //
+ 	//}
+	 
+	 Get_pin(ATMpin);
+ 	
+ }
