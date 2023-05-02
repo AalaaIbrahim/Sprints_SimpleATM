@@ -131,7 +131,7 @@ Uchar8_t USART_receiveData(void)
 void USART_sendSTRING(Uchar8_t * str)
 {
 	Uchar8_t COUNTER = 0;
-	while(str[COUNTER] != NULL)
+	while(str[COUNTER] != null)
 	{
 		USART_sendData(str[COUNTER]);
 		COUNTER++;
@@ -148,7 +148,7 @@ void USART_receiveSTRING(Uchar8_t * str ,Uchar8_t size )
 		USART_sendData(str[COUNTER]);
 		COUNTER++;
 	}
-	str[COUNTER] = NULL;
+	str[COUNTER] = null;
 }
 
 

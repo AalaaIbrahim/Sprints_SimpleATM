@@ -26,10 +26,10 @@ Uchar8_t u8_g_SlaveReceive;
 /* Variables to store number of bytes received & to send */
 Uchar8_t u8_g_SlaveRxLen, u8_g_SlaveTxLen;
 
-Uchar8_t *pu8_g_SlaveTxPtr = NULL;
-Uchar8_t arr_g_SlaveRxBuffer[SPI_BUFFER_SIZE] = {NULL};
+Uchar8_t *pu8_g_SlaveTxPtr = null;
+Uchar8_t arr_g_SlaveRxBuffer[SPI_BUFFER_SIZE] = {null};
 
-void (*SPI_CallbackFn)(void) = NULL;
+void (*SPI_CallbackFn)(void) = null;
 
 /*************************************************************************************************************
  * 											Function Implementation
@@ -104,7 +104,7 @@ en_SPI_ErrorState_t SPI_TranscieveChar(Uchar8_t u8_a_character, Uchar8_t* pu8_a_
 {
 	Uint32_t u32_l_timeCount = 0;
 	
-	if(pu8_a_receivedChar != NULL)
+	if(pu8_a_receivedChar != null)
 	{		
 		SPDR = u8_a_character;
 
@@ -140,7 +140,7 @@ en_SPI_ErrorState_t SPI_TranscieveChar(Uchar8_t u8_a_character, Uchar8_t* pu8_a_
  */
 en_SPI_ErrorState_t SPI_SetCallback(void (*pv_a_CallbackFn)(void))
 {
-	if(pv_a_CallbackFn != NULL)
+	if(pv_a_CallbackFn != null)
 	{
 		SPI_CallbackFn = pv_a_CallbackFn;
 	}
@@ -176,7 +176,7 @@ ISR(SPI_STC_INT)
 	
 	/*------------------------- Sending -------------------------*/
 	//u8_g_SlaveTxIndex++;
-	if((u8_g_SlaveTxIndex < u8_g_SlaveTxLen) && (pu8_g_SlaveTxPtr != NULL))
+	if((u8_g_SlaveTxIndex < u8_g_SlaveTxLen) && (pu8_g_SlaveTxPtr != null))
 	{
 		SPDR = pu8_g_SlaveTxPtr[u8_g_SlaveTxIndex++];
 	}

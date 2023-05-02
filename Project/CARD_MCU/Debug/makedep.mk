@@ -4,6 +4,10 @@
 
 APP\app.c
 
+card_database\card_database.c
+
+DATABASE_MODULE\terminal_process.c
+
 ECUAL\hspi\hspi_program.c
 
 ECUAL\husart\husart.c

@@ -14,6 +14,7 @@
 #include "../ECUAL/buzzer/buzzer.h"
 #include "../ECUAL/keypad/keypad.h"
 #include "../ECUAL/lcd/lcd_interface.h"
+#include "../ECUAL/hspi/hspi_interface.h"
 
 
 typedef enum

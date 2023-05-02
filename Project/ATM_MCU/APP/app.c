@@ -130,6 +130,8 @@ extern VUchar8_t keys_arr [10];
 // 	HSPI_ReceiveData(pu8_a_CardPIN, PIN_LENGTH);
 // }
 // 
+
+
 void APP_Init(void)
 {
  
@@ -139,6 +141,7 @@ void APP_Init(void)
  	//(void)HTimer_enCBF(timer_ovfCount);
  	(void)HLCD_vidInit();
  	//(void)HSPI_MasterInit();
+	(void)H_EXTINT_create(EXTINT2, ANY_LOGICAL_CHANGE, )
  
  
  }
@@ -163,5 +166,7 @@ void APP_Start(void)
  	//}
 	 
 	 Get_pin(ATMpin);
+	 
+	 
  	
  }

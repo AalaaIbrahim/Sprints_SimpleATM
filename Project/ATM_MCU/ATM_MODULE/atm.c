@@ -7,6 +7,7 @@
 
 
 #include "atm.h"
+
 VUchar8_t  ATMpin[5] = "";
 VUchar8_t ZeroFlag = 0;
 VUchar8_t setFlag = 0;
@@ -143,4 +144,34 @@ en_BuzzerErrorState_t deinitAtm(st_Buzzer_t* pst_a_buzzer)
 	ret = BUZ_SetState(pst_a_buzzer,BUZ_ON);
 	
 	return ret;
+}
+
+#define ATM_REQUEST_PIN			'A'
+#define ATM_REQUEST_PAN			'N'
+
+Uchar8_t u8_g_ReceivePIN = 0;
+EN_PinState u8_g_MatchPIN;
+Uchar8_t arr_g_CardPIN[5];
+Uchar8_t arr_g_CardPAN[20];
+
+void Card_Trigger(void)
+{
+	u8_g_ReceivePIN = 1;
+}
+
+void ATM_ValidatePIN()
+{
+	/* Request PIN From Card */
+	HSPI_SendChar(ATM_REQUEST_PIN);
+	
+// 	/* Wait until flag is raised (in EXTI0 ISR) */
+// 	while(!u8_g_ReceivePIN);
+// 	
+// 	/* Clear the flag */
+// 	u8_g_ReceivePIN = 0;
+	
+	/* Receive the PIN */
+	HSPI_ReceiveData(arr_g_CardPIN, 5);
+	
+	u8_g_MatchPIN = PIN_checkPinMatching(arr_g_CardPIN, ATMpin);
 }

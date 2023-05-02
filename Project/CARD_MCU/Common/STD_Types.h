@@ -56,8 +56,8 @@ typedef Uchar8_t                   			Std_ReturnType;
 #endif
 
 
-#ifndef	NULL
-#define NULL	'\0'
+#ifndef	null
+#define null	'\0'
 #endif
 
 

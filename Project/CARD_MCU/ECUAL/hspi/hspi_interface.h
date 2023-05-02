@@ -122,6 +122,13 @@ en_HSPI_ErrorState_t HSPI_ExchangeData(Uchar8_t* pu8_a_TxDataArr, Uchar8_t* pu8_
  */
 void HSPI_SlaveRequest(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize);
 
+/**
+ * \brief Request to trigger the master
+ * 
+ * \return void
+ */
+void HSPI_SendTrigger(void);
+
 
 
 #endif /* SPI_INTERFACE_H_ */

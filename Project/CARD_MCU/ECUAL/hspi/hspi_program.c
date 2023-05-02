@@ -133,7 +133,7 @@ en_HSPI_ErrorState_t HSPI_SendData(Uchar8_t* pu8_a_data, Uchar8_t u8_a_DataSize)
 {
 	Uchar8_t u8_l_DataIterator = 0, u8_l_dummyVar;
 	
-	if(pu8_a_data != NULL)
+	if(pu8_a_data != null)
 	{
 		/* Select Slave */
 		DIO_s8SETPinVal(HSPI_SS, LOW);
@@ -166,7 +166,7 @@ en_HSPI_ErrorState_t HSPI_ReceiveChar(Uchar8_t* pu8_a_character)
 {
 	Uchar8_t u8_l_dummyVar;
 	
-	if(pu8_a_character != NULL)
+	if(pu8_a_character != null)
 	{
 		/* Select Slave */
 		DIO_s8SETPinVal(HSPI_SS, LOW);
@@ -232,7 +232,7 @@ en_HSPI_ErrorState_t HSPI_ExchangeData(Uchar8_t* pu8_a_TxDataArr, Uchar8_t* pu8_
 {
 	Uchar8_t u8_l_DataIterator = 0;
 	
-	if((pu8_a_TxDataArr != NULL) && (pu8_a_RxDataArr != NULL) && (u8_a_DataLen <= SPI_BUFFER_SIZE))
+	if((pu8_a_TxDataArr != null) && (pu8_a_RxDataArr != null) && (u8_a_DataLen <= SPI_BUFFER_SIZE))
 	{
 		/* Select Slave */
 		DIO_s8SETPinVal(HSPI_SS, LOW);

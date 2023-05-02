@@ -139,6 +139,12 @@
     <Compile Include="APP\app.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="card_database\card_database.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="card_database\card_database.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Common\BIT_Math.h">
       <SubType>compile</SubType>
     </Compile>
@@ -146,6 +152,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Common\vect_table.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DATABASE_MODULE\terminal_process.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DATABASE_MODULE\terminal_process.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="ECUAL\hspi\hspi_interface.h">
@@ -205,6 +217,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
+    <Folder Include="DATABASE_MODULE\terminal" />
     <Folder Include="ECUAL\" />
     <Folder Include="ECUAL\hspi\" />
     <Folder Include="ECUAL\husart" />
@@ -213,6 +226,8 @@
     <Folder Include="MCAL\usart" />
     <Folder Include="MCAL\spi\" />
     <Folder Include="APP" />
+    <Folder Include="DATABASE_MODULE" />
+    <Folder Include="card_database" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
