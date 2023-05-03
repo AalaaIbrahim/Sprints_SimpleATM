@@ -17,7 +17,8 @@
 typedef enum
 {
 	TRIGGER,
-	N_TRIGGER
+	N_TRIGGER,
+	IDLE
 }EN_TriggerState;
 
 

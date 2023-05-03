@@ -46,6 +46,7 @@ EN_PinState Get_pin(Uchar8_t *enteredpin);
 en_BuzzerErrorState_t deinitAtm(st_Buzzer_t* pst_a_buzzer);
 en_buttonStatus Button_enStatus(void);
 EN_PinState ATM_ValidatePIN(void);
+void get_amount_left (Uchar8_t * amount);
 
 
 #endif /* ATM_H_ */

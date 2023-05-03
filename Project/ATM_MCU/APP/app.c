@@ -13,10 +13,13 @@ extern Uchar8_t  CARDpin[4] ;
 Uchar8_t global_u8OVFCounter = 0;
 
 extern VUchar8_t keys_arr [10];
+extern st_Buzzer_t st_g_Buzzer;
+extern Uchar8_t Entered_amount [8];
 
 EN_TriggerState TriggerState = N_TRIGGER; 
 
 Uchar8_t welcomeFlag = 0;
+Uchar8_t trialsFlag = 0;
 
 /*************************************************************************************************************
 * 											Function Implementation
@@ -52,6 +55,7 @@ void APP_Init(void)
 	(void)HSPI_MasterInit();
 	(void)H_EXTINT_create(EXTINT0, ANY_LOGICAL_CHANGE,TriggerCallBack);
 	(void)SwICU_Init();
+	(void)BUZ_Init(&st_g_Buzzer);
 }
 
 
@@ -62,17 +66,27 @@ void APP_Start(void)
 	{
 		case TRIGGER:
 		{
-			Get_pin(ATMpin);
 			welcomeFlag = 0;
-			//PIN_checkPinMatching(ATMpin, CARDpin);
+			if(Get_pin(ATMpin)==PIN_NOT_OK)break;
 			if(ATM_ValidatePIN() == PIN_MATCHED)
 			{
-				
+				get_amount_left(Entered_amount);
 			}
 			else
 			{
+				trialsFlag++;
 				/* Lock system if max tries exceeded */
-				/* Break to restart the state to try again */
+				if(trialsFlag == 3)
+				{
+					HLCD_ClrDisplay();
+					HLCD_gotoXY(0,4);
+					HLCD_WriteString("LOCKED");
+					deinitAtm(&st_g_Buzzer);
+					TriggerState = IDLE;
+					
+				}
+				
+				
 			}
 			//_delay_ms(1000);
 			//TriggerState = N_TRIGGER;
@@ -85,6 +99,11 @@ void APP_Start(void)
 				Welcome();
 				welcomeFlag = 1;
 			}
+			break;
+		}
+		case IDLE:
+		{
+			
 			break;
 		}	
 	

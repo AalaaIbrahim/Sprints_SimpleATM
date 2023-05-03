@@ -15,7 +15,7 @@ Uchar8_t  ATMpin[5] = "";
 Uchar8_t  CARDpin[8], CARDpan[20];
 extern Uchar8_t keys_arr [10];
 extern Uchar8_t global_u8OVFCounter;
-Uchar8_t Entered_amount [] = "0000.00";
+Uchar8_t Entered_amount [8] = "0000.00";
 extern Uchar8_t EnterCheck;
 extern Uchar8_t ZeroCheck;
 
@@ -240,20 +240,20 @@ EN_PinState ATM_ValidatePIN(void)
 	HSPI_SendChar(ATM_REQUEST_PIN);
 	_delay_ms(5);
 	HSPI_ReceiveData(CARDpin, 5);
-	HLCD_ClrDisplay();
-	HLCD_WriteString("Received ");
-	HLCD_WriteString(CARDpin);
-	_delay_ms(3000);
+	//HLCD_ClrDisplay();
+	//HLCD_WriteString("Received ");
+	//HLCD_WriteString(CARDpin);
+	//_delay_ms(3000);
 	
 	/* Request PIN From Card */
 	HSPI_SendChar(ATM_REQUEST_PAN);
 	_delay_ms(5);
 	HSPI_ReceiveData(CARDpan, 20);
-	HLCD_ClrDisplay();
-	HLCD_WriteString("Received ");
-	HLCD_gotoXY(1,0);
-	HLCD_WriteString(CARDpan);
-	_delay_ms(10000);
+	//HLCD_ClrDisplay();
+	//HLCD_WriteString("Received ");
+	//HLCD_gotoXY(1,0);
+	//HLCD_WriteString(CARDpan);
+	//_delay_ms(10000);
 	
 	u8_l_MatchPIN = PIN_checkPinMatching(CARDpin, ATMpin);
 	
