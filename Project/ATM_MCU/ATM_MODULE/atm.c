@@ -8,15 +8,14 @@
 
 #include "atm.h"
 
-Uchar8_t global_u8OVFCounter = 0;
+
 Uchar8_t buttonPressed;
 en_buttonStatus myState;
 
-VUchar8_t  ATMpin[5] = "";
-VUchar8_t ZeroFlag = 0;
-VUchar8_t setFlag = 0;
-extern VUchar8_t keys_arr [10];
-VUchar8_t Entered_amount [] = "0000.00";
+Uchar8_t  ATMpin[5] = "";
+extern Uchar8_t keys_arr [10];
+extern Uchar8_t global_u8OVFCounter;
+Uchar8_t Entered_amount [] = "0000.00";
 
 
 void Welcome(void)
@@ -38,21 +37,13 @@ EN_PinState Get_pin(Uchar8_t *enteredpin)
 	HLCD_gotoXY(0,0);
 	HLCD_WriteString("Enter Your pin");
 	Uchar8_t BTN,loc_counter=0;
-	while (loc_counter < 4 && !setFlag)
+	
+	while (loc_counter < 4)
 	{
-		
+		//myState = Button_enStatus();
 		BTN = KEYPAD_GetButton();
 		if(BTN == KEY_NOTHING)continue;
-		else if(ZeroFlag == 1 )
-		{
-			HLCD_gotoXY(1,colPos++);
-			HLCD_vidWriteChar('*');
-			enteredpin[loc_counter] = 0;
-			ZeroFlag = 0;
-			loc_counter++;
-			
-		}
-		else
+		else if(BTN)
 		{
 			HLCD_gotoXY(1,colPos++);
 			enteredpin[loc_counter] = keys_arr[BTN-1];
@@ -64,6 +55,9 @@ EN_PinState Get_pin(Uchar8_t *enteredpin)
 	}
 	if(loc_counter<4)
 	{
+		HLCD_ClrDisplay();
+		HLCD_gotoXY(1,0);
+		HLCD_WriteString("ERROR");
 		return PIN_NOT_OK;
 	}
 	else {
@@ -203,7 +197,7 @@ void ATM_ValidatePIN()
   */
  en_buttonStatus Button_enStatus(void)
  {
- 	en_buttonStatus local_buttonState;
+ 	en_buttonStatus local_buttonState = NOTHING;
  	HButton_getPinVal(DIO_PIND_5, &buttonPressed);
 
  	if (!buttonPressed)
@@ -214,17 +208,17 @@ void ATM_ValidatePIN()
  			HButton_getPinVal(DIO_PIND_5, &buttonPressed);
  		}
  	}
+	 
  	(void)HTimer_enStop();
 
  	if (global_u8OVFCounter < 20 && global_u8OVFCounter > 0)
  	{
  		local_buttonState = ZERO;
- 		ZeroFlag = 1;
  	}
  	else if(global_u8OVFCounter >= 20)
  	{
  		local_buttonState = ENTER;
  	}
-
+	
  	return local_buttonState;
  }

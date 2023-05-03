@@ -31,7 +31,8 @@ typedef enum
 typedef enum
 {
 	ZERO = 0,
-	ENTER
+	ENTER,
+	NOTHING
 
 }en_buttonStatus;
 

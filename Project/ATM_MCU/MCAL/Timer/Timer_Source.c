@@ -50,10 +50,10 @@ enu_timerStatus_t enuTimer2_init (enu_timerMode_t enTimerMode)
 	{
 		switch (enTimerMode)
 		{
-		case OVF_MODE 				: ClrBit(TCCR2_REG, WGM01);ClrBit(TCCR2_REG, WGM00); break;
-		case PHASE_CORRECT_PWM_MODE : ClrBit(TCCR2_REG, WGM01);SetBit(TCCR2_REG, WGM00); break;
-		case CTC_MODE 				: SetBit(TCCR2_REG, WGM01);ClrBit(TCCR2_REG, WGM00); break;
-		case FAST_PWM_MODE 			: SetBit(TCCR2_REG, WGM01);SetBit(TCCR2_REG, WGM00); break;
+		case OVF_MODE 				: CLEAR_BIT(TCCR2_REG, WGM01);CLEAR_BIT(TCCR2_REG, WGM00); break;
+		case PHASE_CORRECT_PWM_MODE : CLEAR_BIT(TCCR2_REG, WGM01);SET_BIT(TCCR2_REG, WGM00); break;
+		case CTC_MODE 				: SET_BIT(TCCR2_REG, WGM01);CLEAR_BIT(TCCR2_REG, WGM00); break;
+		case FAST_PWM_MODE 			: SET_BIT(TCCR2_REG, WGM01);SET_BIT(TCCR2_REG, WGM00); break;
 		default 					: errorStatus = TIMER_NOK; break;
 		}
 	}
@@ -100,8 +100,8 @@ enu_timerStatus_t vidTimer2_OvfIrqEnable(void)
 {
 	enu_timerStatus_t errorStatus = TIMER_OK;
 
-	SetBit(TIMSK_REG, TOIE2);
-	SetBit(SREG_REG, 7);
+	SET_BIT(TIMSK_REG, TOIE2);
+	SET_BIT(SREG_REG, 7);
 
 	return errorStatus;
 
@@ -112,7 +112,7 @@ enu_timerStatus_t vidTimer2_OvfIrqDisable(void)
 {
 	enu_timerStatus_t errorStatus = TIMER_OK;
 
-	ClrBit(TIMSK_REG, TOIE2);
+	CLEAR_BIT(TIMSK_REG, TOIE2);
 
 	return errorStatus;
 }

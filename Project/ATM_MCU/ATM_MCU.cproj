@@ -180,6 +180,12 @@
     <Compile Include="ECUAL\h_ext_int\h_ext_int.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ECUAL\icu\sw_icu.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECUAL\icu\sw_icu.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="ECUAL\keypad\keypad.c">
       <SubType>compile</SubType>
     </Compile>
@@ -249,6 +255,18 @@
     <Compile Include="MCAL\timer0\tim0_register.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\timer1\tim1_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer1\tim1_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer1\tim1_program.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer1\tim1_register.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MCAL\timer\TIMER_Config.h">
       <SubType>compile</SubType>
     </Compile>
@@ -273,10 +291,12 @@
     <Folder Include="ECUAL\HTimer" />
     <Folder Include="ECUAL\button" />
     <Folder Include="ECUAL\lcd" />
+    <Folder Include="ECUAL\icu" />
     <Folder Include="MCAL" />
     <Folder Include="ECUAL" />
     <Folder Include="MCAL\dio\" />
     <Folder Include="MCAL\extint\" />
+    <Folder Include="MCAL\timer1" />
     <Folder Include="MCAL\timer0" />
     <Folder Include="MCAL\timer" />
     <Folder Include="MCAL\spi\" />

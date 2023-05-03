@@ -10,8 +10,7 @@
 // 
 // Uchar8_t  ATMpin[4] = {NULL};
 extern VUchar8_t  ATMpin[5] ;
-extern VUchar8_t ZeroFlag;
-extern VUchar8_t setFlag;
+Uchar8_t global_u8OVFCounter = 0;
 
 extern VUchar8_t keys_arr [10];
 
@@ -29,13 +28,26 @@ void TriggerCallBack(void)
 	TriggerState = TRIGGER;
 }
 
+
+/*
+ * AUTHOR			: Bassel Yasser Mahmoud
+ * FUNCTION			: timer_ovfCount
+ * DESCRIPTION		: Countiong OVF times
+ * RETURN			: void
+ */
+
+void timer_ovfCount(void)
+{
+	global_u8OVFCounter++;
+
+}
 void APP_Init(void)
 {
 	
-	//(void)HButton_Init(DIO_PINB_2);
+	(void)HButton_Init(DIO_PINB_2);
 	(void)KEYPAD_init();
-	//(void)HTimer_enInit();
-	//(void)HTimer_enCBF(timer_ovfCount);
+	(void)HTimer_enInit();
+	(void)HTimer_enCBF(timer_ovfCount);
 	(void)HLCD_vidInit();
 	//(void)HSPI_MasterInit();
 	(void)H_EXTINT_create(EXTINT0, ANY_LOGICAL_CHANGE,TriggerCallBack);
@@ -51,6 +63,7 @@ void APP_Start(void)
 		{
 			Get_pin(ATMpin);
 			welcomeFlag = 0;
+			_delay_ms(1000);
 			break;
 		}
 		case N_TRIGGER:

@@ -43,10 +43,12 @@ SUBDIRS :=  \
 ../ECUAL/HTimer \
 ../ECUAL/button \
 ../ECUAL/lcd \
+../ECUAL/icu \
 ../MCAL \
 ../ECUAL \
 ../MCAL/dio/ \
 ../MCAL/extint/ \
+../MCAL/timer1 \
 ../MCAL/timer0 \
 ../MCAL/timer \
 ../MCAL/spi/ \
@@ -63,6 +65,7 @@ C_SRCS +=  \
 ../ECUAL/htimer0/htimer0.c \
 ../ECUAL/HTimer/HTimer.c \
 ../ECUAL/h_ext_int/h_ext_int.c \
+../ECUAL/icu/sw_icu.c \
 ../ECUAL/keypad/keypad.c \
 ../ECUAL/lcd/lcd_config.c \
 ../ECUAL/lcd/lcd_program.c \
@@ -71,6 +74,7 @@ C_SRCS +=  \
 ../MCAL/extint/extinterrupt.c \
 ../MCAL/spi/spi_program.c \
 ../MCAL/timer0/tim0_program.c \
+../MCAL/timer1/tim1_program.c \
 ../MCAL/timer/Timer_Source.c
 
 
@@ -89,6 +93,7 @@ ECUAL/hspi/hspi_program.o \
 ECUAL/htimer0/htimer0.o \
 ECUAL/HTimer/HTimer.o \
 ECUAL/h_ext_int/h_ext_int.o \
+ECUAL/icu/sw_icu.o \
 ECUAL/keypad/keypad.o \
 ECUAL/lcd/lcd_config.o \
 ECUAL/lcd/lcd_program.o \
@@ -97,6 +102,7 @@ MCAL/dio/dio_prog.o \
 MCAL/extint/extinterrupt.o \
 MCAL/spi/spi_program.o \
 MCAL/timer0/tim0_program.o \
+MCAL/timer1/tim1_program.o \
 MCAL/timer/Timer_Source.o
 
 OBJS_AS_ARGS +=  \
@@ -108,6 +114,7 @@ ECUAL/hspi/hspi_program.o \
 ECUAL/htimer0/htimer0.o \
 ECUAL/HTimer/HTimer.o \
 ECUAL/h_ext_int/h_ext_int.o \
+ECUAL/icu/sw_icu.o \
 ECUAL/keypad/keypad.o \
 ECUAL/lcd/lcd_config.o \
 ECUAL/lcd/lcd_program.o \
@@ -116,6 +123,7 @@ MCAL/dio/dio_prog.o \
 MCAL/extint/extinterrupt.o \
 MCAL/spi/spi_program.o \
 MCAL/timer0/tim0_program.o \
+MCAL/timer1/tim1_program.o \
 MCAL/timer/Timer_Source.o
 
 C_DEPS +=  \
@@ -127,6 +135,7 @@ ECUAL/hspi/hspi_program.d \
 ECUAL/htimer0/htimer0.d \
 ECUAL/HTimer/HTimer.d \
 ECUAL/h_ext_int/h_ext_int.d \
+ECUAL/icu/sw_icu.d \
 ECUAL/keypad/keypad.d \
 ECUAL/lcd/lcd_config.d \
 ECUAL/lcd/lcd_program.d \
@@ -135,6 +144,7 @@ MCAL/dio/dio_prog.d \
 MCAL/extint/extinterrupt.d \
 MCAL/spi/spi_program.d \
 MCAL/timer0/tim0_program.d \
+MCAL/timer1/tim1_program.d \
 MCAL/timer/Timer_Source.d
 
 C_DEPS_AS_ARGS +=  \
@@ -146,6 +156,7 @@ ECUAL/hspi/hspi_program.d \
 ECUAL/htimer0/htimer0.d \
 ECUAL/HTimer/HTimer.d \
 ECUAL/h_ext_int/h_ext_int.d \
+ECUAL/icu/sw_icu.d \
 ECUAL/keypad/keypad.d \
 ECUAL/lcd/lcd_config.d \
 ECUAL/lcd/lcd_program.d \
@@ -154,6 +165,7 @@ MCAL/dio/dio_prog.d \
 MCAL/extint/extinterrupt.d \
 MCAL/spi/spi_program.d \
 MCAL/timer0/tim0_program.d \
+MCAL/timer1/tim1_program.d \
 MCAL/timer/Timer_Source.d
 
 OUTPUT_FILE_PATH +=ATM_MCU.elf
@@ -226,6 +238,13 @@ ECUAL/h_ext_int/h_ext_int.o: ../ECUAL/h_ext_int/h_ext_int.c
 	@echo Finished building: $<
 	
 
+ECUAL/icu/sw_icu.o: ../ECUAL/icu/sw_icu.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ECUAL/keypad/keypad.o: ../ECUAL/keypad/keypad.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -276,6 +295,13 @@ MCAL/spi/spi_program.o: ../MCAL/spi/spi_program.c
 	
 
 MCAL/timer0/tim0_program.o: ../MCAL/timer0/tim0_program.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/timer1/tim1_program.o: ../MCAL/timer1/tim1_program.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

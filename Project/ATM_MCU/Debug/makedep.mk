@@ -18,6 +18,8 @@ ECUAL\HTimer\HTimer.c
 
 ECUAL\h_ext_int\h_ext_int.c
 
+ECUAL\icu\sw_icu.c
+
 ECUAL\keypad\keypad.c
 
 ECUAL\lcd\lcd_config.c
@@ -33,6 +35,8 @@ MCAL\extint\extinterrupt.c
 MCAL\spi\spi_program.c
 
 MCAL\timer0\tim0_program.c
+
+MCAL\timer1\tim1_program.c
 
 MCAL\timer\Timer_Source.c
 
