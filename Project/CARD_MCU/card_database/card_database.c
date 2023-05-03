@@ -111,7 +111,9 @@ EN_TerminalDataState ReadCardData(Uchar8_t *CardPan,Uchar8_t *CardPin)
 		else
 		{
 			eeprom_read_string(0x0000,CardPan);
+			_delay_ms(200);
 			eeprom_read_string(0x0020,CardPin);
+			_delay_ms(200);
 			ret = DATA_READ;
 		}
 		return ret;
@@ -125,7 +127,7 @@ en_CardPinMatchError_t CARD_MatchPINs()
 	/* Get PIN from user */
 	HUSART_sendSTRING( (Uchar8_t*) "\rEnter your PIN : ");
 	u8_l_ValidatePIN = APP_terminalPinGet(pin_arr);
-	
+	if(u8_l_ValidatePIN == PINGET_NOK) return PIN_Match_NOK;
 	/* Get PIN again for Confirmation */
 	HUSART_sendSTRING((Uchar8_t *)"\rConfirm Your PIN : ");
 	u8_l_ValidateConfirmPIN = APP_terminalPinGet(PIN_Confirm);

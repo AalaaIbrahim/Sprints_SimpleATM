@@ -20,8 +20,9 @@
 #include "../ECUAL/Button/button.h"
 #include "../ECUAL/icu/sw_icu.h"
 
-#define		ATM_REQUEST_PIN		'P'
-#define		ATM_REQUEST_PAN		'G'
+#define		ATM_REQUEST_PIN			'P'
+#define		ATM_REQUEST_PAN			'G'
+#define		ATM_REQUEST_EJECTED		'E'
 
 typedef enum
 {

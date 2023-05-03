@@ -152,12 +152,13 @@ EN_PinState Get_pin(Uchar8_t *enteredpin)
 	{
 		myState = NOTHING;
 		HLCD_ClrDisplay();
-		HLCD_gotoXY(1,0);
-		HLCD_WriteString("ERROR");
+		HLCD_gotoXY(0,0);
+		HLCD_WriteString("Short Pin");
+		HTIM0_SyncDelay(1,Seconds);
 		return PIN_NOT_OK;
 	}
-	else {
-		return PIN_OK;
+	else{
+		return PIN_OK;	
 	}
 }
 
@@ -316,7 +317,7 @@ en_BuzzerErrorState_t deinitAtm(st_Buzzer_t* pst_a_buzzer)
 		{
 			(void)HTimer_vidDelayMs(100);
 			// (void)HButton_ExtIntInit(DIO_PINB_2);
-			(void)H_EXTINT_create(EXTINT2, RISING_EDGE,EXTINT_FUNC);
+			(void)H_EXTINT_create(EXTINT2, FALLING_EDGE,EXTINT_FUNC);
 			counter = 1;
 
 		}
@@ -334,7 +335,7 @@ en_BuzzerErrorState_t deinitAtm(st_Buzzer_t* pst_a_buzzer)
 			}
 			global_u8OVFCounter = 0;
 
-			(void)H_EXTINT_create(EXTINT2, FALLING_EDGE,EXTINT_FUNC);
+			(void)H_EXTINT_create(EXTINT2, RISING_EDGE,EXTINT_FUNC);
 			(void)HButton_ExtIntInit(DIO_PINB_2);
 
 			counter = 0;

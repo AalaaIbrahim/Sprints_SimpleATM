@@ -18,8 +18,9 @@
 #define		PIN_LENGTH			5
 #define		PAN_LENGTH			20
 
-#define		CARD_PIN_REQUEST	'P'
-#define		CARD_PAN_REQUEST	'G'
+#define		CARD_PIN_REQUEST		'P'
+#define		CARD_PAN_REQUEST		'G'
+#define		ATM_REQUEST_EJECTED		'E'
 
 typedef enum
 {

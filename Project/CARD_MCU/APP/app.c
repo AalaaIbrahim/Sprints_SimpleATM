@@ -43,7 +43,7 @@ void APP_Start(void)
 		{
 			u8_g_EepromFlag = eeprom_read_byte(0x0050);
 			if(u8_g_EepromFlag == 0xFF) u8_g_CardState = CardProgMode_GetPan;
-			else 
+			else
 			{
 				HUSART_sendSTRING("Please press 1 for entering user mode\rand 2 for programming mode:\r");
 				while(HUSART_enRecieveData(&u8_gs_ModeSelect));
@@ -65,8 +65,8 @@ void APP_Start(void)
 		{
 			if(CARD_MatchPINs() == PIN_Match_OK)
 			{
- 				SaveCardData(pan_arr,pin_arr);
-				u8_g_CardState = CardUserMode;	
+				SaveCardData(pan_arr,pin_arr);
+				u8_g_CardState = CardUserMode;
 			}
 			else u8_g_CardState = CardProgMode_GetPin;
 			break;
@@ -79,7 +79,7 @@ void APP_Start(void)
 			HSPI_SlaveRequest(pin_arr, PIN_LENGTH);
 			
 			/* Get PIN from EEPROM to prepare data in SPI buffer */
-			ReadCardData(pan_arr,pin_arr);			
+			ReadCardData(pan_arr,pin_arr);
 			u8_g_CardState = CardCommMode;
 			break;
 		}
@@ -94,8 +94,13 @@ void APP_Start(void)
 			{
 				u8_g_SlaveReceive = 0;
 				HSPI_SlaveSetData(pan_arr, PAN_LENGTH);
-			}	
-			//u8_g_CardState = CardMcuIdle;		
+			}
+			else if(ATM_REQUEST_EJECTED == u8_g_SlaveReceive)
+			{
+				u8_g_SlaveReceive = 0;
+				u8_g_CardState = CardGetMode;
+			}
+			//u8_g_CardState = CardMcuIdle;
 			break;
 		}
 		case CardMcuIdle:

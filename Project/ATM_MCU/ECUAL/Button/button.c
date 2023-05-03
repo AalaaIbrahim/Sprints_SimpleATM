@@ -21,7 +21,6 @@ enu_buttonError_t HButton_Init(enu_pin en_pinx)
 	if ( en_pinx < PIN_INVALID )
 	{
 		DIO_s8SETPinDir(en_pinx, INPUT);
-		DIO_s8SETPinVal(en_pinx, HIGH);
 	}
 	else
 	{

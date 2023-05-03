@@ -20,6 +20,7 @@ extern en_buttonStatus myState;
 extern st_Buzzer_t st_g_Buzzer;
 extern Uchar8_t Entered_amount [8];
 
+Uchar8_t Default_Entered_amount [8] = "0000.00";
 EN_TriggerState TriggerState = N_TRIGGER; 
 
 Uchar8_t welcomeFlag = 0;
@@ -63,7 +64,7 @@ void APP_Init(void)
 	/*(void)SwICU_Init();*/
 	(void)BUZ_Init(&st_g_Buzzer);
 	(void)HButton_ExtIntInit(DIO_PINB_2);
-	(void)H_EXTINT_create(EXTINT2, FALLING_EDGE,EXTINT_FUNC);
+	(void)H_EXTINT_create(EXTINT2, RISING_EDGE,EXTINT_FUNC);
 }
 
 
@@ -123,6 +124,8 @@ void APP_Start(void)
 			case APPROVED:
 			{
 				ATM_ApprovedCard(newAMOUNT);
+				HSPI_SendChar(ATM_REQUEST_EJECTED);
+				strcpy(Entered_amount,Default_Entered_amount);
 				TriggerState = N_TRIGGER;
 				break;
 			}
@@ -157,6 +160,7 @@ void APP_Start(void)
 				HLCD_WriteString("is Exceeded");
 				HTIM0_SyncDelay(1, Seconds);
 				HLCD_ClrDisplay();
+				strcpy(Entered_amount,Default_Entered_amount);
 				TriggerState = CHECKING;
 				break;
 			}
@@ -168,15 +172,11 @@ void APP_Start(void)
 				HLCD_gotoXY(1, 2);
 				HLCD_WriteString("FUND");
 				HTIM0_SyncDelay(1, Seconds);
-				
+				strcpy(Entered_amount,Default_Entered_amount);
 				TriggerState = CHECKING;
 				break;
-			}
-
-
-			
+			}	
 		}
-		
 		break;
         }	
 
