@@ -1,15 +1,15 @@
 /*************************************************************************************************************
 * 													Includes
 ************************************************************************************************************/
-
+//#include <util/delay.h>
 #include "app.h"
 /*************************************************************************************************************
 * 												Global Variables
 ************************************************************************************************************/
 
-// 
-// Uchar8_t  ATMpin[4] = {NULL};
-extern VUchar8_t  ATMpin[5] ;
+
+extern Uchar8_t  ATMpin[5] ;
+extern Uchar8_t  CARDpin[4] ;
 Uchar8_t global_u8OVFCounter = 0;
 
 extern VUchar8_t keys_arr [10];
@@ -44,13 +44,14 @@ void timer_ovfCount(void)
 void APP_Init(void)
 {
 	
-	(void)HButton_Init(DIO_PINB_2);
+	//(void)HButton_Init(DIO_PINB_2);
 	(void)KEYPAD_init();
 	(void)HTimer_enInit();
 	(void)HTimer_enCBF(timer_ovfCount);
 	(void)HLCD_vidInit();
-	//(void)HSPI_MasterInit();
+	(void)HSPI_MasterInit();
 	(void)H_EXTINT_create(EXTINT0, ANY_LOGICAL_CHANGE,TriggerCallBack);
+	(void)SwICU_Init();
 }
 
 
@@ -63,7 +64,18 @@ void APP_Start(void)
 		{
 			Get_pin(ATMpin);
 			welcomeFlag = 0;
-			_delay_ms(1000);
+			//PIN_checkPinMatching(ATMpin, CARDpin);
+			if(ATM_ValidatePIN() == PIN_MATCHED)
+			{
+				
+			}
+			else
+			{
+				/* Lock system if max tries exceeded */
+				/* Break to restart the state to try again */
+			}
+			//_delay_ms(1000);
+			//TriggerState = N_TRIGGER;
 			break;
 		}
 		case N_TRIGGER:

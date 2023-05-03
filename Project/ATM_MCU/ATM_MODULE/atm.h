@@ -18,6 +18,10 @@
 #include "../ECUAL/h_ext_int/h_ext_int.h"
 #include "../ECUAL/htimer0/htimer0.h"
 #include "../ECUAL/Button/button.h"
+#include "../ECUAL/icu/sw_icu.h"
+
+#define		ATM_REQUEST_PIN		'P'
+#define		ATM_REQUEST_PAN		'G'
 
 typedef enum
 {
@@ -37,10 +41,11 @@ typedef enum
 }en_buttonStatus;
 
 void Welcome(void);
-EN_PinState PIN_checkPinMatching(Schar8_t *pinFromAtm,Schar8_t *pinFromServer);
+EN_PinState PIN_checkPinMatching(Uchar8_t *pinFromAtm,Uchar8_t *pinFromServer);
 EN_PinState Get_pin(Uchar8_t *enteredpin);
 en_BuzzerErrorState_t deinitAtm(st_Buzzer_t* pst_a_buzzer);
 en_buttonStatus Button_enStatus(void);
+EN_PinState ATM_ValidatePIN(void);
 
 
 #endif /* ATM_H_ */

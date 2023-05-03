@@ -140,7 +140,15 @@ void TIM0_DisableOVFInterrupt(void)
 
 en_TIMErrorState_t TIM0_SetOVFCallback(void (*pv_a_CallbackFn)(void))
 {
-	TIM0_OVFCallbackFn = pv_a_CallbackFn;
+	if(pv_a_CallbackFn != NULL)
+	{
+		TIM0_OVFCallbackFn = pv_a_CallbackFn;
+	}
+	else
+	{
+		return TIM_NOK;
+	}
+	return TIM_OK;
 }
 
 

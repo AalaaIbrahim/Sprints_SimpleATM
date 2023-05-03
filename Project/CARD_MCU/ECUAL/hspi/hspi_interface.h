@@ -127,8 +127,8 @@ void HSPI_SlaveRequest(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize);
  * 
  * \return void
  */
-void HSPI_SendTrigger(void);
-
+void HSPI_MasterTrigger(void);
+void HSPI_SlaveSetData(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize);
 
 
 #endif /* SPI_INTERFACE_H_ */

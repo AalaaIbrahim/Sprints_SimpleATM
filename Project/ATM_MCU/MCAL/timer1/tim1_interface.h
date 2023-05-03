@@ -51,7 +51,7 @@ en_TIMErrorState_t TIM1_Init(void);
  * 
  * \return EN_TIMErrorState_t
  */
-en_TIMErrorState_t TIM_Start(en_ICU_Prescaler_t u8_a_prescaler);
+en_TIMErrorState_t TIM1_Start(en_ICU_Prescaler_t u8_a_prescaler);
 
 /**
  * \brief Stop the timer

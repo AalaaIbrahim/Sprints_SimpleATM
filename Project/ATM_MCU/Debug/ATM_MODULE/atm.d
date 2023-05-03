@@ -16,7 +16,14 @@ ATM_MODULE/atm.d ATM_MODULE/atm.o: ../ATM_MODULE/atm.c \
  ../ATM_MODULE/../ECUAL/h_ext_int/../../MCAL/extint/ext_config.h \
  ../ATM_MODULE/../ECUAL/htimer0/htimer0.h \
  ../ATM_MODULE/../ECUAL/Button/button.h \
- ../ATM_MODULE/../ECUAL/Button/../../MCAL/DIO/DIO_Interface.h
+ ../ATM_MODULE/../ECUAL/Button/../../MCAL/DIO/DIO_Interface.h \
+ ../ATM_MODULE/../ECUAL/icu/sw_icu.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
 
 ../ATM_MODULE/atm.h:
 
@@ -53,3 +60,17 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../ATM_MODULE/../ECUAL/Button/button.h:
 
 ../ATM_MODULE/../ECUAL/Button/../../MCAL/DIO/DIO_Interface.h:
+
+../ATM_MODULE/../ECUAL/icu/sw_icu.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:

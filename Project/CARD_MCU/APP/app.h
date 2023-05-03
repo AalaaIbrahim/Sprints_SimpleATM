@@ -17,6 +17,7 @@ typedef enum
 	CardProgMode_GetPan,
 	CardProgMode_GetPin,
 	CardUserMode,
+	CardCommMode,
 	CardMcuIdle
 }en_CardStatus_t;
 

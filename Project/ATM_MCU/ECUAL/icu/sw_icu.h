@@ -11,7 +11,7 @@
 
 
 void SwICU_Init(void);
-Uint16_t SwICU_GetTime(void);
+Uint16_t SwICU_GetTime(Uint16_t u16_a_TimCount);
 void EXTI2_RisingEdgeNotification(void);
 void EXTI2_FallingEdgeNotification(void);
 

@@ -28,13 +28,11 @@ en_TIMErrorState_t TIM1_Init(void)
 en_TIMErrorState_t TIM1_Start(en_ICU_Prescaler_t u8_a_prescaler)
 {
 	en_TIMErrorState_t u8_l_ErrorState = TIM_OK;
-	
-	/* Check that prescaler is valid */
-	
-		/* Clear the prescaler bits */
-		TCCR1B &= TIM1_CLK_MASK;
-		/* Set prescaler value */
-		TCCR1B |= TIM1_PRESCALER;
+		
+	/* Clear the prescaler bits */
+	TCCR1B &= TIM1_CLK_MASK;
+	/* Set prescaler value */
+	TCCR1B |= TIM1_PRESCALER;
 	
 	
 	return u8_l_ErrorState;
@@ -60,7 +58,7 @@ Uint16_t TIM1_GetValue(void)
 
 float32_t TIM1_GetTickTime(void)
 {
-	return (arr_gs_prescalers[TIM1_PRESCALER-1]/TIM1_CLK_MUL);
+	return ((float32_t)arr_gs_prescalers[TIM1_PRESCALER-1]/(TIM1_CLK_MUL*1000));
 }
 
 

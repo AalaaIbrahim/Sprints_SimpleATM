@@ -6,7 +6,7 @@
  */
 
 #include "../../Common/STD_Types.h"
-#include "../../Common/Bit_Math.h"
+#include "../../Common/BIT_Math.h"
 
 #include "dio_private.h"
 #include "dio_interface.h"

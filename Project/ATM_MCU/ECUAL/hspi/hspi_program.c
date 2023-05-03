@@ -210,9 +210,8 @@ void HSPI_ReceiveData(Uchar8_t *pu8_a_data, Uchar8_t u8_a_DataSize)
 	do
 	{
 		SPI_TranscieveChar(DATA_END, &pu8_a_data[u8_l_DataIterator]);
-		u8_l_DataIterator ++;
-				
-	}while((pu8_a_data[u8_l_DataIterator] != DATA_END) && (u8_l_DataIterator < u8_a_DataSize));
+						
+	}while((pu8_a_data[u8_l_DataIterator++]!=DATA_END) && (u8_l_DataIterator < u8_a_DataSize));
 	
 	/* Deselect Slave */
 	DIO_s8SETPinVal(HSPI_SS, HIGH);

@@ -277,3 +277,20 @@ void HSPI_SlaveRequest(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize)
 	/* Send Request to Master */
 	DIO_s8TOGPinVal(SLAVE_SEND_REQUEST_PIN);
 }
+
+void HSPI_MasterTrigger(void)
+{
+	/* Send Request to Master */
+	DIO_s8TOGPinVal(SLAVE_SEND_REQUEST_PIN);
+}
+
+void HSPI_SlaveSetData(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize)
+{
+	/* Reset transmission data index */
+	u8_g_SlaveTxIndex = 0;
+	
+	/* Set global transmission data ptr to point to given data */
+	pu8_g_SlaveTxPtr = pu8_a_dataPtr;
+	
+	u8_g_SlaveTxLen = u8_a_DataSize;
+}
