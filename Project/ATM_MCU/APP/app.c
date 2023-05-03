@@ -3,6 +3,8 @@
 ************************************************************************************************************/
 //#include <util/delay.h>
 #include "app.h"
+#include "../ECUAL/Button/button.h"
+#include "../ATM_MODULE/database_check.h"
 /*************************************************************************************************************
 * 												Global Variables
 ************************************************************************************************************/
@@ -10,9 +12,11 @@
 
 extern Uchar8_t  ATMpin[5] ;
 extern Uchar8_t  CARDpin[4] ;
+extern Uchar8_t  CARDpan[20] ;
 Uchar8_t global_u8OVFCounter = 0;
 
 extern VUchar8_t keys_arr [10];
+extern en_buttonStatus myState;
 extern st_Buzzer_t st_g_Buzzer;
 extern Uchar8_t Entered_amount [8];
 
@@ -20,6 +24,8 @@ EN_TriggerState TriggerState = N_TRIGGER;
 
 Uchar8_t welcomeFlag = 0;
 Uchar8_t trialsFlag = 0;
+EN_dataError_t DB_CHECK;
+float32_t newAMOUNT ;
 
 /*************************************************************************************************************
 * 											Function Implementation
@@ -56,6 +62,8 @@ void APP_Init(void)
 	(void)H_EXTINT_create(EXTINT0, ANY_LOGICAL_CHANGE,TriggerCallBack);
 	(void)SwICU_Init();
 	(void)BUZ_Init(&st_g_Buzzer);
+	(void)HButton_ExtIntInit(DIO_PINB_2);
+	(void)H_EXTINT_create(EXTINT2, FALLING_EDGE,EXTINT_FUNC);
 }
 
 
@@ -70,7 +78,8 @@ void APP_Start(void)
 			if(Get_pin(ATMpin)==PIN_NOT_OK)break;
 			if(ATM_ValidatePIN() == PIN_MATCHED)
 			{
-				get_amount_left(Entered_amount);
+				TriggerState = CHECKING;
+                  
 			}
 			else
 			{
@@ -105,7 +114,74 @@ void APP_Start(void)
 		{
 			
 			break;
-		}	
+		}
+        case CHECKING:
+       {
+
+		get_amount_left(Entered_amount);
+		HLCD_ClrDisplay();
+		DB_CHECK = DATABASE_checking(CARDpan,Entered_amount,&newAMOUNT);
+		switch(DB_CHECK){
+			case APPROVED:
+			{
+				ATM_ApprovedCard(newAMOUNT);
+				TriggerState = N_TRIGGER;
+				break;
+			}
+			case FRAUD_CARD:
+			{
+				deinitAtm(&st_g_Buzzer);
+				HLCD_gotoXY(0, 4);
+				HLCD_WriteString("This is a");
+				HLCD_gotoXY(1, 2);
+				HLCD_WriteString("Fraud Card");
+				HTIM0_SyncDelay(1, Seconds);
+				TriggerState = IDLE;
+				break;
+			}
+			case CARD_STOLEN:
+			{
+				deinitAtm(&st_g_Buzzer);
+				HLCD_gotoXY(0, 4);
+				HLCD_WriteString("This Card ");
+				HLCD_gotoXY(1, 2);
+				HLCD_WriteString("is Stolen");
+				HTIM0_SyncDelay(1, Seconds);
+				TriggerState = IDLE;
+				break;
+			}
+			case EXCEED_MAX_DAILY_AMOUNT:
+			{
+				
+				HLCD_gotoXY(0, 4);
+				HLCD_WriteString("Max Limit ");
+				HLCD_gotoXY(1, 2);
+				HLCD_WriteString("is Exceeded");
+				HTIM0_SyncDelay(1, Seconds);
+				HLCD_ClrDisplay();
+				TriggerState = CHECKING;
+				break;
+			}
+			case INSUFFICIENT_FUND:
+			{
+				
+				HLCD_gotoXY(0, 4);
+				HLCD_WriteString("INSUFFICIENT ");
+				HLCD_gotoXY(1, 2);
+				HLCD_WriteString("FUND");
+				HTIM0_SyncDelay(1, Seconds);
+				
+				TriggerState = CHECKING;
+				break;
+			}
+
+
+			
+		}
+		
+		break;
+        }	
+
 	
 	}
 	//myState = Button_enStatus();

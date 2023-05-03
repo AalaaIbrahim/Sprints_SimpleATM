@@ -16,7 +16,8 @@ APP/app.d APP/app.o: ../APP/app.c ../APP/app.h ../APP/../ATM_MODULE/atm.h \
  ../APP/../ATM_MODULE/../ECUAL/htimer0/htimer0.h \
  ../APP/../ATM_MODULE/../ECUAL/Button/button.h \
  ../APP/../ATM_MODULE/../ECUAL/Button/../../MCAL/DIO/DIO_Interface.h \
- ../APP/../ATM_MODULE/../ECUAL/icu/sw_icu.h
+ ../APP/../ATM_MODULE/../ECUAL/icu/sw_icu.h \
+ ../APP/../ECUAL/Button/button.h ../APP/../ATM_MODULE/database_check.h
 
 ../APP/app.h:
 
@@ -57,3 +58,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../APP/../ATM_MODULE/../ECUAL/Button/../../MCAL/DIO/DIO_Interface.h:
 
 ../APP/../ATM_MODULE/../ECUAL/icu/sw_icu.h:
+
+../APP/../ECUAL/Button/button.h:
+
+../APP/../ATM_MODULE/database_check.h:

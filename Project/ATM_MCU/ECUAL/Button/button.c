@@ -50,3 +50,20 @@ enu_buttonError_t HButton_getPinVal(enu_pin en_pinx,  Uchar8_t* pu8_refVal )
 }
 
 
+enu_buttonError_t HButton_ExtIntInit(enu_pin en_pinx)
+{
+	enu_buttonError_t errorStatus = BUTTON_OK;
+
+	if ( en_pinx < PIN_INVALID )
+	{
+		DIO_s8SETPinVal(en_pinx, HIGH);
+	}
+	else
+	{
+		errorStatus = BUTTON_OK;
+	}
+
+	return errorStatus;
+}
+
+

@@ -47,6 +47,8 @@ en_BuzzerErrorState_t deinitAtm(st_Buzzer_t* pst_a_buzzer);
 en_buttonStatus Button_enStatus(void);
 EN_PinState ATM_ValidatePIN(void);
 void get_amount_left (Uchar8_t * amount);
+void EXTINT_FUNC(void);
+void ATM_ApprovedCard(float32_t f32_a_NewBalance);
 
 
 #endif /* ATM_H_ */

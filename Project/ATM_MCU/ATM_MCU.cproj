@@ -145,6 +145,12 @@
     <Compile Include="ATM_MODULE\atm.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ATM_MODULE\database_check.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ATM_MODULE\database_check.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Common\BIT_Math.h">
       <SubType>compile</SubType>
     </Compile>

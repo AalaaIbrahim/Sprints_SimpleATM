@@ -6,6 +6,8 @@ APP\app.c
 
 ATM_MODULE\atm.c
 
+ATM_MODULE\database_check.c
+
 ECUAL\button\button.c
 
 ECUAL\buzzer\buzzer.c

@@ -21,6 +21,7 @@ typedef enum
 
 enu_buttonError_t HButton_Init(enu_pin en_pinx);
 enu_buttonError_t HButton_getPinVal(enu_pin en_pinx,  Uchar8_t* pu8_refVal );
+enu_buttonError_t HButton_ExtIntInit(enu_pin en_pinx);
 
 
 #endif /* HAL_BUTTON_BUTTON_H_ */
