@@ -54,7 +54,7 @@ Discarded input sections
  .text.HSPI_ExchangeData
                 0x00000000       0x6a ECUAL/hspi/hspi_program.o
  .text.HSPI_MasterTrigger
-                0x00000000        0x8 ECUAL/hspi/hspi_program.o
+                0x00000000       0x1e ECUAL/hspi/hspi_program.o
  .text          0x00000000        0x0 ECUAL/husart/husart.o
  .data          0x00000000        0x0 ECUAL/husart/husart.o
  .bss           0x00000000        0x0 ECUAL/husart/husart.o
@@ -505,7 +505,7 @@ END GROUP
  *(.fini0)
                 0x00000876                _etext = .
 
-.data           0x00800060      0x16c load address 0x00000876
+.data           0x00800060      0x16e load address 0x00000876
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -517,54 +517,54 @@ END GROUP
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800070       0x7a APP/app.o
+                0x00800070       0x7c APP/app.o
  .rodata.str1.1
-                0x008000ea       0xe2 card_database/card_database.o
+                0x008000ec       0xe2 card_database/card_database.o
  *(.gnu.linkonce.r*)
-                0x008001cc                . = ALIGN (0x2)
-                0x008001cc                _edata = .
-                0x008001cc                PROVIDE (__data_end, .)
+                0x008001ce                . = ALIGN (0x2)
+                0x008001ce                _edata = .
+                0x008001ce                PROVIDE (__data_end, .)
 
-.bss            0x008001cc       0x42
-                0x008001cc                PROVIDE (__bss_start, .)
+.bss            0x008001ce       0x42
+                0x008001ce                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.u8_g_CardState
-                0x008001cc        0x1 APP/app.o
-                0x008001cc                u8_g_CardState
+                0x008001ce        0x1 APP/app.o
+                0x008001ce                u8_g_CardState
  .bss.arr_g_SlaveRxBuffer
-                0x008001cd        0xf MCAL/spi/spi_program.o
-                0x008001cd                arr_g_SlaveRxBuffer
+                0x008001cf        0xf MCAL/spi/spi_program.o
+                0x008001cf                arr_g_SlaveRxBuffer
  .bss.pu8_g_SlaveTxPtr
-                0x008001dc        0x2 MCAL/spi/spi_program.o
-                0x008001dc                pu8_g_SlaveTxPtr
+                0x008001de        0x2 MCAL/spi/spi_program.o
+                0x008001de                pu8_g_SlaveTxPtr
  .bss.u8_g_SlaveRxIndex
-                0x008001de        0x1 MCAL/spi/spi_program.o
-                0x008001de                u8_g_SlaveRxIndex
+                0x008001e0        0x1 MCAL/spi/spi_program.o
+                0x008001e0                u8_g_SlaveRxIndex
  .bss.u8_g_SlaveTxIndex
-                0x008001df        0x1 MCAL/spi/spi_program.o
-                0x008001df                u8_g_SlaveTxIndex
+                0x008001e1        0x1 MCAL/spi/spi_program.o
+                0x008001e1                u8_g_SlaveTxIndex
  *(COMMON)
- COMMON         0x008001e0        0x3 APP/app.o
-                0x008001e0                u8_g_EepromFlag
-                0x008001e1                u8_gs_ModeSelect
-                0x008001e2                u8_g_PanValid
- COMMON         0x008001e3       0x28 card_database/card_database.o
-                0x008001e3                pin_arr
-                0x008001f7                pan_arr
- COMMON         0x0080020b        0x3 MCAL/spi/spi_program.o
-                0x0080020b                u8_g_SlaveReceive
-                0x0080020c                u8_g_SlaveRxLen
-                0x0080020d                u8_g_SlaveTxLen
-                0x0080020e                PROVIDE (__bss_end, .)
+ COMMON         0x008001e2        0x3 APP/app.o
+                0x008001e2                u8_g_EepromFlag
+                0x008001e3                u8_gs_ModeSelect
+                0x008001e4                u8_g_PanValid
+ COMMON         0x008001e5       0x28 card_database/card_database.o
+                0x008001e5                pin_arr
+                0x008001f9                pan_arr
+ COMMON         0x0080020d        0x3 MCAL/spi/spi_program.o
+                0x0080020d                u8_g_SlaveReceive
+                0x0080020e                u8_g_SlaveRxLen
+                0x0080020f                u8_g_SlaveTxLen
+                0x00800210                PROVIDE (__bss_end, .)
                 0x00000876                __data_load_start = LOADADDR (.data)
-                0x000009e2                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000009e4                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080020e        0x0
+.noinit         0x00800210        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080020e                _end = .
+                0x00800210                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -664,47 +664,47 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x28db
+.debug_info     0x00000000     0x2976
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_info    0x000004e6      0x35b APP/app.o
  .debug_info    0x00000841      0x688 card_database/card_database.o
  .debug_info    0x00000ec9      0x3ea ECUAL/eeprom/HEEPROM_Program.o
- .debug_info    0x000012b3      0x7c9 ECUAL/hspi/hspi_program.o
- .debug_info    0x00001a7c      0x22c ECUAL/husart/husart.o
- .debug_info    0x00001ca8       0xca main.o
- .debug_info    0x00001d72      0x4ce MCAL/dio/dio_prog.o
- .debug_info    0x00002240      0x1fd MCAL/i2c/MI2C_Program.o
- .debug_info    0x0000243d      0x2e2 MCAL/spi/spi_program.o
- .debug_info    0x0000271f      0x1bc MCAL/usart/usart.o
+ .debug_info    0x000012b3      0x864 ECUAL/hspi/hspi_program.o
+ .debug_info    0x00001b17      0x22c ECUAL/husart/husart.o
+ .debug_info    0x00001d43       0xca main.o
+ .debug_info    0x00001e0d      0x4ce MCAL/dio/dio_prog.o
+ .debug_info    0x000022db      0x1fd MCAL/i2c/MI2C_Program.o
+ .debug_info    0x000024d8      0x2e2 MCAL/spi/spi_program.o
+ .debug_info    0x000027ba      0x1bc MCAL/usart/usart.o
 
-.debug_abbrev   0x00000000      0xf89
+.debug_abbrev   0x00000000      0xff1
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_abbrev  0x000004a3       0xe0 APP/app.o
  .debug_abbrev  0x00000583      0x1b4 card_database/card_database.o
  .debug_abbrev  0x00000737      0x17e ECUAL/eeprom/HEEPROM_Program.o
- .debug_abbrev  0x000008b5      0x171 ECUAL/hspi/hspi_program.o
- .debug_abbrev  0x00000a26       0xf1 ECUAL/husart/husart.o
- .debug_abbrev  0x00000b17       0x68 main.o
- .debug_abbrev  0x00000b7f       0xd6 MCAL/dio/dio_prog.o
- .debug_abbrev  0x00000c55       0xbb MCAL/i2c/MI2C_Program.o
- .debug_abbrev  0x00000d10      0x17d MCAL/spi/spi_program.o
- .debug_abbrev  0x00000e8d       0xfc MCAL/usart/usart.o
+ .debug_abbrev  0x000008b5      0x1d9 ECUAL/hspi/hspi_program.o
+ .debug_abbrev  0x00000a8e       0xf1 ECUAL/husart/husart.o
+ .debug_abbrev  0x00000b7f       0x68 main.o
+ .debug_abbrev  0x00000be7       0xd6 MCAL/dio/dio_prog.o
+ .debug_abbrev  0x00000cbd       0xbb MCAL/i2c/MI2C_Program.o
+ .debug_abbrev  0x00000d78      0x17d MCAL/spi/spi_program.o
+ .debug_abbrev  0x00000ef5       0xfc MCAL/usart/usart.o
 
-.debug_line     0x00000000     0x1804
+.debug_line     0x00000000     0x18de
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_line    0x00000116      0x200 APP/app.o
  .debug_line    0x00000316      0x3d2 card_database/card_database.o
  .debug_line    0x000006e8      0x2b4 ECUAL/eeprom/HEEPROM_Program.o
- .debug_line    0x0000099c      0x364 ECUAL/hspi/hspi_program.o
- .debug_line    0x00000d00      0x10e ECUAL/husart/husart.o
- .debug_line    0x00000e0e       0x59 main.o
- .debug_line    0x00000e67      0x264 MCAL/dio/dio_prog.o
- .debug_line    0x000010cb      0x319 MCAL/i2c/MI2C_Program.o
- .debug_line    0x000013e4      0x2bf MCAL/spi/spi_program.o
- .debug_line    0x000016a3      0x161 MCAL/usart/usart.o
+ .debug_line    0x0000099c      0x43e ECUAL/hspi/hspi_program.o
+ .debug_line    0x00000dda      0x10e ECUAL/husart/husart.o
+ .debug_line    0x00000ee8       0x59 main.o
+ .debug_line    0x00000f41      0x264 MCAL/dio/dio_prog.o
+ .debug_line    0x000011a5      0x319 MCAL/i2c/MI2C_Program.o
+ .debug_line    0x000014be      0x2bf MCAL/spi/spi_program.o
+ .debug_line    0x0000177d      0x161 MCAL/usart/usart.o
 
 .debug_frame    0x00000000      0x64c
  *(.debug_frame)
@@ -719,40 +719,40 @@ END GROUP
  .debug_frame   0x00000528       0x9c MCAL/spi/spi_program.o
  .debug_frame   0x000005c4       0x88 MCAL/usart/usart.o
 
-.debug_str      0x00000000      0xeb6
+.debug_str      0x00000000      0xea4
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_str     0x00000196      0x339 APP/app.o
-                                0x37d (size before relaxing)
- .debug_str     0x000004cf      0x1d9 card_database/card_database.o
-                                0x41b (size before relaxing)
- .debug_str     0x000006a8      0x104 ECUAL/eeprom/HEEPROM_Program.o
-                                0x330 (size before relaxing)
- .debug_str     0x000007ac      0x379 ECUAL/hspi/hspi_program.o
-                                0x580 (size before relaxing)
- .debug_str     0x00000b25       0x8e ECUAL/husart/husart.o
-                                0x2a9 (size before relaxing)
- .debug_str     0x00000bb3       0x11 main.o
-                                0x1b5 (size before relaxing)
- .debug_str     0x00000bc4      0x117 MCAL/dio/dio_prog.o
-                                0x480 (size before relaxing)
- .debug_str     0x00000cdb       0xcc MCAL/i2c/MI2C_Program.o
-                                0x309 (size before relaxing)
- .debug_str     0x00000da7       0xe7 MCAL/spi/spi_program.o
-                                0x36e (size before relaxing)
- .debug_str     0x00000e8e       0x28 MCAL/usart/usart.o
-                                0x242 (size before relaxing)
+ .debug_str     0x00000196      0x327 APP/app.o
+                                0x36b (size before relaxing)
+ .debug_str     0x000004bd      0x1d9 card_database/card_database.o
+                                0x409 (size before relaxing)
+ .debug_str     0x00000696      0x104 ECUAL/eeprom/HEEPROM_Program.o
+                                0x31e (size before relaxing)
+ .debug_str     0x0000079a      0x379 ECUAL/hspi/hspi_program.o
+                                0x5b2 (size before relaxing)
+ .debug_str     0x00000b13       0x8e ECUAL/husart/husart.o
+                                0x297 (size before relaxing)
+ .debug_str     0x00000ba1       0x11 main.o
+                                0x1a3 (size before relaxing)
+ .debug_str     0x00000bb2      0x117 MCAL/dio/dio_prog.o
+                                0x46e (size before relaxing)
+ .debug_str     0x00000cc9       0xcc MCAL/i2c/MI2C_Program.o
+                                0x2f7 (size before relaxing)
+ .debug_str     0x00000d95       0xe7 MCAL/spi/spi_program.o
+                                0x35c (size before relaxing)
+ .debug_str     0x00000e7c       0x28 MCAL/usart/usart.o
+                                0x230 (size before relaxing)
 
-.debug_loc      0x00000000     0x192f
+.debug_loc      0x00000000     0x1975
  *(.debug_loc)
  .debug_loc     0x00000000      0x5c5 card_database/card_database.o
  .debug_loc     0x000005c5      0x3bc ECUAL/eeprom/HEEPROM_Program.o
- .debug_loc     0x00000981      0x5af ECUAL/hspi/hspi_program.o
- .debug_loc     0x00000f30       0xf3 ECUAL/husart/husart.o
- .debug_loc     0x00001023      0x546 MCAL/dio/dio_prog.o
- .debug_loc     0x00001569       0x9c MCAL/i2c/MI2C_Program.o
- .debug_loc     0x00001605      0x1a5 MCAL/spi/spi_program.o
- .debug_loc     0x000017aa      0x185 MCAL/usart/usart.o
+ .debug_loc     0x00000981      0x5f5 ECUAL/hspi/hspi_program.o
+ .debug_loc     0x00000f76       0xf3 ECUAL/husart/husart.o
+ .debug_loc     0x00001069      0x546 MCAL/dio/dio_prog.o
+ .debug_loc     0x000015af       0x9c MCAL/i2c/MI2C_Program.o
+ .debug_loc     0x0000164b      0x1a5 MCAL/spi/spi_program.o
+ .debug_loc     0x000017f0      0x185 MCAL/usart/usart.o
 
 .debug_macinfo
  *(.debug_macinfo)

@@ -5,29 +5,29 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .text         00000876  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000016c  00800060  00000876  0000090a  2**0
+  1 .data         0000016e  00800060  00000876  0000090a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000042  008001cc  008001cc  00000a76  2**0
+  2 .bss          00000042  008001ce  008001ce  00000a78  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000a76  2**0
+  3 .comment      00000030  00000000  00000000  00000a78  2**0
                   CONTENTS, READONLY
   4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000aa8  2**2
                   CONTENTS, READONLY
   5 .debug_aranges 000002d8  00000000  00000000  00000ae4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000028db  00000000  00000000  00000dbc  2**0
+  6 .debug_info   00002976  00000000  00000000  00000dbc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000f89  00000000  00000000  00003697  2**0
+  7 .debug_abbrev 00000ff1  00000000  00000000  00003732  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001804  00000000  00000000  00004620  2**0
+  8 .debug_line   000018de  00000000  00000000  00004723  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000064c  00000000  00000000  00005e24  2**2
+  9 .debug_frame  0000064c  00000000  00000000  00006004  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000eb6  00000000  00000000  00006470  2**0
+ 10 .debug_str    00000ea4  00000000  00000000  00006650  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000192f  00000000  00000000  00007326  2**0
+ 11 .debug_loc    00001975  00000000  00000000  000074f4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000238  00000000  00000000  00008c55  2**0
+ 12 .debug_ranges 00000238  00000000  00000000  00008e69  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -72,13 +72,13 @@ Disassembly of section .text:
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
-  70:	ac 3c       	cpi	r26, 0xCC	; 204
+  70:	ae 3c       	cpi	r26, 0xCE	; 206
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
 
 00000076 <__do_clear_bss>:
   76:	22 e0       	ldi	r18, 0x02	; 2
-  78:	ac ec       	ldi	r26, 0xCC	; 204
+  78:	ae ec       	ldi	r26, 0xCE	; 206
   7a:	b1 e0       	ldi	r27, 0x01	; 1
   7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
@@ -86,7 +86,7 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	ae 30       	cpi	r26, 0x0E	; 14
+  80:	a0 31       	cpi	r26, 0x10	; 16
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 9d 02 	call	0x53a	; 0x53a <main>
@@ -116,7 +116,7 @@ void APP_Start(void)
 	// 	HUSART_sendSTRING(pan_arr);
 	
 	switch(u8_g_CardState)
-  9e:	80 91 cc 01 	lds	r24, 0x01CC	; 0x8001cc <__data_end>
+  9e:	80 91 ce 01 	lds	r24, 0x01CE	; 0x8001ce <__data_end>
   a2:	82 30       	cpi	r24, 0x02	; 2
   a4:	09 f4       	brne	.+2      	; 0xa8 <APP_Start+0xa>
   a6:	49 c0       	rjmp	.+146    	; 0x13a <APP_Start+0x9c>
@@ -140,12 +140,12 @@ void APP_Start(void)
   c2:	80 e5       	ldi	r24, 0x50	; 80
   c4:	90 e0       	ldi	r25, 0x00	; 0
   c6:	0e 94 e4 01 	call	0x3c8	; 0x3c8 <eeprom_read_byte>
-  ca:	80 93 e0 01 	sts	0x01E0, r24	; 0x8001e0 <u8_g_EepromFlag>
+  ca:	80 93 e2 01 	sts	0x01E2, r24	; 0x8001e2 <u8_g_EepromFlag>
 			if(u8_g_EepromFlag == 0xFF) u8_g_CardState = CardProgMode_GetPan;
   ce:	8f 3f       	cpi	r24, 0xFF	; 255
   d0:	21 f4       	brne	.+8      	; 0xda <APP_Start+0x3c>
   d2:	81 e0       	ldi	r24, 0x01	; 1
-  d4:	80 93 cc 01 	sts	0x01CC, r24	; 0x8001cc <__data_end>
+  d4:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
   d8:	08 95       	ret
 			else 
 			{
@@ -154,29 +154,29 @@ void APP_Start(void)
   dc:	90 e0       	ldi	r25, 0x00	; 0
   de:	0e 94 97 02 	call	0x52e	; 0x52e <HUSART_sendSTRING>
 				while(HUSART_enRecieveData(&u8_gs_ModeSelect));
-  e2:	81 ee       	ldi	r24, 0xE1	; 225
+  e2:	83 ee       	ldi	r24, 0xE3	; 227
   e4:	91 e0       	ldi	r25, 0x01	; 1
   e6:	0e 94 8d 02 	call	0x51a	; 0x51a <HUSART_enRecieveData>
   ea:	81 11       	cpse	r24, r1
   ec:	fa cf       	rjmp	.-12     	; 0xe2 <APP_Start+0x44>
 				HUSART_enSendData(u8_gs_ModeSelect);
-  ee:	80 91 e1 01 	lds	r24, 0x01E1	; 0x8001e1 <u8_gs_ModeSelect>
+  ee:	80 91 e3 01 	lds	r24, 0x01E3	; 0x8001e3 <u8_gs_ModeSelect>
   f2:	0e 94 88 02 	call	0x510	; 0x510 <HUSART_enSendData>
 				HUSART_enSendData('\r\r');
   f6:	8d e0       	ldi	r24, 0x0D	; 13
   f8:	0e 94 88 02 	call	0x510	; 0x510 <HUSART_enSendData>
 				if('1' == u8_gs_ModeSelect)	u8_g_CardState = CardUserMode;
-  fc:	80 91 e1 01 	lds	r24, 0x01E1	; 0x8001e1 <u8_gs_ModeSelect>
+  fc:	80 91 e3 01 	lds	r24, 0x01E3	; 0x8001e3 <u8_gs_ModeSelect>
  100:	81 33       	cpi	r24, 0x31	; 49
  102:	21 f4       	brne	.+8      	; 0x10c <APP_Start+0x6e>
  104:	83 e0       	ldi	r24, 0x03	; 3
- 106:	80 93 cc 01 	sts	0x01CC, r24	; 0x8001cc <__data_end>
+ 106:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
  10a:	08 95       	ret
 				else if('2' == u8_gs_ModeSelect) u8_g_CardState = CardProgMode_GetPan;
  10c:	82 33       	cpi	r24, 0x32	; 50
  10e:	21 f4       	brne	.+8      	; 0x118 <APP_Start+0x7a>
  110:	81 e0       	ldi	r24, 0x01	; 1
- 112:	80 93 cc 01 	sts	0x01CC, r24	; 0x8001cc <__data_end>
+ 112:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
  116:	08 95       	ret
 				else HUSART_sendSTRING("Invalid Choice, ");
  118:	83 eb       	ldi	r24, 0xB3	; 179
@@ -189,15 +189,15 @@ void APP_Start(void)
 		case CardProgMode_GetPan:
 		{
 			u8_g_PanValid = APP_terminalPanGet(pan_arr);
- 122:	87 ef       	ldi	r24, 0xF7	; 247
+ 122:	89 ef       	ldi	r24, 0xF9	; 249
  124:	91 e0       	ldi	r25, 0x01	; 1
  126:	0e 94 02 01 	call	0x204	; 0x204 <APP_terminalPanGet>
- 12a:	80 93 e2 01 	sts	0x01E2, r24	; 0x8001e2 <u8_g_PanValid>
+ 12a:	80 93 e4 01 	sts	0x01E4, r24	; 0x8001e4 <u8_g_PanValid>
 			if(PANGET_OK == u8_g_PanValid) u8_g_CardState = CardProgMode_GetPin;
  12e:	81 30       	cpi	r24, 0x01	; 1
  130:	f1 f5       	brne	.+124    	; 0x1ae <APP_Start+0x110>
  132:	82 e0       	ldi	r24, 0x02	; 2
- 134:	80 93 cc 01 	sts	0x01CC, r24	; 0x8001cc <__data_end>
+ 134:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
  138:	08 95       	ret
 			break;
 		}
@@ -209,25 +209,25 @@ void APP_Start(void)
  140:	51 f4       	brne	.+20     	; 0x156 <APP_Start+0xb8>
 			{
  				SaveCardData(pan_arr,pin_arr);
- 142:	63 ee       	ldi	r22, 0xE3	; 227
+ 142:	65 ee       	ldi	r22, 0xE5	; 229
  144:	71 e0       	ldi	r23, 0x01	; 1
- 146:	87 ef       	ldi	r24, 0xF7	; 247
+ 146:	89 ef       	ldi	r24, 0xF9	; 249
  148:	91 e0       	ldi	r25, 0x01	; 1
  14a:	0e 94 2c 01 	call	0x258	; 0x258 <SaveCardData>
 				u8_g_CardState = CardUserMode;	
  14e:	83 e0       	ldi	r24, 0x03	; 3
- 150:	80 93 cc 01 	sts	0x01CC, r24	; 0x8001cc <__data_end>
+ 150:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
  154:	08 95       	ret
 			}
 			else u8_g_CardState = CardProgMode_GetPin;
  156:	82 e0       	ldi	r24, 0x02	; 2
- 158:	80 93 cc 01 	sts	0x01CC, r24	; 0x8001cc <__data_end>
+ 158:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
  15c:	08 95       	ret
 			break;
 		}
 		case CardUserMode:
 		{
-			HUSART_sendSTRING("------------- User Mode -------------");
+			HUSART_sendSTRING("\r------------- User Mode -------------\r");
  15e:	84 ec       	ldi	r24, 0xC4	; 196
  160:	90 e0       	ldi	r25, 0x00	; 0
  162:	0e 94 97 02 	call	0x52e	; 0x52e <HUSART_sendSTRING>
@@ -235,35 +235,35 @@ void APP_Start(void)
 			/* Trigger ATM */
 			HSPI_SlaveRequest(pin_arr, PIN_LENGTH);
  166:	65 e0       	ldi	r22, 0x05	; 5
- 168:	83 ee       	ldi	r24, 0xE3	; 227
+ 168:	85 ee       	ldi	r24, 0xE5	; 229
  16a:	91 e0       	ldi	r25, 0x01	; 1
  16c:	0e 94 6e 02 	call	0x4dc	; 0x4dc <HSPI_SlaveRequest>
 			
 			/* Get PIN from EEPROM to prepare data in SPI buffer */
 			ReadCardData(pan_arr,pin_arr);			
- 170:	63 ee       	ldi	r22, 0xE3	; 227
+ 170:	65 ee       	ldi	r22, 0xE5	; 229
  172:	71 e0       	ldi	r23, 0x01	; 1
- 174:	87 ef       	ldi	r24, 0xF7	; 247
+ 174:	89 ef       	ldi	r24, 0xF9	; 249
  176:	91 e0       	ldi	r25, 0x01	; 1
  178:	0e 94 64 01 	call	0x2c8	; 0x2c8 <ReadCardData>
 			u8_g_CardState = CardCommMode;
  17c:	84 e0       	ldi	r24, 0x04	; 4
- 17e:	80 93 cc 01 	sts	0x01CC, r24	; 0x8001cc <__data_end>
+ 17e:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
 			break;
  182:	08 95       	ret
 		}
 		case CardCommMode:
 		{
 			if(CARD_PIN_REQUEST == u8_g_SlaveReceive)
- 184:	80 91 0b 02 	lds	r24, 0x020B	; 0x80020b <u8_g_SlaveReceive>
+ 184:	80 91 0d 02 	lds	r24, 0x020D	; 0x80020d <u8_g_SlaveReceive>
  188:	80 35       	cpi	r24, 0x50	; 80
  18a:	41 f4       	brne	.+16     	; 0x19c <APP_Start+0xfe>
 			{
 				u8_g_SlaveReceive = 0;
- 18c:	10 92 0b 02 	sts	0x020B, r1	; 0x80020b <u8_g_SlaveReceive>
+ 18c:	10 92 0d 02 	sts	0x020D, r1	; 0x80020d <u8_g_SlaveReceive>
 				HSPI_SlaveSetData(pin_arr, PIN_LENGTH);
  190:	65 e0       	ldi	r22, 0x05	; 5
- 192:	83 ee       	ldi	r24, 0xE3	; 227
+ 192:	85 ee       	ldi	r24, 0xE5	; 229
  194:	91 e0       	ldi	r25, 0x01	; 1
  196:	0e 94 7a 02 	call	0x4f4	; 0x4f4 <HSPI_SlaveSetData>
  19a:	08 95       	ret
@@ -273,10 +273,10 @@ void APP_Start(void)
  19e:	39 f4       	brne	.+14     	; 0x1ae <APP_Start+0x110>
 			{
 				u8_g_SlaveReceive = 0;
- 1a0:	10 92 0b 02 	sts	0x020B, r1	; 0x80020b <u8_g_SlaveReceive>
+ 1a0:	10 92 0d 02 	sts	0x020D, r1	; 0x80020d <u8_g_SlaveReceive>
 				HSPI_SlaveSetData(pan_arr, PAN_LENGTH);
  1a4:	64 e1       	ldi	r22, 0x14	; 20
- 1a6:	87 ef       	ldi	r24, 0xF7	; 247
+ 1a6:	89 ef       	ldi	r24, 0xF9	; 249
  1a8:	91 e0       	ldi	r25, 0x01	; 1
  1aa:	0e 94 7a 02 	call	0x4f4	; 0x4f4 <HSPI_SlaveSetData>
  1ae:	08 95       	ret
@@ -321,7 +321,7 @@ en_terminalPinGetStatus_t APP_terminalPinGet(Uchar8_t* arr)
 		else
 		{
 			HUSART_sendSTRING( (Uchar8_t*) "\rNot numeric ");
- 1cc:	8a ee       	ldi	r24, 0xEA	; 234
+ 1cc:	8c ee       	ldi	r24, 0xEC	; 236
  1ce:	90 e0       	ldi	r25, 0x00	; 0
  1d0:	0e 94 97 02 	call	0x52e	; 0x52e <HUSART_sendSTRING>
 			flag = 1;
@@ -368,7 +368,7 @@ en_terminalPinGetStatus_t APP_terminalPinGet(Uchar8_t* arr)
  1f0:	05 c0       	rjmp	.+10     	; 0x1fc <APP_terminalPinGet+0x4c>
 	{
 		HUSART_sendSTRING( (Uchar8_t*) "\rbelow 4 dig ");
- 1f2:	88 ef       	ldi	r24, 0xF8	; 248
+ 1f2:	8a ef       	ldi	r24, 0xFA	; 250
  1f4:	90 e0       	ldi	r25, 0x00	; 0
  1f6:	0e 94 97 02 	call	0x52e	; 0x52e <HUSART_sendSTRING>
 		errorStatus = PINGET_NOK;
@@ -393,7 +393,7 @@ en_terminalPanGetStatus_t APP_terminalPanGet(Uchar8_t* arr)
  208:	ec 01       	movw	r28, r24
 	Uchar8_t loc_counter=0;
 	HUSART_sendSTRING((Uchar8_t*)"\r\nEnter Card Pan : \r");
- 20a:	86 e0       	ldi	r24, 0x06	; 6
+ 20a:	88 e0       	ldi	r24, 0x08	; 8
  20c:	91 e0       	ldi	r25, 0x01	; 1
  20e:	0e 94 97 02 	call	0x52e	; 0x52e <HUSART_sendSTRING>
 	HUSART_receiveSTRING(arr,20);
@@ -424,7 +424,7 @@ en_terminalPanGetStatus_t APP_terminalPanGet(Uchar8_t* arr)
 		else
 		{
 			HUSART_sendSTRING((Uchar8_t*) "\r\nInvalid Pan Number - must contain Numbers only");
- 228:	8b e1       	ldi	r24, 0x1B	; 27
+ 228:	8d e1       	ldi	r24, 0x1D	; 29
  22a:	91 e0       	ldi	r25, 0x01	; 1
  22c:	0e 94 97 02 	call	0x52e	; 0x52e <HUSART_sendSTRING>
 			return PANGET_NOK;
@@ -452,7 +452,7 @@ en_terminalPanGetStatus_t APP_terminalPanGet(Uchar8_t* arr)
  242:	30 f4       	brcc	.+12     	; 0x250 <APP_terminalPanGet+0x4c>
 	{
 	 HUSART_sendSTRING((Uchar8_t*) "\r\nInvalid Pan Number - must contain at least 16 numbers");
- 244:	8c e4       	ldi	r24, 0x4C	; 76
+ 244:	8e e4       	ldi	r24, 0x4E	; 78
  246:	91 e0       	ldi	r25, 0x01	; 1
  248:	0e 94 97 02 	call	0x52e	; 0x52e <HUSART_sendSTRING>
 	 return PANGET_NOK;
@@ -524,7 +524,7 @@ EN_TerminalDataState SaveCardData(Uchar8_t *CardPan,Uchar8_t *CardPin)
  29e:	00 00       	nop
 		_delay_ms(200);
 		eeprom_write_string(0x0050, (Uchar8_t*)"1");
- 2a0:	64 e8       	ldi	r22, 0x84	; 132
+ 2a0:	66 e8       	ldi	r22, 0x86	; 134
  2a2:	71 e0       	ldi	r23, 0x01	; 1
  2a4:	80 e5       	ldi	r24, 0x50	; 80
  2a6:	90 e0       	ldi	r25, 0x00	; 0
@@ -630,18 +630,18 @@ en_CardPinMatchError_t CARD_MatchPINs()
 	
 	/* Get PIN from user */
 	HUSART_sendSTRING( (Uchar8_t*) "\rEnter your PIN : ");
- 312:	86 e8       	ldi	r24, 0x86	; 134
+ 312:	88 e8       	ldi	r24, 0x88	; 136
  314:	91 e0       	ldi	r25, 0x01	; 1
  316:	0e 94 97 02 	call	0x52e	; 0x52e <HUSART_sendSTRING>
 	u8_l_ValidatePIN = APP_terminalPinGet(pin_arr);
- 31a:	83 ee       	ldi	r24, 0xE3	; 227
+ 31a:	85 ee       	ldi	r24, 0xE5	; 229
  31c:	91 e0       	ldi	r25, 0x01	; 1
  31e:	0e 94 d8 00 	call	0x1b0	; 0x1b0 <APP_terminalPinGet>
  322:	18 2f       	mov	r17, r24
 	
 	/* Get PIN again for Confirmation */
 	HUSART_sendSTRING((Uchar8_t *)"\rConfirm Your PIN : ");
- 324:	89 e9       	ldi	r24, 0x99	; 153
+ 324:	8b e9       	ldi	r24, 0x9B	; 155
  326:	91 e0       	ldi	r25, 0x01	; 1
  328:	0e 94 97 02 	call	0x52e	; 0x52e <HUSART_sendSTRING>
 	u8_l_ValidateConfirmPIN = APP_terminalPinGet(PIN_Confirm);
@@ -671,7 +671,7 @@ en_CardPinMatchError_t CARD_MatchPINs()
  340:	82 2f       	mov	r24, r18
  342:	90 e0       	ldi	r25, 0x00	; 0
  344:	fc 01       	movw	r30, r24
- 346:	ed 51       	subi	r30, 0x1D	; 29
+ 346:	eb 51       	subi	r30, 0x1B	; 27
  348:	fe 4f       	sbci	r31, 0xFE	; 254
  34a:	30 81       	ld	r19, Z
  34c:	e1 e0       	ldi	r30, 0x01	; 1
@@ -685,7 +685,7 @@ en_CardPinMatchError_t CARD_MatchPINs()
  35c:	31 f0       	breq	.+12     	; 0x36a <CARD_MatchPINs+0x6e>
 			{
 				HUSART_sendSTRING((Uchar8_t *)"\rPin Not Matched");
- 35e:	8e ea       	ldi	r24, 0xAE	; 174
+ 35e:	80 eb       	ldi	r24, 0xB0	; 176
  360:	91 e0       	ldi	r25, 0x01	; 1
  362:	0e 94 97 02 	call	0x52e	; 0x52e <HUSART_sendSTRING>
 				return PIN_Match_NOK;
@@ -708,7 +708,7 @@ en_CardPinMatchError_t CARD_MatchPINs()
 		}
 		
 		HUSART_sendSTRING((Uchar8_t *)"\rPin Matched");
- 374:	8f eb       	ldi	r24, 0xBF	; 191
+ 374:	81 ec       	ldi	r24, 0xC1	; 193
  376:	91 e0       	ldi	r25, 0x01	; 1
  378:	0e 94 97 02 	call	0x52e	; 0x52e <HUSART_sendSTRING>
 		return PIN_Match_OK;
@@ -955,12 +955,12 @@ void eeprom_read_string(Uint16_t Copy_u8Address, Uchar8_t* str)
  49c:	08 95       	ret
 
 0000049e <HSPI_SlaveInit>:
-}
-
 void HSPI_MasterTrigger(void)
 {
 	/* Send Request to Master */
-	DIO_s8TOGPinVal(SLAVE_SEND_REQUEST_PIN);
+	DIO_s8SETPinVal(SLAVE_SEND_REQUEST_PIN, HIGH);
+	_delay_ms(10);
+	DIO_s8SETPinVal(SLAVE_SEND_REQUEST_PIN, LOW);
  49e:	60 e0       	ldi	r22, 0x00	; 0
  4a0:	8d e0       	ldi	r24, 0x0D	; 13
  4a2:	0e 94 a2 02 	call	0x544	; 0x544 <DIO_s8SETPinDir>
@@ -986,10 +986,10 @@ void HSPI_MasterTrigger(void)
  4da:	08 95       	ret
 
 000004dc <HSPI_SlaveRequest>:
- 4dc:	10 92 df 01 	sts	0x01DF, r1	; 0x8001df <u8_g_SlaveTxIndex>
- 4e0:	90 93 dd 01 	sts	0x01DD, r25	; 0x8001dd <pu8_g_SlaveTxPtr+0x1>
- 4e4:	80 93 dc 01 	sts	0x01DC, r24	; 0x8001dc <pu8_g_SlaveTxPtr>
- 4e8:	60 93 0d 02 	sts	0x020D, r22	; 0x80020d <u8_g_SlaveTxLen>
+ 4dc:	10 92 e1 01 	sts	0x01E1, r1	; 0x8001e1 <u8_g_SlaveTxIndex>
+ 4e0:	90 93 df 01 	sts	0x01DF, r25	; 0x8001df <pu8_g_SlaveTxPtr+0x1>
+ 4e4:	80 93 de 01 	sts	0x01DE, r24	; 0x8001de <pu8_g_SlaveTxPtr>
+ 4e8:	60 93 0f 02 	sts	0x020F, r22	; 0x80020f <u8_g_SlaveTxLen>
  4ec:	88 e0       	ldi	r24, 0x08	; 8
  4ee:	0e 94 22 03 	call	0x644	; 0x644 <DIO_s8TOGPinVal>
  4f2:	08 95       	ret
@@ -1001,15 +1001,15 @@ void HSPI_SlaveSetData(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize)
 {
 	/* Reset transmission data index */
 	u8_g_SlaveTxIndex = 0;
- 4f4:	10 92 df 01 	sts	0x01DF, r1	; 0x8001df <u8_g_SlaveTxIndex>
+ 4f4:	10 92 e1 01 	sts	0x01E1, r1	; 0x8001e1 <u8_g_SlaveTxIndex>
 	
 	/* Set global transmission data ptr to point to given data */
 	pu8_g_SlaveTxPtr = pu8_a_dataPtr;
- 4f8:	90 93 dd 01 	sts	0x01DD, r25	; 0x8001dd <pu8_g_SlaveTxPtr+0x1>
- 4fc:	80 93 dc 01 	sts	0x01DC, r24	; 0x8001dc <pu8_g_SlaveTxPtr>
+ 4f8:	90 93 df 01 	sts	0x01DF, r25	; 0x8001df <pu8_g_SlaveTxPtr+0x1>
+ 4fc:	80 93 de 01 	sts	0x01DE, r24	; 0x8001de <pu8_g_SlaveTxPtr>
 	
 	u8_g_SlaveTxLen = u8_a_DataSize;
- 500:	60 93 0d 02 	sts	0x020D, r22	; 0x80020d <u8_g_SlaveTxLen>
+ 500:	60 93 0f 02 	sts	0x020F, r22	; 0x80020f <u8_g_SlaveTxLen>
  504:	08 95       	ret
 
 00000506 <HUSART_enInit>:
@@ -1635,48 +1635,48 @@ ISR(SPI_STC_INT)
 	/*------------------------ Reception ------------------------*/
 	u8_g_SlaveReceive = SPDR;
  75a:	8f b1       	in	r24, 0x0f	; 15
- 75c:	80 93 0b 02 	sts	0x020B, r24	; 0x80020b <u8_g_SlaveReceive>
+ 75c:	80 93 0d 02 	sts	0x020D, r24	; 0x80020d <u8_g_SlaveReceive>
 	//DIO_s8SETPortVal(DIO_PORTA, u8_g_SlaveReceive);
 	
 	/* If Max size is exceeded, start overriding data */
 	if(u8_g_SlaveRxIndex == SPI_BUFFER_SIZE) u8_g_SlaveRxIndex = 0;
- 760:	90 91 de 01 	lds	r25, 0x01DE	; 0x8001de <u8_g_SlaveRxIndex>
+ 760:	90 91 e0 01 	lds	r25, 0x01E0	; 0x8001e0 <u8_g_SlaveRxIndex>
  764:	9f 30       	cpi	r25, 0x0F	; 15
  766:	11 f4       	brne	.+4      	; 0x76c <__vector_12+0x28>
- 768:	10 92 de 01 	sts	0x01DE, r1	; 0x8001de <u8_g_SlaveRxIndex>
+ 768:	10 92 e0 01 	sts	0x01E0, r1	; 0x8001e0 <u8_g_SlaveRxIndex>
 	if(u8_g_SlaveReceive != DATA_END)
  76c:	83 32       	cpi	r24, 0x23	; 35
  76e:	59 f0       	breq	.+22     	; 0x786 <__vector_12+0x42>
 	{
 		/* Store received byte in buffer */
 		arr_g_SlaveRxBuffer[u8_g_SlaveRxIndex] = u8_g_SlaveReceive;
- 770:	90 91 de 01 	lds	r25, 0x01DE	; 0x8001de <u8_g_SlaveRxIndex>
+ 770:	90 91 e0 01 	lds	r25, 0x01E0	; 0x8001e0 <u8_g_SlaveRxIndex>
  774:	e9 2f       	mov	r30, r25
  776:	f0 e0       	ldi	r31, 0x00	; 0
- 778:	e3 53       	subi	r30, 0x33	; 51
+ 778:	e1 53       	subi	r30, 0x31	; 49
  77a:	fe 4f       	sbci	r31, 0xFE	; 254
  77c:	80 83       	st	Z, r24
 		u8_g_SlaveRxIndex++;
  77e:	9f 5f       	subi	r25, 0xFF	; 255
- 780:	90 93 de 01 	sts	0x01DE, r25	; 0x8001de <u8_g_SlaveRxIndex>
+ 780:	90 93 e0 01 	sts	0x01E0, r25	; 0x8001e0 <u8_g_SlaveRxIndex>
  784:	04 c0       	rjmp	.+8      	; 0x78e <__vector_12+0x4a>
 	}
 	else
 	{	// Get the number of received bytes
 		u8_g_SlaveRxLen = u8_g_SlaveRxIndex;
- 786:	80 91 de 01 	lds	r24, 0x01DE	; 0x8001de <u8_g_SlaveRxIndex>
- 78a:	80 93 0c 02 	sts	0x020C, r24	; 0x80020c <u8_g_SlaveRxLen>
+ 786:	80 91 e0 01 	lds	r24, 0x01E0	; 0x8001e0 <u8_g_SlaveRxIndex>
+ 78a:	80 93 0e 02 	sts	0x020E, r24	; 0x80020e <u8_g_SlaveRxLen>
 	}
 	
 	/*------------------------- Sending -------------------------*/
 	//u8_g_SlaveTxIndex++;
 	if((u8_g_SlaveTxIndex < u8_g_SlaveTxLen) && (pu8_g_SlaveTxPtr != null))
- 78e:	80 91 df 01 	lds	r24, 0x01DF	; 0x8001df <u8_g_SlaveTxIndex>
- 792:	90 91 0d 02 	lds	r25, 0x020D	; 0x80020d <u8_g_SlaveTxLen>
+ 78e:	80 91 e1 01 	lds	r24, 0x01E1	; 0x8001e1 <u8_g_SlaveTxIndex>
+ 792:	90 91 0f 02 	lds	r25, 0x020F	; 0x80020f <u8_g_SlaveTxLen>
  796:	89 17       	cp	r24, r25
  798:	88 f4       	brcc	.+34     	; 0x7bc <__vector_12+0x78>
- 79a:	20 91 dc 01 	lds	r18, 0x01DC	; 0x8001dc <pu8_g_SlaveTxPtr>
- 79e:	30 91 dd 01 	lds	r19, 0x01DD	; 0x8001dd <pu8_g_SlaveTxPtr+0x1>
+ 79a:	20 91 de 01 	lds	r18, 0x01DE	; 0x8001de <pu8_g_SlaveTxPtr>
+ 79e:	30 91 df 01 	lds	r19, 0x01DF	; 0x8001df <pu8_g_SlaveTxPtr+0x1>
  7a2:	21 15       	cp	r18, r1
  7a4:	31 05       	cpc	r19, r1
  7a6:	51 f0       	breq	.+20     	; 0x7bc <__vector_12+0x78>
@@ -1684,7 +1684,7 @@ ISR(SPI_STC_INT)
 		SPDR = pu8_g_SlaveTxPtr[u8_g_SlaveTxIndex++];
  7a8:	91 e0       	ldi	r25, 0x01	; 1
  7aa:	98 0f       	add	r25, r24
- 7ac:	90 93 df 01 	sts	0x01DF, r25	; 0x8001df <u8_g_SlaveTxIndex>
+ 7ac:	90 93 e1 01 	sts	0x01E1, r25	; 0x8001e1 <u8_g_SlaveTxIndex>
  7b0:	f9 01       	movw	r30, r18
  7b2:	e8 0f       	add	r30, r24
  7b4:	f1 1d       	adc	r31, r1

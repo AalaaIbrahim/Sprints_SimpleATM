@@ -50,7 +50,7 @@ void HSPI_MasterInit(void)
 	DIO_s8SETPinDir(HSPI_MISO, INPUT);
 	
 	/* Initialize EXTI pin for slave requests */
-	EXTINT_init(MASTER_SLAVE_REQUEST_PIN, ANY_LOGICAL_CHANGE);
+	EXTINT_init(MASTER_SLAVE_REQUEST_PIN, RISING_EDGE);
 	
 	/* Initialize SPI Registers */
 	SPI_MasterInit();

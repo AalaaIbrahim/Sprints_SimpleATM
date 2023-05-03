@@ -281,7 +281,9 @@ void HSPI_SlaveRequest(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize)
 void HSPI_MasterTrigger(void)
 {
 	/* Send Request to Master */
-	DIO_s8TOGPinVal(SLAVE_SEND_REQUEST_PIN);
+	DIO_s8SETPinVal(SLAVE_SEND_REQUEST_PIN, HIGH);
+	_delay_ms(10);
+	DIO_s8SETPinVal(SLAVE_SEND_REQUEST_PIN, LOW);
 }
 
 void HSPI_SlaveSetData(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize)

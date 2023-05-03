@@ -60,7 +60,7 @@ void APP_Init(void)
 	(void)HLCD_vidInit();
 	(void)HSPI_MasterInit();
 	(void)H_EXTINT_create(EXTINT0, ANY_LOGICAL_CHANGE,TriggerCallBack);
-	(void)SwICU_Init();
+	/*(void)SwICU_Init();*/
 	(void)BUZ_Init(&st_g_Buzzer);
 	(void)HButton_ExtIntInit(DIO_PINB_2);
 	(void)H_EXTINT_create(EXTINT2, FALLING_EDGE,EXTINT_FUNC);
@@ -94,8 +94,6 @@ void APP_Start(void)
 					TriggerState = IDLE;
 					
 				}
-				
-				
 			}
 			//_delay_ms(1000);
 			//TriggerState = N_TRIGGER;

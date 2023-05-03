@@ -73,7 +73,7 @@ void APP_Start(void)
 		}
 		case CardUserMode:
 		{
-			HUSART_sendSTRING("------------- User Mode -------------");
+			HUSART_sendSTRING("\r------------- User Mode -------------\r");
 			//_delay_ms(5000);
 			/* Trigger ATM */
 			HSPI_SlaveRequest(pin_arr, PIN_LENGTH);
