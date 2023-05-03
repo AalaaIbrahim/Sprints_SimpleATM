@@ -154,10 +154,10 @@
     <Compile Include="Common\vect_table.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DATABASE_MODULE\terminal_process.c">
+    <Compile Include="ECUAL\eeprom\HEEPROM_Interface.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DATABASE_MODULE\terminal_process.h">
+    <Compile Include="ECUAL\eeprom\HEEPROM_Program.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="ECUAL\hspi\hspi_interface.h">
@@ -185,6 +185,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\dio\dio_prog.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\i2c\MI2C_Config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\i2c\MI2C_Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\i2c\MI2C_Private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\i2c\MI2C_Program.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\spi\spi_config.h">
@@ -217,16 +229,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="DATABASE_MODULE\terminal" />
     <Folder Include="ECUAL\" />
     <Folder Include="ECUAL\hspi\" />
     <Folder Include="ECUAL\husart" />
+    <Folder Include="ECUAL\eeprom" />
     <Folder Include="MCAL\" />
     <Folder Include="MCAL\dio\" />
+    <Folder Include="MCAL\i2c" />
     <Folder Include="MCAL\usart" />
     <Folder Include="MCAL\spi\" />
     <Folder Include="APP" />
-    <Folder Include="DATABASE_MODULE" />
     <Folder Include="card_database" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />

@@ -237,6 +237,30 @@
     <Compile Include="MCAL\spi\spi_register.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\timer0\tim0_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer0\tim0_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer0\tim0_program.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer0\tim0_register.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer\TIMER_Config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer\TIMER_Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer\TIMER_Private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\timer\Timer_Source.c">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ATM_MODULE\" />
@@ -253,6 +277,8 @@
     <Folder Include="ECUAL" />
     <Folder Include="MCAL\dio\" />
     <Folder Include="MCAL\extint\" />
+    <Folder Include="MCAL\timer0" />
+    <Folder Include="MCAL\timer" />
     <Folder Include="MCAL\spi\" />
     <Folder Include="APP" />
   </ItemGroup>

@@ -18,7 +18,7 @@
 extern Uchar8_t pin_arr[20];
 extern Uchar8_t pan_arr[20];
 
-Uchar8_t u8_g_EepromFlag, u8_g_CardState, u8_g_PanValid;
+Uchar8_t u8_g_EepromFlag, u8_g_CardState = CardGetMode , u8_g_PanValid;
 /*************************************************************************************************************
 * 											Function Implementation
 ************************************************************************************************************/
@@ -26,6 +26,8 @@ Uchar8_t u8_g_EepromFlag, u8_g_CardState, u8_g_PanValid;
 void APP_Init(void)
 {
 	(void)HUSART_enInit();
+	HSPI_SlaveInit();
+	sei();
 }
 
 
@@ -39,33 +41,39 @@ void APP_Start(void)
 		case CardGetMode:
 		{
 			u8_g_EepromFlag = eeprom_read_byte(0x0050);
-			if(u8_g_EepromFlag != 0xFF) u8_g_CardState = CardProgMode_GetPan;
+			if(u8_g_EepromFlag == 0xFF) u8_g_CardState = CardProgMode_GetPan;
 			else u8_g_CardState = CardUserMode;
 			break;
 		}
 		case CardProgMode_GetPan:
 		{
 			u8_g_PanValid = APP_terminalPanGet(pan_arr);
-			HUSART_sendSTRING(pan_arr);
-			
 			if(PANGET_OK == u8_g_PanValid) u8_g_CardState = CardProgMode_GetPin;
-			
 			break;
 		}
 		case CardProgMode_GetPin:
 		{
-			if(CARD_MatchPINs() == PIN_Match_OK) u8_g_CardState = CardUserMode;
+			if(CARD_MatchPINs() == PIN_Match_OK)
+			{
+ 				SaveCardData(pan_arr,pin_arr);
+				u8_g_CardState = CardUserMode;	
+			}
 			else u8_g_CardState = CardProgMode_GetPin;
 			break;
 		}
 		case CardUserMode:
 		{
 			/* Get PIN from EEPROM to prepare data in SPI buffer (?)*/
-			
+			_delay_ms(5000);
+			ReadCardData(pan_arr,pin_arr);
 			/* Trigger ATM */
 			HSPI_SlaveRequest(pin_arr, PIN_LENGTH);
+			u8_g_CardState = CardMcuIdle;
+			break;
+		}
+		case CardMcuIdle:
+		{
 			break;
 		}
 	}
-	
 }

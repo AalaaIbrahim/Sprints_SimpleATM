@@ -1,25 +1,12 @@
 /*************************************************************************************************************
 * 													Includes
 ************************************************************************************************************/
-//#include "../Common/STD_Types.h"
-//#include "../Common/BIT_Math.h"
-//#include "../Common/vect_table.h"
 
-//#include "../ECUAL/htimer0/htimer0.h"
-//#include "../ECUAL/HTimer/HTimer.h"
-// #include "../ECUAL/button/button.h"
-//#include "../ECUAL/keypad/keypad.h"
-// #include "../ECUAL/lcd/lcd_interface.h"
-// 
-// #include "../ECUAL/hspi/hspi_interface.h"
-// 
 #include "app.h"
 /*************************************************************************************************************
 * 												Global Variables
 ************************************************************************************************************/
-//Uchar8_t global_u8OVFCounter = 0;
-// Uchar8_t buttonPressed;
-// en_buttonStatus myState;
+
 // 
 // Uchar8_t  ATMpin[4] = {NULL};
 extern VUchar8_t  ATMpin[5] ;
@@ -28,9 +15,91 @@ extern VUchar8_t setFlag;
 
 extern VUchar8_t keys_arr [10];
 
+EN_TriggerState TriggerState = N_TRIGGER; 
+
+Uchar8_t welcomeFlag = 0;
+
 /*************************************************************************************************************
 * 											Function Implementation
 ************************************************************************************************************/
+
+
+void TriggerCallBack(void)
+{
+	TriggerState = TRIGGER;
+}
+
+void APP_Init(void)
+{
+	
+	//(void)HButton_Init(DIO_PINB_2);
+	(void)KEYPAD_init();
+	//(void)HTimer_enInit();
+	//(void)HTimer_enCBF(timer_ovfCount);
+	(void)HLCD_vidInit();
+	//(void)HSPI_MasterInit();
+	(void)H_EXTINT_create(EXTINT0, ANY_LOGICAL_CHANGE,TriggerCallBack);
+}
+
+
+void APP_Start(void)
+{
+			
+	switch(TriggerState)
+	{
+		case TRIGGER:
+		{
+			Get_pin(ATMpin);
+			welcomeFlag = 0;
+			break;
+		}
+		case N_TRIGGER:
+		{
+			if(welcomeFlag == 0)
+			{
+				Welcome();
+				welcomeFlag = 1;
+			}
+			break;
+		}	
+	
+	}
+	//myState = Button_enStatus();
+	//if(myState == ZERO)
+	//{
+	//global_u8OVFCounter = 0;
+	//
+	///*TODO*/
+	//
+	//}
+	//else if(myState == ENTER)
+	//{
+	//global_u8OVFCounter = 0;
+	//
+	///*TODO*/
+	//
+	//}	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  * AUTHOR			: Bassel Yasser Mahmoud
  * FUNCTION			: timer_ovfCount
@@ -44,39 +113,7 @@ extern VUchar8_t keys_arr [10];
 //
 //}
 
-// /*
-//  * AUTHOR			: Bassel Yasser Mahmoud
-//  * FUNCTION			: Button_enStatus
-//  * DESCRIPTION		: check button press {Zero if less than 2 sec otherwise it will be Enter}
-//  * RETURN			: en_buttonStatus {ZERO or ENTER}
-//  */
-// en_buttonStatus Button_enStatus(void)
-// {
-// 	en_buttonStatus local_buttonState;
-// 	HButton_getPinVal(DIO_PIND_5, &buttonPressed);
-// 
-// 	if (!buttonPressed)
-// 	{
-// 		(void)HTimer_vidDelayMs(100);
-// 		while (!buttonPressed)
-// 		{
-// 			HButton_getPinVal(DIO_PIND_5, &buttonPressed);
-// 		}
-// 	}
-// 	(void)HTimer_enStop();
-// 
-// 	if (global_u8OVFCounter < 20 && global_u8OVFCounter > 0)
-// 	{
-// 		local_buttonState = ZERO;
-// 		ZeroFlag = 1;
-// 	}
-// 	else if(global_u8OVFCounter >= 20)
-// 	{
-// 		local_buttonState = ENTER;
-// 	}
-// 
-// 	return local_buttonState;
-// }
+
 // 
 // 
 // 
@@ -132,41 +169,3 @@ extern VUchar8_t keys_arr [10];
 // 
 
 
-void APP_Init(void)
-{
- 
- 	//(void)HButton_Init(DIO_PINB_2);
- 	(void)KEYPAD_init();
- 	//(void)HTimer_enInit();
- 	//(void)HTimer_enCBF(timer_ovfCount);
- 	(void)HLCD_vidInit();
- 	//(void)HSPI_MasterInit();
-	(void)H_EXTINT_create(EXTINT2, ANY_LOGICAL_CHANGE, )
- 
- 
- }
-
- 
-void APP_Start(void)
-{
- 	//myState = Button_enStatus();
- 	//if(myState == ZERO)
- 	//{
- 		//global_u8OVFCounter = 0;
- //
- 		///*TODO*/
- //
- 	//}
- 	//else if(myState == ENTER)
- 	//{
- 		//global_u8OVFCounter = 0;
- //
- 		///*TODO*/
- //
- 	//}
-	 
-	 Get_pin(ATMpin);
-	 
-	 
- 	
- }

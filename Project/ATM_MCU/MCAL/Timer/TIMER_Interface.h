@@ -17,6 +17,9 @@
 /************************************************************************************************/
 /*									USER_DEFINED TYPES											*/
 /************************************************************************************************/
+
+
+
 typedef enum
 {
 	TIMER_OK,
@@ -103,7 +106,7 @@ enu_timerStatus_t u8Timer2_setTime_ms(Uint32_t u32_time_ms);
 enu_timerStatus_t enuFastPWM0_init(enu_pwmMode_t ,enu_timerPrescalar_t );
 enu_timerStatus_t vidPWM0_Generate(Uchar8_t);
 
-//void vidTimer2_setcbf_OVF(cbf_t cbf);
+void vidTimer2_setcbf_OVF(cbf_t cbf);
 
 /***********************************************************************/
 

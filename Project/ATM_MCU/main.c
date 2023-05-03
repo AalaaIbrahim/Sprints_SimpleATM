@@ -9,10 +9,9 @@
 int main(void)
 {
 	APP_Init();
-	APP_Start();
     while (1) 
     {
-
+		APP_Start();
     }
 }
 

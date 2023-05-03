@@ -24,8 +24,8 @@
  * 								Global/Static Variables
  ************************************************************************************************************/
 static enu_timerPrescalar_t global_prescaller;
-static Uint8_t global_timerStatus;
-static Uint8_t global_ovf;
+static Uchar8_t global_timerStatus;
+static Uchar8_t global_ovf;
 static Uint16_t preload;
 static cbf_t  globalCallFunc = NULL;
 
@@ -69,7 +69,7 @@ enu_timerStatus_t enuTimer2_init (enu_timerMode_t enTimerMode)
 enu_timerStatus_t u8Timer2_setPrescallar(enu_timerPrescalar_t Copy_enPrescal)
 {
 	enu_timerStatus_t errorStatus = TIMER_OK;
-	Uint8_t temp_reg;
+	Uchar8_t temp_reg;
 	if(Copy_enPrescal < TIMER_PRESCALR_INVALID)
 	{
 		global_prescaller = Copy_enPrescal;
@@ -143,10 +143,10 @@ enu_timerStatus_t u8Timer2_setTime_ms(Uint32_t u32_time_ms)
 {
 	enu_timerStatus_t errorStatus = TIMER_OK;
 	Uint32_t desired_ticks;
-	Float32_t tick_time_ms;
+	float32_t tick_time_ms;
 	if( u32_time_ms < MAX_TIM_MS )
 	{
-		tick_time_ms = (Float32_t)prescaller_map[global_prescaller] / ((Uint32_t)F_CPU / 1000U)  ;
+		tick_time_ms = (float32_t)prescaller_map[global_prescaller] / ((Uint32_t)F_CPU / 1000U)  ;
 		desired_ticks = u32_time_ms / tick_time_ms;
 
 		/* Compare ticks with OVF_ticks */
@@ -162,7 +162,7 @@ enu_timerStatus_t u8Timer2_setTime_ms(Uint32_t u32_time_ms)
 		}
 		else if(desired_ticks > OVF_TICKS)
 		{
-			global_ovf = (Uint8_t)(desired_ticks / OVF_TICKS);
+			global_ovf = (Uchar8_t)(desired_ticks / OVF_TICKS);
 			preload = (uint16_t)(OVF_TICKS - (desired_ticks % OVF_TICKS ));
 			TCNT2_REG = preload;
 			if (preload > 0U)
@@ -196,7 +196,7 @@ void vidTimer2_setcbf_OVF(cbf_t cbf)
  ************************************************************************************************************/
 ISR(TIMER2_OVF_vect)
 {
-	static Uint8_t counter = 0;
+	static Uchar8_t counter = 0;
 	counter++;
 	if(counter == global_ovf)
 	{

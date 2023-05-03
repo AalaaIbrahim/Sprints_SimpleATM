@@ -66,7 +66,7 @@ Uchar8_t eeprom_read_byte(Uint16_t address)
 }
 
 
-
+/*
 void eeprom_write_string(Uint16_t Copy_u8Address, const Uchar8_t* str)
 {
 	Uchar8_t sendedAddress;
@@ -94,18 +94,33 @@ void eeprom_write_string(Uint16_t Copy_u8Address, const Uchar8_t* str)
 
 		i2c_stop();
 }
+*/
 
+
+
+void eeprom_write_string(Uint16_t Copy_u8Address, const Uchar8_t* str)
+{
+		Uchar8_t len = 0;
+			
+			do 
+			{
+				eeprom_write_byte(Copy_u8Address++,str[len]);
+				_delay_ms(200);
+			}
+			while(str[len++] != '\0');
+
+			
+}
 
 
 void eeprom_read_string(Uint16_t Copy_u8Address, Uchar8_t* str)
 {
-	Uchar8_t len ,count = 0;
-	len = eeprom_read_byte(Copy_u8Address);
-
-	 for(Uchar8_t i=0;i<len+1;i++)
-	 {
-		 str[count++] = eeprom_read_byte(++Copy_u8Address);
-	 }
-
+			Uchar8_t len = 0;
+			do
+			{
+				str[len] = eeprom_read_byte(Copy_u8Address++);
+				_delay_ms(200);
+			}
+			while(str[len++] != '\0');
 }
 

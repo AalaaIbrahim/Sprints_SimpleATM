@@ -15,7 +15,9 @@
 #include "../ECUAL/keypad/keypad.h"
 #include "../ECUAL/lcd/lcd_interface.h"
 #include "../ECUAL/hspi/hspi_interface.h"
-
+#include "../ECUAL/h_ext_int/h_ext_int.h"
+#include "../ECUAL/htimer0/htimer0.h"
+#include "../ECUAL/Button/button.h"
 
 typedef enum
 {
@@ -26,13 +28,18 @@ typedef enum
 	PIN_NOT_OK
 }EN_PinState;
 
+typedef enum
+{
+	ZERO = 0,
+	ENTER
 
+}en_buttonStatus;
 
-
+void Welcome(void);
 EN_PinState PIN_checkPinMatching(Schar8_t *pinFromAtm,Schar8_t *pinFromServer);
 EN_PinState Get_pin(Uchar8_t *enteredpin);
 en_BuzzerErrorState_t deinitAtm(st_Buzzer_t* pst_a_buzzer);
-
+en_buttonStatus Button_enStatus(void);
 
 
 #endif /* ATM_H_ */

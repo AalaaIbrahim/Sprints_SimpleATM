@@ -9,6 +9,7 @@
 #define HAL_EEPROM_HEEPROM_INTERFACE_H_
 
 #include <string.h>
+#include <util/delay.h>
 #include "../../MCAL/i2c/MI2C_Interface.h"
 #include "../../Common/STD_Types.h"
 #include "../../Common/BIT_Math.h"

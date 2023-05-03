@@ -8,15 +8,33 @@
 
 #include "atm.h"
 
+Uchar8_t global_u8OVFCounter = 0;
+Uchar8_t buttonPressed;
+en_buttonStatus myState;
+
 VUchar8_t  ATMpin[5] = "";
 VUchar8_t ZeroFlag = 0;
 VUchar8_t setFlag = 0;
 extern VUchar8_t keys_arr [10];
 VUchar8_t Entered_amount [] = "0000.00";
 
+
+void Welcome(void)
+{
+	HLCD_ClrDisplay();
+	HLCD_gotoXY(0,0);
+	HLCD_WriteString((Uchar8_t *)"Welcome To Atm");
+	HTIM0_SyncDelay(1,Seconds);
+	HLCD_ClrDisplay();
+	HLCD_gotoXY(0,0);
+	HLCD_WriteString((Uchar8_t *)"Insert Your Card");
+}
+
+
 EN_PinState Get_pin(Uchar8_t *enteredpin)
 {
 	Uchar8_t colPos=0;
+    HLCD_ClrDisplay();
 	HLCD_gotoXY(0,0);
 	HLCD_WriteString("Enter Your pin");
 	Uchar8_t BTN,loc_counter=0;
@@ -37,8 +55,8 @@ EN_PinState Get_pin(Uchar8_t *enteredpin)
 		else
 		{
 			HLCD_gotoXY(1,colPos++);
-			HLCD_vidWriteChar('*');
 			enteredpin[loc_counter] = keys_arr[BTN-1];
+			HLCD_vidWriteChar(enteredpin[loc_counter]);
 			loc_counter++;
 		}
 		
@@ -175,3 +193,38 @@ void ATM_ValidatePIN()
 	
 	u8_g_MatchPIN = PIN_checkPinMatching(arr_g_CardPIN, ATMpin);
 }
+
+
+ /*
+  * AUTHOR			: Bassel Yasser Mahmoud
+  * FUNCTION			: Button_enStatus
+  * DESCRIPTION		: check button press {Zero if less than 2 sec otherwise it will be Enter}
+  * RETURN			: en_buttonStatus {ZERO or ENTER}
+  */
+ en_buttonStatus Button_enStatus(void)
+ {
+ 	en_buttonStatus local_buttonState;
+ 	HButton_getPinVal(DIO_PIND_5, &buttonPressed);
+
+ 	if (!buttonPressed)
+ 	{
+ 		(void)HTimer_vidDelayMs(100);
+ 		while (!buttonPressed)
+ 		{
+ 			HButton_getPinVal(DIO_PIND_5, &buttonPressed);
+ 		}
+ 	}
+ 	(void)HTimer_enStop();
+
+ 	if (global_u8OVFCounter < 20 && global_u8OVFCounter > 0)
+ 	{
+ 		local_buttonState = ZERO;
+ 		ZeroFlag = 1;
+ 	}
+ 	else if(global_u8OVFCounter >= 20)
+ 	{
+ 		local_buttonState = ENTER;
+ 	}
+
+ 	return local_buttonState;
+ }

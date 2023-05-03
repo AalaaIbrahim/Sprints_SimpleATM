@@ -9,6 +9,7 @@
 #ifndef TERMINAL_PROCESS_H_
 #define TERMINAL_PROCESS_H_
 
+#include <util/delay.h>
 #include "../Common/STD_Types.h"
 #include "../ECUAL/eeprom/HEEPROM_Interface.h"
 #include "../ECUAL/husart/husart.h"

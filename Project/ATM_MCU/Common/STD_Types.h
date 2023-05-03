@@ -44,7 +44,7 @@ typedef Uchar8_t                   			Std_ReturnType;
 //#define E_OK                   				(Std_ReturnType)0x01
 #define E_NOT_OK               				(Std_ReturnType)0x00
 
-
+typedef void(*cbf_t)(void);
 
 #ifndef TRUE
 #define TRUE   1
