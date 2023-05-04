@@ -145,7 +145,7 @@ void i2c_send_slave_address_with_read_req(Uchar8_t slave_address)
 	/* Waiting for TWINT flag to be set */
 	while ( !(GET_BIT(TWCR,TWINT)) );
 	/* Waiting if this condition becoming true */
-//	while ( (TWSR & 0xF8) != SLAVE_ADD_AND_RD_ACK );
+	while ( (TWSR & 0xF8) != SLAVE_ADD_AND_RD_ACK );
 }
 
 
@@ -179,7 +179,7 @@ Uchar8_t i2c_read_byte(void)
 /******************* If ACK enabled or not **************************************/
 #if MI2C_ACK_STATUS == MI2C_ACK_DISABLE
 	/* Waiting if this condition becoming true */
-//	while ( (TWSR & 0xF8) != RD_BYTE_WITH_NACK );
+	//while ( (TWSR & 0xF8) != RD_BYTE_WITH_NACK );
 #elif MI2C_ACK_STATUS == MI2C_ACK_ENABLE
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != RD_BYTE_WITH_ACK );
@@ -198,10 +198,8 @@ void i2c_stop(void)
 	SET_BIT(TWCR, TWSTO);
 	/* Enable I2C peripheral */
 	SET_BIT(TWCR, TWEN);
-
-	while(TWCR&(1<<TWSTO));
-
-//	CLEAR_BIT(TWCR, TWSTA);
+	//while(TWCR&(1<<TWSTO));
+	//CLEAR_BIT(TWCR, TWSTA);
 }
 
 

@@ -3003,8 +3003,8 @@ void HLCD_DisplayFloat(float32_t f32_a_number)
 
 0000121a <main>:
  */ 
+#define F_CPU 8000000UL
 #include "APP/app.h"
-
 void main(void)
 {
 	APP_Init();

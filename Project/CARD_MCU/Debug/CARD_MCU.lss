@@ -3,31 +3,31 @@ CARD_MCU.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000008aa  00000000  00000000  00000094  2**1
+  0 .text         000008d2  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000016e  00800060  000008aa  0000093e  2**0
+  1 .data         00000172  00800060  000008d2  00000966  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000042  008001ce  008001ce  00000aac  2**0
+  2 .bss          00000042  008001d2  008001d2  00000ad8  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000aac  2**0
+  3 .comment      00000030  00000000  00000000  00000ad8  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000adc  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000b08  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000002d8  00000000  00000000  00000b18  2**0
+  5 .debug_aranges 000002d8  00000000  00000000  00000b44  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00002a0a  00000000  00000000  00000df0  2**0
+  6 .debug_info   00002a01  00000000  00000000  00000e1c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001000  00000000  00000000  000037fa  2**0
+  7 .debug_abbrev 00000ff1  00000000  00000000  0000381d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001913  00000000  00000000  000047fa  2**0
+  8 .debug_line   00001915  00000000  00000000  0000480e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000064c  00000000  00000000  00006110  2**2
+  9 .debug_frame  0000064c  00000000  00000000  00006124  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000ecc  00000000  00000000  0000675c  2**0
+ 10 .debug_str    00000ecc  00000000  00000000  00006770  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000019df  00000000  00000000  00007628  2**0
+ 11 .debug_loc    000019df  00000000  00000000  0000763c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000238  00000000  00000000  00009007  2**0
+ 12 .debug_ranges 00000238  00000000  00000000  0000901b  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -45,7 +45,7 @@ Disassembly of section .text:
   24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  30:	0c 94 bc 03 	jmp	0x778	; 0x778 <__vector_12>
+  30:	0c 94 d0 03 	jmp	0x7a0	; 0x7a0 <__vector_12>
   34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -67,18 +67,18 @@ Disassembly of section .text:
   60:	11 e0       	ldi	r17, 0x01	; 1
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	ea ea       	ldi	r30, 0xAA	; 170
+  66:	e2 ed       	ldi	r30, 0xD2	; 210
   68:	f8 e0       	ldi	r31, 0x08	; 8
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
-  70:	ae 3c       	cpi	r26, 0xCE	; 206
+  70:	a2 3d       	cpi	r26, 0xD2	; 210
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
 
 00000076 <__do_clear_bss>:
   76:	22 e0       	ldi	r18, 0x02	; 2
-  78:	ae ec       	ldi	r26, 0xCE	; 206
+  78:	a2 ed       	ldi	r26, 0xD2	; 210
   7a:	b1 e0       	ldi	r27, 0x01	; 1
   7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
@@ -86,11 +86,11 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	a0 31       	cpi	r26, 0x10	; 16
+  80:	a4 31       	cpi	r26, 0x14	; 20
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
-  86:	0e 94 b7 02 	call	0x56e	; 0x56e <main>
-  8a:	0c 94 53 04 	jmp	0x8a6	; 0x8a6 <_exit>
+  86:	0e 94 bc 02 	call	0x578	; 0x578 <main>
+  8a:	0c 94 67 04 	jmp	0x8ce	; 0x8ce <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -102,1820 +102,1849 @@ Disassembly of section .text:
 void APP_Init(void)
 {
 	(void)HUSART_enInit();
-  92:	0e 94 9d 02 	call	0x53a	; 0x53a <HUSART_enInit>
+  92:	0e 94 a2 02 	call	0x544	; 0x544 <HUSART_enInit>
 	HSPI_SlaveInit();
-  96:	0e 94 69 02 	call	0x4d2	; 0x4d2 <HSPI_SlaveInit>
+  96:	0e 94 6e 02 	call	0x4dc	; 0x4dc <HSPI_SlaveInit>
+	eeprom_init();
+  9a:	0e 94 e5 01 	call	0x3ca	; 0x3ca <eeprom_init>
 	sei();
-  9a:	78 94       	sei
-  9c:	08 95       	ret
+  9e:	78 94       	sei
+  a0:	08 95       	ret
 
-0000009e <APP_Start>:
+000000a2 <APP_Start>:
+
 void APP_Start(void)
 {
 	// 	APP_terminalPanGet(pan_arr);
 	// 	HUSART_sendSTRING(pan_arr);
-	
 	switch(u8_g_CardState)
-  9e:	80 91 ce 01 	lds	r24, 0x01CE	; 0x8001ce <__data_end>
-  a2:	82 30       	cpi	r24, 0x02	; 2
-  a4:	09 f4       	brne	.+2      	; 0xa8 <APP_Start+0xa>
-  a6:	4a c0       	rjmp	.+148    	; 0x13c <APP_Start+0x9e>
-  a8:	28 f4       	brcc	.+10     	; 0xb4 <APP_Start+0x16>
-  aa:	88 23       	and	r24, r24
-  ac:	51 f0       	breq	.+20     	; 0xc2 <APP_Start+0x24>
-  ae:	81 30       	cpi	r24, 0x01	; 1
-  b0:	c1 f1       	breq	.+112    	; 0x122 <APP_Start+0x84>
-  b2:	08 95       	ret
-  b4:	83 30       	cpi	r24, 0x03	; 3
-  b6:	09 f4       	brne	.+2      	; 0xba <APP_Start+0x1c>
-  b8:	53 c0       	rjmp	.+166    	; 0x160 <APP_Start+0xc2>
-  ba:	84 30       	cpi	r24, 0x04	; 4
-  bc:	09 f4       	brne	.+2      	; 0xc0 <APP_Start+0x22>
-  be:	63 c0       	rjmp	.+198    	; 0x186 <APP_Start+0xe8>
-  c0:	08 95       	ret
+  a2:	80 91 d2 01 	lds	r24, 0x01D2	; 0x8001d2 <__data_end>
+  a6:	82 30       	cpi	r24, 0x02	; 2
+  a8:	09 f4       	brne	.+2      	; 0xac <APP_Start+0xa>
+  aa:	4a c0       	rjmp	.+148    	; 0x140 <APP_Start+0x9e>
+  ac:	28 f4       	brcc	.+10     	; 0xb8 <APP_Start+0x16>
+  ae:	88 23       	and	r24, r24
+  b0:	51 f0       	breq	.+20     	; 0xc6 <APP_Start+0x24>
+  b2:	81 30       	cpi	r24, 0x01	; 1
+  b4:	c1 f1       	breq	.+112    	; 0x126 <APP_Start+0x84>
+  b6:	08 95       	ret
+  b8:	83 30       	cpi	r24, 0x03	; 3
+  ba:	09 f4       	brne	.+2      	; 0xbe <APP_Start+0x1c>
+  bc:	53 c0       	rjmp	.+166    	; 0x164 <APP_Start+0xc2>
+  be:	84 30       	cpi	r24, 0x04	; 4
+  c0:	09 f4       	brne	.+2      	; 0xc4 <APP_Start+0x22>
+  c2:	63 c0       	rjmp	.+198    	; 0x18a <APP_Start+0xe8>
+  c4:	08 95       	ret
 	{
 		case CardGetMode:
 		{
-			u8_g_EepromFlag = eeprom_read_byte(0x0050);
-  c2:	80 e5       	ldi	r24, 0x50	; 80
-  c4:	90 e0       	ldi	r25, 0x00	; 0
-  c6:	0e 94 fd 01 	call	0x3fa	; 0x3fa <eeprom_read_byte>
-  ca:	80 93 e2 01 	sts	0x01E2, r24	; 0x8001e2 <u8_g_EepromFlag>
+			//u8_g_EepromFlag = eeprom_read_byte(0x0050);
+			HUSART_enSendData(u8_g_EepromFlag);
+  c6:	80 91 e6 01 	lds	r24, 0x01E6	; 0x8001e6 <u8_g_EepromFlag>
+  ca:	0e 94 a7 02 	call	0x54e	; 0x54e <HUSART_enSendData>
 			if(u8_g_EepromFlag == 0xFF) u8_g_CardState = CardProgMode_GetPan;
-  ce:	8f 3f       	cpi	r24, 0xFF	; 255
-  d0:	21 f4       	brne	.+8      	; 0xda <APP_Start+0x3c>
-  d2:	81 e0       	ldi	r24, 0x01	; 1
-  d4:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
-  d8:	08 95       	ret
+  ce:	80 91 e6 01 	lds	r24, 0x01E6	; 0x8001e6 <u8_g_EepromFlag>
+  d2:	8f 3f       	cpi	r24, 0xFF	; 255
+  d4:	21 f4       	brne	.+8      	; 0xde <APP_Start+0x3c>
+  d6:	81 e0       	ldi	r24, 0x01	; 1
+  d8:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
+  dc:	08 95       	ret
 			else
 			{
-				HUSART_sendSTRING("Please press 1 for entering user mode\rand 2 for programming mode:\r");
-  da:	80 e7       	ldi	r24, 0x70	; 112
-  dc:	90 e0       	ldi	r25, 0x00	; 0
-  de:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
+				HUSART_sendSTRING("Please press 1 for entering user mode and 2 for programming mode:");
+  de:	80 e7       	ldi	r24, 0x70	; 112
+  e0:	90 e0       	ldi	r25, 0x00	; 0
+  e2:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
 				while(HUSART_enRecieveData(&u8_gs_ModeSelect));
-  e2:	83 ee       	ldi	r24, 0xE3	; 227
-  e4:	91 e0       	ldi	r25, 0x01	; 1
-  e6:	0e 94 a7 02 	call	0x54e	; 0x54e <HUSART_enRecieveData>
-  ea:	81 11       	cpse	r24, r1
-  ec:	fa cf       	rjmp	.-12     	; 0xe2 <APP_Start+0x44>
+  e6:	87 ee       	ldi	r24, 0xE7	; 231
+  e8:	91 e0       	ldi	r25, 0x01	; 1
+  ea:	0e 94 ac 02 	call	0x558	; 0x558 <HUSART_enRecieveData>
+  ee:	81 11       	cpse	r24, r1
+  f0:	fa cf       	rjmp	.-12     	; 0xe6 <APP_Start+0x44>
 				HUSART_enSendData(u8_gs_ModeSelect);
-  ee:	80 91 e3 01 	lds	r24, 0x01E3	; 0x8001e3 <u8_gs_ModeSelect>
-  f2:	0e 94 a2 02 	call	0x544	; 0x544 <HUSART_enSendData>
-				HUSART_enSendData('\r\r');
-  f6:	8d e0       	ldi	r24, 0x0D	; 13
-  f8:	0e 94 a2 02 	call	0x544	; 0x544 <HUSART_enSendData>
+  f2:	80 91 e7 01 	lds	r24, 0x01E7	; 0x8001e7 <u8_gs_ModeSelect>
+  f6:	0e 94 a7 02 	call	0x54e	; 0x54e <HUSART_enSendData>
+				HUSART_enSendData('\n\r');
+  fa:	8d e0       	ldi	r24, 0x0D	; 13
+  fc:	0e 94 a7 02 	call	0x54e	; 0x54e <HUSART_enSendData>
 				if('1' == u8_gs_ModeSelect)	u8_g_CardState = CardUserMode;
-  fc:	80 91 e3 01 	lds	r24, 0x01E3	; 0x8001e3 <u8_gs_ModeSelect>
- 100:	81 33       	cpi	r24, 0x31	; 49
- 102:	21 f4       	brne	.+8      	; 0x10c <APP_Start+0x6e>
- 104:	83 e0       	ldi	r24, 0x03	; 3
- 106:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
- 10a:	08 95       	ret
+ 100:	80 91 e7 01 	lds	r24, 0x01E7	; 0x8001e7 <u8_gs_ModeSelect>
+ 104:	81 33       	cpi	r24, 0x31	; 49
+ 106:	21 f4       	brne	.+8      	; 0x110 <APP_Start+0x6e>
+ 108:	83 e0       	ldi	r24, 0x03	; 3
+ 10a:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
+ 10e:	08 95       	ret
 				else if('2' == u8_gs_ModeSelect) u8_g_CardState = CardProgMode_GetPan;
- 10c:	82 33       	cpi	r24, 0x32	; 50
- 10e:	21 f4       	brne	.+8      	; 0x118 <APP_Start+0x7a>
- 110:	81 e0       	ldi	r24, 0x01	; 1
- 112:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
- 116:	08 95       	ret
+ 110:	82 33       	cpi	r24, 0x32	; 50
+ 112:	21 f4       	brne	.+8      	; 0x11c <APP_Start+0x7a>
+ 114:	81 e0       	ldi	r24, 0x01	; 1
+ 116:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
+ 11a:	08 95       	ret
 				else HUSART_sendSTRING("Invalid Choice, ");
- 118:	83 eb       	ldi	r24, 0xB3	; 179
- 11a:	90 e0       	ldi	r25, 0x00	; 0
- 11c:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
- 120:	08 95       	ret
+ 11c:	82 eb       	ldi	r24, 0xB2	; 178
+ 11e:	90 e0       	ldi	r25, 0x00	; 0
+ 120:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+ 124:	08 95       	ret
 			}
 			break;
 		}
 		case CardProgMode_GetPan:
 		{
 			u8_g_PanValid = APP_terminalPanGet(pan_arr);
- 122:	89 ef       	ldi	r24, 0xF9	; 249
- 124:	91 e0       	ldi	r25, 0x01	; 1
- 126:	0e 94 0a 01 	call	0x214	; 0x214 <APP_terminalPanGet>
- 12a:	80 93 e4 01 	sts	0x01E4, r24	; 0x8001e4 <u8_g_PanValid>
+ 126:	8d ef       	ldi	r24, 0xFD	; 253
+ 128:	91 e0       	ldi	r25, 0x01	; 1
+ 12a:	0e 94 0c 01 	call	0x218	; 0x218 <APP_terminalPanGet>
+ 12e:	80 93 e8 01 	sts	0x01E8, r24	; 0x8001e8 <u8_g_PanValid>
 			if(PANGET_OK == u8_g_PanValid) u8_g_CardState = CardProgMode_GetPin;
- 12e:	81 30       	cpi	r24, 0x01	; 1
- 130:	09 f0       	breq	.+2      	; 0x134 <APP_Start+0x96>
- 132:	45 c0       	rjmp	.+138    	; 0x1be <APP_Start+0x120>
- 134:	82 e0       	ldi	r24, 0x02	; 2
- 136:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
- 13a:	08 95       	ret
+ 132:	81 30       	cpi	r24, 0x01	; 1
+ 134:	09 f0       	breq	.+2      	; 0x138 <APP_Start+0x96>
+ 136:	45 c0       	rjmp	.+138    	; 0x1c2 <APP_Start+0x120>
+ 138:	82 e0       	ldi	r24, 0x02	; 2
+ 13a:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
+ 13e:	08 95       	ret
 			break;
 		}
 		case CardProgMode_GetPin:
 		{
 			if(CARD_MatchPINs() == PIN_Match_OK)
- 13c:	0e 94 92 01 	call	0x324	; 0x324 <CARD_MatchPINs>
- 140:	81 30       	cpi	r24, 0x01	; 1
- 142:	51 f4       	brne	.+20     	; 0x158 <APP_Start+0xba>
+ 140:	0e 94 94 01 	call	0x328	; 0x328 <CARD_MatchPINs>
+ 144:	81 30       	cpi	r24, 0x01	; 1
+ 146:	51 f4       	brne	.+20     	; 0x15c <APP_Start+0xba>
 			{
 				SaveCardData(pan_arr,pin_arr);
- 144:	65 ee       	ldi	r22, 0xE5	; 229
- 146:	71 e0       	ldi	r23, 0x01	; 1
- 148:	89 ef       	ldi	r24, 0xF9	; 249
- 14a:	91 e0       	ldi	r25, 0x01	; 1
- 14c:	0e 94 34 01 	call	0x268	; 0x268 <SaveCardData>
+ 148:	69 ee       	ldi	r22, 0xE9	; 233
+ 14a:	71 e0       	ldi	r23, 0x01	; 1
+ 14c:	8d ef       	ldi	r24, 0xFD	; 253
+ 14e:	91 e0       	ldi	r25, 0x01	; 1
+ 150:	0e 94 36 01 	call	0x26c	; 0x26c <SaveCardData>
 				u8_g_CardState = CardUserMode;
- 150:	83 e0       	ldi	r24, 0x03	; 3
- 152:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
- 156:	08 95       	ret
+ 154:	83 e0       	ldi	r24, 0x03	; 3
+ 156:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
+ 15a:	08 95       	ret
 			}
 			else u8_g_CardState = CardProgMode_GetPin;
- 158:	82 e0       	ldi	r24, 0x02	; 2
- 15a:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
- 15e:	08 95       	ret
+ 15c:	82 e0       	ldi	r24, 0x02	; 2
+ 15e:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
+ 162:	08 95       	ret
 			break;
 		}
 		case CardUserMode:
 		{
-			HUSART_sendSTRING("\r------------- User Mode -------------\r");
- 160:	84 ec       	ldi	r24, 0xC4	; 196
- 162:	90 e0       	ldi	r25, 0x00	; 0
- 164:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
+			HUSART_sendSTRING("\n\r------------- User Mode -------------\n");
+ 164:	83 ec       	ldi	r24, 0xC3	; 195
+ 166:	90 e0       	ldi	r25, 0x00	; 0
+ 168:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
 			//_delay_ms(5000);
 			/* Trigger ATM */
 			HSPI_SlaveRequest(pin_arr, PIN_LENGTH);
- 168:	65 e0       	ldi	r22, 0x05	; 5
- 16a:	85 ee       	ldi	r24, 0xE5	; 229
- 16c:	91 e0       	ldi	r25, 0x01	; 1
- 16e:	0e 94 88 02 	call	0x510	; 0x510 <HSPI_SlaveRequest>
+ 16c:	65 e0       	ldi	r22, 0x05	; 5
+ 16e:	89 ee       	ldi	r24, 0xE9	; 233
+ 170:	91 e0       	ldi	r25, 0x01	; 1
+ 172:	0e 94 8d 02 	call	0x51a	; 0x51a <HSPI_SlaveRequest>
 			
 			/* Get PIN from EEPROM to prepare data in SPI buffer */
 			ReadCardData(pan_arr,pin_arr);
- 172:	65 ee       	ldi	r22, 0xE5	; 229
- 174:	71 e0       	ldi	r23, 0x01	; 1
- 176:	89 ef       	ldi	r24, 0xF9	; 249
- 178:	91 e0       	ldi	r25, 0x01	; 1
- 17a:	0e 94 6c 01 	call	0x2d8	; 0x2d8 <ReadCardData>
+ 176:	69 ee       	ldi	r22, 0xE9	; 233
+ 178:	71 e0       	ldi	r23, 0x01	; 1
+ 17a:	8d ef       	ldi	r24, 0xFD	; 253
+ 17c:	91 e0       	ldi	r25, 0x01	; 1
+ 17e:	0e 94 6e 01 	call	0x2dc	; 0x2dc <ReadCardData>
 			u8_g_CardState = CardCommMode;
- 17e:	84 e0       	ldi	r24, 0x04	; 4
- 180:	80 93 ce 01 	sts	0x01CE, r24	; 0x8001ce <__data_end>
+ 182:	84 e0       	ldi	r24, 0x04	; 4
+ 184:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
 			break;
- 184:	08 95       	ret
+ 188:	08 95       	ret
 		}
 		case CardCommMode:
 		{
 			if(CARD_PIN_REQUEST == u8_g_SlaveReceive)
- 186:	80 91 0d 02 	lds	r24, 0x020D	; 0x80020d <u8_g_SlaveReceive>
- 18a:	80 35       	cpi	r24, 0x50	; 80
- 18c:	41 f4       	brne	.+16     	; 0x19e <APP_Start+0x100>
+ 18a:	80 91 11 02 	lds	r24, 0x0211	; 0x800211 <u8_g_SlaveReceive>
+ 18e:	80 35       	cpi	r24, 0x50	; 80
+ 190:	41 f4       	brne	.+16     	; 0x1a2 <APP_Start+0x100>
 			{
 				u8_g_SlaveReceive = 0;
- 18e:	10 92 0d 02 	sts	0x020D, r1	; 0x80020d <u8_g_SlaveReceive>
+ 192:	10 92 11 02 	sts	0x0211, r1	; 0x800211 <u8_g_SlaveReceive>
 				HSPI_SlaveSetData(pin_arr, PIN_LENGTH);
- 192:	65 e0       	ldi	r22, 0x05	; 5
- 194:	85 ee       	ldi	r24, 0xE5	; 229
- 196:	91 e0       	ldi	r25, 0x01	; 1
- 198:	0e 94 94 02 	call	0x528	; 0x528 <HSPI_SlaveSetData>
- 19c:	08 95       	ret
+ 196:	65 e0       	ldi	r22, 0x05	; 5
+ 198:	89 ee       	ldi	r24, 0xE9	; 233
+ 19a:	91 e0       	ldi	r25, 0x01	; 1
+ 19c:	0e 94 99 02 	call	0x532	; 0x532 <HSPI_SlaveSetData>
+ 1a0:	08 95       	ret
 			}
 			else if(CARD_PAN_REQUEST == u8_g_SlaveReceive)
- 19e:	87 34       	cpi	r24, 0x47	; 71
- 1a0:	41 f4       	brne	.+16     	; 0x1b2 <APP_Start+0x114>
+ 1a2:	87 34       	cpi	r24, 0x47	; 71
+ 1a4:	41 f4       	brne	.+16     	; 0x1b6 <APP_Start+0x114>
 			{
 				u8_g_SlaveReceive = 0;
- 1a2:	10 92 0d 02 	sts	0x020D, r1	; 0x80020d <u8_g_SlaveReceive>
+ 1a6:	10 92 11 02 	sts	0x0211, r1	; 0x800211 <u8_g_SlaveReceive>
 				HSPI_SlaveSetData(pan_arr, PAN_LENGTH);
- 1a6:	64 e1       	ldi	r22, 0x14	; 20
- 1a8:	89 ef       	ldi	r24, 0xF9	; 249
- 1aa:	91 e0       	ldi	r25, 0x01	; 1
- 1ac:	0e 94 94 02 	call	0x528	; 0x528 <HSPI_SlaveSetData>
- 1b0:	08 95       	ret
+ 1aa:	64 e1       	ldi	r22, 0x14	; 20
+ 1ac:	8d ef       	ldi	r24, 0xFD	; 253
+ 1ae:	91 e0       	ldi	r25, 0x01	; 1
+ 1b0:	0e 94 99 02 	call	0x532	; 0x532 <HSPI_SlaveSetData>
+ 1b4:	08 95       	ret
 			}
 			else if(ATM_REQUEST_EJECTED == u8_g_SlaveReceive)
- 1b2:	85 34       	cpi	r24, 0x45	; 69
- 1b4:	21 f4       	brne	.+8      	; 0x1be <APP_Start+0x120>
+ 1b6:	85 34       	cpi	r24, 0x45	; 69
+ 1b8:	21 f4       	brne	.+8      	; 0x1c2 <APP_Start+0x120>
 			{
 				u8_g_SlaveReceive = 0;
- 1b6:	10 92 0d 02 	sts	0x020D, r1	; 0x80020d <u8_g_SlaveReceive>
+ 1ba:	10 92 11 02 	sts	0x0211, r1	; 0x800211 <u8_g_SlaveReceive>
 				u8_g_CardState = CardGetMode;
- 1ba:	10 92 ce 01 	sts	0x01CE, r1	; 0x8001ce <__data_end>
- 1be:	08 95       	ret
+ 1be:	10 92 d2 01 	sts	0x01D2, r1	; 0x8001d2 <__data_end>
+ 1c2:	08 95       	ret
 
-000001c0 <APP_terminalPinGet>:
+000001c4 <APP_terminalPinGet>:
  * FUNCTION			: APP_terminalPinGet
  * DESCRIPTION		: Get pin from User within terminal and doing some validation
  * RETURN			: en_terminalPinGetStatus_t {PINGET_NOK or PINGET_OK}
  */
 en_terminalPinGetStatus_t APP_terminalPinGet(Uchar8_t* arr)
 {
- 1c0:	0f 93       	push	r16
- 1c2:	1f 93       	push	r17
- 1c4:	cf 93       	push	r28
- 1c6:	8c 01       	movw	r16, r24
+ 1c4:	0f 93       	push	r16
+ 1c6:	1f 93       	push	r17
+ 1c8:	cf 93       	push	r28
+ 1ca:	8c 01       	movw	r16, r24
 	en_terminalPinGetStatus_t errorStatus = PINGET_OK;
 
 	Uchar8_t counter = 0, flag = 0;
 	HUSART_receiveSTRING(arr, 5);
- 1c8:	65 e0       	ldi	r22, 0x05	; 5
- 1ca:	0e 94 b4 02 	call	0x568	; 0x568 <HUSART_receiveSTRING>
+ 1cc:	65 e0       	ldi	r22, 0x05	; 5
+ 1ce:	0e 94 b9 02 	call	0x572	; 0x572 <HUSART_receiveSTRING>
  */
 en_terminalPinGetStatus_t APP_terminalPinGet(Uchar8_t* arr)
 {
 	en_terminalPinGetStatus_t errorStatus = PINGET_OK;
 
 	Uchar8_t counter = 0, flag = 0;
- 1ce:	c0 e0       	ldi	r28, 0x00	; 0
+ 1d2:	c0 e0       	ldi	r28, 0x00	; 0
 	HUSART_receiveSTRING(arr, 5);
 	while(arr[counter] != null)
- 1d0:	0c c0       	rjmp	.+24     	; 0x1ea <APP_terminalPinGet+0x2a>
+ 1d4:	0c c0       	rjmp	.+24     	; 0x1ee <APP_terminalPinGet+0x2a>
 	{
 		if(arr[counter] >= '0' && arr[counter] <= '9')
- 1d2:	80 53       	subi	r24, 0x30	; 48
- 1d4:	8a 30       	cpi	r24, 0x0A	; 10
- 1d6:	10 f4       	brcc	.+4      	; 0x1dc <APP_terminalPinGet+0x1c>
+ 1d6:	80 53       	subi	r24, 0x30	; 48
+ 1d8:	8a 30       	cpi	r24, 0x0A	; 10
+ 1da:	10 f4       	brcc	.+4      	; 0x1e0 <APP_terminalPinGet+0x1c>
 		{
 			counter++;
- 1d8:	cf 5f       	subi	r28, 0xFF	; 255
- 1da:	07 c0       	rjmp	.+14     	; 0x1ea <APP_terminalPinGet+0x2a>
+ 1dc:	cf 5f       	subi	r28, 0xFF	; 255
+ 1de:	07 c0       	rjmp	.+14     	; 0x1ee <APP_terminalPinGet+0x2a>
 		}
 		else
 		{
 			HUSART_sendSTRING( (Uchar8_t*) "\rNot numeric ");
- 1dc:	8c ee       	ldi	r24, 0xEC	; 236
- 1de:	90 e0       	ldi	r25, 0x00	; 0
- 1e0:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
+ 1e0:	8c ee       	ldi	r24, 0xEC	; 236
+ 1e2:	90 e0       	ldi	r25, 0x00	; 0
+ 1e4:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
 			flag = 1;
- 1e4:	91 e0       	ldi	r25, 0x01	; 1
+ 1e8:	91 e0       	ldi	r25, 0x01	; 1
 			errorStatus = PINGET_NOK;
- 1e6:	80 e0       	ldi	r24, 0x00	; 0
+ 1ea:	80 e0       	ldi	r24, 0x00	; 0
 			break;
- 1e8:	08 c0       	rjmp	.+16     	; 0x1fa <APP_terminalPinGet+0x3a>
+ 1ec:	08 c0       	rjmp	.+16     	; 0x1fe <APP_terminalPinGet+0x3a>
 {
 	en_terminalPinGetStatus_t errorStatus = PINGET_OK;
 
 	Uchar8_t counter = 0, flag = 0;
 	HUSART_receiveSTRING(arr, 5);
 	while(arr[counter] != null)
- 1ea:	f8 01       	movw	r30, r16
- 1ec:	ec 0f       	add	r30, r28
- 1ee:	f1 1d       	adc	r31, r1
- 1f0:	80 81       	ld	r24, Z
- 1f2:	81 11       	cpse	r24, r1
- 1f4:	ee cf       	rjmp	.-36     	; 0x1d2 <APP_terminalPinGet+0x12>
+ 1ee:	f8 01       	movw	r30, r16
+ 1f0:	ec 0f       	add	r30, r28
+ 1f2:	f1 1d       	adc	r31, r1
+ 1f4:	80 81       	ld	r24, Z
+ 1f6:	81 11       	cpse	r24, r1
+ 1f8:	ee cf       	rjmp	.-36     	; 0x1d6 <APP_terminalPinGet+0x12>
  */
 en_terminalPinGetStatus_t APP_terminalPinGet(Uchar8_t* arr)
 {
 	en_terminalPinGetStatus_t errorStatus = PINGET_OK;
 
 	Uchar8_t counter = 0, flag = 0;
- 1f6:	90 e0       	ldi	r25, 0x00	; 0
+ 1fa:	90 e0       	ldi	r25, 0x00	; 0
  * DESCRIPTION		: Get pin from User within terminal and doing some validation
  * RETURN			: en_terminalPinGetStatus_t {PINGET_NOK or PINGET_OK}
  */
 en_terminalPinGetStatus_t APP_terminalPinGet(Uchar8_t* arr)
 {
 	en_terminalPinGetStatus_t errorStatus = PINGET_OK;
- 1f8:	81 e0       	ldi	r24, 0x01	; 1
+ 1fc:	81 e0       	ldi	r24, 0x01	; 1
 			flag = 1;
 			errorStatus = PINGET_NOK;
 			break;
 		}
 	}
 	if(counter < 4 && flag == 0)
- 1fa:	c4 30       	cpi	r28, 0x04	; 4
- 1fc:	38 f4       	brcc	.+14     	; 0x20c <APP_terminalPinGet+0x4c>
- 1fe:	91 11       	cpse	r25, r1
- 200:	05 c0       	rjmp	.+10     	; 0x20c <APP_terminalPinGet+0x4c>
+ 1fe:	c4 30       	cpi	r28, 0x04	; 4
+ 200:	38 f4       	brcc	.+14     	; 0x210 <APP_terminalPinGet+0x4c>
+ 202:	91 11       	cpse	r25, r1
+ 204:	05 c0       	rjmp	.+10     	; 0x210 <APP_terminalPinGet+0x4c>
 	{
 		HUSART_sendSTRING( (Uchar8_t*) "\rbelow 4 dig ");
- 202:	8a ef       	ldi	r24, 0xFA	; 250
- 204:	90 e0       	ldi	r25, 0x00	; 0
- 206:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
+ 206:	8a ef       	ldi	r24, 0xFA	; 250
+ 208:	90 e0       	ldi	r25, 0x00	; 0
+ 20a:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
 		errorStatus = PINGET_NOK;
- 20a:	80 e0       	ldi	r24, 0x00	; 0
+ 20e:	80 e0       	ldi	r24, 0x00	; 0
 	}
 	return errorStatus;
 }
- 20c:	cf 91       	pop	r28
- 20e:	1f 91       	pop	r17
- 210:	0f 91       	pop	r16
- 212:	08 95       	ret
+ 210:	cf 91       	pop	r28
+ 212:	1f 91       	pop	r17
+ 214:	0f 91       	pop	r16
+ 216:	08 95       	ret
 
-00000214 <APP_terminalPanGet>:
+00000218 <APP_terminalPanGet>:
  * FUNCTION			: APP_terminalPanGet
  * DESCRIPTION		: Get pan from User within terminal and doing some validation
  * RETURN			: en_terminalPanGetStatus_t {PANGET_NOK or PANGET_OK}
  */
 en_terminalPanGetStatus_t APP_terminalPanGet(Uchar8_t* arr)
 {
- 214:	cf 93       	push	r28
- 216:	df 93       	push	r29
- 218:	ec 01       	movw	r28, r24
+ 218:	cf 93       	push	r28
+ 21a:	df 93       	push	r29
+ 21c:	ec 01       	movw	r28, r24
 	Uchar8_t loc_counter=0;
-	HUSART_sendSTRING((Uchar8_t*)"\r\nEnter Card Pan : \r");
- 21a:	88 e0       	ldi	r24, 0x08	; 8
- 21c:	91 e0       	ldi	r25, 0x01	; 1
- 21e:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
+	HUSART_sendSTRING((Uchar8_t*)"\n\rEnter Card Pan : ");
+ 21e:	88 e0       	ldi	r24, 0x08	; 8
+ 220:	91 e0       	ldi	r25, 0x01	; 1
+ 222:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
 	HUSART_receiveSTRING(arr,20);
- 222:	64 e1       	ldi	r22, 0x14	; 20
- 224:	ce 01       	movw	r24, r28
- 226:	0e 94 b4 02 	call	0x568	; 0x568 <HUSART_receiveSTRING>
+ 226:	64 e1       	ldi	r22, 0x14	; 20
+ 228:	ce 01       	movw	r24, r28
+ 22a:	0e 94 b9 02 	call	0x572	; 0x572 <HUSART_receiveSTRING>
  * DESCRIPTION		: Get pan from User within terminal and doing some validation
  * RETURN			: en_terminalPanGetStatus_t {PANGET_NOK or PANGET_OK}
  */
 en_terminalPanGetStatus_t APP_terminalPanGet(Uchar8_t* arr)
 {
 	Uchar8_t loc_counter=0;
- 22a:	90 e0       	ldi	r25, 0x00	; 0
-	HUSART_sendSTRING((Uchar8_t*)"\r\nEnter Card Pan : \r");
+ 22e:	90 e0       	ldi	r25, 0x00	; 0
+	HUSART_sendSTRING((Uchar8_t*)"\n\rEnter Card Pan : ");
 	HUSART_receiveSTRING(arr,20);
 	while(arr[loc_counter] != null)
- 22c:	0b c0       	rjmp	.+22     	; 0x244 <APP_terminalPanGet+0x30>
+ 230:	0b c0       	rjmp	.+22     	; 0x248 <APP_terminalPanGet+0x30>
 	{
 		if(arr[loc_counter] >= '0' && arr[loc_counter] <= '9')
- 22e:	80 53       	subi	r24, 0x30	; 48
- 230:	8a 30       	cpi	r24, 0x0A	; 10
- 232:	10 f4       	brcc	.+4      	; 0x238 <APP_terminalPanGet+0x24>
+ 232:	80 53       	subi	r24, 0x30	; 48
+ 234:	8a 30       	cpi	r24, 0x0A	; 10
+ 236:	10 f4       	brcc	.+4      	; 0x23c <APP_terminalPanGet+0x24>
 		{
 			loc_counter++;
- 234:	9f 5f       	subi	r25, 0xFF	; 255
- 236:	06 c0       	rjmp	.+12     	; 0x244 <APP_terminalPanGet+0x30>
+ 238:	9f 5f       	subi	r25, 0xFF	; 255
+ 23a:	06 c0       	rjmp	.+12     	; 0x248 <APP_terminalPanGet+0x30>
 		}
 		else
 		{
-			HUSART_sendSTRING((Uchar8_t*) "\r\nInvalid Pan Number - must contain Numbers only");
- 238:	8d e1       	ldi	r24, 0x1D	; 29
- 23a:	91 e0       	ldi	r25, 0x01	; 1
- 23c:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
+			HUSART_sendSTRING((Uchar8_t*) "\n\rInvalid Pan Number - must contain Numbers only");
+ 23c:	8c e1       	ldi	r24, 0x1C	; 28
+ 23e:	91 e0       	ldi	r25, 0x01	; 1
+ 240:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
 			return PANGET_NOK;
- 240:	80 e0       	ldi	r24, 0x00	; 0
- 242:	0f c0       	rjmp	.+30     	; 0x262 <APP_terminalPanGet+0x4e>
+ 244:	80 e0       	ldi	r24, 0x00	; 0
+ 246:	0f c0       	rjmp	.+30     	; 0x266 <APP_terminalPanGet+0x4e>
 en_terminalPanGetStatus_t APP_terminalPanGet(Uchar8_t* arr)
 {
 	Uchar8_t loc_counter=0;
-	HUSART_sendSTRING((Uchar8_t*)"\r\nEnter Card Pan : \r");
+	HUSART_sendSTRING((Uchar8_t*)"\n\rEnter Card Pan : ");
 	HUSART_receiveSTRING(arr,20);
 	while(arr[loc_counter] != null)
- 244:	fe 01       	movw	r30, r28
- 246:	e9 0f       	add	r30, r25
- 248:	f1 1d       	adc	r31, r1
- 24a:	80 81       	ld	r24, Z
- 24c:	81 11       	cpse	r24, r1
- 24e:	ef cf       	rjmp	.-34     	; 0x22e <APP_terminalPanGet+0x1a>
+ 248:	fe 01       	movw	r30, r28
+ 24a:	e9 0f       	add	r30, r25
+ 24c:	f1 1d       	adc	r31, r1
+ 24e:	80 81       	ld	r24, Z
+ 250:	81 11       	cpse	r24, r1
+ 252:	ef cf       	rjmp	.-34     	; 0x232 <APP_terminalPanGet+0x1a>
 		{
-			HUSART_sendSTRING((Uchar8_t*) "\r\nInvalid Pan Number - must contain Numbers only");
+			HUSART_sendSTRING((Uchar8_t*) "\n\rInvalid Pan Number - must contain Numbers only");
 			return PANGET_NOK;
 		}
 	}
 	if(loc_counter<16)
- 250:	90 31       	cpi	r25, 0x10	; 16
- 252:	30 f4       	brcc	.+12     	; 0x260 <APP_terminalPanGet+0x4c>
+ 254:	90 31       	cpi	r25, 0x10	; 16
+ 256:	30 f4       	brcc	.+12     	; 0x264 <APP_terminalPanGet+0x4c>
 	{
-	 HUSART_sendSTRING((Uchar8_t*) "\r\nInvalid Pan Number - must contain at least 16 numbers");
- 254:	8e e4       	ldi	r24, 0x4E	; 78
- 256:	91 e0       	ldi	r25, 0x01	; 1
- 258:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
+	 HUSART_sendSTRING((Uchar8_t*) "\n\rInvalid Pan Number - must contain at least 16 numbers");
+ 258:	8d e4       	ldi	r24, 0x4D	; 77
+ 25a:	91 e0       	ldi	r25, 0x01	; 1
+ 25c:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
 	 return PANGET_NOK;
- 25c:	80 e0       	ldi	r24, 0x00	; 0
- 25e:	01 c0       	rjmp	.+2      	; 0x262 <APP_terminalPanGet+0x4e>
+ 260:	80 e0       	ldi	r24, 0x00	; 0
+ 262:	01 c0       	rjmp	.+2      	; 0x266 <APP_terminalPanGet+0x4e>
 	}
 	return PANGET_OK;
- 260:	81 e0       	ldi	r24, 0x01	; 1
+ 264:	81 e0       	ldi	r24, 0x01	; 1
 }
- 262:	df 91       	pop	r29
- 264:	cf 91       	pop	r28
- 266:	08 95       	ret
+ 266:	df 91       	pop	r29
+ 268:	cf 91       	pop	r28
+ 26a:	08 95       	ret
 
-00000268 <SaveCardData>:
+0000026c <SaveCardData>:
 
 
 EN_TerminalDataState SaveCardData(Uchar8_t *CardPan,Uchar8_t *CardPin)
 {
- 268:	cf 93       	push	r28
- 26a:	df 93       	push	r29
+ 26c:	cf 93       	push	r28
+ 26e:	df 93       	push	r29
 	EN_TerminalDataState ret = DATA_NSAVED;
 	
 	if(CardPan == null || CardPin == null)
- 26c:	00 97       	sbiw	r24, 0x00	; 0
- 26e:	71 f1       	breq	.+92     	; 0x2cc <SaveCardData+0x64>
- 270:	61 15       	cp	r22, r1
- 272:	71 05       	cpc	r23, r1
- 274:	69 f1       	breq	.+90     	; 0x2d0 <SaveCardData+0x68>
- 276:	eb 01       	movw	r28, r22
- 278:	bc 01       	movw	r22, r24
+ 270:	00 97       	sbiw	r24, 0x00	; 0
+ 272:	71 f1       	breq	.+92     	; 0x2d0 <SaveCardData+0x64>
+ 274:	61 15       	cp	r22, r1
+ 276:	71 05       	cpc	r23, r1
+ 278:	69 f1       	breq	.+90     	; 0x2d4 <SaveCardData+0x68>
+ 27a:	eb 01       	movw	r28, r22
+ 27c:	bc 01       	movw	r22, r24
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 27a:	8f e4       	ldi	r24, 0x4F	; 79
- 27c:	93 ec       	ldi	r25, 0xC3	; 195
- 27e:	01 97       	sbiw	r24, 0x01	; 1
- 280:	f1 f7       	brne	.-4      	; 0x27e <SaveCardData+0x16>
- 282:	00 c0       	rjmp	.+0      	; 0x284 <SaveCardData+0x1c>
- 284:	00 00       	nop
+ 27e:	8f e4       	ldi	r24, 0x4F	; 79
+ 280:	93 ec       	ldi	r25, 0xC3	; 195
+ 282:	01 97       	sbiw	r24, 0x01	; 1
+ 284:	f1 f7       	brne	.-4      	; 0x282 <SaveCardData+0x16>
+ 286:	00 c0       	rjmp	.+0      	; 0x288 <SaveCardData+0x1c>
+ 288:	00 00       	nop
 		ret = DATA_NSAVED;
 	}
 	else
 	{
 		_delay_ms(200);
 		eeprom_write_string(0x0000,CardPan);
- 286:	80 e0       	ldi	r24, 0x00	; 0
- 288:	90 e0       	ldi	r25, 0x00	; 0
- 28a:	0e 94 1a 02 	call	0x434	; 0x434 <eeprom_write_string>
- 28e:	8f e4       	ldi	r24, 0x4F	; 79
- 290:	93 ec       	ldi	r25, 0xC3	; 195
- 292:	01 97       	sbiw	r24, 0x01	; 1
- 294:	f1 f7       	brne	.-4      	; 0x292 <SaveCardData+0x2a>
- 296:	00 c0       	rjmp	.+0      	; 0x298 <SaveCardData+0x30>
- 298:	00 00       	nop
+ 28a:	80 e0       	ldi	r24, 0x00	; 0
+ 28c:	90 e0       	ldi	r25, 0x00	; 0
+ 28e:	0e 94 1f 02 	call	0x43e	; 0x43e <eeprom_write_string>
+ 292:	8f e4       	ldi	r24, 0x4F	; 79
+ 294:	93 ec       	ldi	r25, 0xC3	; 195
+ 296:	01 97       	sbiw	r24, 0x01	; 1
+ 298:	f1 f7       	brne	.-4      	; 0x296 <SaveCardData+0x2a>
+ 29a:	00 c0       	rjmp	.+0      	; 0x29c <SaveCardData+0x30>
+ 29c:	00 00       	nop
 		_delay_ms(200);
 		eeprom_write_string(0x0020,CardPin);
- 29a:	be 01       	movw	r22, r28
- 29c:	80 e2       	ldi	r24, 0x20	; 32
- 29e:	90 e0       	ldi	r25, 0x00	; 0
- 2a0:	0e 94 1a 02 	call	0x434	; 0x434 <eeprom_write_string>
- 2a4:	8f e4       	ldi	r24, 0x4F	; 79
- 2a6:	93 ec       	ldi	r25, 0xC3	; 195
- 2a8:	01 97       	sbiw	r24, 0x01	; 1
- 2aa:	f1 f7       	brne	.-4      	; 0x2a8 <SaveCardData+0x40>
- 2ac:	00 c0       	rjmp	.+0      	; 0x2ae <SaveCardData+0x46>
- 2ae:	00 00       	nop
+ 29e:	be 01       	movw	r22, r28
+ 2a0:	80 e2       	ldi	r24, 0x20	; 32
+ 2a2:	90 e0       	ldi	r25, 0x00	; 0
+ 2a4:	0e 94 1f 02 	call	0x43e	; 0x43e <eeprom_write_string>
+ 2a8:	8f e4       	ldi	r24, 0x4F	; 79
+ 2aa:	93 ec       	ldi	r25, 0xC3	; 195
+ 2ac:	01 97       	sbiw	r24, 0x01	; 1
+ 2ae:	f1 f7       	brne	.-4      	; 0x2ac <SaveCardData+0x40>
+ 2b0:	00 c0       	rjmp	.+0      	; 0x2b2 <SaveCardData+0x46>
+ 2b2:	00 00       	nop
 		_delay_ms(200);
 		eeprom_write_string(0x0050, (Uchar8_t*)"1");
- 2b0:	66 e8       	ldi	r22, 0x86	; 134
- 2b2:	71 e0       	ldi	r23, 0x01	; 1
- 2b4:	80 e5       	ldi	r24, 0x50	; 80
- 2b6:	90 e0       	ldi	r25, 0x00	; 0
- 2b8:	0e 94 1a 02 	call	0x434	; 0x434 <eeprom_write_string>
- 2bc:	8f e4       	ldi	r24, 0x4F	; 79
- 2be:	93 ec       	ldi	r25, 0xC3	; 195
- 2c0:	01 97       	sbiw	r24, 0x01	; 1
- 2c2:	f1 f7       	brne	.-4      	; 0x2c0 <SaveCardData+0x58>
- 2c4:	00 c0       	rjmp	.+0      	; 0x2c6 <SaveCardData+0x5e>
- 2c6:	00 00       	nop
+ 2b4:	65 e8       	ldi	r22, 0x85	; 133
+ 2b6:	71 e0       	ldi	r23, 0x01	; 1
+ 2b8:	80 e5       	ldi	r24, 0x50	; 80
+ 2ba:	90 e0       	ldi	r25, 0x00	; 0
+ 2bc:	0e 94 1f 02 	call	0x43e	; 0x43e <eeprom_write_string>
+ 2c0:	8f e4       	ldi	r24, 0x4F	; 79
+ 2c2:	93 ec       	ldi	r25, 0xC3	; 195
+ 2c4:	01 97       	sbiw	r24, 0x01	; 1
+ 2c6:	f1 f7       	brne	.-4      	; 0x2c4 <SaveCardData+0x58>
+ 2c8:	00 c0       	rjmp	.+0      	; 0x2ca <SaveCardData+0x5e>
+ 2ca:	00 00       	nop
 		_delay_ms(200);
 		ret = DATA_SAVED;
- 2c8:	80 e0       	ldi	r24, 0x00	; 0
- 2ca:	03 c0       	rjmp	.+6      	; 0x2d2 <SaveCardData+0x6a>
+ 2cc:	80 e0       	ldi	r24, 0x00	; 0
+ 2ce:	03 c0       	rjmp	.+6      	; 0x2d6 <SaveCardData+0x6a>
 {
 	EN_TerminalDataState ret = DATA_NSAVED;
 	
 	if(CardPan == null || CardPin == null)
 	{
 		ret = DATA_NSAVED;
- 2cc:	81 e0       	ldi	r24, 0x01	; 1
- 2ce:	01 c0       	rjmp	.+2      	; 0x2d2 <SaveCardData+0x6a>
  2d0:	81 e0       	ldi	r24, 0x01	; 1
+ 2d2:	01 c0       	rjmp	.+2      	; 0x2d6 <SaveCardData+0x6a>
+ 2d4:	81 e0       	ldi	r24, 0x01	; 1
 		_delay_ms(200);
 		ret = DATA_SAVED;
 	}
 	
 	return ret;
 }
- 2d2:	df 91       	pop	r29
- 2d4:	cf 91       	pop	r28
- 2d6:	08 95       	ret
+ 2d6:	df 91       	pop	r29
+ 2d8:	cf 91       	pop	r28
+ 2da:	08 95       	ret
 
-000002d8 <ReadCardData>:
+000002dc <ReadCardData>:
 
 EN_TerminalDataState ReadCardData(Uchar8_t *CardPan,Uchar8_t *CardPin)
 {
- 2d8:	cf 93       	push	r28
- 2da:	df 93       	push	r29
+ 2dc:	cf 93       	push	r28
+ 2de:	df 93       	push	r29
 		EN_TerminalDataState ret = DATA_NREAD;
 		
 		if(CardPan == null || CardPin == null)
- 2dc:	00 97       	sbiw	r24, 0x00	; 0
- 2de:	e1 f0       	breq	.+56     	; 0x318 <ReadCardData+0x40>
- 2e0:	61 15       	cp	r22, r1
- 2e2:	71 05       	cpc	r23, r1
- 2e4:	d9 f0       	breq	.+54     	; 0x31c <ReadCardData+0x44>
- 2e6:	eb 01       	movw	r28, r22
- 2e8:	bc 01       	movw	r22, r24
+ 2e0:	00 97       	sbiw	r24, 0x00	; 0
+ 2e2:	e1 f0       	breq	.+56     	; 0x31c <ReadCardData+0x40>
+ 2e4:	61 15       	cp	r22, r1
+ 2e6:	71 05       	cpc	r23, r1
+ 2e8:	d9 f0       	breq	.+54     	; 0x320 <ReadCardData+0x44>
+ 2ea:	eb 01       	movw	r28, r22
+ 2ec:	bc 01       	movw	r22, r24
 		{
 			ret = DATA_NREAD;
 		}
 		else
 		{
 			eeprom_read_string(0x0000,CardPan);
- 2ea:	80 e0       	ldi	r24, 0x00	; 0
- 2ec:	90 e0       	ldi	r25, 0x00	; 0
- 2ee:	0e 94 42 02 	call	0x484	; 0x484 <eeprom_read_string>
- 2f2:	8f e4       	ldi	r24, 0x4F	; 79
- 2f4:	93 ec       	ldi	r25, 0xC3	; 195
- 2f6:	01 97       	sbiw	r24, 0x01	; 1
- 2f8:	f1 f7       	brne	.-4      	; 0x2f6 <ReadCardData+0x1e>
- 2fa:	00 c0       	rjmp	.+0      	; 0x2fc <ReadCardData+0x24>
- 2fc:	00 00       	nop
+ 2ee:	80 e0       	ldi	r24, 0x00	; 0
+ 2f0:	90 e0       	ldi	r25, 0x00	; 0
+ 2f2:	0e 94 47 02 	call	0x48e	; 0x48e <eeprom_read_string>
+ 2f6:	8f e4       	ldi	r24, 0x4F	; 79
+ 2f8:	93 ec       	ldi	r25, 0xC3	; 195
+ 2fa:	01 97       	sbiw	r24, 0x01	; 1
+ 2fc:	f1 f7       	brne	.-4      	; 0x2fa <ReadCardData+0x1e>
+ 2fe:	00 c0       	rjmp	.+0      	; 0x300 <ReadCardData+0x24>
+ 300:	00 00       	nop
 			_delay_ms(200);
 			eeprom_read_string(0x0020,CardPin);
- 2fe:	be 01       	movw	r22, r28
- 300:	80 e2       	ldi	r24, 0x20	; 32
- 302:	90 e0       	ldi	r25, 0x00	; 0
- 304:	0e 94 42 02 	call	0x484	; 0x484 <eeprom_read_string>
- 308:	8f e4       	ldi	r24, 0x4F	; 79
- 30a:	93 ec       	ldi	r25, 0xC3	; 195
- 30c:	01 97       	sbiw	r24, 0x01	; 1
- 30e:	f1 f7       	brne	.-4      	; 0x30c <ReadCardData+0x34>
- 310:	00 c0       	rjmp	.+0      	; 0x312 <ReadCardData+0x3a>
- 312:	00 00       	nop
+ 302:	be 01       	movw	r22, r28
+ 304:	80 e2       	ldi	r24, 0x20	; 32
+ 306:	90 e0       	ldi	r25, 0x00	; 0
+ 308:	0e 94 47 02 	call	0x48e	; 0x48e <eeprom_read_string>
+ 30c:	8f e4       	ldi	r24, 0x4F	; 79
+ 30e:	93 ec       	ldi	r25, 0xC3	; 195
+ 310:	01 97       	sbiw	r24, 0x01	; 1
+ 312:	f1 f7       	brne	.-4      	; 0x310 <ReadCardData+0x34>
+ 314:	00 c0       	rjmp	.+0      	; 0x316 <ReadCardData+0x3a>
+ 316:	00 00       	nop
 			_delay_ms(200);
 			ret = DATA_READ;
- 314:	82 e0       	ldi	r24, 0x02	; 2
- 316:	03 c0       	rjmp	.+6      	; 0x31e <ReadCardData+0x46>
+ 318:	82 e0       	ldi	r24, 0x02	; 2
+ 31a:	03 c0       	rjmp	.+6      	; 0x322 <ReadCardData+0x46>
 {
 		EN_TerminalDataState ret = DATA_NREAD;
 		
 		if(CardPan == null || CardPin == null)
 		{
 			ret = DATA_NREAD;
- 318:	83 e0       	ldi	r24, 0x03	; 3
- 31a:	01 c0       	rjmp	.+2      	; 0x31e <ReadCardData+0x46>
  31c:	83 e0       	ldi	r24, 0x03	; 3
+ 31e:	01 c0       	rjmp	.+2      	; 0x322 <ReadCardData+0x46>
+ 320:	83 e0       	ldi	r24, 0x03	; 3
 			eeprom_read_string(0x0020,CardPin);
 			_delay_ms(200);
 			ret = DATA_READ;
 		}
 		return ret;
 }
- 31e:	df 91       	pop	r29
- 320:	cf 91       	pop	r28
- 322:	08 95       	ret
+ 322:	df 91       	pop	r29
+ 324:	cf 91       	pop	r28
+ 326:	08 95       	ret
 
-00000324 <CARD_MatchPINs>:
+00000328 <CARD_MatchPINs>:
 
 en_CardPinMatchError_t CARD_MatchPINs()
 {
- 324:	1f 93       	push	r17
- 326:	cf 93       	push	r28
- 328:	df 93       	push	r29
- 32a:	cd b7       	in	r28, 0x3d	; 61
- 32c:	de b7       	in	r29, 0x3e	; 62
- 32e:	2a 97       	sbiw	r28, 0x0a	; 10
- 330:	0f b6       	in	r0, 0x3f	; 63
- 332:	f8 94       	cli
- 334:	de bf       	out	0x3e, r29	; 62
- 336:	0f be       	out	0x3f, r0	; 63
- 338:	cd bf       	out	0x3d, r28	; 61
+ 328:	1f 93       	push	r17
+ 32a:	cf 93       	push	r28
+ 32c:	df 93       	push	r29
+ 32e:	cd b7       	in	r28, 0x3d	; 61
+ 330:	de b7       	in	r29, 0x3e	; 62
+ 332:	2a 97       	sbiw	r28, 0x0a	; 10
+ 334:	0f b6       	in	r0, 0x3f	; 63
+ 336:	f8 94       	cli
+ 338:	de bf       	out	0x3e, r29	; 62
+ 33a:	0f be       	out	0x3f, r0	; 63
+ 33c:	cd bf       	out	0x3d, r28	; 61
 	Uchar8_t PIN_Confirm[10], u8_l_PINiterator;
 	Uchar8_t u8_l_ValidatePIN, u8_l_ValidateConfirmPIN;
 	
 	/* Get PIN from user */
-	HUSART_sendSTRING( (Uchar8_t*) "\rEnter your PIN : ");
- 33a:	88 e8       	ldi	r24, 0x88	; 136
- 33c:	91 e0       	ldi	r25, 0x01	; 1
- 33e:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
+	HUSART_sendSTRING( (Uchar8_t*) "\n\rEnter your PIN : ");
+ 33e:	87 e8       	ldi	r24, 0x87	; 135
+ 340:	91 e0       	ldi	r25, 0x01	; 1
+ 342:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
 	u8_l_ValidatePIN = APP_terminalPinGet(pin_arr);
- 342:	85 ee       	ldi	r24, 0xE5	; 229
- 344:	91 e0       	ldi	r25, 0x01	; 1
- 346:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <APP_terminalPinGet>
- 34a:	18 2f       	mov	r17, r24
+ 346:	89 ee       	ldi	r24, 0xE9	; 233
+ 348:	91 e0       	ldi	r25, 0x01	; 1
+ 34a:	0e 94 e2 00 	call	0x1c4	; 0x1c4 <APP_terminalPinGet>
+ 34e:	18 2f       	mov	r17, r24
 	if(u8_l_ValidatePIN == PINGET_NOK) return PIN_Match_NOK;
- 34c:	88 23       	and	r24, r24
- 34e:	71 f1       	breq	.+92     	; 0x3ac <CARD_MatchPINs+0x88>
+ 350:	88 23       	and	r24, r24
+ 352:	71 f1       	breq	.+92     	; 0x3b0 <CARD_MatchPINs+0x88>
 	/* Get PIN again for Confirmation */
-	HUSART_sendSTRING((Uchar8_t *)"\rConfirm Your PIN : ");
- 350:	8b e9       	ldi	r24, 0x9B	; 155
- 352:	91 e0       	ldi	r25, 0x01	; 1
- 354:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
+	HUSART_sendSTRING((Uchar8_t *)"\n\rConfirm Your PIN : ");
+ 354:	8b e9       	ldi	r24, 0x9B	; 155
+ 356:	91 e0       	ldi	r25, 0x01	; 1
+ 358:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
 	u8_l_ValidateConfirmPIN = APP_terminalPinGet(PIN_Confirm);
- 358:	ce 01       	movw	r24, r28
- 35a:	01 96       	adiw	r24, 0x01	; 1
- 35c:	0e 94 e0 00 	call	0x1c0	; 0x1c0 <APP_terminalPinGet>
+ 35c:	ce 01       	movw	r24, r28
+ 35e:	01 96       	adiw	r24, 0x01	; 1
+ 360:	0e 94 e2 00 	call	0x1c4	; 0x1c4 <APP_terminalPinGet>
 	
 	if((PINGET_OK == u8_l_ValidatePIN) && (PINGET_OK == u8_l_ValidateConfirmPIN))
- 360:	11 30       	cpi	r17, 0x01	; 1
- 362:	31 f5       	brne	.+76     	; 0x3b0 <CARD_MatchPINs+0x8c>
- 364:	81 30       	cpi	r24, 0x01	; 1
- 366:	c9 f0       	breq	.+50     	; 0x39a <CARD_MatchPINs+0x76>
+ 364:	11 30       	cpi	r17, 0x01	; 1
+ 366:	31 f5       	brne	.+76     	; 0x3b4 <CARD_MatchPINs+0x8c>
+ 368:	81 30       	cpi	r24, 0x01	; 1
+ 36a:	c9 f0       	breq	.+50     	; 0x39e <CARD_MatchPINs+0x76>
 		
-		HUSART_sendSTRING((Uchar8_t *)"\rPin Matched");
+		HUSART_sendSTRING((Uchar8_t *)"\n\rPin Matched");
 		return PIN_Match_OK;
 	}
 	
 	return PIN_Match_NOK;
- 368:	80 e0       	ldi	r24, 0x00	; 0
- 36a:	23 c0       	rjmp	.+70     	; 0x3b2 <CARD_MatchPINs+0x8e>
+ 36c:	80 e0       	ldi	r24, 0x00	; 0
+ 36e:	23 c0       	rjmp	.+70     	; 0x3b6 <CARD_MatchPINs+0x8e>
 	if((PINGET_OK == u8_l_ValidatePIN) && (PINGET_OK == u8_l_ValidateConfirmPIN))
 	{
 		/* Check if the user entered same PIN both times */
 		for(u8_l_PINiterator=0; u8_l_PINiterator<PIN_LENGTH; u8_l_PINiterator++)
 		{
 			if(pin_arr[u8_l_PINiterator] != PIN_Confirm[u8_l_PINiterator])
- 36c:	82 2f       	mov	r24, r18
- 36e:	90 e0       	ldi	r25, 0x00	; 0
- 370:	fc 01       	movw	r30, r24
- 372:	eb 51       	subi	r30, 0x1B	; 27
- 374:	fe 4f       	sbci	r31, 0xFE	; 254
- 376:	30 81       	ld	r19, Z
- 378:	e1 e0       	ldi	r30, 0x01	; 1
- 37a:	f0 e0       	ldi	r31, 0x00	; 0
- 37c:	ec 0f       	add	r30, r28
- 37e:	fd 1f       	adc	r31, r29
- 380:	e8 0f       	add	r30, r24
- 382:	f9 1f       	adc	r31, r25
- 384:	80 81       	ld	r24, Z
- 386:	38 17       	cp	r19, r24
- 388:	31 f0       	breq	.+12     	; 0x396 <CARD_MatchPINs+0x72>
+ 370:	82 2f       	mov	r24, r18
+ 372:	90 e0       	ldi	r25, 0x00	; 0
+ 374:	fc 01       	movw	r30, r24
+ 376:	e7 51       	subi	r30, 0x17	; 23
+ 378:	fe 4f       	sbci	r31, 0xFE	; 254
+ 37a:	30 81       	ld	r19, Z
+ 37c:	e1 e0       	ldi	r30, 0x01	; 1
+ 37e:	f0 e0       	ldi	r31, 0x00	; 0
+ 380:	ec 0f       	add	r30, r28
+ 382:	fd 1f       	adc	r31, r29
+ 384:	e8 0f       	add	r30, r24
+ 386:	f9 1f       	adc	r31, r25
+ 388:	80 81       	ld	r24, Z
+ 38a:	38 17       	cp	r19, r24
+ 38c:	31 f0       	breq	.+12     	; 0x39a <CARD_MatchPINs+0x72>
 			{
-				HUSART_sendSTRING((Uchar8_t *)"\rPin Not Matched");
- 38a:	80 eb       	ldi	r24, 0xB0	; 176
- 38c:	91 e0       	ldi	r25, 0x01	; 1
- 38e:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
+				HUSART_sendSTRING((Uchar8_t *)"\n\rPin Not Matched");
+ 38e:	81 eb       	ldi	r24, 0xB1	; 177
+ 390:	91 e0       	ldi	r25, 0x01	; 1
+ 392:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
 				return PIN_Match_NOK;
- 392:	80 e0       	ldi	r24, 0x00	; 0
- 394:	0e c0       	rjmp	.+28     	; 0x3b2 <CARD_MatchPINs+0x8e>
+ 396:	80 e0       	ldi	r24, 0x00	; 0
+ 398:	0e c0       	rjmp	.+28     	; 0x3b6 <CARD_MatchPINs+0x8e>
 	u8_l_ValidateConfirmPIN = APP_terminalPinGet(PIN_Confirm);
 	
 	if((PINGET_OK == u8_l_ValidatePIN) && (PINGET_OK == u8_l_ValidateConfirmPIN))
 	{
 		/* Check if the user entered same PIN both times */
 		for(u8_l_PINiterator=0; u8_l_PINiterator<PIN_LENGTH; u8_l_PINiterator++)
- 396:	2f 5f       	subi	r18, 0xFF	; 255
- 398:	01 c0       	rjmp	.+2      	; 0x39c <CARD_MatchPINs+0x78>
- 39a:	20 e0       	ldi	r18, 0x00	; 0
- 39c:	25 30       	cpi	r18, 0x05	; 5
- 39e:	30 f3       	brcs	.-52     	; 0x36c <CARD_MatchPINs+0x48>
-				HUSART_sendSTRING((Uchar8_t *)"\rPin Not Matched");
+ 39a:	2f 5f       	subi	r18, 0xFF	; 255
+ 39c:	01 c0       	rjmp	.+2      	; 0x3a0 <CARD_MatchPINs+0x78>
+ 39e:	20 e0       	ldi	r18, 0x00	; 0
+ 3a0:	25 30       	cpi	r18, 0x05	; 5
+ 3a2:	30 f3       	brcs	.-52     	; 0x370 <CARD_MatchPINs+0x48>
+				HUSART_sendSTRING((Uchar8_t *)"\n\rPin Not Matched");
 				return PIN_Match_NOK;
 			}
 		}
 		
-		HUSART_sendSTRING((Uchar8_t *)"\rPin Matched");
- 3a0:	81 ec       	ldi	r24, 0xC1	; 193
- 3a2:	91 e0       	ldi	r25, 0x01	; 1
- 3a4:	0e 94 b1 02 	call	0x562	; 0x562 <HUSART_sendSTRING>
+		HUSART_sendSTRING((Uchar8_t *)"\n\rPin Matched");
+ 3a4:	83 ec       	ldi	r24, 0xC3	; 195
+ 3a6:	91 e0       	ldi	r25, 0x01	; 1
+ 3a8:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
 		return PIN_Match_OK;
- 3a8:	81 e0       	ldi	r24, 0x01	; 1
- 3aa:	03 c0       	rjmp	.+6      	; 0x3b2 <CARD_MatchPINs+0x8e>
+ 3ac:	81 e0       	ldi	r24, 0x01	; 1
+ 3ae:	03 c0       	rjmp	.+6      	; 0x3b6 <CARD_MatchPINs+0x8e>
 	Uchar8_t u8_l_ValidatePIN, u8_l_ValidateConfirmPIN;
 	
 	/* Get PIN from user */
-	HUSART_sendSTRING( (Uchar8_t*) "\rEnter your PIN : ");
+	HUSART_sendSTRING( (Uchar8_t*) "\n\rEnter your PIN : ");
 	u8_l_ValidatePIN = APP_terminalPinGet(pin_arr);
 	if(u8_l_ValidatePIN == PINGET_NOK) return PIN_Match_NOK;
- 3ac:	80 e0       	ldi	r24, 0x00	; 0
- 3ae:	01 c0       	rjmp	.+2      	; 0x3b2 <CARD_MatchPINs+0x8e>
+ 3b0:	80 e0       	ldi	r24, 0x00	; 0
+ 3b2:	01 c0       	rjmp	.+2      	; 0x3b6 <CARD_MatchPINs+0x8e>
 		
-		HUSART_sendSTRING((Uchar8_t *)"\rPin Matched");
+		HUSART_sendSTRING((Uchar8_t *)"\n\rPin Matched");
 		return PIN_Match_OK;
 	}
 	
 	return PIN_Match_NOK;
- 3b0:	80 e0       	ldi	r24, 0x00	; 0
+ 3b4:	80 e0       	ldi	r24, 0x00	; 0
 }
- 3b2:	2a 96       	adiw	r28, 0x0a	; 10
- 3b4:	0f b6       	in	r0, 0x3f	; 63
- 3b6:	f8 94       	cli
- 3b8:	de bf       	out	0x3e, r29	; 62
- 3ba:	0f be       	out	0x3f, r0	; 63
- 3bc:	cd bf       	out	0x3d, r28	; 61
- 3be:	df 91       	pop	r29
- 3c0:	cf 91       	pop	r28
- 3c2:	1f 91       	pop	r17
- 3c4:	08 95       	ret
+ 3b6:	2a 96       	adiw	r28, 0x0a	; 10
+ 3b8:	0f b6       	in	r0, 0x3f	; 63
+ 3ba:	f8 94       	cli
+ 3bc:	de bf       	out	0x3e, r29	; 62
+ 3be:	0f be       	out	0x3f, r0	; 63
+ 3c0:	cd bf       	out	0x3d, r28	; 61
+ 3c2:	df 91       	pop	r29
+ 3c4:	cf 91       	pop	r28
+ 3c6:	1f 91       	pop	r17
+ 3c8:	08 95       	ret
 
-000003c6 <eeprom_write_byte>:
+000003ca <eeprom_init>:
+
+
+
+void eeprom_init(void)
+{
 	i2c_init_master();
+ 3ca:	0e 94 60 03 	call	0x6c0	; 0x6c0 <i2c_init_master>
+ 3ce:	08 95       	ret
+
+000003d0 <eeprom_write_byte>:
 }
 
 
 void eeprom_write_byte(Uint16_t address, Uchar8_t data)  // address is 10 bit
 {
- 3c6:	1f 93       	push	r17
- 3c8:	cf 93       	push	r28
- 3ca:	df 93       	push	r29
- 3cc:	d8 2f       	mov	r29, r24
- 3ce:	19 2f       	mov	r17, r25
- 3d0:	c6 2f       	mov	r28, r22
+ 3d0:	1f 93       	push	r17
+ 3d2:	cf 93       	push	r28
+ 3d4:	df 93       	push	r29
+ 3d6:	d8 2f       	mov	r29, r24
+ 3d8:	19 2f       	mov	r17, r25
+ 3da:	c6 2f       	mov	r28, r22
 	deviceAddress = EEPROM_ADDRESS;	
 	/*deviceAddress = EEPROM_ADDRESS | ((address >> 8) & 0x0003);*/
 //	dataAddress = (address & 0b0011111111);
 
 	/* Send start condition */
 	i2c_start();
- 3d2:	0e 94 5b 03 	call	0x6b6	; 0x6b6 <i2c_start>
+ 3dc:	0e 94 6e 03 	call	0x6dc	; 0x6dc <i2c_start>
 	/* Send slave address */
 	i2c_send_slave_address_with_write_req(deviceAddress);     // i2c_write_byte(0x50 | (address >> 8) & 0x00000111 );
- 3d6:	80 e5       	ldi	r24, 0x50	; 80
- 3d8:	0e 94 6f 03 	call	0x6de	; 0x6de <i2c_send_slave_address_with_write_req>
+ 3e0:	80 e5       	ldi	r24, 0x50	; 80
+ 3e2:	0e 94 82 03 	call	0x704	; 0x704 <i2c_send_slave_address_with_write_req>
 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	  // 520 = 0b 01010 0  0  1   1 01110 11
 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	  //                A2 P1 P2  B7      B0
 	/* Send data location */
 	i2c_write_byte((Uchar8_t) (address >> 8)); // or i2c_write_byte(dataAddress);
- 3dc:	81 2f       	mov	r24, r17
- 3de:	0e 94 89 03 	call	0x712	; 0x712 <i2c_write_byte>
+ 3e6:	81 2f       	mov	r24, r17
+ 3e8:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_write_byte>
 	i2c_write_byte((Uchar8_t) address);
- 3e2:	8d 2f       	mov	r24, r29
- 3e4:	0e 94 89 03 	call	0x712	; 0x712 <i2c_write_byte>
+ 3ec:	8d 2f       	mov	r24, r29
+ 3ee:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_write_byte>
 	/* Send data */
 	i2c_write_byte(data);
- 3e8:	8c 2f       	mov	r24, r28
- 3ea:	0e 94 89 03 	call	0x712	; 0x712 <i2c_write_byte>
+ 3f2:	8c 2f       	mov	r24, r28
+ 3f4:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_write_byte>
 	/* Send Stop Condition */
 	i2c_stop();
- 3ee:	0e 94 9f 03 	call	0x73e	; 0x73e <i2c_stop>
+ 3f8:	0e 94 b6 03 	call	0x76c	; 0x76c <i2c_stop>
 }
- 3f2:	df 91       	pop	r29
- 3f4:	cf 91       	pop	r28
- 3f6:	1f 91       	pop	r17
- 3f8:	08 95       	ret
+ 3fc:	df 91       	pop	r29
+ 3fe:	cf 91       	pop	r28
+ 400:	1f 91       	pop	r17
+ 402:	08 95       	ret
 
-000003fa <eeprom_read_byte>:
+00000404 <eeprom_read_byte>:
 
 
 Uchar8_t eeprom_read_byte(Uint16_t address)
 {
- 3fa:	cf 93       	push	r28
- 3fc:	df 93       	push	r29
- 3fe:	c8 2f       	mov	r28, r24
- 400:	d9 2f       	mov	r29, r25
+ 404:	cf 93       	push	r28
+ 406:	df 93       	push	r29
+ 408:	c8 2f       	mov	r28, r24
+ 40a:	d9 2f       	mov	r29, r25
 	deviceAddress = EEPROM_ADDRESS;
 
 // 	deviceAddress = EEPROM_ADDRESS | ((address >> 8) & 0x0003);
 
 	/* Send start condition */
 	i2c_start();
- 402:	0e 94 5b 03 	call	0x6b6	; 0x6b6 <i2c_start>
+ 40c:	0e 94 6e 03 	call	0x6dc	; 0x6dc <i2c_start>
+
 	/* Send slave address with write request*/
 	i2c_send_slave_address_with_write_req(deviceAddress);
- 406:	80 e5       	ldi	r24, 0x50	; 80
- 408:	0e 94 6f 03 	call	0x6de	; 0x6de <i2c_send_slave_address_with_write_req>
+ 410:	80 e5       	ldi	r24, 0x50	; 80
+ 412:	0e 94 82 03 	call	0x704	; 0x704 <i2c_send_slave_address_with_write_req>
 	/* Send Data location*/
 		i2c_write_byte((Uchar8_t) (address >> 8));
- 40c:	8d 2f       	mov	r24, r29
- 40e:	0e 94 89 03 	call	0x712	; 0x712 <i2c_write_byte>
+ 416:	8d 2f       	mov	r24, r29
+ 418:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_write_byte>
 		i2c_write_byte((Uchar8_t) address);
- 412:	8c 2f       	mov	r24, r28
- 414:	0e 94 89 03 	call	0x712	; 0x712 <i2c_write_byte>
+ 41c:	8c 2f       	mov	r24, r28
+ 41e:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_write_byte>
 	/* Send Repeated Start Condition*/
 	i2c_repeated_start();
- 418:	0e 94 65 03 	call	0x6ca	; 0x6ca <i2c_repeated_start>
+ 422:	0e 94 78 03 	call	0x6f0	; 0x6f0 <i2c_repeated_start>
 	/* Send slave address with read request*/
 	i2c_send_slave_address_with_read_req(deviceAddress);
- 41c:	80 e5       	ldi	r24, 0x50	; 80
- 41e:	0e 94 7e 03 	call	0x6fc	; 0x6fc <i2c_send_slave_address_with_read_req>
+ 426:	80 e5       	ldi	r24, 0x50	; 80
+ 428:	0e 94 91 03 	call	0x722	; 0x722 <i2c_send_slave_address_with_read_req>
 	/*Read Received Byte*/
 	data = i2c_read_byte();
- 422:	0e 94 98 03 	call	0x730	; 0x730 <i2c_read_byte>
- 426:	c8 2f       	mov	r28, r24
+ 42c:	0e 94 af 03 	call	0x75e	; 0x75e <i2c_read_byte>
+ 430:	c8 2f       	mov	r28, r24
 	/* Send Stop Condition */
 	i2c_stop();
- 428:	0e 94 9f 03 	call	0x73e	; 0x73e <i2c_stop>
-
+ 432:	0e 94 b6 03 	call	0x76c	; 0x76c <i2c_stop>
 	return data;
 }
- 42c:	8c 2f       	mov	r24, r28
- 42e:	df 91       	pop	r29
- 430:	cf 91       	pop	r28
- 432:	08 95       	ret
+ 436:	8c 2f       	mov	r24, r28
+ 438:	df 91       	pop	r29
+ 43a:	cf 91       	pop	r28
+ 43c:	08 95       	ret
 
-00000434 <eeprom_write_string>:
+0000043e <eeprom_write_string>:
 */
 
 
 
 void eeprom_write_string(Uint16_t Copy_u8Address, const Uchar8_t* str)
 {
- 434:	cf 92       	push	r12
- 436:	df 92       	push	r13
- 438:	ef 92       	push	r14
- 43a:	ff 92       	push	r15
- 43c:	0f 93       	push	r16
- 43e:	1f 93       	push	r17
- 440:	cf 93       	push	r28
- 442:	6b 01       	movw	r12, r22
+ 43e:	cf 92       	push	r12
+ 440:	df 92       	push	r13
+ 442:	ef 92       	push	r14
+ 444:	ff 92       	push	r15
+ 446:	0f 93       	push	r16
+ 448:	1f 93       	push	r17
+ 44a:	cf 93       	push	r28
+ 44c:	6b 01       	movw	r12, r22
 		Uchar8_t len = 0;
- 444:	c0 e0       	ldi	r28, 0x00	; 0
+ 44e:	c0 e0       	ldi	r28, 0x00	; 0
 			
 			do 
 			{
 				eeprom_write_byte(Copy_u8Address++,str[len]);
- 446:	86 01       	movw	r16, r12
- 448:	0c 0f       	add	r16, r28
- 44a:	11 1d       	adc	r17, r1
- 44c:	7c 01       	movw	r14, r24
- 44e:	2f ef       	ldi	r18, 0xFF	; 255
- 450:	e2 1a       	sub	r14, r18
- 452:	f2 0a       	sbc	r15, r18
- 454:	f8 01       	movw	r30, r16
- 456:	60 81       	ld	r22, Z
- 458:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <eeprom_write_byte>
- 45c:	8f e4       	ldi	r24, 0x4F	; 79
- 45e:	93 ec       	ldi	r25, 0xC3	; 195
- 460:	01 97       	sbiw	r24, 0x01	; 1
- 462:	f1 f7       	brne	.-4      	; 0x460 <eeprom_write_string+0x2c>
- 464:	00 c0       	rjmp	.+0      	; 0x466 <eeprom_write_string+0x32>
- 466:	00 00       	nop
+ 450:	86 01       	movw	r16, r12
+ 452:	0c 0f       	add	r16, r28
+ 454:	11 1d       	adc	r17, r1
+ 456:	7c 01       	movw	r14, r24
+ 458:	2f ef       	ldi	r18, 0xFF	; 255
+ 45a:	e2 1a       	sub	r14, r18
+ 45c:	f2 0a       	sbc	r15, r18
+ 45e:	f8 01       	movw	r30, r16
+ 460:	60 81       	ld	r22, Z
+ 462:	0e 94 e8 01 	call	0x3d0	; 0x3d0 <eeprom_write_byte>
+ 466:	8f e4       	ldi	r24, 0x4F	; 79
+ 468:	93 ec       	ldi	r25, 0xC3	; 195
+ 46a:	01 97       	sbiw	r24, 0x01	; 1
+ 46c:	f1 f7       	brne	.-4      	; 0x46a <eeprom_write_string+0x2c>
+ 46e:	00 c0       	rjmp	.+0      	; 0x470 <eeprom_write_string+0x32>
+ 470:	00 00       	nop
 				_delay_ms(200);
 			}
 			while(str[len++] != '\0');
- 468:	cf 5f       	subi	r28, 0xFF	; 255
- 46a:	f8 01       	movw	r30, r16
- 46c:	20 81       	ld	r18, Z
+ 472:	cf 5f       	subi	r28, 0xFF	; 255
+ 474:	f8 01       	movw	r30, r16
+ 476:	20 81       	ld	r18, Z
 {
 		Uchar8_t len = 0;
 			
 			do 
 			{
 				eeprom_write_byte(Copy_u8Address++,str[len]);
- 46e:	c7 01       	movw	r24, r14
+ 478:	c7 01       	movw	r24, r14
 				_delay_ms(200);
 			}
 			while(str[len++] != '\0');
- 470:	21 11       	cpse	r18, r1
- 472:	e9 cf       	rjmp	.-46     	; 0x446 <eeprom_write_string+0x12>
+ 47a:	21 11       	cpse	r18, r1
+ 47c:	e9 cf       	rjmp	.-46     	; 0x450 <eeprom_write_string+0x12>
 
 			
 }
- 474:	cf 91       	pop	r28
- 476:	1f 91       	pop	r17
- 478:	0f 91       	pop	r16
- 47a:	ff 90       	pop	r15
- 47c:	ef 90       	pop	r14
- 47e:	df 90       	pop	r13
- 480:	cf 90       	pop	r12
- 482:	08 95       	ret
+ 47e:	cf 91       	pop	r28
+ 480:	1f 91       	pop	r17
+ 482:	0f 91       	pop	r16
+ 484:	ff 90       	pop	r15
+ 486:	ef 90       	pop	r14
+ 488:	df 90       	pop	r13
+ 48a:	cf 90       	pop	r12
+ 48c:	08 95       	ret
 
-00000484 <eeprom_read_string>:
+0000048e <eeprom_read_string>:
 
 
 void eeprom_read_string(Uint16_t Copy_u8Address, Uchar8_t* str)
 {
- 484:	cf 92       	push	r12
- 486:	df 92       	push	r13
- 488:	ef 92       	push	r14
- 48a:	ff 92       	push	r15
- 48c:	0f 93       	push	r16
- 48e:	1f 93       	push	r17
- 490:	cf 93       	push	r28
- 492:	6b 01       	movw	r12, r22
+ 48e:	cf 92       	push	r12
+ 490:	df 92       	push	r13
+ 492:	ef 92       	push	r14
+ 494:	ff 92       	push	r15
+ 496:	0f 93       	push	r16
+ 498:	1f 93       	push	r17
+ 49a:	cf 93       	push	r28
+ 49c:	6b 01       	movw	r12, r22
 			Uchar8_t len = 0;
- 494:	c0 e0       	ldi	r28, 0x00	; 0
+ 49e:	c0 e0       	ldi	r28, 0x00	; 0
 			do
 			{
 				str[len] = eeprom_read_byte(Copy_u8Address++);
- 496:	86 01       	movw	r16, r12
- 498:	0c 0f       	add	r16, r28
- 49a:	11 1d       	adc	r17, r1
- 49c:	7c 01       	movw	r14, r24
- 49e:	2f ef       	ldi	r18, 0xFF	; 255
- 4a0:	e2 1a       	sub	r14, r18
- 4a2:	f2 0a       	sbc	r15, r18
- 4a4:	0e 94 fd 01 	call	0x3fa	; 0x3fa <eeprom_read_byte>
- 4a8:	f8 01       	movw	r30, r16
- 4aa:	80 83       	st	Z, r24
- 4ac:	8f e4       	ldi	r24, 0x4F	; 79
- 4ae:	93 ec       	ldi	r25, 0xC3	; 195
- 4b0:	01 97       	sbiw	r24, 0x01	; 1
- 4b2:	f1 f7       	brne	.-4      	; 0x4b0 <eeprom_read_string+0x2c>
- 4b4:	00 c0       	rjmp	.+0      	; 0x4b6 <eeprom_read_string+0x32>
- 4b6:	00 00       	nop
+ 4a0:	86 01       	movw	r16, r12
+ 4a2:	0c 0f       	add	r16, r28
+ 4a4:	11 1d       	adc	r17, r1
+ 4a6:	7c 01       	movw	r14, r24
+ 4a8:	2f ef       	ldi	r18, 0xFF	; 255
+ 4aa:	e2 1a       	sub	r14, r18
+ 4ac:	f2 0a       	sbc	r15, r18
+ 4ae:	0e 94 02 02 	call	0x404	; 0x404 <eeprom_read_byte>
+ 4b2:	f8 01       	movw	r30, r16
+ 4b4:	80 83       	st	Z, r24
+ 4b6:	8f e4       	ldi	r24, 0x4F	; 79
+ 4b8:	93 ec       	ldi	r25, 0xC3	; 195
+ 4ba:	01 97       	sbiw	r24, 0x01	; 1
+ 4bc:	f1 f7       	brne	.-4      	; 0x4ba <eeprom_read_string+0x2c>
+ 4be:	00 c0       	rjmp	.+0      	; 0x4c0 <eeprom_read_string+0x32>
+ 4c0:	00 00       	nop
 				_delay_ms(200);
 			}
 			while(str[len++] != '\0');
- 4b8:	cf 5f       	subi	r28, 0xFF	; 255
- 4ba:	20 81       	ld	r18, Z
+ 4c2:	cf 5f       	subi	r28, 0xFF	; 255
+ 4c4:	20 81       	ld	r18, Z
 void eeprom_read_string(Uint16_t Copy_u8Address, Uchar8_t* str)
 {
 			Uchar8_t len = 0;
 			do
 			{
 				str[len] = eeprom_read_byte(Copy_u8Address++);
- 4bc:	c7 01       	movw	r24, r14
+ 4c6:	c7 01       	movw	r24, r14
 				_delay_ms(200);
 			}
 			while(str[len++] != '\0');
- 4be:	21 11       	cpse	r18, r1
- 4c0:	ea cf       	rjmp	.-44     	; 0x496 <eeprom_read_string+0x12>
+ 4c8:	21 11       	cpse	r18, r1
+ 4ca:	ea cf       	rjmp	.-44     	; 0x4a0 <eeprom_read_string+0x12>
 }
- 4c2:	cf 91       	pop	r28
- 4c4:	1f 91       	pop	r17
- 4c6:	0f 91       	pop	r16
- 4c8:	ff 90       	pop	r15
- 4ca:	ef 90       	pop	r14
- 4cc:	df 90       	pop	r13
- 4ce:	cf 90       	pop	r12
- 4d0:	08 95       	ret
+ 4cc:	cf 91       	pop	r28
+ 4ce:	1f 91       	pop	r17
+ 4d0:	0f 91       	pop	r16
+ 4d2:	ff 90       	pop	r15
+ 4d4:	ef 90       	pop	r14
+ 4d6:	df 90       	pop	r13
+ 4d8:	cf 90       	pop	r12
+ 4da:	08 95       	ret
 
-000004d2 <HSPI_SlaveInit>:
+000004dc <HSPI_SlaveInit>:
 void HSPI_MasterTrigger(void)
 {
 	/* Send Request to Master */
 	DIO_s8SETPinVal(SLAVE_SEND_REQUEST_PIN, HIGH);
 	_delay_ms(10);
 	DIO_s8SETPinVal(SLAVE_SEND_REQUEST_PIN, LOW);
- 4d2:	60 e0       	ldi	r22, 0x00	; 0
- 4d4:	8d e0       	ldi	r24, 0x0D	; 13
- 4d6:	0e 94 bc 02 	call	0x578	; 0x578 <DIO_s8SETPinDir>
- 4da:	60 e0       	ldi	r22, 0x00	; 0
- 4dc:	8f e0       	ldi	r24, 0x0F	; 15
- 4de:	0e 94 bc 02 	call	0x578	; 0x578 <DIO_s8SETPinDir>
- 4e2:	60 e0       	ldi	r22, 0x00	; 0
- 4e4:	8c e0       	ldi	r24, 0x0C	; 12
- 4e6:	0e 94 bc 02 	call	0x578	; 0x578 <DIO_s8SETPinDir>
- 4ea:	61 e0       	ldi	r22, 0x01	; 1
- 4ec:	8c e0       	ldi	r24, 0x0C	; 12
- 4ee:	0e 94 fc 02 	call	0x5f8	; 0x5f8 <DIO_s8SETPinVal>
- 4f2:	61 e0       	ldi	r22, 0x01	; 1
- 4f4:	8e e0       	ldi	r24, 0x0E	; 14
- 4f6:	0e 94 bc 02 	call	0x578	; 0x578 <DIO_s8SETPinDir>
- 4fa:	61 e0       	ldi	r22, 0x01	; 1
- 4fc:	88 e0       	ldi	r24, 0x08	; 8
- 4fe:	0e 94 bc 02 	call	0x578	; 0x578 <DIO_s8SETPinDir>
- 502:	0e 94 ac 03 	call	0x758	; 0x758 <SPI_SlaveInit>
- 506:	61 e0       	ldi	r22, 0x01	; 1
- 508:	8c e0       	ldi	r24, 0x0C	; 12
- 50a:	0e 94 fc 02 	call	0x5f8	; 0x5f8 <DIO_s8SETPinVal>
- 50e:	08 95       	ret
+ 4dc:	60 e0       	ldi	r22, 0x00	; 0
+ 4de:	8d e0       	ldi	r24, 0x0D	; 13
+ 4e0:	0e 94 c1 02 	call	0x582	; 0x582 <DIO_s8SETPinDir>
+ 4e4:	60 e0       	ldi	r22, 0x00	; 0
+ 4e6:	8f e0       	ldi	r24, 0x0F	; 15
+ 4e8:	0e 94 c1 02 	call	0x582	; 0x582 <DIO_s8SETPinDir>
+ 4ec:	60 e0       	ldi	r22, 0x00	; 0
+ 4ee:	8c e0       	ldi	r24, 0x0C	; 12
+ 4f0:	0e 94 c1 02 	call	0x582	; 0x582 <DIO_s8SETPinDir>
+ 4f4:	61 e0       	ldi	r22, 0x01	; 1
+ 4f6:	8c e0       	ldi	r24, 0x0C	; 12
+ 4f8:	0e 94 01 03 	call	0x602	; 0x602 <DIO_s8SETPinVal>
+ 4fc:	61 e0       	ldi	r22, 0x01	; 1
+ 4fe:	8e e0       	ldi	r24, 0x0E	; 14
+ 500:	0e 94 c1 02 	call	0x582	; 0x582 <DIO_s8SETPinDir>
+ 504:	61 e0       	ldi	r22, 0x01	; 1
+ 506:	88 e0       	ldi	r24, 0x08	; 8
+ 508:	0e 94 c1 02 	call	0x582	; 0x582 <DIO_s8SETPinDir>
+ 50c:	0e 94 c0 03 	call	0x780	; 0x780 <SPI_SlaveInit>
+ 510:	61 e0       	ldi	r22, 0x01	; 1
+ 512:	8c e0       	ldi	r24, 0x0C	; 12
+ 514:	0e 94 01 03 	call	0x602	; 0x602 <DIO_s8SETPinVal>
+ 518:	08 95       	ret
 
-00000510 <HSPI_SlaveRequest>:
- 510:	10 92 e1 01 	sts	0x01E1, r1	; 0x8001e1 <u8_g_SlaveTxIndex>
- 514:	90 93 df 01 	sts	0x01DF, r25	; 0x8001df <pu8_g_SlaveTxPtr+0x1>
- 518:	80 93 de 01 	sts	0x01DE, r24	; 0x8001de <pu8_g_SlaveTxPtr>
- 51c:	60 93 0f 02 	sts	0x020F, r22	; 0x80020f <u8_g_SlaveTxLen>
- 520:	88 e0       	ldi	r24, 0x08	; 8
- 522:	0e 94 3c 03 	call	0x678	; 0x678 <DIO_s8TOGPinVal>
- 526:	08 95       	ret
+0000051a <HSPI_SlaveRequest>:
+ 51a:	10 92 e5 01 	sts	0x01E5, r1	; 0x8001e5 <u8_g_SlaveTxIndex>
+ 51e:	90 93 e3 01 	sts	0x01E3, r25	; 0x8001e3 <pu8_g_SlaveTxPtr+0x1>
+ 522:	80 93 e2 01 	sts	0x01E2, r24	; 0x8001e2 <pu8_g_SlaveTxPtr>
+ 526:	60 93 13 02 	sts	0x0213, r22	; 0x800213 <u8_g_SlaveTxLen>
+ 52a:	88 e0       	ldi	r24, 0x08	; 8
+ 52c:	0e 94 41 03 	call	0x682	; 0x682 <DIO_s8TOGPinVal>
+ 530:	08 95       	ret
 
-00000528 <HSPI_SlaveSetData>:
+00000532 <HSPI_SlaveSetData>:
 }
 
 void HSPI_SlaveSetData(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize)
 {
 	/* Reset transmission data index */
 	u8_g_SlaveTxIndex = 0;
- 528:	10 92 e1 01 	sts	0x01E1, r1	; 0x8001e1 <u8_g_SlaveTxIndex>
+ 532:	10 92 e5 01 	sts	0x01E5, r1	; 0x8001e5 <u8_g_SlaveTxIndex>
 	
 	/* Set global transmission data ptr to point to given data */
 	pu8_g_SlaveTxPtr = pu8_a_dataPtr;
- 52c:	90 93 df 01 	sts	0x01DF, r25	; 0x8001df <pu8_g_SlaveTxPtr+0x1>
- 530:	80 93 de 01 	sts	0x01DE, r24	; 0x8001de <pu8_g_SlaveTxPtr>
+ 536:	90 93 e3 01 	sts	0x01E3, r25	; 0x8001e3 <pu8_g_SlaveTxPtr+0x1>
+ 53a:	80 93 e2 01 	sts	0x01E2, r24	; 0x8001e2 <pu8_g_SlaveTxPtr>
 	
 	u8_g_SlaveTxLen = u8_a_DataSize;
- 534:	60 93 0f 02 	sts	0x020F, r22	; 0x80020f <u8_g_SlaveTxLen>
- 538:	08 95       	ret
+ 53e:	60 93 13 02 	sts	0x0213, r22	; 0x800213 <u8_g_SlaveTxLen>
+ 542:	08 95       	ret
 
-0000053a <HUSART_enInit>:
+00000544 <HUSART_enInit>:
 #include "husart.h"
 
 
 EN_USART_ERROR HUSART_enInit(void)
 {
 	if(USART_init())return USART_NOT_OK;
- 53a:	0e 94 07 04 	call	0x80e	; 0x80e <USART_init>
- 53e:	81 11       	cpse	r24, r1
- 540:	81 e0       	ldi	r24, 0x01	; 1
-	return USART_OK;
-}
- 542:	08 95       	ret
-
-00000544 <HUSART_enSendData>:
-EN_USART_ERROR HUSART_enSendData(Uchar8_t Copy_u8DataH)
-{
-	if(USART_sendData(Copy_u8DataH))return USART_NOT_OK;
- 544:	0e 94 13 04 	call	0x826	; 0x826 <USART_sendData>
+ 544:	0e 94 1b 04 	call	0x836	; 0x836 <USART_init>
  548:	81 11       	cpse	r24, r1
  54a:	81 e0       	ldi	r24, 0x01	; 1
 	return USART_OK;
 }
  54c:	08 95       	ret
 
-0000054e <HUSART_enRecieveData>:
-EN_USART_ERROR HUSART_enRecieveData(Uchar8_t* Ref_u8DataH)
+0000054e <HUSART_enSendData>:
+EN_USART_ERROR HUSART_enSendData(Uchar8_t Copy_u8DataH)
 {
- 54e:	cf 93       	push	r28
- 550:	df 93       	push	r29
- 552:	ec 01       	movw	r28, r24
-	*Ref_u8DataH = USART_receiveData();
- 554:	0e 94 18 04 	call	0x830	; 0x830 <USART_receiveData>
- 558:	88 83       	st	Y, r24
+	if(USART_sendData(Copy_u8DataH))return USART_NOT_OK;
+ 54e:	0e 94 27 04 	call	0x84e	; 0x84e <USART_sendData>
+ 552:	81 11       	cpse	r24, r1
+ 554:	81 e0       	ldi	r24, 0x01	; 1
 	return USART_OK;
 }
- 55a:	80 e0       	ldi	r24, 0x00	; 0
- 55c:	df 91       	pop	r29
- 55e:	cf 91       	pop	r28
- 560:	08 95       	ret
+ 556:	08 95       	ret
 
-00000562 <HUSART_sendSTRING>:
+00000558 <HUSART_enRecieveData>:
+EN_USART_ERROR HUSART_enRecieveData(Uchar8_t* Ref_u8DataH)
+{
+ 558:	cf 93       	push	r28
+ 55a:	df 93       	push	r29
+ 55c:	ec 01       	movw	r28, r24
+	*Ref_u8DataH = USART_receiveData();
+ 55e:	0e 94 2c 04 	call	0x858	; 0x858 <USART_receiveData>
+ 562:	88 83       	st	Y, r24
+	return USART_OK;
+}
+ 564:	80 e0       	ldi	r24, 0x00	; 0
+ 566:	df 91       	pop	r29
+ 568:	cf 91       	pop	r28
+ 56a:	08 95       	ret
+
+0000056c <HUSART_sendSTRING>:
 
 void HUSART_sendSTRING(Uchar8_t * Hstr)
 {
 	USART_sendSTRING(Hstr);
- 562:	0e 94 1c 04 	call	0x838	; 0x838 <USART_sendSTRING>
- 566:	08 95       	ret
+ 56c:	0e 94 30 04 	call	0x860	; 0x860 <USART_sendSTRING>
+ 570:	08 95       	ret
 
-00000568 <HUSART_receiveSTRING>:
+00000572 <HUSART_receiveSTRING>:
 }
 void HUSART_receiveSTRING(Uchar8_t * Hstr ,Uchar8_t Hsize )
 {
 	USART_receiveSTRING(Hstr,Hsize);
- 568:	0e 94 2f 04 	call	0x85e	; 0x85e <USART_receiveSTRING>
- 56c:	08 95       	ret
+ 572:	0e 94 43 04 	call	0x886	; 0x886 <USART_receiveSTRING>
+ 576:	08 95       	ret
 
-0000056e <main>:
- * Author : ME
+00000578 <main>:
  */ 
+#define F_CPU 8000000UL
 #include "APP/app.h"
 int main(void)
 {
 	APP_Init();
- 56e:	0e 94 49 00 	call	0x92	; 0x92 <APP_Init>
+ 578:	0e 94 49 00 	call	0x92	; 0x92 <APP_Init>
     while (1) 
     {
       APP_Start();
- 572:	0e 94 4f 00 	call	0x9e	; 0x9e <APP_Start>
- 576:	fd cf       	rjmp	.-6      	; 0x572 <main+0x4>
+ 57c:	0e 94 51 00 	call	0xa2	; 0xa2 <APP_Start>
+ 580:	fd cf       	rjmp	.-6      	; 0x57c <main+0x4>
 
-00000578 <DIO_s8SETPinDir>:
+00000582 <DIO_s8SETPinDir>:
 {
 	Uchar8_t errStatus = E_OK;
 	Uchar8_t portID;
 	Uchar8_t pinID;
 
 	if (enPinCopy < PIN_INVALID && enPortDir< DIR_INVALID)
- 578:	80 32       	cpi	r24, 0x20	; 32
- 57a:	c0 f5       	brcc	.+112    	; 0x5ec <DIO_s8SETPinDir+0x74>
- 57c:	62 30       	cpi	r22, 0x02	; 2
- 57e:	c0 f5       	brcc	.+112    	; 0x5f0 <DIO_s8SETPinDir+0x78>
+ 582:	80 32       	cpi	r24, 0x20	; 32
+ 584:	c0 f5       	brcc	.+112    	; 0x5f6 <DIO_s8SETPinDir+0x74>
+ 586:	62 30       	cpi	r22, 0x02	; 2
+ 588:	c0 f5       	brcc	.+112    	; 0x5fa <DIO_s8SETPinDir+0x78>
 	{
 		portID = enPinCopy/8;
- 580:	e8 2f       	mov	r30, r24
- 582:	e6 95       	lsr	r30
- 584:	e6 95       	lsr	r30
- 586:	e6 95       	lsr	r30
+ 58a:	e8 2f       	mov	r30, r24
+ 58c:	e6 95       	lsr	r30
+ 58e:	e6 95       	lsr	r30
+ 590:	e6 95       	lsr	r30
 		pinID  = enPinCopy%8;
- 588:	87 70       	andi	r24, 0x07	; 7
+ 592:	87 70       	andi	r24, 0x07	; 7
 
 		if (enPortDir == INPUT)
- 58a:	61 11       	cpse	r22, r1
- 58c:	17 c0       	rjmp	.+46     	; 0x5bc <DIO_s8SETPinDir+0x44>
+ 594:	61 11       	cpse	r22, r1
+ 596:	17 c0       	rjmp	.+46     	; 0x5c6 <DIO_s8SETPinDir+0x44>
 		{
 			CLEAR_BIT(*ddrReg[portID],pinID);
- 58e:	f0 e0       	ldi	r31, 0x00	; 0
- 590:	ee 0f       	add	r30, r30
- 592:	ff 1f       	adc	r31, r31
- 594:	e0 5a       	subi	r30, 0xA0	; 160
- 596:	ff 4f       	sbci	r31, 0xFF	; 255
- 598:	01 90       	ld	r0, Z+
- 59a:	f0 81       	ld	r31, Z
- 59c:	e0 2d       	mov	r30, r0
- 59e:	40 81       	ld	r20, Z
- 5a0:	21 e0       	ldi	r18, 0x01	; 1
- 5a2:	30 e0       	ldi	r19, 0x00	; 0
- 5a4:	b9 01       	movw	r22, r18
- 5a6:	02 c0       	rjmp	.+4      	; 0x5ac <DIO_s8SETPinDir+0x34>
- 5a8:	66 0f       	add	r22, r22
- 5aa:	77 1f       	adc	r23, r23
- 5ac:	8a 95       	dec	r24
- 5ae:	e2 f7       	brpl	.-8      	; 0x5a8 <DIO_s8SETPinDir+0x30>
- 5b0:	cb 01       	movw	r24, r22
- 5b2:	80 95       	com	r24
- 5b4:	84 23       	and	r24, r20
- 5b6:	80 83       	st	Z, r24
+ 598:	f0 e0       	ldi	r31, 0x00	; 0
+ 59a:	ee 0f       	add	r30, r30
+ 59c:	ff 1f       	adc	r31, r31
+ 59e:	e0 5a       	subi	r30, 0xA0	; 160
+ 5a0:	ff 4f       	sbci	r31, 0xFF	; 255
+ 5a2:	01 90       	ld	r0, Z+
+ 5a4:	f0 81       	ld	r31, Z
+ 5a6:	e0 2d       	mov	r30, r0
+ 5a8:	40 81       	ld	r20, Z
+ 5aa:	21 e0       	ldi	r18, 0x01	; 1
+ 5ac:	30 e0       	ldi	r19, 0x00	; 0
+ 5ae:	b9 01       	movw	r22, r18
+ 5b0:	02 c0       	rjmp	.+4      	; 0x5b6 <DIO_s8SETPinDir+0x34>
+ 5b2:	66 0f       	add	r22, r22
+ 5b4:	77 1f       	adc	r23, r23
+ 5b6:	8a 95       	dec	r24
+ 5b8:	e2 f7       	brpl	.-8      	; 0x5b2 <DIO_s8SETPinDir+0x30>
+ 5ba:	cb 01       	movw	r24, r22
+ 5bc:	80 95       	com	r24
+ 5be:	84 23       	and	r24, r20
+ 5c0:	80 83       	st	Z, r24
 
 
 
 Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
 {
 	Uchar8_t errStatus = E_OK;
- 5b8:	80 e0       	ldi	r24, 0x00	; 0
- 5ba:	08 95       	ret
+ 5c2:	80 e0       	ldi	r24, 0x00	; 0
+ 5c4:	08 95       	ret
 
 		if (enPortDir == INPUT)
 		{
 			CLEAR_BIT(*ddrReg[portID],pinID);
 		}
 		else if(enPortDir == OUTPUT)
- 5bc:	61 30       	cpi	r22, 0x01	; 1
- 5be:	d1 f4       	brne	.+52     	; 0x5f4 <DIO_s8SETPinDir+0x7c>
+ 5c6:	61 30       	cpi	r22, 0x01	; 1
+ 5c8:	d1 f4       	brne	.+52     	; 0x5fe <DIO_s8SETPinDir+0x7c>
 		{
 			SET_BIT(*ddrReg[portID],pinID);
- 5c0:	f0 e0       	ldi	r31, 0x00	; 0
- 5c2:	ee 0f       	add	r30, r30
- 5c4:	ff 1f       	adc	r31, r31
- 5c6:	e0 5a       	subi	r30, 0xA0	; 160
- 5c8:	ff 4f       	sbci	r31, 0xFF	; 255
- 5ca:	01 90       	ld	r0, Z+
- 5cc:	f0 81       	ld	r31, Z
- 5ce:	e0 2d       	mov	r30, r0
- 5d0:	40 81       	ld	r20, Z
- 5d2:	21 e0       	ldi	r18, 0x01	; 1
- 5d4:	30 e0       	ldi	r19, 0x00	; 0
- 5d6:	b9 01       	movw	r22, r18
- 5d8:	02 c0       	rjmp	.+4      	; 0x5de <DIO_s8SETPinDir+0x66>
- 5da:	66 0f       	add	r22, r22
- 5dc:	77 1f       	adc	r23, r23
- 5de:	8a 95       	dec	r24
- 5e0:	e2 f7       	brpl	.-8      	; 0x5da <DIO_s8SETPinDir+0x62>
- 5e2:	cb 01       	movw	r24, r22
- 5e4:	84 2b       	or	r24, r20
- 5e6:	80 83       	st	Z, r24
+ 5ca:	f0 e0       	ldi	r31, 0x00	; 0
+ 5cc:	ee 0f       	add	r30, r30
+ 5ce:	ff 1f       	adc	r31, r31
+ 5d0:	e0 5a       	subi	r30, 0xA0	; 160
+ 5d2:	ff 4f       	sbci	r31, 0xFF	; 255
+ 5d4:	01 90       	ld	r0, Z+
+ 5d6:	f0 81       	ld	r31, Z
+ 5d8:	e0 2d       	mov	r30, r0
+ 5da:	40 81       	ld	r20, Z
+ 5dc:	21 e0       	ldi	r18, 0x01	; 1
+ 5de:	30 e0       	ldi	r19, 0x00	; 0
+ 5e0:	b9 01       	movw	r22, r18
+ 5e2:	02 c0       	rjmp	.+4      	; 0x5e8 <DIO_s8SETPinDir+0x66>
+ 5e4:	66 0f       	add	r22, r22
+ 5e6:	77 1f       	adc	r23, r23
+ 5e8:	8a 95       	dec	r24
+ 5ea:	e2 f7       	brpl	.-8      	; 0x5e4 <DIO_s8SETPinDir+0x62>
+ 5ec:	cb 01       	movw	r24, r22
+ 5ee:	84 2b       	or	r24, r20
+ 5f0:	80 83       	st	Z, r24
 
 
 
 Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
 {
 	Uchar8_t errStatus = E_OK;
- 5e8:	80 e0       	ldi	r24, 0x00	; 0
- 5ea:	08 95       	ret
+ 5f2:	80 e0       	ldi	r24, 0x00	; 0
+ 5f4:	08 95       	ret
 			/* do nothing */
 		}
 	}
 	else
 	{
 		errStatus = E_NOK;
- 5ec:	8f ef       	ldi	r24, 0xFF	; 255
- 5ee:	08 95       	ret
- 5f0:	8f ef       	ldi	r24, 0xFF	; 255
- 5f2:	08 95       	ret
+ 5f6:	8f ef       	ldi	r24, 0xFF	; 255
+ 5f8:	08 95       	ret
+ 5fa:	8f ef       	ldi	r24, 0xFF	; 255
+ 5fc:	08 95       	ret
 
 
 
 Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
 {
 	Uchar8_t errStatus = E_OK;
- 5f4:	80 e0       	ldi	r24, 0x00	; 0
+ 5fe:	80 e0       	ldi	r24, 0x00	; 0
 	else
 	{
 		errStatus = E_NOK;
 	}
 	return errStatus;
 }
- 5f6:	08 95       	ret
+ 600:	08 95       	ret
 
-000005f8 <DIO_s8SETPinVal>:
+00000602 <DIO_s8SETPinVal>:
 {
 	Uchar8_t errStatus = E_OK;
 	Uchar8_t portID;
 	Uchar8_t pinID;
 
 	if (enPinCopy < PIN_INVALID && enPortVal< VAL_INVALID)
- 5f8:	80 32       	cpi	r24, 0x20	; 32
- 5fa:	c0 f5       	brcc	.+112    	; 0x66c <DIO_s8SETPinVal+0x74>
- 5fc:	62 30       	cpi	r22, 0x02	; 2
- 5fe:	c0 f5       	brcc	.+112    	; 0x670 <DIO_s8SETPinVal+0x78>
+ 602:	80 32       	cpi	r24, 0x20	; 32
+ 604:	c0 f5       	brcc	.+112    	; 0x676 <DIO_s8SETPinVal+0x74>
+ 606:	62 30       	cpi	r22, 0x02	; 2
+ 608:	c0 f5       	brcc	.+112    	; 0x67a <DIO_s8SETPinVal+0x78>
 	{
 		portID = enPinCopy/8;
- 600:	e8 2f       	mov	r30, r24
- 602:	e6 95       	lsr	r30
- 604:	e6 95       	lsr	r30
- 606:	e6 95       	lsr	r30
+ 60a:	e8 2f       	mov	r30, r24
+ 60c:	e6 95       	lsr	r30
+ 60e:	e6 95       	lsr	r30
+ 610:	e6 95       	lsr	r30
 		pinID  = enPinCopy%8;
- 608:	87 70       	andi	r24, 0x07	; 7
+ 612:	87 70       	andi	r24, 0x07	; 7
 
 		if (enPortVal == LOW)
- 60a:	61 11       	cpse	r22, r1
- 60c:	17 c0       	rjmp	.+46     	; 0x63c <DIO_s8SETPinVal+0x44>
+ 614:	61 11       	cpse	r22, r1
+ 616:	17 c0       	rjmp	.+46     	; 0x646 <DIO_s8SETPinVal+0x44>
 		{
 			CLEAR_BIT(*portReg[portID],pinID);
- 60e:	f0 e0       	ldi	r31, 0x00	; 0
- 610:	ee 0f       	add	r30, r30
- 612:	ff 1f       	adc	r31, r31
- 614:	e8 59       	subi	r30, 0x98	; 152
- 616:	ff 4f       	sbci	r31, 0xFF	; 255
- 618:	01 90       	ld	r0, Z+
- 61a:	f0 81       	ld	r31, Z
- 61c:	e0 2d       	mov	r30, r0
- 61e:	40 81       	ld	r20, Z
- 620:	21 e0       	ldi	r18, 0x01	; 1
- 622:	30 e0       	ldi	r19, 0x00	; 0
- 624:	b9 01       	movw	r22, r18
- 626:	02 c0       	rjmp	.+4      	; 0x62c <DIO_s8SETPinVal+0x34>
- 628:	66 0f       	add	r22, r22
- 62a:	77 1f       	adc	r23, r23
- 62c:	8a 95       	dec	r24
- 62e:	e2 f7       	brpl	.-8      	; 0x628 <DIO_s8SETPinVal+0x30>
- 630:	cb 01       	movw	r24, r22
- 632:	80 95       	com	r24
- 634:	84 23       	and	r24, r20
- 636:	80 83       	st	Z, r24
+ 618:	f0 e0       	ldi	r31, 0x00	; 0
+ 61a:	ee 0f       	add	r30, r30
+ 61c:	ff 1f       	adc	r31, r31
+ 61e:	e8 59       	subi	r30, 0x98	; 152
+ 620:	ff 4f       	sbci	r31, 0xFF	; 255
+ 622:	01 90       	ld	r0, Z+
+ 624:	f0 81       	ld	r31, Z
+ 626:	e0 2d       	mov	r30, r0
+ 628:	40 81       	ld	r20, Z
+ 62a:	21 e0       	ldi	r18, 0x01	; 1
+ 62c:	30 e0       	ldi	r19, 0x00	; 0
+ 62e:	b9 01       	movw	r22, r18
+ 630:	02 c0       	rjmp	.+4      	; 0x636 <DIO_s8SETPinVal+0x34>
+ 632:	66 0f       	add	r22, r22
+ 634:	77 1f       	adc	r23, r23
+ 636:	8a 95       	dec	r24
+ 638:	e2 f7       	brpl	.-8      	; 0x632 <DIO_s8SETPinVal+0x30>
+ 63a:	cb 01       	movw	r24, r22
+ 63c:	80 95       	com	r24
+ 63e:	84 23       	and	r24, r20
+ 640:	80 83       	st	Z, r24
 }
 
 
 Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
 {
 	Uchar8_t errStatus = E_OK;
- 638:	80 e0       	ldi	r24, 0x00	; 0
- 63a:	08 95       	ret
+ 642:	80 e0       	ldi	r24, 0x00	; 0
+ 644:	08 95       	ret
 
 		if (enPortVal == LOW)
 		{
 			CLEAR_BIT(*portReg[portID],pinID);
 		}
 		else if(enPortVal == HIGH)
- 63c:	61 30       	cpi	r22, 0x01	; 1
- 63e:	d1 f4       	brne	.+52     	; 0x674 <DIO_s8SETPinVal+0x7c>
+ 646:	61 30       	cpi	r22, 0x01	; 1
+ 648:	d1 f4       	brne	.+52     	; 0x67e <DIO_s8SETPinVal+0x7c>
 		{
 			SET_BIT(*portReg[portID],pinID);
- 640:	f0 e0       	ldi	r31, 0x00	; 0
- 642:	ee 0f       	add	r30, r30
- 644:	ff 1f       	adc	r31, r31
- 646:	e8 59       	subi	r30, 0x98	; 152
- 648:	ff 4f       	sbci	r31, 0xFF	; 255
- 64a:	01 90       	ld	r0, Z+
- 64c:	f0 81       	ld	r31, Z
- 64e:	e0 2d       	mov	r30, r0
- 650:	40 81       	ld	r20, Z
- 652:	21 e0       	ldi	r18, 0x01	; 1
- 654:	30 e0       	ldi	r19, 0x00	; 0
- 656:	b9 01       	movw	r22, r18
- 658:	02 c0       	rjmp	.+4      	; 0x65e <DIO_s8SETPinVal+0x66>
- 65a:	66 0f       	add	r22, r22
- 65c:	77 1f       	adc	r23, r23
- 65e:	8a 95       	dec	r24
- 660:	e2 f7       	brpl	.-8      	; 0x65a <DIO_s8SETPinVal+0x62>
- 662:	cb 01       	movw	r24, r22
- 664:	84 2b       	or	r24, r20
- 666:	80 83       	st	Z, r24
+ 64a:	f0 e0       	ldi	r31, 0x00	; 0
+ 64c:	ee 0f       	add	r30, r30
+ 64e:	ff 1f       	adc	r31, r31
+ 650:	e8 59       	subi	r30, 0x98	; 152
+ 652:	ff 4f       	sbci	r31, 0xFF	; 255
+ 654:	01 90       	ld	r0, Z+
+ 656:	f0 81       	ld	r31, Z
+ 658:	e0 2d       	mov	r30, r0
+ 65a:	40 81       	ld	r20, Z
+ 65c:	21 e0       	ldi	r18, 0x01	; 1
+ 65e:	30 e0       	ldi	r19, 0x00	; 0
+ 660:	b9 01       	movw	r22, r18
+ 662:	02 c0       	rjmp	.+4      	; 0x668 <DIO_s8SETPinVal+0x66>
+ 664:	66 0f       	add	r22, r22
+ 666:	77 1f       	adc	r23, r23
+ 668:	8a 95       	dec	r24
+ 66a:	e2 f7       	brpl	.-8      	; 0x664 <DIO_s8SETPinVal+0x62>
+ 66c:	cb 01       	movw	r24, r22
+ 66e:	84 2b       	or	r24, r20
+ 670:	80 83       	st	Z, r24
 }
 
 
 Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
 {
 	Uchar8_t errStatus = E_OK;
- 668:	80 e0       	ldi	r24, 0x00	; 0
- 66a:	08 95       	ret
+ 672:	80 e0       	ldi	r24, 0x00	; 0
+ 674:	08 95       	ret
 			/* do nothing */
 		}
 	}
 	else
 	{
 		errStatus = E_NOK;
- 66c:	8f ef       	ldi	r24, 0xFF	; 255
- 66e:	08 95       	ret
- 670:	8f ef       	ldi	r24, 0xFF	; 255
- 672:	08 95       	ret
+ 676:	8f ef       	ldi	r24, 0xFF	; 255
+ 678:	08 95       	ret
+ 67a:	8f ef       	ldi	r24, 0xFF	; 255
+ 67c:	08 95       	ret
 }
 
 
 Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
 {
 	Uchar8_t errStatus = E_OK;
- 674:	80 e0       	ldi	r24, 0x00	; 0
+ 67e:	80 e0       	ldi	r24, 0x00	; 0
 	else
 	{
 		errStatus = E_NOK;
 	}
 	return errStatus;
 }
- 676:	08 95       	ret
+ 680:	08 95       	ret
 
-00000678 <DIO_s8TOGPinVal>:
+00000682 <DIO_s8TOGPinVal>:
 {
 	Uchar8_t errStatus = E_OK;
 	Uchar8_t portID;
 	Uchar8_t pinID;
 
 	if (enPinCopy < PIN_INVALID)
- 678:	80 32       	cpi	r24, 0x20	; 32
- 67a:	d8 f4       	brcc	.+54     	; 0x6b2 <DIO_s8TOGPinVal+0x3a>
+ 682:	80 32       	cpi	r24, 0x20	; 32
+ 684:	d8 f4       	brcc	.+54     	; 0x6bc <DIO_s8TOGPinVal+0x3a>
 	{
 		portID = enPinCopy/8;
- 67c:	e8 2f       	mov	r30, r24
- 67e:	e6 95       	lsr	r30
- 680:	e6 95       	lsr	r30
- 682:	e6 95       	lsr	r30
+ 686:	e8 2f       	mov	r30, r24
+ 688:	e6 95       	lsr	r30
+ 68a:	e6 95       	lsr	r30
+ 68c:	e6 95       	lsr	r30
 		pinID  = enPinCopy%8;
- 684:	87 70       	andi	r24, 0x07	; 7
+ 68e:	87 70       	andi	r24, 0x07	; 7
 
 		TOGGLE_BIT(*portReg[portID],pinID);
- 686:	f0 e0       	ldi	r31, 0x00	; 0
- 688:	ee 0f       	add	r30, r30
- 68a:	ff 1f       	adc	r31, r31
- 68c:	e8 59       	subi	r30, 0x98	; 152
- 68e:	ff 4f       	sbci	r31, 0xFF	; 255
- 690:	01 90       	ld	r0, Z+
- 692:	f0 81       	ld	r31, Z
- 694:	e0 2d       	mov	r30, r0
- 696:	40 81       	ld	r20, Z
- 698:	21 e0       	ldi	r18, 0x01	; 1
- 69a:	30 e0       	ldi	r19, 0x00	; 0
- 69c:	b9 01       	movw	r22, r18
- 69e:	02 c0       	rjmp	.+4      	; 0x6a4 <DIO_s8TOGPinVal+0x2c>
- 6a0:	66 0f       	add	r22, r22
- 6a2:	77 1f       	adc	r23, r23
- 6a4:	8a 95       	dec	r24
- 6a6:	e2 f7       	brpl	.-8      	; 0x6a0 <DIO_s8TOGPinVal+0x28>
- 6a8:	cb 01       	movw	r24, r22
- 6aa:	84 27       	eor	r24, r20
- 6ac:	80 83       	st	Z, r24
+ 690:	f0 e0       	ldi	r31, 0x00	; 0
+ 692:	ee 0f       	add	r30, r30
+ 694:	ff 1f       	adc	r31, r31
+ 696:	e8 59       	subi	r30, 0x98	; 152
+ 698:	ff 4f       	sbci	r31, 0xFF	; 255
+ 69a:	01 90       	ld	r0, Z+
+ 69c:	f0 81       	ld	r31, Z
+ 69e:	e0 2d       	mov	r30, r0
+ 6a0:	40 81       	ld	r20, Z
+ 6a2:	21 e0       	ldi	r18, 0x01	; 1
+ 6a4:	30 e0       	ldi	r19, 0x00	; 0
+ 6a6:	b9 01       	movw	r22, r18
+ 6a8:	02 c0       	rjmp	.+4      	; 0x6ae <DIO_s8TOGPinVal+0x2c>
+ 6aa:	66 0f       	add	r22, r22
+ 6ac:	77 1f       	adc	r23, r23
+ 6ae:	8a 95       	dec	r24
+ 6b0:	e2 f7       	brpl	.-8      	; 0x6aa <DIO_s8TOGPinVal+0x28>
+ 6b2:	cb 01       	movw	r24, r22
+ 6b4:	84 27       	eor	r24, r20
+ 6b6:	80 83       	st	Z, r24
 }
 
 
 Uchar8_t DIO_s8TOGPinVal (enu_pin enPinCopy)
 {
 	Uchar8_t errStatus = E_OK;
- 6ae:	80 e0       	ldi	r24, 0x00	; 0
- 6b0:	08 95       	ret
+ 6b8:	80 e0       	ldi	r24, 0x00	; 0
+ 6ba:	08 95       	ret
 
 		TOGGLE_BIT(*portReg[portID],pinID);
 	}
 	else
 	{
 		errStatus = E_NOK;
- 6b2:	8f ef       	ldi	r24, 0xFF	; 255
+ 6bc:	8f ef       	ldi	r24, 0xFF	; 255
 	}
 	return errStatus;
 
 }
- 6b4:	08 95       	ret
+ 6be:	08 95       	ret
 
-000006b6 <i2c_start>:
+000006c0 <i2c_init_master>:
+void i2c_init_slave (void)
+{
+	/* Set Slave Address */
+	TWAR = (SLAVE_ADDRESS << 1);
+	/* Enable I2C peripheral */
+	SET_BIT(TWCR, TWEN);
+ 6c0:	81 b1       	in	r24, 0x01	; 1
+ 6c2:	8e 7f       	andi	r24, 0xFE	; 254
+ 6c4:	81 b9       	out	0x01, r24	; 1
+ 6c6:	81 b1       	in	r24, 0x01	; 1
+ 6c8:	8d 7f       	andi	r24, 0xFD	; 253
+ 6ca:	81 b9       	out	0x01, r24	; 1
+ 6cc:	82 e0       	ldi	r24, 0x02	; 2
+ 6ce:	80 b9       	out	0x00, r24	; 0
+ 6d0:	80 ea       	ldi	r24, 0xA0	; 160
+ 6d2:	82 b9       	out	0x02, r24	; 2
+ 6d4:	86 b7       	in	r24, 0x36	; 54
+ 6d6:	84 60       	ori	r24, 0x04	; 4
+ 6d8:	86 bf       	out	0x36, r24	; 54
+ 6da:	08 95       	ret
+
+000006dc <i2c_start>:
 }
 
 
 void i2c_start(void)
 {
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
- 6b6:	84 ea       	ldi	r24, 0xA4	; 164
- 6b8:	86 bf       	out	0x36, r24	; 54
+ 6dc:	84 ea       	ldi	r24, 0xA4	; 164
+ 6de:	86 bf       	out	0x36, r24	; 54
 	/* Enable Start bit */
 //	SET_BIT(TWCR, TWSTA);
 	/* Enable I2C peripheral */
 //	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
 	while ( !(GET_BIT(TWCR,TWINT)) );
- 6ba:	06 b6       	in	r0, 0x36	; 54
- 6bc:	07 fe       	sbrs	r0, 7
- 6be:	fd cf       	rjmp	.-6      	; 0x6ba <i2c_start+0x4>
+ 6e0:	06 b6       	in	r0, 0x36	; 54
+ 6e2:	07 fe       	sbrs	r0, 7
+ 6e4:	fd cf       	rjmp	.-6      	; 0x6e0 <i2c_start+0x4>
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != START_ACK );
- 6c0:	81 b1       	in	r24, 0x01	; 1
- 6c2:	88 7f       	andi	r24, 0xF8	; 248
- 6c4:	88 30       	cpi	r24, 0x08	; 8
- 6c6:	e1 f7       	brne	.-8      	; 0x6c0 <i2c_start+0xa>
+ 6e6:	81 b1       	in	r24, 0x01	; 1
+ 6e8:	88 7f       	andi	r24, 0xF8	; 248
+ 6ea:	88 30       	cpi	r24, 0x08	; 8
+ 6ec:	e1 f7       	brne	.-8      	; 0x6e6 <i2c_start+0xa>
 	/* Disable Start bit */
 //	CLEAR_BIT(TWCR, TWSTA);
 }
- 6c8:	08 95       	ret
+ 6ee:	08 95       	ret
 
-000006ca <i2c_repeated_start>:
+000006f0 <i2c_repeated_start>:
 
 
 void i2c_repeated_start(void)
 {
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
- 6ca:	84 ea       	ldi	r24, 0xA4	; 164
- 6cc:	86 bf       	out	0x36, r24	; 54
+ 6f0:	84 ea       	ldi	r24, 0xA4	; 164
+ 6f2:	86 bf       	out	0x36, r24	; 54
 	/* Enable Start bit */
 //	SET_BIT(TWCR, TWSTA);
 	/* Enable I2C peripheral */
 //	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
 	while ( !(GET_BIT(TWCR,TWINT)) );
- 6ce:	06 b6       	in	r0, 0x36	; 54
- 6d0:	07 fe       	sbrs	r0, 7
- 6d2:	fd cf       	rjmp	.-6      	; 0x6ce <i2c_repeated_start+0x4>
+ 6f4:	06 b6       	in	r0, 0x36	; 54
+ 6f6:	07 fe       	sbrs	r0, 7
+ 6f8:	fd cf       	rjmp	.-6      	; 0x6f4 <i2c_repeated_start+0x4>
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != REP_START_ACK );
- 6d4:	81 b1       	in	r24, 0x01	; 1
- 6d6:	88 7f       	andi	r24, 0xF8	; 248
- 6d8:	80 31       	cpi	r24, 0x10	; 16
- 6da:	e1 f7       	brne	.-8      	; 0x6d4 <i2c_repeated_start+0xa>
+ 6fa:	81 b1       	in	r24, 0x01	; 1
+ 6fc:	88 7f       	andi	r24, 0xF8	; 248
+ 6fe:	80 31       	cpi	r24, 0x10	; 16
+ 700:	e1 f7       	brne	.-8      	; 0x6fa <i2c_repeated_start+0xa>
 	/* Disable Start bit */
 //	CLEAR_BIT(TWCR, TWSTA);
 }
- 6dc:	08 95       	ret
+ 702:	08 95       	ret
 
-000006de <i2c_send_slave_address_with_write_req>:
+00000704 <i2c_send_slave_address_with_write_req>:
 
 
 void i2c_send_slave_address_with_write_req(Uchar8_t slave_address)
 {
 	/* Putting slave address to TWDR register to be transmitted */
 	TWDR = (slave_address<<1);
- 6de:	88 0f       	add	r24, r24
- 6e0:	83 b9       	out	0x03, r24	; 3
+ 704:	88 0f       	add	r24, r24
+ 706:	83 b9       	out	0x03, r24	; 3
 	/* Set bit 0 on TWDR register to make write operation */
 	CLEAR_BIT(TWDR, R_W);
- 6e2:	83 b1       	in	r24, 0x03	; 3
- 6e4:	8e 7f       	andi	r24, 0xFE	; 254
- 6e6:	83 b9       	out	0x03, r24	; 3
+ 708:	83 b1       	in	r24, 0x03	; 3
+ 70a:	8e 7f       	andi	r24, 0xFE	; 254
+ 70c:	83 b9       	out	0x03, r24	; 3
 
 	TWCR = (1<<TWINT) | (1<<TWEN);
- 6e8:	84 e8       	ldi	r24, 0x84	; 132
- 6ea:	86 bf       	out	0x36, r24	; 54
+ 70e:	84 e8       	ldi	r24, 0x84	; 132
+ 710:	86 bf       	out	0x36, r24	; 54
 	/* Clear TWINT flag */
 //	SET_BIT(TWCR, TWINT);
 	/* Enable I2C peripheral */
 //	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
 	while ( !(GET_BIT(TWCR,TWINT)) );
- 6ec:	06 b6       	in	r0, 0x36	; 54
- 6ee:	07 fe       	sbrs	r0, 7
- 6f0:	fd cf       	rjmp	.-6      	; 0x6ec <i2c_send_slave_address_with_write_req+0xe>
+ 712:	06 b6       	in	r0, 0x36	; 54
+ 714:	07 fe       	sbrs	r0, 7
+ 716:	fd cf       	rjmp	.-6      	; 0x712 <i2c_send_slave_address_with_write_req+0xe>
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != SLAVE_ADD_AND_WR_ACK );
- 6f2:	81 b1       	in	r24, 0x01	; 1
- 6f4:	88 7f       	andi	r24, 0xF8	; 248
- 6f6:	88 31       	cpi	r24, 0x18	; 24
- 6f8:	e1 f7       	brne	.-8      	; 0x6f2 <i2c_send_slave_address_with_write_req+0x14>
+ 718:	81 b1       	in	r24, 0x01	; 1
+ 71a:	88 7f       	andi	r24, 0xF8	; 248
+ 71c:	88 31       	cpi	r24, 0x18	; 24
+ 71e:	e1 f7       	brne	.-8      	; 0x718 <i2c_send_slave_address_with_write_req+0x14>
 }
- 6fa:	08 95       	ret
+ 720:	08 95       	ret
 
-000006fc <i2c_send_slave_address_with_read_req>:
+00000722 <i2c_send_slave_address_with_read_req>:
 
 
 void i2c_send_slave_address_with_read_req(Uchar8_t slave_address)
 {
 	TWDR = (slave_address<<1);
- 6fc:	88 0f       	add	r24, r24
- 6fe:	83 b9       	out	0x03, r24	; 3
+ 722:	88 0f       	add	r24, r24
+ 724:	83 b9       	out	0x03, r24	; 3
 	TWDR |= (1<<0);
- 700:	83 b1       	in	r24, 0x03	; 3
- 702:	81 60       	ori	r24, 0x01	; 1
- 704:	83 b9       	out	0x03, r24	; 3
+ 726:	83 b1       	in	r24, 0x03	; 3
+ 728:	81 60       	ori	r24, 0x01	; 1
+ 72a:	83 b9       	out	0x03, r24	; 3
 	TWCR = (1<<TWINT) | (1<<TWEN);
- 706:	84 e8       	ldi	r24, 0x84	; 132
- 708:	86 bf       	out	0x36, r24	; 54
+ 72c:	84 e8       	ldi	r24, 0x84	; 132
+ 72e:	86 bf       	out	0x36, r24	; 54
 #endif
 /*********************************************************************************/
 	/* Enable I2C peripheral */
 //	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
 	while ( !(GET_BIT(TWCR,TWINT)) );
- 70a:	06 b6       	in	r0, 0x36	; 54
- 70c:	07 fe       	sbrs	r0, 7
- 70e:	fd cf       	rjmp	.-6      	; 0x70a <i2c_send_slave_address_with_read_req+0xe>
+ 730:	06 b6       	in	r0, 0x36	; 54
+ 732:	07 fe       	sbrs	r0, 7
+ 734:	fd cf       	rjmp	.-6      	; 0x730 <i2c_send_slave_address_with_read_req+0xe>
 	/* Waiting if this condition becoming true */
-//	while ( (TWSR & 0xF8) != SLAVE_ADD_AND_RD_ACK );
+	while ( (TWSR & 0xF8) != SLAVE_ADD_AND_RD_ACK );
+ 736:	81 b1       	in	r24, 0x01	; 1
+ 738:	88 7f       	andi	r24, 0xF8	; 248
+ 73a:	80 34       	cpi	r24, 0x40	; 64
+ 73c:	e1 f7       	brne	.-8      	; 0x736 <i2c_send_slave_address_with_read_req+0x14>
 }
- 710:	08 95       	ret
+ 73e:	08 95       	ret
 
-00000712 <i2c_write_byte>:
+00000740 <i2c_write_byte>:
 
 void i2c_write_byte(Uchar8_t byte)
 {
 
 	/* Putting data to TWDR register to be transmitted */
 	TWDR = byte;
- 712:	83 b9       	out	0x03, r24	; 3
+ 740:	83 b9       	out	0x03, r24	; 3
 
 //	TWCR = (1<<TWINT) | (1<<TWEN);
 	/* Clear TWINT flag */
 	SET_BIT(TWCR, TWINT);
- 714:	86 b7       	in	r24, 0x36	; 54
- 716:	80 68       	ori	r24, 0x80	; 128
- 718:	86 bf       	out	0x36, r24	; 54
+ 742:	86 b7       	in	r24, 0x36	; 54
+ 744:	80 68       	ori	r24, 0x80	; 128
+ 746:	86 bf       	out	0x36, r24	; 54
 	/* Enable I2C peripheral */
 	SET_BIT(TWCR, TWEN);
- 71a:	86 b7       	in	r24, 0x36	; 54
- 71c:	84 60       	ori	r24, 0x04	; 4
- 71e:	86 bf       	out	0x36, r24	; 54
+ 748:	86 b7       	in	r24, 0x36	; 54
+ 74a:	84 60       	ori	r24, 0x04	; 4
+ 74c:	86 bf       	out	0x36, r24	; 54
 	/* Waiting for TWINT flag to be set */
 	while ( !(GET_BIT(TWCR,TWINT)) );
- 720:	06 b6       	in	r0, 0x36	; 54
- 722:	07 fe       	sbrs	r0, 7
- 724:	fd cf       	rjmp	.-6      	; 0x720 <i2c_write_byte+0xe>
+ 74e:	06 b6       	in	r0, 0x36	; 54
+ 750:	07 fe       	sbrs	r0, 7
+ 752:	fd cf       	rjmp	.-6      	; 0x74e <i2c_write_byte+0xe>
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != WR_BYTE_ACK );
- 726:	81 b1       	in	r24, 0x01	; 1
- 728:	88 7f       	andi	r24, 0xF8	; 248
- 72a:	88 32       	cpi	r24, 0x28	; 40
- 72c:	e1 f7       	brne	.-8      	; 0x726 <i2c_write_byte+0x14>
+ 754:	81 b1       	in	r24, 0x01	; 1
+ 756:	88 7f       	andi	r24, 0xF8	; 248
+ 758:	88 32       	cpi	r24, 0x28	; 40
+ 75a:	e1 f7       	brne	.-8      	; 0x754 <i2c_write_byte+0x14>
 }
- 72e:	08 95       	ret
+ 75c:	08 95       	ret
 
-00000730 <i2c_read_byte>:
+0000075e <i2c_read_byte>:
 
 
 Uchar8_t i2c_read_byte(void)
 {
 	TWCR = (1<<TWINT) | (1<<TWEN);
- 730:	84 e8       	ldi	r24, 0x84	; 132
- 732:	86 bf       	out	0x36, r24	; 54
+ 75e:	84 e8       	ldi	r24, 0x84	; 132
+ 760:	86 bf       	out	0x36, r24	; 54
 	/* Clear TWINT flag */
 //	SET_BIT(TWCR, TWINT);
 	/* Enable I2C peripheral */
 //	SET_BIT(TWCR, TWEN);
 	/* Waiting for TWINT flag to be set */
 	while ( !(GET_BIT(TWCR,TWINT)) );
- 734:	06 b6       	in	r0, 0x36	; 54
- 736:	07 fe       	sbrs	r0, 7
- 738:	fd cf       	rjmp	.-6      	; 0x734 <i2c_read_byte+0x4>
+ 762:	06 b6       	in	r0, 0x36	; 54
+ 764:	07 fe       	sbrs	r0, 7
+ 766:	fd cf       	rjmp	.-6      	; 0x762 <i2c_read_byte+0x4>
 #elif MI2C_ACK_STATUS == MI2C_ACK_ENABLE
 	/* Waiting if this condition becoming true */
 	while ( (TWSR & 0xF8) != RD_BYTE_WITH_ACK );
 #endif
 /*********************************************************************************/
 	return TWDR;
- 73a:	83 b1       	in	r24, 0x03	; 3
+ 768:	83 b1       	in	r24, 0x03	; 3
 }
- 73c:	08 95       	ret
+ 76a:	08 95       	ret
 
-0000073e <i2c_stop>:
+0000076c <i2c_stop>:
 
 void i2c_stop(void)
 {
 //	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
 	/* Clear TWINT flag */
 	SET_BIT(TWCR, TWINT);
- 73e:	86 b7       	in	r24, 0x36	; 54
- 740:	80 68       	ori	r24, 0x80	; 128
- 742:	86 bf       	out	0x36, r24	; 54
+ 76c:	86 b7       	in	r24, 0x36	; 54
+ 76e:	80 68       	ori	r24, 0x80	; 128
+ 770:	86 bf       	out	0x36, r24	; 54
 	/* Enable Stop bit */
 	SET_BIT(TWCR, TWSTO);
- 744:	86 b7       	in	r24, 0x36	; 54
- 746:	80 61       	ori	r24, 0x10	; 16
- 748:	86 bf       	out	0x36, r24	; 54
+ 772:	86 b7       	in	r24, 0x36	; 54
+ 774:	80 61       	ori	r24, 0x10	; 16
+ 776:	86 bf       	out	0x36, r24	; 54
 	/* Enable I2C peripheral */
 	SET_BIT(TWCR, TWEN);
- 74a:	86 b7       	in	r24, 0x36	; 54
- 74c:	84 60       	ori	r24, 0x04	; 4
- 74e:	86 bf       	out	0x36, r24	; 54
+ 778:	86 b7       	in	r24, 0x36	; 54
+ 77a:	84 60       	ori	r24, 0x04	; 4
+ 77c:	86 bf       	out	0x36, r24	; 54
+ 77e:	08 95       	ret
 
-	while(TWCR&(1<<TWSTO));
- 750:	06 b6       	in	r0, 0x36	; 54
- 752:	04 fc       	sbrc	r0, 4
- 754:	fd cf       	rjmp	.-6      	; 0x750 <i2c_stop+0x12>
-
-//	CLEAR_BIT(TWCR, TWSTA);
-}
- 756:	08 95       	ret
-
-00000758 <SPI_SlaveInit>:
+00000780 <SPI_SlaveInit>:
 	{
 		return SPI_NOK;
 	}
 	
 	return SPI_OK;
 }
- 758:	8d b1       	in	r24, 0x0d	; 13
- 75a:	8f 7e       	andi	r24, 0xEF	; 239
- 75c:	8d b9       	out	0x0d, r24	; 13
- 75e:	8d b1       	in	r24, 0x0d	; 13
- 760:	87 7f       	andi	r24, 0xF7	; 247
- 762:	8d b9       	out	0x0d, r24	; 13
- 764:	8d b1       	in	r24, 0x0d	; 13
- 766:	8b 7f       	andi	r24, 0xFB	; 251
- 768:	8d b9       	out	0x0d, r24	; 13
- 76a:	8d b1       	in	r24, 0x0d	; 13
- 76c:	80 68       	ori	r24, 0x80	; 128
- 76e:	8d b9       	out	0x0d, r24	; 13
- 770:	8d b1       	in	r24, 0x0d	; 13
- 772:	80 64       	ori	r24, 0x40	; 64
- 774:	8d b9       	out	0x0d, r24	; 13
- 776:	08 95       	ret
+ 780:	8d b1       	in	r24, 0x0d	; 13
+ 782:	8f 7e       	andi	r24, 0xEF	; 239
+ 784:	8d b9       	out	0x0d, r24	; 13
+ 786:	8d b1       	in	r24, 0x0d	; 13
+ 788:	87 7f       	andi	r24, 0xF7	; 247
+ 78a:	8d b9       	out	0x0d, r24	; 13
+ 78c:	8d b1       	in	r24, 0x0d	; 13
+ 78e:	8b 7f       	andi	r24, 0xFB	; 251
+ 790:	8d b9       	out	0x0d, r24	; 13
+ 792:	8d b1       	in	r24, 0x0d	; 13
+ 794:	80 68       	ori	r24, 0x80	; 128
+ 796:	8d b9       	out	0x0d, r24	; 13
+ 798:	8d b1       	in	r24, 0x0d	; 13
+ 79a:	80 64       	ori	r24, 0x40	; 64
+ 79c:	8d b9       	out	0x0d, r24	; 13
+ 79e:	08 95       	ret
 
-00000778 <__vector_12>:
+000007a0 <__vector_12>:
 
 /*************************************************************************************************************
  * 													  ISRs
  ************************************************************************************************************/
 ISR(SPI_STC_INT)
 {
- 778:	1f 92       	push	r1
- 77a:	0f 92       	push	r0
- 77c:	0f b6       	in	r0, 0x3f	; 63
- 77e:	0f 92       	push	r0
- 780:	11 24       	eor	r1, r1
- 782:	2f 93       	push	r18
- 784:	3f 93       	push	r19
- 786:	8f 93       	push	r24
- 788:	9f 93       	push	r25
- 78a:	ef 93       	push	r30
- 78c:	ff 93       	push	r31
+ 7a0:	1f 92       	push	r1
+ 7a2:	0f 92       	push	r0
+ 7a4:	0f b6       	in	r0, 0x3f	; 63
+ 7a6:	0f 92       	push	r0
+ 7a8:	11 24       	eor	r1, r1
+ 7aa:	2f 93       	push	r18
+ 7ac:	3f 93       	push	r19
+ 7ae:	8f 93       	push	r24
+ 7b0:	9f 93       	push	r25
+ 7b2:	ef 93       	push	r30
+ 7b4:	ff 93       	push	r31
 	/*------------------------ Reception ------------------------*/
 	u8_g_SlaveReceive = SPDR;
- 78e:	8f b1       	in	r24, 0x0f	; 15
- 790:	80 93 0d 02 	sts	0x020D, r24	; 0x80020d <u8_g_SlaveReceive>
+ 7b6:	8f b1       	in	r24, 0x0f	; 15
+ 7b8:	80 93 11 02 	sts	0x0211, r24	; 0x800211 <u8_g_SlaveReceive>
 	//DIO_s8SETPortVal(DIO_PORTA, u8_g_SlaveReceive);
 	
 	/* If Max size is exceeded, start overriding data */
 	if(u8_g_SlaveRxIndex == SPI_BUFFER_SIZE) u8_g_SlaveRxIndex = 0;
- 794:	90 91 e0 01 	lds	r25, 0x01E0	; 0x8001e0 <u8_g_SlaveRxIndex>
- 798:	9f 30       	cpi	r25, 0x0F	; 15
- 79a:	11 f4       	brne	.+4      	; 0x7a0 <__vector_12+0x28>
- 79c:	10 92 e0 01 	sts	0x01E0, r1	; 0x8001e0 <u8_g_SlaveRxIndex>
+ 7bc:	90 91 e4 01 	lds	r25, 0x01E4	; 0x8001e4 <u8_g_SlaveRxIndex>
+ 7c0:	9f 30       	cpi	r25, 0x0F	; 15
+ 7c2:	11 f4       	brne	.+4      	; 0x7c8 <__vector_12+0x28>
+ 7c4:	10 92 e4 01 	sts	0x01E4, r1	; 0x8001e4 <u8_g_SlaveRxIndex>
 	if(u8_g_SlaveReceive != DATA_END)
- 7a0:	83 32       	cpi	r24, 0x23	; 35
- 7a2:	59 f0       	breq	.+22     	; 0x7ba <__vector_12+0x42>
+ 7c8:	83 32       	cpi	r24, 0x23	; 35
+ 7ca:	59 f0       	breq	.+22     	; 0x7e2 <__vector_12+0x42>
 	{
 		/* Store received byte in buffer */
 		arr_g_SlaveRxBuffer[u8_g_SlaveRxIndex] = u8_g_SlaveReceive;
- 7a4:	90 91 e0 01 	lds	r25, 0x01E0	; 0x8001e0 <u8_g_SlaveRxIndex>
- 7a8:	e9 2f       	mov	r30, r25
- 7aa:	f0 e0       	ldi	r31, 0x00	; 0
- 7ac:	e1 53       	subi	r30, 0x31	; 49
- 7ae:	fe 4f       	sbci	r31, 0xFE	; 254
- 7b0:	80 83       	st	Z, r24
+ 7cc:	90 91 e4 01 	lds	r25, 0x01E4	; 0x8001e4 <u8_g_SlaveRxIndex>
+ 7d0:	e9 2f       	mov	r30, r25
+ 7d2:	f0 e0       	ldi	r31, 0x00	; 0
+ 7d4:	ed 52       	subi	r30, 0x2D	; 45
+ 7d6:	fe 4f       	sbci	r31, 0xFE	; 254
+ 7d8:	80 83       	st	Z, r24
 		u8_g_SlaveRxIndex++;
- 7b2:	9f 5f       	subi	r25, 0xFF	; 255
- 7b4:	90 93 e0 01 	sts	0x01E0, r25	; 0x8001e0 <u8_g_SlaveRxIndex>
- 7b8:	04 c0       	rjmp	.+8      	; 0x7c2 <__vector_12+0x4a>
+ 7da:	9f 5f       	subi	r25, 0xFF	; 255
+ 7dc:	90 93 e4 01 	sts	0x01E4, r25	; 0x8001e4 <u8_g_SlaveRxIndex>
+ 7e0:	04 c0       	rjmp	.+8      	; 0x7ea <__vector_12+0x4a>
 	}
 	else
 	{	// Get the number of received bytes
 		u8_g_SlaveRxLen = u8_g_SlaveRxIndex;
- 7ba:	80 91 e0 01 	lds	r24, 0x01E0	; 0x8001e0 <u8_g_SlaveRxIndex>
- 7be:	80 93 0e 02 	sts	0x020E, r24	; 0x80020e <u8_g_SlaveRxLen>
+ 7e2:	80 91 e4 01 	lds	r24, 0x01E4	; 0x8001e4 <u8_g_SlaveRxIndex>
+ 7e6:	80 93 12 02 	sts	0x0212, r24	; 0x800212 <u8_g_SlaveRxLen>
 	}
 	
 	/*------------------------- Sending -------------------------*/
 	//u8_g_SlaveTxIndex++;
 	if((u8_g_SlaveTxIndex < u8_g_SlaveTxLen) && (pu8_g_SlaveTxPtr != null))
- 7c2:	80 91 e1 01 	lds	r24, 0x01E1	; 0x8001e1 <u8_g_SlaveTxIndex>
- 7c6:	90 91 0f 02 	lds	r25, 0x020F	; 0x80020f <u8_g_SlaveTxLen>
- 7ca:	89 17       	cp	r24, r25
- 7cc:	88 f4       	brcc	.+34     	; 0x7f0 <__vector_12+0x78>
- 7ce:	20 91 de 01 	lds	r18, 0x01DE	; 0x8001de <pu8_g_SlaveTxPtr>
- 7d2:	30 91 df 01 	lds	r19, 0x01DF	; 0x8001df <pu8_g_SlaveTxPtr+0x1>
- 7d6:	21 15       	cp	r18, r1
- 7d8:	31 05       	cpc	r19, r1
- 7da:	51 f0       	breq	.+20     	; 0x7f0 <__vector_12+0x78>
+ 7ea:	80 91 e5 01 	lds	r24, 0x01E5	; 0x8001e5 <u8_g_SlaveTxIndex>
+ 7ee:	90 91 13 02 	lds	r25, 0x0213	; 0x800213 <u8_g_SlaveTxLen>
+ 7f2:	89 17       	cp	r24, r25
+ 7f4:	88 f4       	brcc	.+34     	; 0x818 <__DATA_REGION_LENGTH__+0x18>
+ 7f6:	20 91 e2 01 	lds	r18, 0x01E2	; 0x8001e2 <pu8_g_SlaveTxPtr>
+ 7fa:	30 91 e3 01 	lds	r19, 0x01E3	; 0x8001e3 <pu8_g_SlaveTxPtr+0x1>
+ 7fe:	21 15       	cp	r18, r1
+ 800:	31 05       	cpc	r19, r1
+ 802:	51 f0       	breq	.+20     	; 0x818 <__DATA_REGION_LENGTH__+0x18>
 	{
 		SPDR = pu8_g_SlaveTxPtr[u8_g_SlaveTxIndex++];
- 7dc:	91 e0       	ldi	r25, 0x01	; 1
- 7de:	98 0f       	add	r25, r24
- 7e0:	90 93 e1 01 	sts	0x01E1, r25	; 0x8001e1 <u8_g_SlaveTxIndex>
- 7e4:	f9 01       	movw	r30, r18
- 7e6:	e8 0f       	add	r30, r24
- 7e8:	f1 1d       	adc	r31, r1
- 7ea:	80 81       	ld	r24, Z
- 7ec:	8f b9       	out	0x0f, r24	; 15
- 7ee:	04 c0       	rjmp	.+8      	; 0x7f8 <__vector_12+0x80>
+ 804:	91 e0       	ldi	r25, 0x01	; 1
+ 806:	98 0f       	add	r25, r24
+ 808:	90 93 e5 01 	sts	0x01E5, r25	; 0x8001e5 <u8_g_SlaveTxIndex>
+ 80c:	f9 01       	movw	r30, r18
+ 80e:	e8 0f       	add	r30, r24
+ 810:	f1 1d       	adc	r31, r1
+ 812:	80 81       	ld	r24, Z
+ 814:	8f b9       	out	0x0f, r24	; 15
+ 816:	04 c0       	rjmp	.+8      	; 0x820 <__DATA_REGION_LENGTH__+0x20>
 	}
 	else if(u8_g_SlaveTxIndex >= u8_g_SlaveTxLen)
- 7f0:	89 17       	cp	r24, r25
- 7f2:	10 f0       	brcs	.+4      	; 0x7f8 <__vector_12+0x80>
+ 818:	89 17       	cp	r24, r25
+ 81a:	10 f0       	brcs	.+4      	; 0x820 <__DATA_REGION_LENGTH__+0x20>
 	{
 		SPDR = DATA_END;
- 7f4:	83 e2       	ldi	r24, 0x23	; 35
- 7f6:	8f b9       	out	0x0f, r24	; 15
+ 81c:	83 e2       	ldi	r24, 0x23	; 35
+ 81e:	8f b9       	out	0x0f, r24	; 15
 	}
- 7f8:	ff 91       	pop	r31
- 7fa:	ef 91       	pop	r30
- 7fc:	9f 91       	pop	r25
- 7fe:	8f 91       	pop	r24
- 800:	3f 91       	pop	r19
- 802:	2f 91       	pop	r18
- 804:	0f 90       	pop	r0
- 806:	0f be       	out	0x3f, r0	; 63
- 808:	0f 90       	pop	r0
- 80a:	1f 90       	pop	r1
- 80c:	18 95       	reti
+ 820:	ff 91       	pop	r31
+ 822:	ef 91       	pop	r30
+ 824:	9f 91       	pop	r25
+ 826:	8f 91       	pop	r24
+ 828:	3f 91       	pop	r19
+ 82a:	2f 91       	pop	r18
+ 82c:	0f 90       	pop	r0
+ 82e:	0f be       	out	0x3f, r0	; 63
+ 830:	0f 90       	pop	r0
+ 832:	1f 90       	pop	r1
+ 834:	18 95       	reti
 
-0000080e <USART_init>:
+00000836 <USART_init>:
 	CLEAR_BIT(UCSRB,UCSZ2);
 	
 	#elif USART_SET_DATA_SIZE == USART_DATA_SIZE_8
 	SET_BIT(UCSRC,UCSZ0);
 	SET_BIT(UCSRC,UCSZ1);
 	CLEAR_BIT(UCSRB,UCSZ2);
- 80e:	8a b1       	in	r24, 0x0a	; 10
- 810:	8b 7f       	andi	r24, 0xFB	; 251
+ 836:	8a b1       	in	r24, 0x0a	; 10
+ 838:	8b 7f       	andi	r24, 0xFB	; 251
 	
 	#endif
 	
 	/* select USART Speed (Normal,Double) */
 	#if USART_SET_SPEED == USART_NORMAL_SPEED
 	CLEAR_BIT(UCSRA,U2X);
- 812:	9b b1       	in	r25, 0x0b	; 11
- 814:	9d 7f       	andi	r25, 0xFD	; 253
- 816:	9b b9       	out	0x0b, r25	; 11
+ 83a:	9b b1       	in	r25, 0x0b	; 11
+ 83c:	9d 7f       	andi	r25, 0xFD	; 253
+ 83e:	9b b9       	out	0x0b, r25	; 11
 	return USART_NOT_OK;
 	
 	#endif
 	/* Enable Transmit and receive bits in UCSRB*/
 	SET_BIT(UCSRB,RXEN);
 	SET_BIT(UCSRB,TXEN);
- 818:	88 61       	ori	r24, 0x18	; 24
- 81a:	8a b9       	out	0x0a, r24	; 10
+ 840:	88 61       	ori	r24, 0x18	; 24
+ 842:	8a b9       	out	0x0a, r24	; 10
 	
 	/* assign UBRRL and UBRRH with calculated BAUD_PRESCALLER */
 	UBRRL = BAUD_PRESCALLER;
- 81c:	83 e3       	ldi	r24, 0x33	; 51
- 81e:	89 b9       	out	0x09, r24	; 9
+ 844:	83 e3       	ldi	r24, 0x33	; 51
+ 846:	89 b9       	out	0x09, r24	; 9
 	UBRRH = (BAUD_PRESCALLER>>8);
- 820:	10 bc       	out	0x20, r1	; 32
+ 848:	10 bc       	out	0x20, r1	; 32
 	
    return USART_OK;
 }
- 822:	80 e0       	ldi	r24, 0x00	; 0
- 824:	08 95       	ret
+ 84a:	80 e0       	ldi	r24, 0x00	; 0
+ 84c:	08 95       	ret
 
-00000826 <USART_sendData>:
+0000084e <USART_sendData>:
 EN_USART_ERROR USART_sendData(Uchar8_t data)
 {
 	// WAIT UNTIL ISEMPTY FLAG IS SET
 	while(!GET_BIT(UCSRA,UDRE));
- 826:	5d 9b       	sbis	0x0b, 5	; 11
- 828:	fe cf       	rjmp	.-4      	; 0x826 <USART_sendData>
+ 84e:	5d 9b       	sbis	0x0b, 5	; 11
+ 850:	fe cf       	rjmp	.-4      	; 0x84e <USART_sendData>
 	
 	// assign data to UDR register to be sent
 	UDR = data;
- 82a:	8c b9       	out	0x0c, r24	; 12
+ 852:	8c b9       	out	0x0c, r24	; 12
 	
 	return USART_OK;
 }
- 82c:	80 e0       	ldi	r24, 0x00	; 0
- 82e:	08 95       	ret
+ 854:	80 e0       	ldi	r24, 0x00	; 0
+ 856:	08 95       	ret
 
-00000830 <USART_receiveData>:
+00000858 <USART_receiveData>:
 Uchar8_t USART_receiveData(void)
 {
 	// WAIT UNTIL Recieve FLAG IS SET
 	while(!GET_BIT(UCSRA,RXC));
- 830:	5f 9b       	sbis	0x0b, 7	; 11
- 832:	fe cf       	rjmp	.-4      	; 0x830 <USART_receiveData>
+ 858:	5f 9b       	sbis	0x0b, 7	; 11
+ 85a:	fe cf       	rjmp	.-4      	; 0x858 <USART_receiveData>
 	return UDR;
 }
- 834:	8c b1       	in	r24, 0x0c	; 12
- 836:	08 95       	ret
+ 85c:	8c b1       	in	r24, 0x0c	; 12
+ 85e:	08 95       	ret
 
-00000838 <USART_sendSTRING>:
+00000860 <USART_sendSTRING>:
 void USART_sendSTRING(Uchar8_t * str)
 {
- 838:	0f 93       	push	r16
- 83a:	1f 93       	push	r17
- 83c:	cf 93       	push	r28
- 83e:	8c 01       	movw	r16, r24
-	Uchar8_t COUNTER = 0;
- 840:	c0 e0       	ldi	r28, 0x00	; 0
-	while(str[COUNTER] != null)
- 842:	03 c0       	rjmp	.+6      	; 0x84a <USART_sendSTRING+0x12>
-	{
-		USART_sendData(str[COUNTER]);
- 844:	0e 94 13 04 	call	0x826	; 0x826 <USART_sendData>
-		COUNTER++;
- 848:	cf 5f       	subi	r28, 0xFF	; 255
-	return UDR;
-}
-void USART_sendSTRING(Uchar8_t * str)
-{
-	Uchar8_t COUNTER = 0;
-	while(str[COUNTER] != null)
- 84a:	f8 01       	movw	r30, r16
- 84c:	ec 0f       	add	r30, r28
- 84e:	f1 1d       	adc	r31, r1
- 850:	80 81       	ld	r24, Z
- 852:	81 11       	cpse	r24, r1
- 854:	f7 cf       	rjmp	.-18     	; 0x844 <USART_sendSTRING+0xc>
-	{
-		USART_sendData(str[COUNTER]);
-		COUNTER++;
-	}
-}
- 856:	cf 91       	pop	r28
- 858:	1f 91       	pop	r17
- 85a:	0f 91       	pop	r16
- 85c:	08 95       	ret
-
-0000085e <USART_receiveSTRING>:
-void USART_receiveSTRING(Uchar8_t * str ,Uchar8_t size )
-{
- 85e:	0f 93       	push	r16
- 860:	1f 93       	push	r17
- 862:	cf 93       	push	r28
- 864:	df 93       	push	r29
+ 860:	0f 93       	push	r16
+ 862:	1f 93       	push	r17
+ 864:	cf 93       	push	r28
  866:	8c 01       	movw	r16, r24
- 868:	d6 2f       	mov	r29, r22
 	Uchar8_t COUNTER = 0;
- 86a:	c0 e0       	ldi	r28, 0x00	; 0
-	while(COUNTER < size-1)
- 86c:	0b c0       	rjmp	.+22     	; 0x884 <__stack+0x25>
+ 868:	c0 e0       	ldi	r28, 0x00	; 0
+	while(str[COUNTER] != null)
+ 86a:	03 c0       	rjmp	.+6      	; 0x872 <USART_sendSTRING+0x12>
 	{
-		
-		str[COUNTER]= USART_receiveData();
- 86e:	0e 94 18 04 	call	0x830	; 0x830 <USART_receiveData>
+		USART_sendData(str[COUNTER]);
+ 86c:	0e 94 27 04 	call	0x84e	; 0x84e <USART_sendData>
+		COUNTER++;
+ 870:	cf 5f       	subi	r28, 0xFF	; 255
+	return UDR;
+}
+void USART_sendSTRING(Uchar8_t * str)
+{
+	Uchar8_t COUNTER = 0;
+	while(str[COUNTER] != null)
  872:	f8 01       	movw	r30, r16
  874:	ec 0f       	add	r30, r28
  876:	f1 1d       	adc	r31, r1
- 878:	80 83       	st	Z, r24
-		if(str[COUNTER] == ENTER_KEY)break;
- 87a:	8d 30       	cpi	r24, 0x0D	; 13
- 87c:	59 f0       	breq	.+22     	; 0x894 <__stack+0x35>
+ 878:	80 81       	ld	r24, Z
+ 87a:	81 11       	cpse	r24, r1
+ 87c:	f7 cf       	rjmp	.-18     	; 0x86c <USART_sendSTRING+0xc>
+	{
 		USART_sendData(str[COUNTER]);
- 87e:	0e 94 13 04 	call	0x826	; 0x826 <USART_sendData>
 		COUNTER++;
- 882:	cf 5f       	subi	r28, 0xFF	; 255
+	}
+}
+ 87e:	cf 91       	pop	r28
+ 880:	1f 91       	pop	r17
+ 882:	0f 91       	pop	r16
+ 884:	08 95       	ret
+
+00000886 <USART_receiveSTRING>:
+void USART_receiveSTRING(Uchar8_t * str ,Uchar8_t size )
+{
+ 886:	0f 93       	push	r16
+ 888:	1f 93       	push	r17
+ 88a:	cf 93       	push	r28
+ 88c:	df 93       	push	r29
+ 88e:	8c 01       	movw	r16, r24
+ 890:	d6 2f       	mov	r29, r22
+	Uchar8_t COUNTER = 0;
+ 892:	c0 e0       	ldi	r28, 0x00	; 0
+	while(COUNTER < size-1)
+ 894:	0b c0       	rjmp	.+22     	; 0x8ac <USART_receiveSTRING+0x26>
+	{
+		
+		str[COUNTER]= USART_receiveData();
+ 896:	0e 94 2c 04 	call	0x858	; 0x858 <USART_receiveData>
+ 89a:	f8 01       	movw	r30, r16
+ 89c:	ec 0f       	add	r30, r28
+ 89e:	f1 1d       	adc	r31, r1
+ 8a0:	80 83       	st	Z, r24
+		if(str[COUNTER] == ENTER_KEY)break;
+ 8a2:	8d 30       	cpi	r24, 0x0D	; 13
+ 8a4:	59 f0       	breq	.+22     	; 0x8bc <USART_receiveSTRING+0x36>
+		USART_sendData(str[COUNTER]);
+ 8a6:	0e 94 27 04 	call	0x84e	; 0x84e <USART_sendData>
+		COUNTER++;
+ 8aa:	cf 5f       	subi	r28, 0xFF	; 255
 	}
 }
 void USART_receiveSTRING(Uchar8_t * str ,Uchar8_t size )
 {
 	Uchar8_t COUNTER = 0;
 	while(COUNTER < size-1)
- 884:	2c 2f       	mov	r18, r28
- 886:	30 e0       	ldi	r19, 0x00	; 0
- 888:	8d 2f       	mov	r24, r29
- 88a:	90 e0       	ldi	r25, 0x00	; 0
- 88c:	01 97       	sbiw	r24, 0x01	; 1
- 88e:	28 17       	cp	r18, r24
- 890:	39 07       	cpc	r19, r25
- 892:	6c f3       	brlt	.-38     	; 0x86e <__stack+0xf>
+ 8ac:	2c 2f       	mov	r18, r28
+ 8ae:	30 e0       	ldi	r19, 0x00	; 0
+ 8b0:	8d 2f       	mov	r24, r29
+ 8b2:	90 e0       	ldi	r25, 0x00	; 0
+ 8b4:	01 97       	sbiw	r24, 0x01	; 1
+ 8b6:	28 17       	cp	r18, r24
+ 8b8:	39 07       	cpc	r19, r25
+ 8ba:	6c f3       	brlt	.-38     	; 0x896 <USART_receiveSTRING+0x10>
 		str[COUNTER]= USART_receiveData();
 		if(str[COUNTER] == ENTER_KEY)break;
 		USART_sendData(str[COUNTER]);
 		COUNTER++;
 	}
 	str[COUNTER] = null;
- 894:	f8 01       	movw	r30, r16
- 896:	ec 0f       	add	r30, r28
- 898:	f1 1d       	adc	r31, r1
- 89a:	10 82       	st	Z, r1
+ 8bc:	f8 01       	movw	r30, r16
+ 8be:	ec 0f       	add	r30, r28
+ 8c0:	f1 1d       	adc	r31, r1
+ 8c2:	10 82       	st	Z, r1
 }
- 89c:	df 91       	pop	r29
- 89e:	cf 91       	pop	r28
- 8a0:	1f 91       	pop	r17
- 8a2:	0f 91       	pop	r16
- 8a4:	08 95       	ret
+ 8c4:	df 91       	pop	r29
+ 8c6:	cf 91       	pop	r28
+ 8c8:	1f 91       	pop	r17
+ 8ca:	0f 91       	pop	r16
+ 8cc:	08 95       	ret
 
-000008a6 <_exit>:
- 8a6:	f8 94       	cli
+000008ce <_exit>:
+ 8ce:	f8 94       	cli
 
-000008a8 <__stop_program>:
- 8a8:	ff cf       	rjmp	.-2      	; 0x8a8 <__stop_program>
+000008d0 <__stop_program>:
+ 8d0:	ff cf       	rjmp	.-2      	; 0x8d0 <__stop_program>

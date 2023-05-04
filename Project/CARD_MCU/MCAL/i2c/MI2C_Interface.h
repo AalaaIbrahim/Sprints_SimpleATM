@@ -46,6 +46,7 @@
 #define SLAVE_ADD_RCVD_WR_REQ    0x60 // means that slave address is received with read req
 #define SLAVE_DATA_RECEIVED      0x80 // means that read byte req is received
 #define SLAVE_BYTE_TRANSMITTED   0xC0 // means that write byte req is received
+				 
 
 /********************************  Acknowledgment En/Dis   *******************************************/
 #define MI2C_ACK_DISABLE		0

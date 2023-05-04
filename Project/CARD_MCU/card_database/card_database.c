@@ -54,7 +54,7 @@ en_terminalPinGetStatus_t APP_terminalPinGet(Uchar8_t* arr)
 en_terminalPanGetStatus_t APP_terminalPanGet(Uchar8_t* arr)
 {
 	Uchar8_t loc_counter=0;
-	HUSART_sendSTRING((Uchar8_t*)"\r\nEnter Card Pan : \r");
+	HUSART_sendSTRING((Uchar8_t*)"\n\rEnter Card Pan : ");
 	HUSART_receiveSTRING(arr,20);
 	while(arr[loc_counter] != null)
 	{
@@ -64,13 +64,13 @@ en_terminalPanGetStatus_t APP_terminalPanGet(Uchar8_t* arr)
 		}
 		else
 		{
-			HUSART_sendSTRING((Uchar8_t*) "\r\nInvalid Pan Number - must contain Numbers only");
+			HUSART_sendSTRING((Uchar8_t*) "\n\rInvalid Pan Number - must contain Numbers only");
 			return PANGET_NOK;
 		}
 	}
 	if(loc_counter<16)
 	{
-	 HUSART_sendSTRING((Uchar8_t*) "\r\nInvalid Pan Number - must contain at least 16 numbers");
+	 HUSART_sendSTRING((Uchar8_t*) "\n\rInvalid Pan Number - must contain at least 16 numbers");
 	 return PANGET_NOK;
 	}
 	return PANGET_OK;
@@ -125,11 +125,11 @@ en_CardPinMatchError_t CARD_MatchPINs()
 	Uchar8_t u8_l_ValidatePIN, u8_l_ValidateConfirmPIN;
 	
 	/* Get PIN from user */
-	HUSART_sendSTRING( (Uchar8_t*) "\rEnter your PIN : ");
+	HUSART_sendSTRING( (Uchar8_t*) "\n\rEnter your PIN : ");
 	u8_l_ValidatePIN = APP_terminalPinGet(pin_arr);
 	if(u8_l_ValidatePIN == PINGET_NOK) return PIN_Match_NOK;
 	/* Get PIN again for Confirmation */
-	HUSART_sendSTRING((Uchar8_t *)"\rConfirm Your PIN : ");
+	HUSART_sendSTRING((Uchar8_t *)"\n\rConfirm Your PIN : ");
 	u8_l_ValidateConfirmPIN = APP_terminalPinGet(PIN_Confirm);
 	
 	if((PINGET_OK == u8_l_ValidatePIN) && (PINGET_OK == u8_l_ValidateConfirmPIN))
@@ -139,12 +139,12 @@ en_CardPinMatchError_t CARD_MatchPINs()
 		{
 			if(pin_arr[u8_l_PINiterator] != PIN_Confirm[u8_l_PINiterator])
 			{
-				HUSART_sendSTRING((Uchar8_t *)"\rPin Not Matched");
+				HUSART_sendSTRING((Uchar8_t *)"\n\rPin Not Matched");
 				return PIN_Match_NOK;
 			}
 		}
 		
-		HUSART_sendSTRING((Uchar8_t *)"\rPin Matched");
+		HUSART_sendSTRING((Uchar8_t *)"\n\rPin Matched");
 		return PIN_Match_OK;
 	}
 	

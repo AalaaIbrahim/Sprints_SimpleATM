@@ -54,6 +54,7 @@ Uchar8_t eeprom_read_byte(Uint16_t address)
 
 	/* Send start condition */
 	i2c_start();
+
 	/* Send slave address with write request*/
 	i2c_send_slave_address_with_write_req(deviceAddress);
 	/* Send Data location*/
@@ -67,7 +68,6 @@ Uchar8_t eeprom_read_byte(Uint16_t address)
 	data = i2c_read_byte();
 	/* Send Stop Condition */
 	i2c_stop();
-
 	return data;
 }
 

@@ -28,6 +28,7 @@ void APP_Init(void)
 {
 	(void)HUSART_enInit();
 	HSPI_SlaveInit();
+	eeprom_init();
 	sei();
 }
 
@@ -36,19 +37,19 @@ void APP_Start(void)
 {
 	// 	APP_terminalPanGet(pan_arr);
 	// 	HUSART_sendSTRING(pan_arr);
-	
 	switch(u8_g_CardState)
 	{
 		case CardGetMode:
 		{
-			u8_g_EepromFlag = eeprom_read_byte(0x0050);
+			//u8_g_EepromFlag = eeprom_read_byte(0x0050);
+			HUSART_enSendData(u8_g_EepromFlag);
 			if(u8_g_EepromFlag == 0xFF) u8_g_CardState = CardProgMode_GetPan;
 			else
 			{
-				HUSART_sendSTRING("Please press 1 for entering user mode\rand 2 for programming mode:\r");
+				HUSART_sendSTRING("Please press 1 for entering user mode and 2 for programming mode:");
 				while(HUSART_enRecieveData(&u8_gs_ModeSelect));
 				HUSART_enSendData(u8_gs_ModeSelect);
-				HUSART_enSendData('\r\r');
+				HUSART_enSendData('\n\r');
 				if('1' == u8_gs_ModeSelect)	u8_g_CardState = CardUserMode;
 				else if('2' == u8_gs_ModeSelect) u8_g_CardState = CardProgMode_GetPan;
 				else HUSART_sendSTRING("Invalid Choice, ");
@@ -73,7 +74,7 @@ void APP_Start(void)
 		}
 		case CardUserMode:
 		{
-			HUSART_sendSTRING("\r------------- User Mode -------------\r");
+			HUSART_sendSTRING("\n\r------------- User Mode -------------\n");
 			//_delay_ms(5000);
 			/* Trigger ATM */
 			HSPI_SlaveRequest(pin_arr, PIN_LENGTH);
