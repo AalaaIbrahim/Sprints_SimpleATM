@@ -119,6 +119,7 @@ EN_PinState Get_pin(Uchar8_t *enteredpin)
 	HLCD_ClrDisplay();
 	HLCD_gotoXY(0,0);
 	HLCD_WriteString("Enter Your pin");
+	HLCD_gotoXY(1,0);
 	Uchar8_t BTN,loc_counter=0;
 	
 	while (loc_counter < 4 && myState != ENTER)
