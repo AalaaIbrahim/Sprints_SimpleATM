@@ -8,8 +8,8 @@
 #include "card_database.h"
 
 
-Uchar8_t pin_arr[5] = "5555";
-Uchar8_t pan_arr[20] = "01013578898";
+Uchar8_t pin_arr[5] = "";
+Uchar8_t pan_arr[20] = "";
 
 /*
  * AUTHOR			: Bassel Yasser Mahmoud

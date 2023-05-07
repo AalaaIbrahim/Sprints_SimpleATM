@@ -15,8 +15,8 @@
 /*************************************************************************************************************
 * 												Global Variables
 ************************************************************************************************************/
-extern Uchar8_t pin_arr[64];
-extern Uchar8_t pan_arr[64];
+extern Uchar8_t pin_arr[5];
+extern Uchar8_t pan_arr[20];
 extern Uchar8_t u8_g_SlaveReceive;
 
 Uchar8_t u8_g_EepromFlag, u8_g_CardState = CardGetMode , u8_g_PanValid, u8_gs_ModeSelect;
@@ -76,12 +76,11 @@ void APP_Start(void)
 			HUSART_sendSTRING("\n\r------------- User Mode -------------\n");
 			//_delay_ms(5000);
 			/* Trigger ATM */
-			HSPI_SlaveRequest(pin_arr, PIN_LENGTH);
+			
 			
 			/* Get PIN from EEPROM to prepare data in SPI buffer */
 			ReadCardData(pan_arr,pin_arr);
-			HUSART_sendSTRING(pan_arr);
-			HUSART_sendSTRING(pin_arr);
+			HSPI_SlaveRequest(pin_arr, PIN_LENGTH);
 			u8_g_CardState = CardCommMode;
 			break;
 		}

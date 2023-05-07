@@ -11,7 +11,7 @@
 
 
 extern Uchar8_t  ATMpin[5] ;
-extern Uchar8_t  CARDpin[4] ;
+extern Uchar8_t  CARDpin[5] ;
 extern Uchar8_t  CARDpan[20] ;
 Uchar8_t global_u8OVFCounter = 0;
 
@@ -54,14 +54,13 @@ void timer_ovfCount(void)
 void APP_Init(void)
 {
 	
-	//(void)HButton_Init(DIO_PINB_2);
+	
 	(void)KEYPAD_init();
 	(void)HTimer_enInit();
 	(void)HTimer_enCBF(timer_ovfCount);
 	(void)HLCD_vidInit();
 	(void)HSPI_MasterInit();
 	(void)H_EXTINT_create(EXTINT0,RISING_EDGE,TriggerCallBack);
-	/*(void)SwICU_Init();*/
 	(void)BUZ_Init(&st_g_Buzzer);
 	(void)HButton_ExtIntInit(DIO_PINB_2);
 	(void)H_EXTINT_create(EXTINT2, RISING_EDGE,EXTINT_FUNC);

@@ -14,7 +14,7 @@ Uchar8_t buttonPressed;
 en_buttonStatus myState;
 
 Uchar8_t  ATMpin[5] = "";
-Uchar8_t  CARDpin[8], CARDpan[20];
+Uchar8_t  CARDpin[5], CARDpan[20];
 extern Uchar8_t keys_arr [10];
 extern Uchar8_t global_u8OVFCounter;
 Uchar8_t Entered_amount [8] = "0000.00";
@@ -125,7 +125,7 @@ EN_PinState Get_pin(Uchar8_t *enteredpin)
 			
 		}
 		
-		
+
 	}
 	
 	
@@ -309,7 +309,9 @@ void get_amount_left (Uchar8_t * amount)
 			
 		}
 		
+		while(myState != ENTER);
 		
+		myState = NOTHING;
 }
 	
 
@@ -332,20 +334,12 @@ void get_amount_left (Uchar8_t * amount)
 		HSPI_SendChar(ATM_REQUEST_PIN);
 		_delay_ms(5);
 		HSPI_ReceiveData(CARDpin, 5);
-		HLCD_ClrDisplay();
-		HLCD_WriteString("Received ");
-		HLCD_WriteString(CARDpin);
 		_delay_ms(3000);
 		
 		/* Request PIN From Card */
 		HSPI_SendChar(ATM_REQUEST_PAN);
 		_delay_ms(5);
 		HSPI_ReceiveData(CARDpan, 20);
-		//HLCD_ClrDisplay();
-		//HLCD_WriteString("Received ");
-		//HLCD_gotoXY(1,0);
-		//HLCD_WriteString(CARDpan);
-		//_delay_ms(10000);
 		
 		u8_l_MatchPIN = PIN_checkPinMatching(CARDpin, ATMpin);
 		
