@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  00000664  00000000  00000000  00006240  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000f20  00000000  00000000  000068a4  2**0
+ 10 .debug_str    00000ef4  00000000  00000000  000068a4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00001a20  00000000  00000000  000077c4  2**0
+ 11 .debug_loc    00001a20  00000000  00000000  00007798  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000248  00000000  00000000  000091e4  2**0
+ 12 .debug_ranges 00000248  00000000  00000000  000091b8  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -776,62 +776,107 @@ en_CardPinMatchError_t CARD_MatchPINs()
  3c8:	08 95       	ret
 
 000003ca <eeprom_init>:
+*
+* \return void
+*/
+void eeprom_init(void)
+{
+	i2c_init_master(); // call function that init I2c Master
  3ca:	0e 94 51 03 	call	0x6a2	; 0x6a2 <i2c_init_master>
  3ce:	08 95       	ret
 
 000003d0 <eeprom_write_byte>:
+*		 : Uchar8_t data : This Is Data That Will Be Write	
+*
+* \return void
+*/
+void eeprom_write_byte(Uint16_t address, Uchar8_t data)  
+{
  3d0:	1f 93       	push	r17
  3d2:	cf 93       	push	r28
  3d4:	df 93       	push	r29
  3d6:	d8 2f       	mov	r29, r24
  3d8:	19 2f       	mov	r17, r25
  3da:	c6 2f       	mov	r28, r22
+	
+	i2c_start(); // Send Start Bit On I2c
  3dc:	0e 94 5f 03 	call	0x6be	; 0x6be <i2c_start>
+	i2c_send_slave_address_with_write_req(0x50);// Send Slave Address With Write Bit On I2c
  3e0:	80 e5       	ldi	r24, 0x50	; 80
  3e2:	0e 94 73 03 	call	0x6e6	; 0x6e6 <i2c_send_slave_address_with_write_req>
+	i2c_write_byte(address >> 8); // Write Byte Contain Device Address Shifted By 8 On I2c
  3e6:	81 2f       	mov	r24, r17
  3e8:	0e 94 91 03 	call	0x722	; 0x722 <i2c_write_byte>
+	i2c_write_byte(address); // Write Byte Contain Device Address On I2c
  3ec:	8d 2f       	mov	r24, r29
  3ee:	0e 94 91 03 	call	0x722	; 0x722 <i2c_write_byte>
+	i2c_write_byte(data); // Write Byte Contain Data On I2c
  3f2:	8c 2f       	mov	r24, r28
  3f4:	0e 94 91 03 	call	0x722	; 0x722 <i2c_write_byte>
+	i2c_stop(); // Send Stop Bit On I2c
  3f8:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_stop>
+}
  3fc:	df 91       	pop	r29
  3fe:	cf 91       	pop	r28
  400:	1f 91       	pop	r17
  402:	08 95       	ret
 
 00000404 <eeprom_read_byte>:
+* \param : Uint16_t address : This Is Device Address	
+*
+* \return Uchar8_t : Function Will Return Uchar8_t Contain The Data
+*/
+Uchar8_t eeprom_read_byte(Uint16_t address)
+{
  404:	cf 93       	push	r28
  406:	df 93       	push	r29
  408:	c8 2f       	mov	r28, r24
  40a:	d9 2f       	mov	r29, r25
+	Uchar8_t data = 0;
+	i2c_start();// Send Start Bit On I2c
  40c:	0e 94 5f 03 	call	0x6be	; 0x6be <i2c_start>
+	i2c_send_slave_address_with_write_req(0x50);// Send Slave Address With Write Bit On I2c
  410:	80 e5       	ldi	r24, 0x50	; 80
  412:	0e 94 73 03 	call	0x6e6	; 0x6e6 <i2c_send_slave_address_with_write_req>
+	i2c_write_byte(address >> 8);// Write Byte Contain Device Address Shifted By 8 On I2c
  416:	8d 2f       	mov	r24, r29
  418:	0e 94 91 03 	call	0x722	; 0x722 <i2c_write_byte>
+	i2c_write_byte(address & 0xFF);// Write Byte Contain Device Address On I2c
  41c:	8c 2f       	mov	r24, r28
  41e:	0e 94 91 03 	call	0x722	; 0x722 <i2c_write_byte>
+	i2c_repeated_start();// Send Repeated Start Bit On I2c
  422:	0e 94 69 03 	call	0x6d2	; 0x6d2 <i2c_repeated_start>
+	i2c_send_slave_address_with_read_req(0x50);// Send Slave Address With Read Bit On I2c
  426:	80 e5       	ldi	r24, 0x50	; 80
  428:	0e 94 82 03 	call	0x704	; 0x704 <i2c_send_slave_address_with_read_req>
+	data = i2c_read_byte_nack();// Read Byte Contain Data On I2c With No Ack
  42c:	0e 94 a3 03 	call	0x746	; 0x746 <i2c_read_byte_nack>
  430:	c8 2f       	mov	r28, r24
+	i2c_stop();// Send Stop Bit On I2c
  432:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_stop>
+	return data;//Return The Data That Been Read 
+}
  436:	8c 2f       	mov	r24, r28
  438:	df 91       	pop	r29
  43a:	cf 91       	pop	r28
  43c:	08 95       	ret
 
 0000043e <eeprom_write_string>:
+* \param : Uint16_t address : This Is Device Address
+*		 : Uchar8_t *str	: This Pointer Will Store The Address Of The Array Of The Chars
+* \return  Void
+*/
+void eeprom_write_string(Uint16_t Copy_u8Address, const Uchar8_t* str)
+{
  43e:	ef 92       	push	r14
  440:	ff 92       	push	r15
  442:	0f 93       	push	r16
  444:	1f 93       	push	r17
  446:	cf 93       	push	r28
  448:	7b 01       	movw	r14, r22
+	Uchar8_t i = 0;
  44a:	c0 e0       	ldi	r28, 0x00	; 0
+	while(str[i] != '\0') // Loop Until The End Of The String
  44c:	0e c0       	rjmp	.+28     	; 0x46a <eeprom_write_string+0x2c>
  44e:	a3 ed       	ldi	r26, 0xD3	; 211
  450:	b0 e3       	ldi	r27, 0x30	; 48
@@ -839,6 +884,9 @@ en_CardPinMatchError_t CARD_MatchPINs()
  454:	f1 f7       	brne	.-4      	; 0x452 <eeprom_write_string+0x14>
  456:	00 c0       	rjmp	.+0      	; 0x458 <eeprom_write_string+0x1a>
  458:	00 00       	nop
+	{
+		_delay_ms(50);
+		eeprom_write_byte(Copy_u8Address++,str[i++]);//Call This Function To Write Char In EEPROM And Increment The Address And Index
  45a:	cf 5f       	subi	r28, 0xFF	; 255
  45c:	8c 01       	movw	r16, r24
  45e:	0f 5f       	subi	r16, 0xFF	; 255
@@ -846,6 +894,12 @@ en_CardPinMatchError_t CARD_MatchPINs()
  462:	60 81       	ld	r22, Z
  464:	0e 94 e8 01 	call	0x3d0	; 0x3d0 <eeprom_write_byte>
  468:	c8 01       	movw	r24, r16
+* \return  Void
+*/
+void eeprom_write_string(Uint16_t Copy_u8Address, const Uchar8_t* str)
+{
+	Uchar8_t i = 0;
+	while(str[i] != '\0') // Loop Until The End Of The String
  46a:	f7 01       	movw	r30, r14
  46c:	ec 0f       	add	r30, r28
  46e:	f1 1d       	adc	r31, r1
@@ -858,8 +912,15 @@ en_CardPinMatchError_t CARD_MatchPINs()
  47c:	f1 f7       	brne	.-4      	; 0x47a <eeprom_write_string+0x3c>
  47e:	00 c0       	rjmp	.+0      	; 0x480 <eeprom_write_string+0x42>
  480:	00 00       	nop
+	{
+		_delay_ms(50);
+		eeprom_write_byte(Copy_u8Address++,str[i++]);//Call This Function To Write Char In EEPROM And Increment The Address And Index
+	}
+	_delay_ms(50);
+	eeprom_write_byte(Copy_u8Address++,'\0');//Call This Function To Write Null After The Last Char Of The String To Know Where The String Is End
  482:	60 e0       	ldi	r22, 0x00	; 0
  484:	0e 94 e8 01 	call	0x3d0	; 0x3d0 <eeprom_write_byte>
+}
  488:	cf 91       	pop	r28
  48a:	1f 91       	pop	r17
  48c:	0f 91       	pop	r16
@@ -868,6 +929,12 @@ en_CardPinMatchError_t CARD_MatchPINs()
  492:	08 95       	ret
 
 00000494 <eeprom_read_string>:
+* \param : Uint16_t address : This Is Device Address
+*		 : Uchar8_t *str	: This Pointer Will Store The Address Of The Array Of The Chars That Will Return String In It
+* \return  Void
+*/
+void eeprom_read_string(Uint16_t Copy_u8Address, Uchar8_t* str)
+{
  494:	cf 92       	push	r12
  496:	df 92       	push	r13
  498:	ef 92       	push	r14
@@ -876,6 +943,7 @@ en_CardPinMatchError_t CARD_MatchPINs()
  49e:	1f 93       	push	r17
  4a0:	cf 93       	push	r28
  4a2:	6b 01       	movw	r12, r22
+	Uchar8_t len = 0;
  4a4:	c0 e0       	ldi	r28, 0x00	; 0
  4a6:	e3 ed       	ldi	r30, 0xD3	; 211
  4a8:	f0 e3       	ldi	r31, 0x30	; 48
@@ -883,6 +951,10 @@ en_CardPinMatchError_t CARD_MatchPINs()
  4ac:	f1 f7       	brne	.-4      	; 0x4aa <eeprom_read_string+0x16>
  4ae:	00 c0       	rjmp	.+0      	; 0x4b0 <eeprom_read_string+0x1c>
  4b0:	00 00       	nop
+	do
+	{
+		_delay_ms(50);
+		str[len] = eeprom_read_byte(Copy_u8Address++);//Call This Function To Read Char From EEPROM And Increment The Address And Index
  4b2:	76 01       	movw	r14, r12
  4b4:	ec 0e       	add	r14, r28
  4b6:	f1 1c       	adc	r15, r1
@@ -893,10 +965,21 @@ en_CardPinMatchError_t CARD_MatchPINs()
  4c2:	28 2f       	mov	r18, r24
  4c4:	f7 01       	movw	r30, r14
  4c6:	80 83       	st	Z, r24
+	}
+	while(str[len++] != '\0');// Loop Until The End Of The String
  4c8:	cf 5f       	subi	r28, 0xFF	; 255
+{
+	Uchar8_t len = 0;
+	do
+	{
+		_delay_ms(50);
+		str[len] = eeprom_read_byte(Copy_u8Address++);//Call This Function To Read Char From EEPROM And Increment The Address And Index
  4ca:	c8 01       	movw	r24, r16
+	}
+	while(str[len++] != '\0');// Loop Until The End Of The String
  4cc:	21 11       	cpse	r18, r1
  4ce:	eb cf       	rjmp	.-42     	; 0x4a6 <eeprom_read_string+0x12>
+}
  4d0:	cf 91       	pop	r28
  4d2:	1f 91       	pop	r17
  4d4:	0f 91       	pop	r16
@@ -907,6 +990,12 @@ en_CardPinMatchError_t CARD_MatchPINs()
  4de:	08 95       	ret
 
 000004e0 <HSPI_SlaveInit>:
+	{
+		return HSPI_NOK;
+	}
+	
+	return HSPI_OK;
+}
  4e0:	60 e0       	ldi	r22, 0x00	; 0
  4e2:	8d e0       	ldi	r24, 0x0D	; 13
  4e4:	0e 94 d1 02 	call	0x5a2	; 0x5a2 <DIO_s8SETPinDir>
@@ -932,6 +1021,12 @@ en_CardPinMatchError_t CARD_MatchPINs()
  51c:	08 95       	ret
 
 0000051e <HSPI_MasterTrigger>:
+}
+
+void HSPI_MasterTrigger(void)
+{
+	/* Send Request to Master */
+	DIO_s8SETPinVal(SLAVE_SEND_REQUEST_PIN, HIGH);
  51e:	61 e0       	ldi	r22, 0x01	; 1
  520:	88 e0       	ldi	r24, 0x08	; 8
  522:	0e 94 11 03 	call	0x622	; 0x622 <DIO_s8SETPinVal>
@@ -941,74 +1036,152 @@ en_CardPinMatchError_t CARD_MatchPINs()
  52c:	f1 f7       	brne	.-4      	; 0x52a <HSPI_MasterTrigger+0xc>
  52e:	00 c0       	rjmp	.+0      	; 0x530 <HSPI_MasterTrigger+0x12>
  530:	00 00       	nop
+	_delay_ms(10);
+	DIO_s8SETPinVal(SLAVE_SEND_REQUEST_PIN, LOW);
  532:	60 e0       	ldi	r22, 0x00	; 0
  534:	88 e0       	ldi	r24, 0x08	; 8
  536:	0e 94 11 03 	call	0x622	; 0x622 <DIO_s8SETPinVal>
  53a:	08 95       	ret
 
 0000053c <HSPI_SlaveRequest>:
+ * \return void
+ */
+void HSPI_SlaveRequest(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize)
+{
+	/* Reset transmission data index */
+	u8_g_SlaveTxIndex = 0;
  53c:	10 92 00 02 	sts	0x0200, r1	; 0x800200 <u8_g_SlaveTxIndex>
+	
+	/* Set global transmission data ptr to point to given data */
+	pu8_g_SlaveTxPtr = pu8_a_dataPtr;
  540:	90 93 fe 01 	sts	0x01FE, r25	; 0x8001fe <pu8_g_SlaveTxPtr+0x1>
  544:	80 93 fd 01 	sts	0x01FD, r24	; 0x8001fd <pu8_g_SlaveTxPtr>
+	
+	u8_g_SlaveTxLen = u8_a_DataSize;
  548:	60 93 06 02 	sts	0x0206, r22	; 0x800206 <u8_g_SlaveTxLen>
+	/* Set the Data register with value */
+	//SPI_SetValue(pu8_g_SlaveTxPtr[u8_g_SlaveTxIndex++]);
+
+	/* Send Request to Master */
+	//DIO_s8TOGPinVal(SLAVE_SEND_REQUEST_PIN);
+HSPI_MasterTrigger();
  54c:	0e 94 8f 02 	call	0x51e	; 0x51e <HSPI_MasterTrigger>
  550:	08 95       	ret
 
 00000552 <HSPI_SlaveSetData>:
+}
+
+void HSPI_SlaveSetData(Uchar8_t* pu8_a_dataPtr, Uchar8_t u8_a_DataSize)
+{
+	/* Reset transmission data index */
+	u8_g_SlaveTxIndex = 0;
  552:	10 92 00 02 	sts	0x0200, r1	; 0x800200 <u8_g_SlaveTxIndex>
+	
+	/* Set global transmission data ptr to point to given data */
+	pu8_g_SlaveTxPtr = pu8_a_dataPtr;
  556:	90 93 fe 01 	sts	0x01FE, r25	; 0x8001fe <pu8_g_SlaveTxPtr+0x1>
  55a:	80 93 fd 01 	sts	0x01FD, r24	; 0x8001fd <pu8_g_SlaveTxPtr>
+	
+	u8_g_SlaveTxLen = u8_a_DataSize;
  55e:	60 93 06 02 	sts	0x0206, r22	; 0x800206 <u8_g_SlaveTxLen>
  562:	08 95       	ret
 
 00000564 <HUSART_enInit>:
+#include "husart.h"
+
+
+EN_USART_ERROR HUSART_enInit(void)
+{
+	if(USART_init())return USART_NOT_OK;
  564:	0e 94 09 04 	call	0x812	; 0x812 <USART_init>
  568:	81 11       	cpse	r24, r1
  56a:	81 e0       	ldi	r24, 0x01	; 1
+	return USART_OK;
+}
  56c:	08 95       	ret
 
 0000056e <HUSART_enSendData>:
+EN_USART_ERROR HUSART_enSendData(Uchar8_t Copy_u8DataH)
+{
+	if(USART_sendData(Copy_u8DataH))return USART_NOT_OK;
  56e:	0e 94 15 04 	call	0x82a	; 0x82a <USART_sendData>
  572:	81 11       	cpse	r24, r1
  574:	81 e0       	ldi	r24, 0x01	; 1
+	return USART_OK;
+}
  576:	08 95       	ret
 
 00000578 <HUSART_enRecieveData>:
+EN_USART_ERROR HUSART_enRecieveData(Uchar8_t* Ref_u8DataH)
+{
  578:	cf 93       	push	r28
  57a:	df 93       	push	r29
  57c:	ec 01       	movw	r28, r24
+	*Ref_u8DataH = USART_receiveData();
  57e:	0e 94 1a 04 	call	0x834	; 0x834 <USART_receiveData>
  582:	88 83       	st	Y, r24
+	return USART_OK;
+}
  584:	80 e0       	ldi	r24, 0x00	; 0
  586:	df 91       	pop	r29
  588:	cf 91       	pop	r28
  58a:	08 95       	ret
 
 0000058c <HUSART_sendSTRING>:
+
+void HUSART_sendSTRING(Uchar8_t * Hstr)
+{
+	USART_sendSTRING(Hstr);
  58c:	0e 94 1e 04 	call	0x83c	; 0x83c <USART_sendSTRING>
  590:	08 95       	ret
 
 00000592 <HUSART_receiveSTRING>:
+}
+void HUSART_receiveSTRING(Uchar8_t * Hstr ,Uchar8_t Hsize )
+{
+	USART_receiveSTRING(Hstr,Hsize);
  592:	0e 94 31 04 	call	0x862	; 0x862 <USART_receiveSTRING>
  596:	08 95       	ret
 
 00000598 <main>:
+ */ 
+#define F_CPU 8000000UL
+#include "APP/app.h"
+int main(void)
+{
+	APP_Init();
  598:	0e 94 49 00 	call	0x92	; 0x92 <APP_Init>
+    while (1) 
+    {
+      APP_Start();
  59c:	0e 94 51 00 	call	0xa2	; 0xa2 <APP_Start>
  5a0:	fd cf       	rjmp	.-6      	; 0x59c <main+0x4>
 
 000005a2 <DIO_s8SETPinDir>:
+{
+	Uchar8_t errStatus = E_OK;
+	Uchar8_t portID;
+	Uchar8_t pinID;
+
+	if (enPinCopy < PIN_INVALID && enPortDir< DIR_INVALID)
  5a2:	80 32       	cpi	r24, 0x20	; 32
  5a4:	c0 f5       	brcc	.+112    	; 0x616 <DIO_s8SETPinDir+0x74>
  5a6:	62 30       	cpi	r22, 0x02	; 2
  5a8:	c0 f5       	brcc	.+112    	; 0x61a <DIO_s8SETPinDir+0x78>
+	{
+		portID = enPinCopy/8;
  5aa:	e8 2f       	mov	r30, r24
  5ac:	e6 95       	lsr	r30
  5ae:	e6 95       	lsr	r30
  5b0:	e6 95       	lsr	r30
+		pinID  = enPinCopy%8;
  5b2:	87 70       	andi	r24, 0x07	; 7
+
+		if (enPortDir == INPUT)
  5b4:	61 11       	cpse	r22, r1
  5b6:	17 c0       	rjmp	.+46     	; 0x5e6 <DIO_s8SETPinDir+0x44>
+		{
+			CLEAR_BIT(*ddrReg[portID],pinID);
  5b8:	f0 e0       	ldi	r31, 0x00	; 0
  5ba:	ee 0f       	add	r30, r30
  5bc:	ff 1f       	adc	r31, r31
@@ -1030,10 +1203,24 @@ en_CardPinMatchError_t CARD_MatchPINs()
  5dc:	80 95       	com	r24
  5de:	84 23       	and	r24, r20
  5e0:	80 83       	st	Z, r24
+
+
+
+Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
+{
+	Uchar8_t errStatus = E_OK;
  5e2:	80 e0       	ldi	r24, 0x00	; 0
  5e4:	08 95       	ret
+
+		if (enPortDir == INPUT)
+		{
+			CLEAR_BIT(*ddrReg[portID],pinID);
+		}
+		else if(enPortDir == OUTPUT)
  5e6:	61 30       	cpi	r22, 0x01	; 1
  5e8:	d1 f4       	brne	.+52     	; 0x61e <DIO_s8SETPinDir+0x7c>
+		{
+			SET_BIT(*ddrReg[portID],pinID);
  5ea:	f0 e0       	ldi	r31, 0x00	; 0
  5ec:	ee 0f       	add	r30, r30
  5ee:	ff 1f       	adc	r31, r31
@@ -1054,27 +1241,64 @@ en_CardPinMatchError_t CARD_MatchPINs()
  60c:	cb 01       	movw	r24, r22
  60e:	84 2b       	or	r24, r20
  610:	80 83       	st	Z, r24
+
+
+
+Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
+{
+	Uchar8_t errStatus = E_OK;
  612:	80 e0       	ldi	r24, 0x00	; 0
  614:	08 95       	ret
+			/* do nothing */
+		}
+	}
+	else
+	{
+		errStatus = E_NOK;
  616:	8f ef       	ldi	r24, 0xFF	; 255
  618:	08 95       	ret
  61a:	8f ef       	ldi	r24, 0xFF	; 255
  61c:	08 95       	ret
+
+
+
+Uchar8_t DIO_s8SETPinDir (enu_pin enPinCopy, enu_dir enPortDir)
+{
+	Uchar8_t errStatus = E_OK;
  61e:	80 e0       	ldi	r24, 0x00	; 0
+	else
+	{
+		errStatus = E_NOK;
+	}
+	return errStatus;
+}
  620:	08 95       	ret
 
 00000622 <DIO_s8SETPinVal>:
+{
+	Uchar8_t errStatus = E_OK;
+	Uchar8_t portID;
+	Uchar8_t pinID;
+
+	if (enPinCopy < PIN_INVALID && enPortVal< VAL_INVALID)
  622:	80 32       	cpi	r24, 0x20	; 32
  624:	c0 f5       	brcc	.+112    	; 0x696 <DIO_s8SETPinVal+0x74>
  626:	62 30       	cpi	r22, 0x02	; 2
  628:	c0 f5       	brcc	.+112    	; 0x69a <DIO_s8SETPinVal+0x78>
+	{
+		portID = enPinCopy/8;
  62a:	e8 2f       	mov	r30, r24
  62c:	e6 95       	lsr	r30
  62e:	e6 95       	lsr	r30
  630:	e6 95       	lsr	r30
+		pinID  = enPinCopy%8;
  632:	87 70       	andi	r24, 0x07	; 7
+
+		if (enPortVal == LOW)
  634:	61 11       	cpse	r22, r1
  636:	17 c0       	rjmp	.+46     	; 0x666 <DIO_s8SETPinVal+0x44>
+		{
+			CLEAR_BIT(*portReg[portID],pinID);
  638:	f0 e0       	ldi	r31, 0x00	; 0
  63a:	ee 0f       	add	r30, r30
  63c:	ff 1f       	adc	r31, r31
@@ -1096,10 +1320,24 @@ en_CardPinMatchError_t CARD_MatchPINs()
  65c:	80 95       	com	r24
  65e:	84 23       	and	r24, r20
  660:	80 83       	st	Z, r24
+}
+
+
+Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
+{
+	Uchar8_t errStatus = E_OK;
  662:	80 e0       	ldi	r24, 0x00	; 0
  664:	08 95       	ret
+
+		if (enPortVal == LOW)
+		{
+			CLEAR_BIT(*portReg[portID],pinID);
+		}
+		else if(enPortVal == HIGH)
  666:	61 30       	cpi	r22, 0x01	; 1
  668:	d1 f4       	brne	.+52     	; 0x69e <DIO_s8SETPinVal+0x7c>
+		{
+			SET_BIT(*portReg[portID],pinID);
  66a:	f0 e0       	ldi	r31, 0x00	; 0
  66c:	ee 0f       	add	r30, r30
  66e:	ff 1f       	adc	r31, r31
@@ -1120,16 +1358,46 @@ en_CardPinMatchError_t CARD_MatchPINs()
  68c:	cb 01       	movw	r24, r22
  68e:	84 2b       	or	r24, r20
  690:	80 83       	st	Z, r24
+}
+
+
+Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
+{
+	Uchar8_t errStatus = E_OK;
  692:	80 e0       	ldi	r24, 0x00	; 0
  694:	08 95       	ret
+			/* do nothing */
+		}
+	}
+	else
+	{
+		errStatus = E_NOK;
  696:	8f ef       	ldi	r24, 0xFF	; 255
  698:	08 95       	ret
  69a:	8f ef       	ldi	r24, 0xFF	; 255
  69c:	08 95       	ret
+}
+
+
+Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
+{
+	Uchar8_t errStatus = E_OK;
  69e:	80 e0       	ldi	r24, 0x00	; 0
+	else
+	{
+		errStatus = E_NOK;
+	}
+	return errStatus;
+}
  6a0:	08 95       	ret
 
 000006a2 <i2c_init_master>:
+	SET_BIT(TWCR, TWEN);
+	/* Waiting for TWINT flag to be set */
+	while ( !(GET_BIT(TWCR,TWINT)) );
+	/* Waiting if this condition becoming true */
+	while ( (TWSR & 0xF8) != SLAVE_BYTE_TRANSMITTED );
+}
  6a2:	81 b1       	in	r24, 0x01	; 1
  6a4:	8e 7f       	andi	r24, 0xFE	; 254
  6a6:	81 b9       	out	0x01, r24	; 1
@@ -1226,19 +1494,40 @@ en_CardPinMatchError_t CARD_MatchPINs()
  744:	08 95       	ret
 
 00000746 <i2c_read_byte_nack>:
+
+
+Uchar8_t i2c_read_byte_nack(void)
+{
+	/* Clear TWINT flag */
+	SET_BIT(TWCR, TWINT);
  746:	86 b7       	in	r24, 0x36	; 54
  748:	80 68       	ori	r24, 0x80	; 128
  74a:	86 bf       	out	0x36, r24	; 54
+
+	/* Enable I2C peripheral */
+	SET_BIT(TWCR, TWEN);
  74c:	86 b7       	in	r24, 0x36	; 54
  74e:	84 60       	ori	r24, 0x04	; 4
  750:	86 bf       	out	0x36, r24	; 54
+	
+	/* Waiting for TWINT flag to be set */
+	while ( !(GET_BIT(TWCR,TWINT)) );
  752:	06 b6       	in	r0, 0x36	; 54
  754:	07 fe       	sbrs	r0, 7
  756:	fd cf       	rjmp	.-6      	; 0x752 <i2c_read_byte_nack+0xc>
+
+	return TWDR;
  758:	83 b1       	in	r24, 0x03	; 3
+}
  75a:	08 95       	ret
 
 0000075c <SPI_SlaveInit>:
+	{
+		return SPI_NOK;
+	}
+	
+	return SPI_OK;
+}
  75c:	8d b1       	in	r24, 0x0d	; 13
  75e:	8f 7e       	andi	r24, 0xEF	; 239
  760:	8d b9       	out	0x0d, r24	; 13
@@ -1257,6 +1546,12 @@ en_CardPinMatchError_t CARD_MatchPINs()
  77a:	08 95       	ret
 
 0000077c <__vector_12>:
+
+/*************************************************************************************************************
+ * 													  ISRs
+ ************************************************************************************************************/
+ISR(SPI_STC_INT)
+{
  77c:	1f 92       	push	r1
  77e:	0f 92       	push	r0
  780:	0f b6       	in	r0, 0x3f	; 63
@@ -1268,25 +1563,45 @@ en_CardPinMatchError_t CARD_MatchPINs()
  78c:	9f 93       	push	r25
  78e:	ef 93       	push	r30
  790:	ff 93       	push	r31
+	/*------------------------ Reception ------------------------*/
+	u8_g_SlaveReceive = SPDR;
  792:	8f b1       	in	r24, 0x0f	; 15
  794:	80 93 04 02 	sts	0x0204, r24	; 0x800204 <u8_g_SlaveReceive>
+	//DIO_s8SETPortVal(DIO_PORTA, u8_g_SlaveReceive);
+	
+	/* If Max size is exceeded, start overriding data */
+	if(u8_g_SlaveRxIndex == SPI_BUFFER_SIZE) u8_g_SlaveRxIndex = 0;
  798:	90 91 ff 01 	lds	r25, 0x01FF	; 0x8001ff <u8_g_SlaveRxIndex>
  79c:	9f 30       	cpi	r25, 0x0F	; 15
  79e:	11 f4       	brne	.+4      	; 0x7a4 <__vector_12+0x28>
  7a0:	10 92 ff 01 	sts	0x01FF, r1	; 0x8001ff <u8_g_SlaveRxIndex>
+	if(u8_g_SlaveReceive != DATA_END)
  7a4:	83 32       	cpi	r24, 0x23	; 35
  7a6:	59 f0       	breq	.+22     	; 0x7be <__vector_12+0x42>
+	{
+		/* Store received byte in buffer */
+		arr_g_SlaveRxBuffer[u8_g_SlaveRxIndex] = u8_g_SlaveReceive;
  7a8:	90 91 ff 01 	lds	r25, 0x01FF	; 0x8001ff <u8_g_SlaveRxIndex>
  7ac:	e9 2f       	mov	r30, r25
  7ae:	f0 e0       	ldi	r31, 0x00	; 0
  7b0:	e2 51       	subi	r30, 0x12	; 18
  7b2:	fe 4f       	sbci	r31, 0xFE	; 254
  7b4:	80 83       	st	Z, r24
+		u8_g_SlaveRxIndex++;
  7b6:	9f 5f       	subi	r25, 0xFF	; 255
  7b8:	90 93 ff 01 	sts	0x01FF, r25	; 0x8001ff <u8_g_SlaveRxIndex>
  7bc:	04 c0       	rjmp	.+8      	; 0x7c6 <__vector_12+0x4a>
+	}
+	else
+	{	// Get the number of received bytes
+		u8_g_SlaveRxLen = u8_g_SlaveRxIndex;
  7be:	80 91 ff 01 	lds	r24, 0x01FF	; 0x8001ff <u8_g_SlaveRxIndex>
  7c2:	80 93 05 02 	sts	0x0205, r24	; 0x800205 <u8_g_SlaveRxLen>
+	}
+	
+	/*------------------------- Sending -------------------------*/
+	//u8_g_SlaveTxIndex++;
+	if((u8_g_SlaveTxIndex < u8_g_SlaveTxLen) && (pu8_g_SlaveTxPtr != null))
  7c6:	80 91 00 02 	lds	r24, 0x0200	; 0x800200 <u8_g_SlaveTxIndex>
  7ca:	90 91 06 02 	lds	r25, 0x0206	; 0x800206 <u8_g_SlaveTxLen>
  7ce:	89 17       	cp	r24, r25
@@ -1296,6 +1611,8 @@ en_CardPinMatchError_t CARD_MatchPINs()
  7da:	21 15       	cp	r18, r1
  7dc:	31 05       	cpc	r19, r1
  7de:	51 f0       	breq	.+20     	; 0x7f4 <__vector_12+0x78>
+	{
+		SPDR = pu8_g_SlaveTxPtr[u8_g_SlaveTxIndex++];
  7e0:	91 e0       	ldi	r25, 0x01	; 1
  7e2:	98 0f       	add	r25, r24
  7e4:	90 93 00 02 	sts	0x0200, r25	; 0x800200 <u8_g_SlaveTxIndex>
@@ -1305,10 +1622,15 @@ en_CardPinMatchError_t CARD_MatchPINs()
  7ee:	80 81       	ld	r24, Z
  7f0:	8f b9       	out	0x0f, r24	; 15
  7f2:	04 c0       	rjmp	.+8      	; 0x7fc <__vector_12+0x80>
+	}
+	else if(u8_g_SlaveTxIndex >= u8_g_SlaveTxLen)
  7f4:	89 17       	cp	r24, r25
  7f6:	10 f0       	brcs	.+4      	; 0x7fc <__vector_12+0x80>
+	{
+		SPDR = DATA_END;
  7f8:	83 e2       	ldi	r24, 0x23	; 35
  7fa:	8f b9       	out	0x0f, r24	; 15
+	}
  7fc:	ff 91       	pop	r31
  7fe:	ef 91       	pop	r30
  800:	9f 91       	pop	r25
@@ -1322,70 +1644,145 @@ en_CardPinMatchError_t CARD_MatchPINs()
  810:	18 95       	reti
 
 00000812 <USART_init>:
+	CLEAR_BIT(UCSRB,UCSZ2);
+	
+	#elif USART_SET_DATA_SIZE == USART_DATA_SIZE_8
+	SET_BIT(UCSRC,UCSZ0);
+	SET_BIT(UCSRC,UCSZ1);
+	CLEAR_BIT(UCSRB,UCSZ2);
  812:	8a b1       	in	r24, 0x0a	; 10
  814:	8b 7f       	andi	r24, 0xFB	; 251
+	
+	#endif
+	
+	/* select USART Speed (Normal,Double) */
+	#if USART_SET_SPEED == USART_NORMAL_SPEED
+	CLEAR_BIT(UCSRA,U2X);
  816:	9b b1       	in	r25, 0x0b	; 11
  818:	9d 7f       	andi	r25, 0xFD	; 253
  81a:	9b b9       	out	0x0b, r25	; 11
+	return USART_NOT_OK;
+	
+	#endif
+	/* Enable Transmit and receive bits in UCSRB*/
+	SET_BIT(UCSRB,RXEN);
+	SET_BIT(UCSRB,TXEN);
  81c:	88 61       	ori	r24, 0x18	; 24
  81e:	8a b9       	out	0x0a, r24	; 10
+	
+	/* assign UBRRL and UBRRH with calculated BAUD_PRESCALLER */
+	UBRRL = BAUD_PRESCALLER;
  820:	83 e3       	ldi	r24, 0x33	; 51
  822:	89 b9       	out	0x09, r24	; 9
+	UBRRH = (BAUD_PRESCALLER>>8);
  824:	10 bc       	out	0x20, r1	; 32
+	
+   return USART_OK;
+}
  826:	80 e0       	ldi	r24, 0x00	; 0
  828:	08 95       	ret
 
 0000082a <USART_sendData>:
+EN_USART_ERROR USART_sendData(Uchar8_t data)
+{
+	// WAIT UNTIL ISEMPTY FLAG IS SET
+	while(!GET_BIT(UCSRA,UDRE));
  82a:	5d 9b       	sbis	0x0b, 5	; 11
  82c:	fe cf       	rjmp	.-4      	; 0x82a <USART_sendData>
+	
+	// assign data to UDR register to be sent
+	UDR = data;
  82e:	8c b9       	out	0x0c, r24	; 12
+	
+	return USART_OK;
+}
  830:	80 e0       	ldi	r24, 0x00	; 0
  832:	08 95       	ret
 
 00000834 <USART_receiveData>:
+Uchar8_t USART_receiveData(void)
+{
+	// WAIT UNTIL Recieve FLAG IS SET
+	while(!GET_BIT(UCSRA,RXC));
  834:	5f 9b       	sbis	0x0b, 7	; 11
  836:	fe cf       	rjmp	.-4      	; 0x834 <USART_receiveData>
+	return UDR;
+}
  838:	8c b1       	in	r24, 0x0c	; 12
  83a:	08 95       	ret
 
 0000083c <USART_sendSTRING>:
+void USART_sendSTRING(Uchar8_t * str)
+{
  83c:	0f 93       	push	r16
  83e:	1f 93       	push	r17
  840:	cf 93       	push	r28
  842:	8c 01       	movw	r16, r24
+	Uchar8_t COUNTER = 0;
  844:	c0 e0       	ldi	r28, 0x00	; 0
+	while(str[COUNTER] != null)
  846:	03 c0       	rjmp	.+6      	; 0x84e <USART_sendSTRING+0x12>
+	{
+		USART_sendData(str[COUNTER]);
  848:	0e 94 15 04 	call	0x82a	; 0x82a <USART_sendData>
+		COUNTER++;
  84c:	cf 5f       	subi	r28, 0xFF	; 255
+	return UDR;
+}
+void USART_sendSTRING(Uchar8_t * str)
+{
+	Uchar8_t COUNTER = 0;
+	while(str[COUNTER] != null)
  84e:	f8 01       	movw	r30, r16
  850:	ec 0f       	add	r30, r28
  852:	f1 1d       	adc	r31, r1
  854:	80 81       	ld	r24, Z
  856:	81 11       	cpse	r24, r1
  858:	f7 cf       	rjmp	.-18     	; 0x848 <USART_sendSTRING+0xc>
+	{
+		USART_sendData(str[COUNTER]);
+		COUNTER++;
+	}
+}
  85a:	cf 91       	pop	r28
  85c:	1f 91       	pop	r17
  85e:	0f 91       	pop	r16
  860:	08 95       	ret
 
 00000862 <USART_receiveSTRING>:
+void USART_receiveSTRING(Uchar8_t * str ,Uchar8_t size )
+{
  862:	0f 93       	push	r16
  864:	1f 93       	push	r17
  866:	cf 93       	push	r28
  868:	df 93       	push	r29
  86a:	8c 01       	movw	r16, r24
  86c:	d6 2f       	mov	r29, r22
+	Uchar8_t COUNTER = 0;
  86e:	c0 e0       	ldi	r28, 0x00	; 0
+	while(COUNTER < size-1)
  870:	0b c0       	rjmp	.+22     	; 0x888 <USART_receiveSTRING+0x26>
+	{
+		
+		str[COUNTER]= USART_receiveData();
  872:	0e 94 1a 04 	call	0x834	; 0x834 <USART_receiveData>
  876:	f8 01       	movw	r30, r16
  878:	ec 0f       	add	r30, r28
  87a:	f1 1d       	adc	r31, r1
  87c:	80 83       	st	Z, r24
+		if(str[COUNTER] == ENTER_KEY)break;
  87e:	8d 30       	cpi	r24, 0x0D	; 13
  880:	59 f0       	breq	.+22     	; 0x898 <USART_receiveSTRING+0x36>
+		USART_sendData(str[COUNTER]);
  882:	0e 94 15 04 	call	0x82a	; 0x82a <USART_sendData>
+		COUNTER++;
  886:	cf 5f       	subi	r28, 0xFF	; 255
+	}
+}
+void USART_receiveSTRING(Uchar8_t * str ,Uchar8_t size )
+{
+	Uchar8_t COUNTER = 0;
+	while(COUNTER < size-1)
  888:	2c 2f       	mov	r18, r28
  88a:	30 e0       	ldi	r19, 0x00	; 0
  88c:	8d 2f       	mov	r24, r29
@@ -1394,10 +1791,17 @@ en_CardPinMatchError_t CARD_MatchPINs()
  892:	28 17       	cp	r18, r24
  894:	39 07       	cpc	r19, r25
  896:	6c f3       	brlt	.-38     	; 0x872 <USART_receiveSTRING+0x10>
+		str[COUNTER]= USART_receiveData();
+		if(str[COUNTER] == ENTER_KEY)break;
+		USART_sendData(str[COUNTER]);
+		COUNTER++;
+	}
+	str[COUNTER] = null;
  898:	f8 01       	movw	r30, r16
  89a:	ec 0f       	add	r30, r28
  89c:	f1 1d       	adc	r31, r1
  89e:	10 82       	st	Z, r1
+}
  8a0:	df 91       	pop	r29
  8a2:	cf 91       	pop	r28
  8a4:	1f 91       	pop	r17

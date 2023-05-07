@@ -727,28 +727,28 @@ END GROUP
  .debug_frame   0x00000540       0x9c MCAL/spi/spi_program.o
  .debug_frame   0x000005dc       0x88 MCAL/usart/usart.o
 
-.debug_str      0x00000000      0xf20
+.debug_str      0x00000000      0xef4
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_str     0x00000196      0x31f APP/app.o
-                                0x363 (size before relaxing)
- .debug_str     0x000004b5      0x1d9 card_database/card_database.o
-                                0x3f5 (size before relaxing)
- .debug_str     0x0000068e      0x168 ECUAL/eeprom/HEEPROM_Program.o
+ .debug_str     0x00000196      0x35b APP/app.o
+                                0x39f (size before relaxing)
+ .debug_str     0x000004f1      0x1d9 card_database/card_database.o
+                                0x431 (size before relaxing)
+ .debug_str     0x000006ca      0x100 ECUAL/eeprom/HEEPROM_Program.o
                                 0x357 (size before relaxing)
- .debug_str     0x000007f6      0x369 ECUAL/hspi/hspi_program.o
+ .debug_str     0x000007ca      0x369 ECUAL/hspi/hspi_program.o
                                 0x5ca (size before relaxing)
- .debug_str     0x00000b5f       0x8e ECUAL/husart/husart.o
+ .debug_str     0x00000b33       0x8e ECUAL/husart/husart.o
                                 0x2bf (size before relaxing)
- .debug_str     0x00000bed       0x11 main.o
+ .debug_str     0x00000bc1       0x11 main.o
                                 0x1cb (size before relaxing)
- .debug_str     0x00000bfe      0x127 MCAL/dio/dio_prog.o
+ .debug_str     0x00000bd2      0x127 MCAL/dio/dio_prog.o
                                 0x496 (size before relaxing)
- .debug_str     0x00000d25       0xec MCAL/i2c/MI2C_Program.o
+ .debug_str     0x00000cf9       0xec MCAL/i2c/MI2C_Program.o
                                 0x344 (size before relaxing)
- .debug_str     0x00000e11       0xe7 MCAL/spi/spi_program.o
+ .debug_str     0x00000de5       0xe7 MCAL/spi/spi_program.o
                                 0x384 (size before relaxing)
- .debug_str     0x00000ef8       0x28 MCAL/usart/usart.o
+ .debug_str     0x00000ecc       0x28 MCAL/usart/usart.o
                                 0x258 (size before relaxing)
 
 .debug_loc      0x00000000     0x1a20
