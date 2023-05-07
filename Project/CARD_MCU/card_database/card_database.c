@@ -8,8 +8,8 @@
 #include "card_database.h"
 
 
-Uchar8_t pin_arr[20];
-Uchar8_t pan_arr[20];
+Uchar8_t pin_arr[5] = "5555";
+Uchar8_t pan_arr[20] = "01013578898";
 
 /*
  * AUTHOR			: Bassel Yasser Mahmoud
@@ -77,49 +77,57 @@ en_terminalPanGetStatus_t APP_terminalPanGet(Uchar8_t* arr)
 }
 
 
+/**
+ * \brief : This Function Use To Save User Pan & User Pin In The EEPROM By Calling eeprom_write_string Function
+ * 
+ * \param Uchar8_t *CardPan :  Pointer From Uchar8_t Will Store The Address Of Array Of Char That Contain User Pan String
+ * \param Uchar8_t *CardPin :  Pointer From Uchar8_t Will Store The Address Of Array Of Char That Contain User Pin String
+ * \return EN_TerminalDataState : This Is Enum For Terminal Data State
+ */
 EN_TerminalDataState SaveCardData(Uchar8_t *CardPan,Uchar8_t *CardPin)
 {
-	EN_TerminalDataState ret = DATA_NSAVED;
-	
-	if(CardPan == null || CardPin == null)
+	EN_TerminalDataState ret = DATA_NSAVED; 
+	if(CardPan == null || CardPin == null) // Check If The Pointers Is Equal Null Or Not Equal
 	{
-		ret = DATA_NSAVED;
+		ret = DATA_NSAVED; // If Equal Null Then Return DATA_NSAVED From Terminal Data State Enum
 	}
 	else
 	{
 		_delay_ms(200);
-		eeprom_write_string(PAN_PAGE,CardPan);
+		eeprom_write_string(PAN_PAGE,CardPan);// Call This Function To Write In The EEPROM And Give To It The Address & Pointer Point To The Pan Array 
 		_delay_ms(200);
-		eeprom_write_string(PIN_PAGE,CardPin);
+		eeprom_write_string(PIN_PAGE,CardPin);// Call This Function To Write In The EEPROM And Give To It The Address & Pointer Point To The Pin Array
 		_delay_ms(200);
-		eeprom_write_string(FLAG_PAGE, (Uchar8_t*)"1");
+		eeprom_write_string(FLAG_PAGE, (Uchar8_t*)"1");// Call This Function To Write In The EEPROM And Give To It The Address & The Data 
 		_delay_ms(200);
-		ret = DATA_SAVED;
+		ret = DATA_SAVED;//Return DATA_NSAVED From Terminal Data State 
 	}
 	
 	return ret;
 }
 
+/**
+ * \brief : This Function Use To Read User Pan & User Pin From The EEPROM By Calling eeprom_read_string Function
+ * 
+ * \param Uchar8_t *CardPan :  Pointer From Uchar8_t Will Store The Address Of Array Of Char That Function Will Return User Pan String In It
+ * \param Uchar8_t *CardPin :  Pointer From Uchar8_t Will Store The Address Of Array Of Char That Function Will Return User Pin String In It
+ * \return EN_TerminalDataState : This Is Enum For Terminal Data State 
+ */
 EN_TerminalDataState ReadCardData(Uchar8_t *CardPan,Uchar8_t *CardPin)
 {
 		EN_TerminalDataState ret = DATA_NREAD;
 		
-		if(CardPan == null || CardPin == null)
+		if(CardPan == null || CardPin == null)// Check If The Pointers Is Equal Null Or Not Equal
 		{
-			ret = DATA_NREAD;
+			ret = DATA_NREAD;// If Equal Null Then Return DATA_NREAD From Terminal Data State Enum
 		}
 		else
-		{
-			eeprom_read_string(0x0000,CardPan);
+		{			
+			eeprom_read_string(PAN_PAGE , CardPan);// Call This Function To Read From The EEPROM And Give To It The Address & Pointer Point To The Pan Array 
 			_delay_ms(200);
-			eeprom_read_string(0x0020,CardPin);
+			eeprom_read_string(PIN_PAGE , CardPin);// Call This Function To Read From The EEPROM And Give To It The Address & Pointer Point To The Pin Array
 			_delay_ms(200);
-			
-// 			EEPROM_readPage(PAN_PAGE , CardPan);
-// 			_delay_ms(200);
-// 			EEPROM_readPage(PIN_PAGE , CardPin);
-// 			_delay_ms(200);
-			ret = DATA_READ;
+			ret = DATA_READ;//Return DATA_READ From Terminal Data State 
 		}
 		return ret;
 }

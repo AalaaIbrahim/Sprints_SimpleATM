@@ -19,9 +19,9 @@
 #define		PAN_LENGTH			20
 
 
-#define		PIN_PAGE			0x00
-#define		PAN_PAGE			0x40
-#define		FLAG_PAGE			0x100
+#define		PIN_PAGE			0x0000
+#define		PAN_PAGE			0x0060
+#define		FLAG_PAGE			0x0120
 
 #define		CARD_PIN_REQUEST		'P'
 #define		CARD_PAN_REQUEST		'G'
