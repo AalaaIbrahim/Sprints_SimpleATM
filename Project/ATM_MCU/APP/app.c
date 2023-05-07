@@ -118,6 +118,7 @@ void APP_Start(void)
        {
 
 		get_amount_left(Entered_amount);
+		if(!strcmp(Entered_amount,Default_Entered_amount))break;
 		HLCD_ClrDisplay();
 		DB_CHECK = DATABASE_checking(CARDpan,Entered_amount,&newAMOUNT);
 		switch(DB_CHECK){
@@ -169,7 +170,7 @@ void APP_Start(void)
 				
 				HLCD_gotoXY(0, 4);
 				HLCD_WriteString("INSUFFICIENT ");
-				HLCD_gotoXY(1, 2);
+				HLCD_gotoXY(1, 5);
 				HLCD_WriteString("FUND");
 				HTIM0_SyncDelay(1, Seconds);
 				strcpy(Entered_amount,Default_Entered_amount);
@@ -182,21 +183,8 @@ void APP_Start(void)
 
 	
 	}
-	//myState = Button_enStatus();
-	//if(myState == ZERO)
-	//{
-	//global_u8OVFCounter = 0;
-	//
-	///*TODO*/
-	//
-	//}
-	//else if(myState == ENTER)
-	//{
-	//global_u8OVFCounter = 0;
-	//
-	///*TODO*/
-	//
-	//}	
+	
+	
 }
 
 

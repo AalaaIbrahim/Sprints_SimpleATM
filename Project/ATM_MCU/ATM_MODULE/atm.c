@@ -58,109 +58,96 @@ void ATM_ApprovedCard(float32_t f32_a_NewBalance)
 	HTIM0_SyncDelay(1, Seconds);
 	HLCD_ClrDisplay();
 }
-//EN_PinState Get_pin(Uchar8_t *enteredpin)
-//{
-//Uchar8_t colPos=0;
-//HLCD_ClrDisplay();
-//HLCD_gotoXY(0,0);
-//HLCD_WriteString("Enter Your pin");
-//Uchar8_t BTN,loc_counter=0;
-//HLCD_gotoXY(1,colPos);
-//while (loc_counter < 4 && EnterCheck == 0)
-//{
-////myState = Button_enStatus();
-//BTN = KEYPAD_GetButton();
-//if(BTN == KEY_NOTHING)
-//{
-//if(ZeroCheck == 1)
-//{
-//ZeroCheck = 0;
-//enteredpin[loc_counter] = '0';
-////HLCD_gotoXY(1,colPos++);
-//HLCD_vidWriteChar('0');
-//loc_counter++;
-//}
-//continue;
-//}
-//else if(BTN)
-//{
-//if(EnterCheck == 0 && ZeroCheck == 0)
-//{
-//enteredpin[loc_counter] = keys_arr[BTN-1];
-//HLCD_vidWriteChar(enteredpin[loc_counter]);
-//loc_counter++;
-//}
-//else if(EnterCheck == 1)
-//{
-//break;
-//}
-//}
-//
-//}
-//EnterCheck = 0;
-//if(loc_counter<4)
-//{
-//HLCD_ClrDisplay();
-//HLCD_gotoXY(1,0);
-//HLCD_WriteString("ERROR");
-//_delay_ms(1000);
-//return PIN_NOT_OK;
-//}
-//else
-//{
-//return PIN_OK;
-//}
-//}
 
 
+
+/*
+* AUTHOR			: Sharpel
+* FUNCTION			: Get_pin
+* DESCRIPTION		: get pin from user (on the atm )
+* ARGS		        : pointer to array (the size of array must be 5 or more) to store entered pin by user
+* RETURN			: PIN_OK if user enters 4 numbers , PIN_NOT_OK otherwise
+*/
 EN_PinState Get_pin(Uchar8_t *enteredpin)
 {
-	Uchar8_t colPos=0;
-	HLCD_ClrDisplay();
-	HLCD_gotoXY(0,0);
-	HLCD_WriteString("Enter Your pin");
-	HLCD_gotoXY(1,0);
-	Uchar8_t BTN,loc_counter=0;
 	
-	while (loc_counter < 4 && myState != ENTER)
+	/* Clear Display and display enter your pin */
+	HLCD_ClrDisplay();
+	HLCD_gotoXY(LCD_LINE_ZERO,LCD_COL_ZERO);
+	HLCD_WriteString("Enter Your pin");
+	/* change cursor position to next line for user input */
+	HLCD_gotoXY(LCD_LINE_ONE,LCD_COL_ZERO);
+	
+	/* clear global (ENTER-ZERO) variable --> myState*/
+	myState =NOTHING;
+	Uchar8_t BTN = KEY_NOTHING , loc_counter=ZERO;
+	
+	/* loop terminates if the counter exceed pin length or enter button pressed */
+	while (loc_counter < PIN_LENGTH && myState != ENTER)
 	{
-		//myState = Button_enStatus();
+		/* Get Button from keypad*/
 		BTN = KEYPAD_GetButton();
+		
+		/* case nothing pressed on keypad*/
 		if(BTN == KEY_NOTHING)
 		{
+		
+		/* check if zero pressed*/
 			if(myState == ZERO)
 			{
+			
+			    /* clear global (ENTER-ZERO) variable --> myState*/
 				myState = NOTHING;
-				enteredpin[loc_counter] = '0';
-				HLCD_gotoXY(1,colPos++);
-				HLCD_vidWriteChar('0');
-				loc_counter++;
+				
+				/* store zero in the array at counter position */
+				enteredpin[loc_counter] = ZERO_CHAR;
+				
+				/* Update cursor position and increament counter*/
+				HLCD_gotoXY(LCD_LINE_ONE,loc_counter++);
+				HLCD_vidWriteChar('*');
+				
 			}
+			
+		    /* repeat while */
 			continue;
 		}
-		else if(BTN)
+		
+		
+		/* case Button pressed on keypad*/
+		else 
 		{
-			HLCD_gotoXY(1,colPos++);
+		    /* store Button in the array at counter position */
 			enteredpin[loc_counter] = keys_arr[BTN-1];
-			HLCD_vidWriteChar(enteredpin[loc_counter]);
-			loc_counter++;
+			
+			/* Update cursor position and increament counter*/
+			HLCD_gotoXY(LCD_LINE_ONE,loc_counter++);
+			HLCD_vidWriteChar('*');
+			
 		}
 		
 		
 	}
 	
-	if(loc_counter<4)
+	
+	/* check if user types less than pin length and press enter*/
+	if(loc_counter<PIN_LENGTH)
 	{
+	    /* clear global (ENTER-ZERO) variable --> myState*/
 		myState = NOTHING;
+		
+		
+		/* Clear Display and display short pin */
 		HLCD_ClrDisplay();
-		HLCD_gotoXY(0,0);
+		HLCD_gotoXY(LCD_LINE_ZERO,LCD_COL_ZERO);
 		HLCD_WriteString("Short Pin");
-		HTIM0_SyncDelay(1,Seconds);
+		HTIM0_SyncDelay(LCD_LINE_ONE,Seconds);
+		
+		
 		return PIN_NOT_OK;
 	}
-	else{
-		return PIN_OK;	
-	}
+	
+    return PIN_OK;	
+	     
 }
 
 EN_PinState PIN_checkPinMatching(Uchar8_t *pinFromAtm,Uchar8_t *pinFromServer)
@@ -189,64 +176,109 @@ EN_PinState PIN_checkPinMatching(Uchar8_t *pinFromAtm,Uchar8_t *pinFromServer)
 		}
 		return ret;
 	}
-
+	
+	
+/*
+* AUTHOR			: Sharpel
+* FUNCTION			: get_amount_left
+* DESCRIPTION		: get amount from user ( on the atm )
+* ARGS		        : pointer to array (the size of array must be 8 or more and equal "0000.00" initial value) to store entered pin by user
+* RETURN			: void
+*/
 void get_amount_left (Uchar8_t * amount)
 	{
+		/* Clear Display and display ENTER amount at first line */
 		HLCD_ClrDisplay();
-		HLCD_gotoXY(0,0);
+		HLCD_gotoXY(LCD_LINE_ZERO,LCD_COL_ZERO);
 		HLCD_WriteString("ENTER amount");
-		HLCD_gotoXY(1,0);
+		
+	    /* display amount at second line initially "0000.00" */
+		HLCD_gotoXY(LCD_LINE_ONE,LCD_COL_ZERO);
 		HLCD_WriteString(amount);
-		Uchar8_t BTN ,loc_counter=0,i=0;
-		while(loc_counter<6 && myState !=ENTER)
+        
+		 /* clear global (ENTER-ZERO) variable --> myState*/
+		myState =NOTHING;
+		/* display amount at second line initially "0000.00" */
+		Uchar8_t BTN = KEY_NOTHING,loc_counter=ZERO,i=ZERO;
+		while(loc_counter<AMOUNT_LENGTH && myState !=ENTER)
 		{
+			
+			/* Get Button from keypad*/
 			BTN = KEYPAD_GetButton();
-			if(!BTN)
+			
+			/* Case Nothing pressed on keypad*/
+			if(BTN == KEY_NOTHING)
 			{
+				/* check if zero pressed*/
 				if(myState == ZERO)
 				{
+					
+					 /* clear global (ENTER-ZERO) variable --> myState*/
 					myState =NOTHING;
-					for(i=0;i<6;i++)
+					
+					/* loop to shift numbers left*/
+					for(i=ZERO;i<AMOUNT_LENGTH;i++)
 					{
+						
+						/* check if index is before decimal*/
 						if(i==3)
 						{
+							/* shift the number before decimal left to after decimal at index 3*/
 							amount[i]=amount[i+2];
 							HLCD_gotoXY(1,i);
 							HLCD_vidWriteChar(amount[i]);
+							/* skip decimal iteration and move after it*/
 							i=5;
 						};
+						/* shift the number left*/
 						amount[i]=amount[i+1];
 						HLCD_gotoXY(1,i);
 						HLCD_vidWriteChar(amount[i]);
 					}
+					
+					/* store zero in the array at least position */
 					amount[6] = '0';
-					HLCD_gotoXY(1,6);
+					HLCD_gotoXY(1,AMOUNT_LENGTH);
 					HLCD_vidWriteChar(amount[6]);
 					loc_counter++;
 				}
+				
+				/* repeat while*/
 				continue;
 			}
+			
+			
+			/* case Button pressed on keypad*/
 			else
 			{
-				for(i=0;i<6;i++)
+				
+				/* loop to shift numbers left*/
+				for(i=ZERO;i<AMOUNT_LENGTH;i++)
 				{
+					
+					/* check if index is before decimal*/
 					if(i==3)
 					{
+						/* shift the number before decimal left to after decimal at index 3*/
 						amount[i]=amount[i+2];
 						HLCD_gotoXY(1,i);
 						HLCD_vidWriteChar(amount[i]);
+						/* skip decimal iteration and move after it*/
 						i=5;
 					};
+					/* shift the number left*/
 					amount[i]=amount[i+1];
 					HLCD_gotoXY(1,i);
 					HLCD_vidWriteChar(amount[i]);
 				}
+				
+				/* store Button in the array at least position */
 				amount[6] = keys_arr[BTN-1];
 				HLCD_gotoXY(1,6);
 				HLCD_vidWriteChar(amount[6]);
-				
+				loc_counter++;
 			}
-			loc_counter++;
+			
 			
 		}
 		

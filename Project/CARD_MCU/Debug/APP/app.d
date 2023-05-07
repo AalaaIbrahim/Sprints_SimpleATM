@@ -13,8 +13,8 @@ APP/app.d APP/app.o: ../APP/app.c ../APP/../Common/BIT_Math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  ../APP/../ECUAL/eeprom/../../MCAL/i2c/MI2C_Interface.h \
- ../APP/../ECUAL/eeprom/../../MCAL/i2c/../../Common/STD_Types.h \
- ../APP/../ECUAL/eeprom/../../MCAL/i2c/../../Common/Bit_Math.h \
+ d:\sprints_simpleatm\project\card_mcu\common\std_types.h \
+ d:\sprints_simpleatm\project\card_mcu\common\bit_math.h \
  ../APP/../ECUAL/eeprom/../../MCAL/i2c/MI2C_Config.h \
  ../APP/../ECUAL/eeprom/../../MCAL/i2c/MI2C_Private.h \
  ../APP/../ECUAL/eeprom/../../Common/STD_Types.h \
@@ -56,9 +56,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../APP/../ECUAL/eeprom/../../MCAL/i2c/MI2C_Interface.h:
 
-../APP/../ECUAL/eeprom/../../MCAL/i2c/../../Common/STD_Types.h:
+d:\sprints_simpleatm\project\card_mcu\common\std_types.h:
 
-../APP/../ECUAL/eeprom/../../MCAL/i2c/../../Common/Bit_Math.h:
+d:\sprints_simpleatm\project\card_mcu\common\bit_math.h:
 
 ../APP/../ECUAL/eeprom/../../MCAL/i2c/MI2C_Config.h:
 
