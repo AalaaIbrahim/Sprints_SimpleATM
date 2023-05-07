@@ -1,132 +1,133 @@
 /*
- * HEEPROM_Program.c
- *
- *  Created on: Feb 3, 2023
- *      Author: hp
- */
+* HEEPROM_Program.c
+*
+*  Created on: Feb 3, 2023
+*      Author: hp
+*/
 
 #include "HEEPROM_Interface.h"
 
 #define EEPROM_ADDRESS		0b01010000
 
+Uchar8_t arr_g_ReadBuffer[EEPROM_PAGE_SIZE];
 
 
+
+/**
+* \brief : This Function Just Call To Initialize I2C as Master
+*
+* \param : Void
+*
+* \return void
+*/
 void eeprom_init(void)
 {
-	i2c_init_master();
+	i2c_init_master(); // call function that init I2c Master
 }
 
-
-void eeprom_write_byte(Uint16_t address, Uchar8_t data)  // address is 10 bit
+/**
+* \brief : This Function Call To Make The Sequence Of I2C Frame To Write Byte On A Device
+*
+* \param : Uint16_t address : This Is Device Address
+*		 : Uchar8_t data : This Is Data That Will Be Write	
+*
+* \return void
+*/
+void eeprom_write_byte(Uint16_t address, Uchar8_t data)  
 {
-	Uchar8_t deviceAddress;
-	//Uchar8_t dataAddress;
-		
-	deviceAddress = EEPROM_ADDRESS;	
-	/*deviceAddress = EEPROM_ADDRESS | ((address >> 8) & 0x0003);*/
-//	dataAddress = (address & 0b0011111111);
-
-	/* Send start condition */
-	i2c_start();
-	/* Send slave address */
-	i2c_send_slave_address_with_write_req(deviceAddress);     // i2c_write_byte(0x50 | (address >> 8) & 0x00000111 );
-	 	 	 	 	 	 	 	 	 	 	 	 	 	 	  // 520 = 0b 01010 0  0  1   1 01110 11
-	 	 	 	 	 	 	 	 	 	 	 	 	 	 	  //                A2 P1 P2  B7      B0
-	/* Send data location */
-	i2c_write_byte((Uchar8_t) (address >> 8)); // or i2c_write_byte(dataAddress);
-	i2c_write_byte((Uchar8_t) address);
-	/* Send data */
-	i2c_write_byte(data);
-	/* Send Stop Condition */
-	i2c_stop();
+	
+	i2c_start(); // Send Start Bit On I2c
+	i2c_send_slave_address_with_write_req(0x50);// Send Slave Address With Write Bit On I2c
+	i2c_write_byte(address >> 8); // Write Byte Contain Device Address Shifted By 8 On I2c
+	i2c_write_byte(address); // Write Byte Contain Device Address On I2c
+	i2c_write_byte(data); // Write Byte Contain Data On I2c
+	i2c_stop(); // Send Stop Bit On I2c
 }
 
-
+/**
+* \brief : This Function Call To Make The Sequence Of I2C Frame To Read Byte On A Device
+*
+* \param : Uint16_t address : This Is Device Address	
+*
+* \return Uchar8_t : Function Will Return Uchar8_t Contain The Data
+*/
 Uchar8_t eeprom_read_byte(Uint16_t address)
 {
-	Uchar8_t deviceAddress;
-	//Uchar8_t dataAddress;
-	Uchar8_t data;
-	
-	deviceAddress = EEPROM_ADDRESS;
-
-// 	deviceAddress = EEPROM_ADDRESS | ((address >> 8) & 0x0003);
-
-	/* Send start condition */
-	i2c_start();
-
-	/* Send slave address with write request*/
-	i2c_send_slave_address_with_write_req(deviceAddress);
-	/* Send Data location*/
-		i2c_write_byte((Uchar8_t) (address >> 8));
-		i2c_write_byte((Uchar8_t) address);
-	/* Send Repeated Start Condition*/
-	i2c_repeated_start();
-	/* Send slave address with read request*/
-	i2c_send_slave_address_with_read_req(deviceAddress);
-	/*Read Received Byte*/
-	data = i2c_read_byte();
-	/* Send Stop Condition */
-	i2c_stop();
-	return data;
+	Uchar8_t data = 0;
+	i2c_start();// Send Start Bit On I2c
+	i2c_send_slave_address_with_write_req(0x50);// Send Slave Address With Write Bit On I2c
+	i2c_write_byte(address >> 8);// Write Byte Contain Device Address Shifted By 8 On I2c
+	i2c_write_byte(address & 0xFF);// Write Byte Contain Device Address On I2c
+	i2c_repeated_start();// Send Repeated Start Bit On I2c
+	i2c_send_slave_address_with_read_req(0x50);// Send Slave Address With Read Bit On I2c
+	data = i2c_read_byte_nack();// Read Byte Contain Data On I2c With No Ack
+	i2c_stop();// Send Stop Bit On I2c
+	return data;//Return The Data That Been Read 
 }
 
 
-/*
-void eeprom_write_string(Uint16_t Copy_u8Address, const Uchar8_t* str)
-{
-	Uchar8_t sendedAddress;
-	Uchar8_t dataAddress, count = 0;
 
-	while(str[count] != '\0')
-	{
-		count++;
-
-	}
-	sendedAddress = EEPROM_ADDRESS | ((Copy_u8Address >> 8) & 0x0003);
-	dataAddress = (Uchar8_t)Copy_u8Address;
-	i2c_start();
-
-	i2c_send_slave_address_with_write_req(sendedAddress);
-	i2c_write_byte((Uchar8_t) dataAddress);
-
-    i2c_write_byte(count);
-
-	    for(Uchar8_t i=0;i<count;i++)
-	    {
-		    i2c_write_byte(*str++);
-	    }
-	    i2c_write_byte('\0');
-
-		i2c_stop();
-}
+/**
+* \brief : This Function Call When You Need To Write A String In The EEPROM 
+*
+* \param : Uint16_t address : This Is Device Address
+*		 : Uchar8_t *str	: This Pointer Will Store The Address Of The Array Of The Chars
+* \return  Void
 */
-
-
-
 void eeprom_write_string(Uint16_t Copy_u8Address, const Uchar8_t* str)
 {
-		Uchar8_t len = 0;
-			
-			do 
-			{
-				eeprom_write_byte(Copy_u8Address++,str[len]);
-				_delay_ms(200);
-			}
-			while(str[len++] != '\0');
-
-			
+	Uchar8_t i = 0;
+	while(str[i] != '\0') // Loop Until The End Of The String
+	{
+		_delay_ms(50);
+		eeprom_write_byte(Copy_u8Address++,str[i++]);//Call This Function To Write Char In EEPROM And Increment The Address And Index
+	}
+	_delay_ms(50);
+	eeprom_write_byte(Copy_u8Address++,'\0');//Call This Function To Write Null After The Last Char Of The String To Know Where The String Is End
 }
 
-
+/**
+* \brief : This Function Call When You Need To Read A String From The EEPROM
+*
+* \param : Uint16_t address : This Is Device Address
+*		 : Uchar8_t *str	: This Pointer Will Store The Address Of The Array Of The Chars That Will Return String In It
+* \return  Void
+*/
 void eeprom_read_string(Uint16_t Copy_u8Address, Uchar8_t* str)
 {
-			Uchar8_t len = 0;
-			do
-			{
-				str[len] = eeprom_read_byte(Copy_u8Address++);
-				_delay_ms(200);
-			}
-			while(str[len++] != '\0');
+	Uchar8_t len = 0;
+	do
+	{
+		_delay_ms(50);
+		str[len] = eeprom_read_byte(Copy_u8Address++);//Call This Function To Read Char From EEPROM And Increment The Address And Index
+	}
+	while(str[len++] != '\0');// Loop Until The End Of The String
 }
 
+// void EEPROM_readPage(Uint16_t u16_a_pageAddress , Uchar8_t *str)
+// {
+// 	Uchar8_t u8_l_iterator;
+// 
+// 	i2c_start();
+// 
+// 	i2c_send_slave_address_with_write_req(EEPROM_ADDRESS);
+// 
+// 	/* Page high address byte */
+// 	i2c_write_byte(u16_a_pageAddress >> 8);
+// 
+// 	/* Page low address byte */
+// 	i2c_write_byte(u16_a_pageAddress & 0xFF);
+// 	
+// 	i2c_repeated_start();
+// 	i2c_send_slave_address_with_read_req(EEPROM_ADDRESS);
+// 
+// 	for(u8_l_iterator=0; u8_l_iterator<EEPROM_PAGE_SIZE-1; u8_l_iterator++)
+// 	{
+// 		str[u8_l_iterator] = i2c_read_byte();
+// 	}
+// 
+// 	/* Read the last bit with NACK */
+// 	str[EEPROM_PAGE_SIZE-1] = i2c_read_byte_nack();
+// 
+// 	i2c_stop();
+// }

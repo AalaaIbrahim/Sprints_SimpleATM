@@ -183,5 +183,7 @@ Uchar8_t i2c_slave_read_byte(void);
  ************************************************************************************/
 void i2c_slave_write_byte(Uchar8_t byte);
 
+Uchar8_t i2c_read_byte_ack(void);
+Uchar8_t i2c_read_byte_nack(void);
 
 #endif /* MCAL_I2C_V2_MI2C_INTERFACE_H_ */

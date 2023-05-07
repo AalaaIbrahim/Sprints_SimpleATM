@@ -60,7 +60,7 @@ void APP_Init(void)
 	(void)HTimer_enCBF(timer_ovfCount);
 	(void)HLCD_vidInit();
 	(void)HSPI_MasterInit();
-	(void)H_EXTINT_create(EXTINT0, ANY_LOGICAL_CHANGE,TriggerCallBack);
+	(void)H_EXTINT_create(EXTINT0,RISING_EDGE,TriggerCallBack);
 	/*(void)SwICU_Init();*/
 	(void)BUZ_Init(&st_g_Buzzer);
 	(void)HButton_ExtIntInit(DIO_PINB_2);

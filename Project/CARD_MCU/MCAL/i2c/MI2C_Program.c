@@ -34,6 +34,7 @@
 /*								Function Implementation			     		*/
 /****************************************************************************/
 
+
 void i2c_init_master(void)
 {
 //	TWBR = 0x02; // bit rate = 400.000 kbps, F_CPU = 8M   SCL freq= F_CPU/(16+2(TWBR).4^TWPS)
@@ -169,7 +170,7 @@ void i2c_write_byte(Uchar8_t byte)
 
 Uchar8_t i2c_read_byte(void)
 {
-	TWCR = (1<<TWINT) | (1<<TWEN);
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWEA);
 	/* Clear TWINT flag */
 //	SET_BIT(TWCR, TWINT);
 	/* Enable I2C peripheral */
@@ -191,15 +192,7 @@ Uchar8_t i2c_read_byte(void)
 
 void i2c_stop(void)
 {
-//	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
-	/* Clear TWINT flag */
-	SET_BIT(TWCR, TWINT);
-	/* Enable Stop bit */
-	SET_BIT(TWCR, TWSTO);
-	/* Enable I2C peripheral */
-	SET_BIT(TWCR, TWEN);
-	//while(TWCR&(1<<TWSTO));
-	//CLEAR_BIT(TWCR, TWSTA);
+ TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
 }
 
 
@@ -267,4 +260,35 @@ void i2c_slave_write_byte(Uchar8_t byte)
 	while ( (TWSR & 0xF8) != SLAVE_BYTE_TRANSMITTED );
 }
 
+
+Uchar8_t i2c_read_byte_nack(void)
+{
+	/* Clear TWINT flag */
+	SET_BIT(TWCR, TWINT);
+
+	/* Enable I2C peripheral */
+	SET_BIT(TWCR, TWEN);
+	
+	/* Waiting for TWINT flag to be set */
+	while ( !(GET_BIT(TWCR,TWINT)) );
+
+	return TWDR;
+}
+
+Uchar8_t i2c_read_byte_ack(void)
+{
+	/* Clear TWINT flag */
+	SET_BIT(TWCR, TWINT);
+
+	/* Enable ACK bit */
+	SET_BIT(TWCR, TWEA);
+
+	/* Enable I2C peripheral */
+	SET_BIT(TWCR, TWEN);
+
+	/* Waiting for TWINT flag to be set */
+	while ( !(GET_BIT(TWCR,TWINT)) );
+
+	return TWDR;
+}
 

@@ -88,11 +88,11 @@ EN_TerminalDataState SaveCardData(Uchar8_t *CardPan,Uchar8_t *CardPin)
 	else
 	{
 		_delay_ms(200);
-		eeprom_write_string(0x0000,CardPan);
+		eeprom_write_string(PAN_PAGE,CardPan);
 		_delay_ms(200);
-		eeprom_write_string(0x0020,CardPin);
+		eeprom_write_string(PIN_PAGE,CardPin);
 		_delay_ms(200);
-		eeprom_write_string(0x0050, (Uchar8_t*)"1");
+		eeprom_write_string(FLAG_PAGE, (Uchar8_t*)"1");
 		_delay_ms(200);
 		ret = DATA_SAVED;
 	}
@@ -114,6 +114,11 @@ EN_TerminalDataState ReadCardData(Uchar8_t *CardPan,Uchar8_t *CardPin)
 			_delay_ms(200);
 			eeprom_read_string(0x0020,CardPin);
 			_delay_ms(200);
+			
+// 			EEPROM_readPage(PAN_PAGE , CardPan);
+// 			_delay_ms(200);
+// 			EEPROM_readPage(PIN_PAGE , CardPin);
+// 			_delay_ms(200);
 			ret = DATA_READ;
 		}
 		return ret;

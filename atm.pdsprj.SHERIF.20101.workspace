@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activewindow="0">
-  <PLACEMENT>2c00000002000000020000000083ffff0083ffffffffffffffffffff710100001700000080070000fc030000</PLACEMENT>
+  <PLACEMENT>2c00000002000000030000000083ffff0083ffffffffffffffffffff710100001700000080070000fc030000</PLACEMENT>
   <WINDOW type="default" module="ISIS">
    <editor metric="0" gridmajor="2540000" mode="00000000" zoom="-1" scale="118" flipped="0" gridminor="254000" gridmode="32" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="127000">
     <world y1="-8890000" x1="-12700000" y2="8890000" x2="12700000"/>
@@ -26,9 +26,9 @@
  </MODULE>
  <MODULE name="VSMDEBUG">
   <PWI>
-   <POPUP w="800" x="48" flags="00000002" y="160" h="200" pid="0" iid="-1">
+   <POPUP w="800" x="1022" flags="00000003" y="85" h="200" pid="0" iid="-1">
     <PROPERTIES>
-     <ITEM name="Message Column Width">661</ITEM>
+     <ITEM name="Message Column Width">540</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
      <ITEM name="Source Column Width">100</ITEM>
      <ITEM name="Time Column Width">120</ITEM>
@@ -52,7 +52,7 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="718" x="1004" flags="00000022" y="301" h="250" pid="0" iid="6">
+   <POPUP w="1544" x="157" flags="00008023" y="486" h="250" pid="0" iid="6">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>
@@ -194,7 +194,7 @@
      <ITEM name="TopLineAddress">00000020</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="8" x="251" flags="0000000a" y="439" h="32" pid="101" iid="2">
+   <POPUP w="8" x="251" flags="0000000b" y="439" h="32" pid="101" iid="2">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -204,7 +204,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="388" flags="00000022" y="500" h="250" pid="0" iid="3">
+   <POPUP w="835" x="-352" flags="00000023" y="152" h="250" pid="0" iid="3">
     <PROPERTIES>
      <ITEM name="ComboBox1000">S</ITEM>
      <ITEM name="ComboBox1001">Sr</ITEM>
@@ -217,7 +217,7 @@
      <ITEM name="ComboBox1008">A</ITEM>
      <ITEM name="ComboBox1009">N</ITEM>
      <ITEM name="HSplitter1Pos">125</ITEM>
-     <ITEM name="VSplitter1Pos">298</ITEM>
+     <ITEM name="VSplitter1Pos">248</ITEM>
     </PROPERTIES>
    </POPUP>
   </PWI>

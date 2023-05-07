@@ -282,10 +282,10 @@ en_BuzzerErrorState_t deinitAtm(st_Buzzer_t* pst_a_buzzer)
 		HSPI_SendChar(ATM_REQUEST_PIN);
 		_delay_ms(5);
 		HSPI_ReceiveData(CARDpin, 5);
-		//HLCD_ClrDisplay();
-		//HLCD_WriteString("Received ");
-		//HLCD_WriteString(CARDpin);
-		//_delay_ms(3000);
+		HLCD_ClrDisplay();
+		HLCD_WriteString("Received ");
+		HLCD_WriteString(CARDpin);
+		_delay_ms(3000);
 		
 		/* Request PIN From Card */
 		HSPI_SendChar(ATM_REQUEST_PAN);

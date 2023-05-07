@@ -15,8 +15,8 @@
 /*************************************************************************************************************
 * 												Global Variables
 ************************************************************************************************************/
-extern Uchar8_t pin_arr[20];
-extern Uchar8_t pan_arr[20];
+extern Uchar8_t pin_arr[64];
+extern Uchar8_t pan_arr[64];
 extern Uchar8_t u8_g_SlaveReceive;
 
 Uchar8_t u8_g_EepromFlag, u8_g_CardState = CardGetMode , u8_g_PanValid, u8_gs_ModeSelect;
@@ -41,7 +41,7 @@ void APP_Start(void)
 	{
 		case CardGetMode:
 		{
-			//u8_g_EepromFlag = eeprom_read_byte(0x0050);
+			u8_g_EepromFlag = eeprom_read_byte(0x100);
 			HUSART_enSendData(u8_g_EepromFlag);
 			if(u8_g_EepromFlag == 0xFF) u8_g_CardState = CardProgMode_GetPan;
 			else
@@ -81,6 +81,8 @@ void APP_Start(void)
 			
 			/* Get PIN from EEPROM to prepare data in SPI buffer */
 			ReadCardData(pan_arr,pin_arr);
+			HUSART_sendSTRING(pan_arr);
+			HUSART_sendSTRING(pin_arr);
 			u8_g_CardState = CardCommMode;
 			break;
 		}
