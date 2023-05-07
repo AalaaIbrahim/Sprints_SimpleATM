@@ -41,13 +41,7 @@ void APP_Start(void)
 	{
 		case CardGetMode:
 		{
-<<<<<<< HEAD
-			u8_g_EepromFlag = eeprom_read_byte(0x100);
-			HUSART_enSendData(u8_g_EepromFlag);
-=======
-			u8_g_EepromFlag = eeprom_read_byte(0x0050);
-			//HUSART_enSendData(u8_g_EepromFlag);
->>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
+			u8_g_EepromFlag = eeprom_read_byte(FLAG_PAGE);
 			if(u8_g_EepromFlag == 0xFF) u8_g_CardState = CardProgMode_GetPan;
 			else
 			{

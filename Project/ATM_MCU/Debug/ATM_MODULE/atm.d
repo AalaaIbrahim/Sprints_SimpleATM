@@ -9,11 +9,11 @@ ATM_MODULE/atm.d ATM_MODULE/atm.o: ../ATM_MODULE/atm.c \
  ../ATM_MODULE/../ECUAL/lcd/../../Common/STD_Types.h \
  ../ATM_MODULE/../ECUAL/hspi/hspi_interface.h \
  ../ATM_MODULE/../ECUAL/h_ext_int/h_ext_int.h \
- d:\sprints_simpleatm\project\atm_mcu\mcal\extint\extinterrupt.h \
- d:\sprints_simpleatm\project\atm_mcu\common\vect_table.h \
- d:\sprints_simpleatm\project\atm_mcu\common\bit_math.h \
- d:\sprints_simpleatm\project\atm_mcu\common\std_types.h \
- d:\sprints_simpleatm\project\atm_mcu\mcal\extint\ext_config.h \
+ ../ATM_MODULE/../ECUAL/h_ext_int/../../MCAL/extint/extinterrupt.h \
+ ../ATM_MODULE/../ECUAL/h_ext_int/../../MCAL/extint/../../Common/vect_table.h \
+ ../ATM_MODULE/../ECUAL/h_ext_int/../../MCAL/extint/../../Common/BIT_Math.h \
+ ../ATM_MODULE/../ECUAL/h_ext_int/../../MCAL/extint/../../Common/STD_Types.h \
+ ../ATM_MODULE/../ECUAL/h_ext_int/../../MCAL/extint/ext_config.h \
  ../ATM_MODULE/../ECUAL/htimer0/htimer0.h \
  ../ATM_MODULE/../ECUAL/Button/button.h \
  ../ATM_MODULE/../ECUAL/Button/../../MCAL/DIO/DIO_Interface.h \
@@ -46,15 +46,15 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../ATM_MODULE/../ECUAL/h_ext_int/h_ext_int.h:
 
-d:\sprints_simpleatm\project\atm_mcu\mcal\extint\extinterrupt.h:
+../ATM_MODULE/../ECUAL/h_ext_int/../../MCAL/extint/extinterrupt.h:
 
-d:\sprints_simpleatm\project\atm_mcu\common\vect_table.h:
+../ATM_MODULE/../ECUAL/h_ext_int/../../MCAL/extint/../../Common/vect_table.h:
 
-d:\sprints_simpleatm\project\atm_mcu\common\bit_math.h:
+../ATM_MODULE/../ECUAL/h_ext_int/../../MCAL/extint/../../Common/BIT_Math.h:
 
-d:\sprints_simpleatm\project\atm_mcu\common\std_types.h:
+../ATM_MODULE/../ECUAL/h_ext_int/../../MCAL/extint/../../Common/STD_Types.h:
 
-d:\sprints_simpleatm\project\atm_mcu\mcal\extint\ext_config.h:
+../ATM_MODULE/../ECUAL/h_ext_int/../../MCAL/extint/ext_config.h:
 
 ../ATM_MODULE/../ECUAL/htimer0/htimer0.h:
 

@@ -150,32 +150,59 @@ EN_PinState Get_pin(Uchar8_t *enteredpin)
 	     
 }
 
+/**
+* \brief : ThiS Function Compare Pin User Enter It On Atm With The Pin Saved In The EEPROM On Card
+*
+* \param : Uchar8_t *pinFromAtm : Pointer From Uchar8_t Data Type Point On The Array Contain The Pin User Enter From Atm
+* \param : Uchar8_t *pinFromServer : Pointer From Uchar8_t Data Type Point On The Array Contain The Pin Saved EEPROM Of The Card
+*
+* \return EN_PinState This Is Enum Contain pin State
+*/
 EN_PinState PIN_checkPinMatching(Uchar8_t *pinFromAtm,Uchar8_t *pinFromServer)
+{
+	EN_PinState ret = PIN_NOT_MATCHED;
+	if(pinFromAtm == NULL || pinFromServer == NULL) // Check If The Pointers Is Equal Null Or Not Equal
 	{
-		EN_PinState ret = PIN_NOT_MATCHED;
-		if(pinFromAtm == NULL || pinFromServer == NULL)
+		ret = NULL_POINTER;//Return NULL_POINTER From PinState Enum
+	}
+	else
+	{
+		if(!strcmp(pinFromAtm,pinFromServer)) // Compare This Two Array Equal Or Not
 		{
-			ret = NULL_POINTER;
+			ret = PIN_MATCHED;//Return PIN_MATCHED From PinState Enum
+			HLCD_ClrDisplay();// Clear Screen
+			HLCD_WriteString("PIN_MATCHED");//Print PIN_MATCHED On Lcd
+			_delay_ms(5000);
 		}
 		else
 		{
-			if(!strcmp(pinFromAtm,pinFromServer))
-			{
-				ret = PIN_MATCHED;
-				HLCD_ClrDisplay();
-				HLCD_WriteString("PIN_MATCHED");
-				_delay_ms(5000);
-			}
-			else
-			{
-				ret = PIN_NOT_MATCHED;
-				HLCD_ClrDisplay();
-				HLCD_WriteString("PIN_NOT_MATCHED");
-				_delay_ms(5000);
-			}
+			ret = PIN_NOT_MATCHED;//Return PIN_NOT_MATCHED From PinState Enum
+			HLCD_ClrDisplay();// Clear Screen
+			HLCD_WriteString("PIN_NOT_MATCHED");//Print PIN_NOT_MATCHED On Lcd
+			_delay_ms(5000);
 		}
-		return ret;
 	}
+	return ret;
+}
+	
+/**
+ * \brief : This Function Call To Locked The Atm System
+ * 
+ * \param : st_Buzzer_t *pst_a_buzzer Thi sIs Struct Contain The Buzzer CFG
+ * 
+ * \return en_BuzzerErrorState_t This Is Enum Return Buzzer State
+ */
+en_BuzzerErrorState_t deinitAtm(st_Buzzer_t* pst_a_buzzer)
+{
+	en_BuzzerErrorState_t ret = BUZ_NOK;
+	
+	ret = BUZ_SetState(pst_a_buzzer,BUZ_ON);//Call This Function To Change Buzzer State To On
+	
+	return ret;
+}
+	
+	
+	
 	
 	
 /*
@@ -285,16 +312,6 @@ void get_amount_left (Uchar8_t * amount)
 		
 }
 	
-
-
-en_BuzzerErrorState_t deinitAtm(st_Buzzer_t* pst_a_buzzer)
-	{
-		en_BuzzerErrorState_t ret = BUZ_NOK;
-		
-		ret = BUZ_SetState(pst_a_buzzer,BUZ_ON);
-		
-		return ret;
-	}
 
 
 	Uchar8_t u8_g_ReceivePIN = 0;
