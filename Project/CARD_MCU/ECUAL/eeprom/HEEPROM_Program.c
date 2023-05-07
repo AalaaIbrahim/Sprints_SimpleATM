@@ -7,8 +7,6 @@
 
 #include "HEEPROM_Interface.h"
 
-#define EEPROM_ADDRESS		0b01010000
-
 Uchar8_t arr_g_ReadBuffer[EEPROM_PAGE_SIZE];
 
 
@@ -104,30 +102,3 @@ void eeprom_read_string(Uint16_t Copy_u8Address, Uchar8_t* str)
 	while(str[len++] != '\0');// Loop Until The End Of The String
 }
 
-// void EEPROM_readPage(Uint16_t u16_a_pageAddress , Uchar8_t *str)
-// {
-// 	Uchar8_t u8_l_iterator;
-// 
-// 	i2c_start();
-// 
-// 	i2c_send_slave_address_with_write_req(EEPROM_ADDRESS);
-// 
-// 	/* Page high address byte */
-// 	i2c_write_byte(u16_a_pageAddress >> 8);
-// 
-// 	/* Page low address byte */
-// 	i2c_write_byte(u16_a_pageAddress & 0xFF);
-// 	
-// 	i2c_repeated_start();
-// 	i2c_send_slave_address_with_read_req(EEPROM_ADDRESS);
-// 
-// 	for(u8_l_iterator=0; u8_l_iterator<EEPROM_PAGE_SIZE-1; u8_l_iterator++)
-// 	{
-// 		str[u8_l_iterator] = i2c_read_byte();
-// 	}
-// 
-// 	/* Read the last bit with NACK */
-// 	str[EEPROM_PAGE_SIZE-1] = i2c_read_byte_nack();
-// 
-// 	i2c_stop();
-// }
