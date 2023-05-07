@@ -41,12 +41,17 @@ void APP_Start(void)
 	{
 		case CardGetMode:
 		{
+<<<<<<< HEAD
 			u8_g_EepromFlag = eeprom_read_byte(0x100);
 			HUSART_enSendData(u8_g_EepromFlag);
+=======
+			u8_g_EepromFlag = eeprom_read_byte(0x0050);
+			//HUSART_enSendData(u8_g_EepromFlag);
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
 			if(u8_g_EepromFlag == 0xFF) u8_g_CardState = CardProgMode_GetPan;
 			else
 			{
-				HUSART_sendSTRING("Please press 1 for entering user mode and 2 for programming mode:");
+				HUSART_sendSTRING("\n\rPlease press 1 for entering user mode and 2 for programming mode:");
 				while(HUSART_enRecieveData(&u8_gs_ModeSelect));
 				HUSART_enSendData(u8_gs_ModeSelect);
 				HUSART_enSendData('\n\r');

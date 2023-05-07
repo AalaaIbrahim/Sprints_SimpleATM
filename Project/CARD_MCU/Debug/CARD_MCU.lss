@@ -5,6 +5,7 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .text         000008c6  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
+<<<<<<< HEAD
   1 .data         00000172  00800060  000008c6  0000095a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   2 .bss          00000042  008001d2  008001d2  00000acc  2**0
@@ -28,6 +29,31 @@ Idx Name          Size      VMA       LMA       File off  Algn
  11 .debug_loc    00001a20  00000000  00000000  000077c0  2**0
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_ranges 00000248  00000000  00000000  000091e0  2**0
+=======
+  1 .data         00000174  00800060  000008d2  00000966  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000042  008001d4  008001d4  00000ada  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000ada  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000b0c  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000002d8  00000000  00000000  00000b48  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00002a1e  00000000  00000000  00000e20  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000ff1  00000000  00000000  0000383e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00001915  00000000  00000000  0000482f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  0000064c  00000000  00000000  00006144  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000ef8  00000000  00000000  00006790  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000019df  00000000  00000000  00007688  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000238  00000000  00000000  00009067  2**0
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -72,13 +98,13 @@ Disassembly of section .text:
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
-  70:	a2 3d       	cpi	r26, 0xD2	; 210
+  70:	a4 3d       	cpi	r26, 0xD4	; 212
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
 
 00000076 <__do_clear_bss>:
   76:	22 e0       	ldi	r18, 0x02	; 2
-  78:	a2 ed       	ldi	r26, 0xD2	; 210
+  78:	a4 ed       	ldi	r26, 0xD4	; 212
   7a:	b1 e0       	ldi	r27, 0x01	; 1
   7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
@@ -86,7 +112,7 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	a4 31       	cpi	r26, 0x14	; 20
+  80:	a6 31       	cpi	r26, 0x16	; 22
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 d8 02 	call	0x5b0	; 0x5b0 <main>
@@ -118,7 +144,7 @@ void APP_Start(void)
 	// 	APP_terminalPanGet(pan_arr);
 	// 	HUSART_sendSTRING(pan_arr);
 	switch(u8_g_CardState)
-  a2:	80 91 d2 01 	lds	r24, 0x01D2	; 0x8001d2 <__data_end>
+  a2:	80 91 d4 01 	lds	r24, 0x01D4	; 0x8001d4 <__data_end>
   a6:	82 30       	cpi	r24, 0x02	; 2
   a8:	09 f4       	brne	.+2      	; 0xac <APP_Start+0xa>
   aa:	4e c0       	rjmp	.+156    	; 0x148 <APP_Start+0xa6>
@@ -138,6 +164,7 @@ void APP_Start(void)
 	{
 		case CardGetMode:
 		{
+<<<<<<< HEAD
 			u8_g_EepromFlag = eeprom_read_byte(0x100);
   c6:	80 e0       	ldi	r24, 0x00	; 0
   c8:	91 e0       	ldi	r25, 0x01	; 1
@@ -167,10 +194,40 @@ void APP_Start(void)
 				HUSART_enSendData(u8_gs_ModeSelect);
   fa:	80 91 e7 01 	lds	r24, 0x01E7	; 0x8001e7 <u8_gs_ModeSelect>
   fe:	0e 94 c3 02 	call	0x586	; 0x586 <HUSART_enSendData>
+=======
+			u8_g_EepromFlag = eeprom_read_byte(0x0050);
+  c6:	80 e5       	ldi	r24, 0x50	; 80
+  c8:	90 e0       	ldi	r25, 0x00	; 0
+  ca:	0e 94 02 02 	call	0x404	; 0x404 <eeprom_read_byte>
+  ce:	80 93 e8 01 	sts	0x01E8, r24	; 0x8001e8 <u8_g_EepromFlag>
+			//HUSART_enSendData(u8_g_EepromFlag);
+			if(u8_g_EepromFlag == 0xFF) u8_g_CardState = CardProgMode_GetPan;
+  d2:	8f 3f       	cpi	r24, 0xFF	; 255
+  d4:	21 f4       	brne	.+8      	; 0xde <APP_Start+0x3c>
+  d6:	81 e0       	ldi	r24, 0x01	; 1
+  d8:	80 93 d4 01 	sts	0x01D4, r24	; 0x8001d4 <__data_end>
+  dc:	08 95       	ret
+			else
+			{
+				HUSART_sendSTRING("\n\rPlease press 1 for entering user mode and 2 for programming mode:");
+  de:	80 e7       	ldi	r24, 0x70	; 112
+  e0:	90 e0       	ldi	r25, 0x00	; 0
+  e2:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+				while(HUSART_enRecieveData(&u8_gs_ModeSelect));
+  e6:	89 ee       	ldi	r24, 0xE9	; 233
+  e8:	91 e0       	ldi	r25, 0x01	; 1
+  ea:	0e 94 ac 02 	call	0x558	; 0x558 <HUSART_enRecieveData>
+  ee:	81 11       	cpse	r24, r1
+  f0:	fa cf       	rjmp	.-12     	; 0xe6 <APP_Start+0x44>
+				HUSART_enSendData(u8_gs_ModeSelect);
+  f2:	80 91 e9 01 	lds	r24, 0x01E9	; 0x8001e9 <u8_gs_ModeSelect>
+  f6:	0e 94 a7 02 	call	0x54e	; 0x54e <HUSART_enSendData>
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
 				HUSART_enSendData('\n\r');
  102:	8d e0       	ldi	r24, 0x0D	; 13
  104:	0e 94 c3 02 	call	0x586	; 0x586 <HUSART_enSendData>
 				if('1' == u8_gs_ModeSelect)	u8_g_CardState = CardUserMode;
+<<<<<<< HEAD
  108:	80 91 e7 01 	lds	r24, 0x01E7	; 0x8001e7 <u8_gs_ModeSelect>
  10c:	81 33       	cpi	r24, 0x31	; 49
  10e:	21 f4       	brne	.+8      	; 0x118 <APP_Start+0x76>
@@ -188,12 +245,32 @@ void APP_Start(void)
  126:	90 e0       	ldi	r25, 0x00	; 0
  128:	0e 94 d2 02 	call	0x5a4	; 0x5a4 <HUSART_sendSTRING>
  12c:	08 95       	ret
+=======
+ 100:	80 91 e9 01 	lds	r24, 0x01E9	; 0x8001e9 <u8_gs_ModeSelect>
+ 104:	81 33       	cpi	r24, 0x31	; 49
+ 106:	21 f4       	brne	.+8      	; 0x110 <APP_Start+0x6e>
+ 108:	83 e0       	ldi	r24, 0x03	; 3
+ 10a:	80 93 d4 01 	sts	0x01D4, r24	; 0x8001d4 <__data_end>
+ 10e:	08 95       	ret
+				else if('2' == u8_gs_ModeSelect) u8_g_CardState = CardProgMode_GetPan;
+ 110:	82 33       	cpi	r24, 0x32	; 50
+ 112:	21 f4       	brne	.+8      	; 0x11c <APP_Start+0x7a>
+ 114:	81 e0       	ldi	r24, 0x01	; 1
+ 116:	80 93 d4 01 	sts	0x01D4, r24	; 0x8001d4 <__data_end>
+ 11a:	08 95       	ret
+				else HUSART_sendSTRING("Invalid Choice, ");
+ 11c:	84 eb       	ldi	r24, 0xB4	; 180
+ 11e:	90 e0       	ldi	r25, 0x00	; 0
+ 120:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+ 124:	08 95       	ret
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
 			}
 			break;
 		}
 		case CardProgMode_GetPan:
 		{
 			u8_g_PanValid = APP_terminalPanGet(pan_arr);
+<<<<<<< HEAD
  12e:	8d ef       	ldi	r24, 0xFD	; 253
  130:	91 e0       	ldi	r25, 0x01	; 1
  132:	0e 94 18 01 	call	0x230	; 0x230 <APP_terminalPanGet>
@@ -205,6 +282,19 @@ void APP_Start(void)
  140:	82 e0       	ldi	r24, 0x02	; 2
  142:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
  146:	08 95       	ret
+=======
+ 126:	8f ef       	ldi	r24, 0xFF	; 255
+ 128:	91 e0       	ldi	r25, 0x01	; 1
+ 12a:	0e 94 0c 01 	call	0x218	; 0x218 <APP_terminalPanGet>
+ 12e:	80 93 ea 01 	sts	0x01EA, r24	; 0x8001ea <u8_g_PanValid>
+			if(PANGET_OK == u8_g_PanValid) u8_g_CardState = CardProgMode_GetPin;
+ 132:	81 30       	cpi	r24, 0x01	; 1
+ 134:	09 f0       	breq	.+2      	; 0x138 <APP_Start+0x96>
+ 136:	45 c0       	rjmp	.+138    	; 0x1c2 <APP_Start+0x120>
+ 138:	82 e0       	ldi	r24, 0x02	; 2
+ 13a:	80 93 d4 01 	sts	0x01D4, r24	; 0x8001d4 <__data_end>
+ 13e:	08 95       	ret
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
 			break;
 		}
 		case CardProgMode_GetPin:
@@ -215,6 +305,7 @@ void APP_Start(void)
  14e:	51 f4       	brne	.+20     	; 0x164 <APP_Start+0xc2>
 			{
 				SaveCardData(pan_arr,pin_arr);
+<<<<<<< HEAD
  150:	69 ee       	ldi	r22, 0xE9	; 233
  152:	71 e0       	ldi	r23, 0x01	; 1
  154:	8d ef       	ldi	r24, 0xFD	; 253
@@ -223,6 +314,21 @@ void APP_Start(void)
 				u8_g_CardState = CardUserMode;
  15c:	83 e0       	ldi	r24, 0x03	; 3
  15e:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
+=======
+ 148:	6b ee       	ldi	r22, 0xEB	; 235
+ 14a:	71 e0       	ldi	r23, 0x01	; 1
+ 14c:	8f ef       	ldi	r24, 0xFF	; 255
+ 14e:	91 e0       	ldi	r25, 0x01	; 1
+ 150:	0e 94 36 01 	call	0x26c	; 0x26c <SaveCardData>
+				u8_g_CardState = CardUserMode;
+ 154:	83 e0       	ldi	r24, 0x03	; 3
+ 156:	80 93 d4 01 	sts	0x01D4, r24	; 0x8001d4 <__data_end>
+ 15a:	08 95       	ret
+			}
+			else u8_g_CardState = CardProgMode_GetPin;
+ 15c:	82 e0       	ldi	r24, 0x02	; 2
+ 15e:	80 93 d4 01 	sts	0x01D4, r24	; 0x8001d4 <__data_end>
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
  162:	08 95       	ret
 			}
 			else u8_g_CardState = CardProgMode_GetPin;
@@ -234,6 +340,7 @@ void APP_Start(void)
 		case CardUserMode:
 		{
 			HUSART_sendSTRING("\n\r------------- User Mode -------------\n");
+<<<<<<< HEAD
  16c:	83 ec       	ldi	r24, 0xC3	; 195
  16e:	90 e0       	ldi	r25, 0x00	; 0
  170:	0e 94 d2 02 	call	0x5a4	; 0x5a4 <HUSART_sendSTRING>
@@ -263,12 +370,36 @@ void APP_Start(void)
 			u8_g_CardState = CardCommMode;
  19a:	84 e0       	ldi	r24, 0x04	; 4
  19c:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
+=======
+ 164:	85 ec       	ldi	r24, 0xC5	; 197
+ 166:	90 e0       	ldi	r25, 0x00	; 0
+ 168:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+			//_delay_ms(5000);
+			/* Trigger ATM */
+			HSPI_SlaveRequest(pin_arr, PIN_LENGTH);
+ 16c:	65 e0       	ldi	r22, 0x05	; 5
+ 16e:	8b ee       	ldi	r24, 0xEB	; 235
+ 170:	91 e0       	ldi	r25, 0x01	; 1
+ 172:	0e 94 8d 02 	call	0x51a	; 0x51a <HSPI_SlaveRequest>
+			
+			/* Get PIN from EEPROM to prepare data in SPI buffer */
+			ReadCardData(pan_arr,pin_arr);
+ 176:	6b ee       	ldi	r22, 0xEB	; 235
+ 178:	71 e0       	ldi	r23, 0x01	; 1
+ 17a:	8f ef       	ldi	r24, 0xFF	; 255
+ 17c:	91 e0       	ldi	r25, 0x01	; 1
+ 17e:	0e 94 6e 01 	call	0x2dc	; 0x2dc <ReadCardData>
+			u8_g_CardState = CardCommMode;
+ 182:	84 e0       	ldi	r24, 0x04	; 4
+ 184:	80 93 d4 01 	sts	0x01D4, r24	; 0x8001d4 <__data_end>
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
 			break;
  1a0:	08 95       	ret
 		}
 		case CardCommMode:
 		{
 			if(CARD_PIN_REQUEST == u8_g_SlaveReceive)
+<<<<<<< HEAD
  1a2:	80 91 11 02 	lds	r24, 0x0211	; 0x800211 <u8_g_SlaveReceive>
  1a6:	80 35       	cpi	r24, 0x50	; 80
  1a8:	41 f4       	brne	.+16     	; 0x1ba <APP_Start+0x118>
@@ -281,12 +412,27 @@ void APP_Start(void)
  1b2:	91 e0       	ldi	r25, 0x01	; 1
  1b4:	0e 94 b5 02 	call	0x56a	; 0x56a <HSPI_SlaveSetData>
  1b8:	08 95       	ret
+=======
+ 18a:	80 91 13 02 	lds	r24, 0x0213	; 0x800213 <u8_g_SlaveReceive>
+ 18e:	80 35       	cpi	r24, 0x50	; 80
+ 190:	41 f4       	brne	.+16     	; 0x1a2 <APP_Start+0x100>
+			{
+				u8_g_SlaveReceive = 0;
+ 192:	10 92 13 02 	sts	0x0213, r1	; 0x800213 <u8_g_SlaveReceive>
+				HSPI_SlaveSetData(pin_arr, PIN_LENGTH);
+ 196:	65 e0       	ldi	r22, 0x05	; 5
+ 198:	8b ee       	ldi	r24, 0xEB	; 235
+ 19a:	91 e0       	ldi	r25, 0x01	; 1
+ 19c:	0e 94 99 02 	call	0x532	; 0x532 <HSPI_SlaveSetData>
+ 1a0:	08 95       	ret
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
 			}
 			else if(CARD_PAN_REQUEST == u8_g_SlaveReceive)
  1ba:	87 34       	cpi	r24, 0x47	; 71
  1bc:	41 f4       	brne	.+16     	; 0x1ce <APP_Start+0x12c>
 			{
 				u8_g_SlaveReceive = 0;
+<<<<<<< HEAD
  1be:	10 92 11 02 	sts	0x0211, r1	; 0x800211 <u8_g_SlaveReceive>
 				HSPI_SlaveSetData(pan_arr, PAN_LENGTH);
  1c2:	64 e1       	ldi	r22, 0x14	; 20
@@ -294,12 +440,22 @@ void APP_Start(void)
  1c6:	91 e0       	ldi	r25, 0x01	; 1
  1c8:	0e 94 b5 02 	call	0x56a	; 0x56a <HSPI_SlaveSetData>
  1cc:	08 95       	ret
+=======
+ 1a6:	10 92 13 02 	sts	0x0213, r1	; 0x800213 <u8_g_SlaveReceive>
+				HSPI_SlaveSetData(pan_arr, PAN_LENGTH);
+ 1aa:	64 e1       	ldi	r22, 0x14	; 20
+ 1ac:	8f ef       	ldi	r24, 0xFF	; 255
+ 1ae:	91 e0       	ldi	r25, 0x01	; 1
+ 1b0:	0e 94 99 02 	call	0x532	; 0x532 <HSPI_SlaveSetData>
+ 1b4:	08 95       	ret
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
 			}
 			else if(ATM_REQUEST_EJECTED == u8_g_SlaveReceive)
  1ce:	85 34       	cpi	r24, 0x45	; 69
  1d0:	21 f4       	brne	.+8      	; 0x1da <APP_Start+0x138>
 			{
 				u8_g_SlaveReceive = 0;
+<<<<<<< HEAD
  1d2:	10 92 11 02 	sts	0x0211, r1	; 0x800211 <u8_g_SlaveReceive>
 				u8_g_CardState = CardGetMode;
  1d6:	10 92 d2 01 	sts	0x01D2, r1	; 0x8001d2 <__data_end>
@@ -507,12 +663,111 @@ EN_TerminalDataState SaveCardData(Uchar8_t *CardPan,Uchar8_t *CardPin)
  290:	69 f1       	breq	.+90     	; 0x2ec <SaveCardData+0x68>
  292:	eb 01       	movw	r28, r22
  294:	bc 01       	movw	r22, r24
+=======
+ 1ba:	10 92 13 02 	sts	0x0213, r1	; 0x800213 <u8_g_SlaveReceive>
+				u8_g_CardState = CardGetMode;
+ 1be:	10 92 d4 01 	sts	0x01D4, r1	; 0x8001d4 <__data_end>
+ 1c2:	08 95       	ret
+
+000001c4 <APP_terminalPinGet>:
+ 1c4:	0f 93       	push	r16
+ 1c6:	1f 93       	push	r17
+ 1c8:	cf 93       	push	r28
+ 1ca:	8c 01       	movw	r16, r24
+ 1cc:	65 e0       	ldi	r22, 0x05	; 5
+ 1ce:	0e 94 b9 02 	call	0x572	; 0x572 <HUSART_receiveSTRING>
+ 1d2:	c0 e0       	ldi	r28, 0x00	; 0
+ 1d4:	0c c0       	rjmp	.+24     	; 0x1ee <APP_terminalPinGet+0x2a>
+ 1d6:	80 53       	subi	r24, 0x30	; 48
+ 1d8:	8a 30       	cpi	r24, 0x0A	; 10
+ 1da:	10 f4       	brcc	.+4      	; 0x1e0 <APP_terminalPinGet+0x1c>
+ 1dc:	cf 5f       	subi	r28, 0xFF	; 255
+ 1de:	07 c0       	rjmp	.+14     	; 0x1ee <APP_terminalPinGet+0x2a>
+ 1e0:	8e ee       	ldi	r24, 0xEE	; 238
+ 1e2:	90 e0       	ldi	r25, 0x00	; 0
+ 1e4:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+ 1e8:	91 e0       	ldi	r25, 0x01	; 1
+ 1ea:	80 e0       	ldi	r24, 0x00	; 0
+ 1ec:	08 c0       	rjmp	.+16     	; 0x1fe <APP_terminalPinGet+0x3a>
+ 1ee:	f8 01       	movw	r30, r16
+ 1f0:	ec 0f       	add	r30, r28
+ 1f2:	f1 1d       	adc	r31, r1
+ 1f4:	80 81       	ld	r24, Z
+ 1f6:	81 11       	cpse	r24, r1
+ 1f8:	ee cf       	rjmp	.-36     	; 0x1d6 <APP_terminalPinGet+0x12>
+ 1fa:	90 e0       	ldi	r25, 0x00	; 0
+ 1fc:	81 e0       	ldi	r24, 0x01	; 1
+ 1fe:	c4 30       	cpi	r28, 0x04	; 4
+ 200:	38 f4       	brcc	.+14     	; 0x210 <APP_terminalPinGet+0x4c>
+ 202:	91 11       	cpse	r25, r1
+ 204:	05 c0       	rjmp	.+10     	; 0x210 <APP_terminalPinGet+0x4c>
+ 206:	8c ef       	ldi	r24, 0xFC	; 252
+ 208:	90 e0       	ldi	r25, 0x00	; 0
+ 20a:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+ 20e:	80 e0       	ldi	r24, 0x00	; 0
+ 210:	cf 91       	pop	r28
+ 212:	1f 91       	pop	r17
+ 214:	0f 91       	pop	r16
+ 216:	08 95       	ret
+
+00000218 <APP_terminalPanGet>:
+ 218:	cf 93       	push	r28
+ 21a:	df 93       	push	r29
+ 21c:	ec 01       	movw	r28, r24
+ 21e:	8a e0       	ldi	r24, 0x0A	; 10
+ 220:	91 e0       	ldi	r25, 0x01	; 1
+ 222:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+ 226:	64 e1       	ldi	r22, 0x14	; 20
+ 228:	ce 01       	movw	r24, r28
+ 22a:	0e 94 b9 02 	call	0x572	; 0x572 <HUSART_receiveSTRING>
+ 22e:	90 e0       	ldi	r25, 0x00	; 0
+ 230:	0b c0       	rjmp	.+22     	; 0x248 <APP_terminalPanGet+0x30>
+ 232:	80 53       	subi	r24, 0x30	; 48
+ 234:	8a 30       	cpi	r24, 0x0A	; 10
+ 236:	10 f4       	brcc	.+4      	; 0x23c <APP_terminalPanGet+0x24>
+ 238:	9f 5f       	subi	r25, 0xFF	; 255
+ 23a:	06 c0       	rjmp	.+12     	; 0x248 <APP_terminalPanGet+0x30>
+ 23c:	8e e1       	ldi	r24, 0x1E	; 30
+ 23e:	91 e0       	ldi	r25, 0x01	; 1
+ 240:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+ 244:	80 e0       	ldi	r24, 0x00	; 0
+ 246:	0f c0       	rjmp	.+30     	; 0x266 <APP_terminalPanGet+0x4e>
+ 248:	fe 01       	movw	r30, r28
+ 24a:	e9 0f       	add	r30, r25
+ 24c:	f1 1d       	adc	r31, r1
+ 24e:	80 81       	ld	r24, Z
+ 250:	81 11       	cpse	r24, r1
+ 252:	ef cf       	rjmp	.-34     	; 0x232 <APP_terminalPanGet+0x1a>
+ 254:	90 31       	cpi	r25, 0x10	; 16
+ 256:	30 f4       	brcc	.+12     	; 0x264 <APP_terminalPanGet+0x4c>
+ 258:	8f e4       	ldi	r24, 0x4F	; 79
+ 25a:	91 e0       	ldi	r25, 0x01	; 1
+ 25c:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+ 260:	80 e0       	ldi	r24, 0x00	; 0
+ 262:	01 c0       	rjmp	.+2      	; 0x266 <APP_terminalPanGet+0x4e>
+ 264:	81 e0       	ldi	r24, 0x01	; 1
+ 266:	df 91       	pop	r29
+ 268:	cf 91       	pop	r28
+ 26a:	08 95       	ret
+
+0000026c <SaveCardData>:
+ 26c:	cf 93       	push	r28
+ 26e:	df 93       	push	r29
+ 270:	00 97       	sbiw	r24, 0x00	; 0
+ 272:	71 f1       	breq	.+92     	; 0x2d0 <SaveCardData+0x64>
+ 274:	61 15       	cp	r22, r1
+ 276:	71 05       	cpc	r23, r1
+ 278:	69 f1       	breq	.+90     	; 0x2d4 <SaveCardData+0x68>
+ 27a:	eb 01       	movw	r28, r22
+ 27c:	bc 01       	movw	r22, r24
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
+<<<<<<< HEAD
  296:	8f e4       	ldi	r24, 0x4F	; 79
  298:	93 ec       	ldi	r25, 0xC3	; 195
  29a:	01 97       	sbiw	r24, 0x01	; 1
@@ -538,6 +793,36 @@ EN_TerminalDataState SaveCardData(Uchar8_t *CardPan,Uchar8_t *CardPin)
 		eeprom_write_string(PIN_PAGE,CardPin);
  2b6:	be 01       	movw	r22, r28
  2b8:	80 e0       	ldi	r24, 0x00	; 0
+=======
+ 27e:	8f e4       	ldi	r24, 0x4F	; 79
+ 280:	93 ec       	ldi	r25, 0xC3	; 195
+ 282:	01 97       	sbiw	r24, 0x01	; 1
+ 284:	f1 f7       	brne	.-4      	; 0x282 <SaveCardData+0x16>
+ 286:	00 c0       	rjmp	.+0      	; 0x288 <SaveCardData+0x1c>
+ 288:	00 00       	nop
+ 28a:	80 e0       	ldi	r24, 0x00	; 0
+ 28c:	90 e0       	ldi	r25, 0x00	; 0
+ 28e:	0e 94 1f 02 	call	0x43e	; 0x43e <eeprom_write_string>
+ 292:	8f e4       	ldi	r24, 0x4F	; 79
+ 294:	93 ec       	ldi	r25, 0xC3	; 195
+ 296:	01 97       	sbiw	r24, 0x01	; 1
+ 298:	f1 f7       	brne	.-4      	; 0x296 <SaveCardData+0x2a>
+ 29a:	00 c0       	rjmp	.+0      	; 0x29c <SaveCardData+0x30>
+ 29c:	00 00       	nop
+ 29e:	be 01       	movw	r22, r28
+ 2a0:	80 e2       	ldi	r24, 0x20	; 32
+ 2a2:	90 e0       	ldi	r25, 0x00	; 0
+ 2a4:	0e 94 1f 02 	call	0x43e	; 0x43e <eeprom_write_string>
+ 2a8:	8f e4       	ldi	r24, 0x4F	; 79
+ 2aa:	93 ec       	ldi	r25, 0xC3	; 195
+ 2ac:	01 97       	sbiw	r24, 0x01	; 1
+ 2ae:	f1 f7       	brne	.-4      	; 0x2ac <SaveCardData+0x40>
+ 2b0:	00 c0       	rjmp	.+0      	; 0x2b2 <SaveCardData+0x46>
+ 2b2:	00 00       	nop
+ 2b4:	67 e8       	ldi	r22, 0x87	; 135
+ 2b6:	71 e0       	ldi	r23, 0x01	; 1
+ 2b8:	80 e5       	ldi	r24, 0x50	; 80
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
  2ba:	90 e0       	ldi	r25, 0x00	; 0
  2bc:	0e 94 2b 02 	call	0x456	; 0x456 <eeprom_write_string>
  2c0:	8f e4       	ldi	r24, 0x4F	; 79
@@ -546,6 +831,7 @@ EN_TerminalDataState SaveCardData(Uchar8_t *CardPan,Uchar8_t *CardPin)
  2c6:	f1 f7       	brne	.-4      	; 0x2c4 <SaveCardData+0x40>
  2c8:	00 c0       	rjmp	.+0      	; 0x2ca <SaveCardData+0x46>
  2ca:	00 00       	nop
+<<<<<<< HEAD
 		_delay_ms(200);
 		eeprom_write_string(FLAG_PAGE, (Uchar8_t*)"1");
  2cc:	65 e8       	ldi	r22, 0x85	; 133
@@ -1411,6 +1697,505 @@ Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
  6ba:	81 b1       	in	r24, 0x01	; 1
  6bc:	8e 7f       	andi	r24, 0xFE	; 254
  6be:	81 b9       	out	0x01, r24	; 1
+=======
+ 2cc:	80 e0       	ldi	r24, 0x00	; 0
+ 2ce:	03 c0       	rjmp	.+6      	; 0x2d6 <SaveCardData+0x6a>
+ 2d0:	81 e0       	ldi	r24, 0x01	; 1
+ 2d2:	01 c0       	rjmp	.+2      	; 0x2d6 <SaveCardData+0x6a>
+ 2d4:	81 e0       	ldi	r24, 0x01	; 1
+ 2d6:	df 91       	pop	r29
+ 2d8:	cf 91       	pop	r28
+ 2da:	08 95       	ret
+
+000002dc <ReadCardData>:
+ 2dc:	cf 93       	push	r28
+ 2de:	df 93       	push	r29
+ 2e0:	00 97       	sbiw	r24, 0x00	; 0
+ 2e2:	e1 f0       	breq	.+56     	; 0x31c <ReadCardData+0x40>
+ 2e4:	61 15       	cp	r22, r1
+ 2e6:	71 05       	cpc	r23, r1
+ 2e8:	d9 f0       	breq	.+54     	; 0x320 <ReadCardData+0x44>
+ 2ea:	eb 01       	movw	r28, r22
+ 2ec:	bc 01       	movw	r22, r24
+ 2ee:	80 e0       	ldi	r24, 0x00	; 0
+ 2f0:	90 e0       	ldi	r25, 0x00	; 0
+ 2f2:	0e 94 47 02 	call	0x48e	; 0x48e <eeprom_read_string>
+ 2f6:	8f e4       	ldi	r24, 0x4F	; 79
+ 2f8:	93 ec       	ldi	r25, 0xC3	; 195
+ 2fa:	01 97       	sbiw	r24, 0x01	; 1
+ 2fc:	f1 f7       	brne	.-4      	; 0x2fa <ReadCardData+0x1e>
+ 2fe:	00 c0       	rjmp	.+0      	; 0x300 <ReadCardData+0x24>
+ 300:	00 00       	nop
+ 302:	be 01       	movw	r22, r28
+ 304:	80 e2       	ldi	r24, 0x20	; 32
+ 306:	90 e0       	ldi	r25, 0x00	; 0
+ 308:	0e 94 47 02 	call	0x48e	; 0x48e <eeprom_read_string>
+ 30c:	8f e4       	ldi	r24, 0x4F	; 79
+ 30e:	93 ec       	ldi	r25, 0xC3	; 195
+ 310:	01 97       	sbiw	r24, 0x01	; 1
+ 312:	f1 f7       	brne	.-4      	; 0x310 <ReadCardData+0x34>
+ 314:	00 c0       	rjmp	.+0      	; 0x316 <ReadCardData+0x3a>
+ 316:	00 00       	nop
+ 318:	82 e0       	ldi	r24, 0x02	; 2
+ 31a:	03 c0       	rjmp	.+6      	; 0x322 <ReadCardData+0x46>
+ 31c:	83 e0       	ldi	r24, 0x03	; 3
+ 31e:	01 c0       	rjmp	.+2      	; 0x322 <ReadCardData+0x46>
+ 320:	83 e0       	ldi	r24, 0x03	; 3
+ 322:	df 91       	pop	r29
+ 324:	cf 91       	pop	r28
+ 326:	08 95       	ret
+
+00000328 <CARD_MatchPINs>:
+ 328:	1f 93       	push	r17
+ 32a:	cf 93       	push	r28
+ 32c:	df 93       	push	r29
+ 32e:	cd b7       	in	r28, 0x3d	; 61
+ 330:	de b7       	in	r29, 0x3e	; 62
+ 332:	2a 97       	sbiw	r28, 0x0a	; 10
+ 334:	0f b6       	in	r0, 0x3f	; 63
+ 336:	f8 94       	cli
+ 338:	de bf       	out	0x3e, r29	; 62
+ 33a:	0f be       	out	0x3f, r0	; 63
+ 33c:	cd bf       	out	0x3d, r28	; 61
+ 33e:	89 e8       	ldi	r24, 0x89	; 137
+ 340:	91 e0       	ldi	r25, 0x01	; 1
+ 342:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+ 346:	8b ee       	ldi	r24, 0xEB	; 235
+ 348:	91 e0       	ldi	r25, 0x01	; 1
+ 34a:	0e 94 e2 00 	call	0x1c4	; 0x1c4 <APP_terminalPinGet>
+ 34e:	18 2f       	mov	r17, r24
+ 350:	88 23       	and	r24, r24
+ 352:	71 f1       	breq	.+92     	; 0x3b0 <CARD_MatchPINs+0x88>
+ 354:	8d e9       	ldi	r24, 0x9D	; 157
+ 356:	91 e0       	ldi	r25, 0x01	; 1
+ 358:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+ 35c:	ce 01       	movw	r24, r28
+ 35e:	01 96       	adiw	r24, 0x01	; 1
+ 360:	0e 94 e2 00 	call	0x1c4	; 0x1c4 <APP_terminalPinGet>
+ 364:	11 30       	cpi	r17, 0x01	; 1
+ 366:	31 f5       	brne	.+76     	; 0x3b4 <CARD_MatchPINs+0x8c>
+ 368:	81 30       	cpi	r24, 0x01	; 1
+ 36a:	c9 f0       	breq	.+50     	; 0x39e <CARD_MatchPINs+0x76>
+ 36c:	80 e0       	ldi	r24, 0x00	; 0
+ 36e:	23 c0       	rjmp	.+70     	; 0x3b6 <CARD_MatchPINs+0x8e>
+ 370:	82 2f       	mov	r24, r18
+ 372:	90 e0       	ldi	r25, 0x00	; 0
+ 374:	fc 01       	movw	r30, r24
+ 376:	e5 51       	subi	r30, 0x15	; 21
+ 378:	fe 4f       	sbci	r31, 0xFE	; 254
+ 37a:	30 81       	ld	r19, Z
+ 37c:	e1 e0       	ldi	r30, 0x01	; 1
+ 37e:	f0 e0       	ldi	r31, 0x00	; 0
+ 380:	ec 0f       	add	r30, r28
+ 382:	fd 1f       	adc	r31, r29
+ 384:	e8 0f       	add	r30, r24
+ 386:	f9 1f       	adc	r31, r25
+ 388:	80 81       	ld	r24, Z
+ 38a:	38 17       	cp	r19, r24
+ 38c:	31 f0       	breq	.+12     	; 0x39a <CARD_MatchPINs+0x72>
+ 38e:	83 eb       	ldi	r24, 0xB3	; 179
+ 390:	91 e0       	ldi	r25, 0x01	; 1
+ 392:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+ 396:	80 e0       	ldi	r24, 0x00	; 0
+ 398:	0e c0       	rjmp	.+28     	; 0x3b6 <CARD_MatchPINs+0x8e>
+ 39a:	2f 5f       	subi	r18, 0xFF	; 255
+ 39c:	01 c0       	rjmp	.+2      	; 0x3a0 <CARD_MatchPINs+0x78>
+ 39e:	20 e0       	ldi	r18, 0x00	; 0
+ 3a0:	25 30       	cpi	r18, 0x05	; 5
+ 3a2:	30 f3       	brcs	.-52     	; 0x370 <CARD_MatchPINs+0x48>
+ 3a4:	85 ec       	ldi	r24, 0xC5	; 197
+ 3a6:	91 e0       	ldi	r25, 0x01	; 1
+ 3a8:	0e 94 b6 02 	call	0x56c	; 0x56c <HUSART_sendSTRING>
+ 3ac:	81 e0       	ldi	r24, 0x01	; 1
+ 3ae:	03 c0       	rjmp	.+6      	; 0x3b6 <CARD_MatchPINs+0x8e>
+ 3b0:	80 e0       	ldi	r24, 0x00	; 0
+ 3b2:	01 c0       	rjmp	.+2      	; 0x3b6 <CARD_MatchPINs+0x8e>
+ 3b4:	80 e0       	ldi	r24, 0x00	; 0
+ 3b6:	2a 96       	adiw	r28, 0x0a	; 10
+ 3b8:	0f b6       	in	r0, 0x3f	; 63
+ 3ba:	f8 94       	cli
+ 3bc:	de bf       	out	0x3e, r29	; 62
+ 3be:	0f be       	out	0x3f, r0	; 63
+ 3c0:	cd bf       	out	0x3d, r28	; 61
+ 3c2:	df 91       	pop	r29
+ 3c4:	cf 91       	pop	r28
+ 3c6:	1f 91       	pop	r17
+ 3c8:	08 95       	ret
+
+000003ca <eeprom_init>:
+ 3ca:	0e 94 60 03 	call	0x6c0	; 0x6c0 <i2c_init_master>
+ 3ce:	08 95       	ret
+
+000003d0 <eeprom_write_byte>:
+ 3d0:	1f 93       	push	r17
+ 3d2:	cf 93       	push	r28
+ 3d4:	df 93       	push	r29
+ 3d6:	d8 2f       	mov	r29, r24
+ 3d8:	19 2f       	mov	r17, r25
+ 3da:	c6 2f       	mov	r28, r22
+ 3dc:	0e 94 6e 03 	call	0x6dc	; 0x6dc <i2c_start>
+ 3e0:	80 e5       	ldi	r24, 0x50	; 80
+ 3e2:	0e 94 82 03 	call	0x704	; 0x704 <i2c_send_slave_address_with_write_req>
+ 3e6:	81 2f       	mov	r24, r17
+ 3e8:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_write_byte>
+ 3ec:	8d 2f       	mov	r24, r29
+ 3ee:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_write_byte>
+ 3f2:	8c 2f       	mov	r24, r28
+ 3f4:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_write_byte>
+ 3f8:	0e 94 b6 03 	call	0x76c	; 0x76c <i2c_stop>
+ 3fc:	df 91       	pop	r29
+ 3fe:	cf 91       	pop	r28
+ 400:	1f 91       	pop	r17
+ 402:	08 95       	ret
+
+00000404 <eeprom_read_byte>:
+ 404:	cf 93       	push	r28
+ 406:	df 93       	push	r29
+ 408:	c8 2f       	mov	r28, r24
+ 40a:	d9 2f       	mov	r29, r25
+ 40c:	0e 94 6e 03 	call	0x6dc	; 0x6dc <i2c_start>
+ 410:	80 e5       	ldi	r24, 0x50	; 80
+ 412:	0e 94 82 03 	call	0x704	; 0x704 <i2c_send_slave_address_with_write_req>
+ 416:	8d 2f       	mov	r24, r29
+ 418:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_write_byte>
+ 41c:	8c 2f       	mov	r24, r28
+ 41e:	0e 94 a0 03 	call	0x740	; 0x740 <i2c_write_byte>
+ 422:	0e 94 78 03 	call	0x6f0	; 0x6f0 <i2c_repeated_start>
+ 426:	80 e5       	ldi	r24, 0x50	; 80
+ 428:	0e 94 91 03 	call	0x722	; 0x722 <i2c_send_slave_address_with_read_req>
+ 42c:	0e 94 af 03 	call	0x75e	; 0x75e <i2c_read_byte>
+ 430:	c8 2f       	mov	r28, r24
+ 432:	0e 94 b6 03 	call	0x76c	; 0x76c <i2c_stop>
+ 436:	8c 2f       	mov	r24, r28
+ 438:	df 91       	pop	r29
+ 43a:	cf 91       	pop	r28
+ 43c:	08 95       	ret
+
+0000043e <eeprom_write_string>:
+ 43e:	cf 92       	push	r12
+ 440:	df 92       	push	r13
+ 442:	ef 92       	push	r14
+ 444:	ff 92       	push	r15
+ 446:	0f 93       	push	r16
+ 448:	1f 93       	push	r17
+ 44a:	cf 93       	push	r28
+ 44c:	6b 01       	movw	r12, r22
+ 44e:	c0 e0       	ldi	r28, 0x00	; 0
+ 450:	86 01       	movw	r16, r12
+ 452:	0c 0f       	add	r16, r28
+ 454:	11 1d       	adc	r17, r1
+ 456:	7c 01       	movw	r14, r24
+ 458:	2f ef       	ldi	r18, 0xFF	; 255
+ 45a:	e2 1a       	sub	r14, r18
+ 45c:	f2 0a       	sbc	r15, r18
+ 45e:	f8 01       	movw	r30, r16
+ 460:	60 81       	ld	r22, Z
+ 462:	0e 94 e8 01 	call	0x3d0	; 0x3d0 <eeprom_write_byte>
+ 466:	8f e4       	ldi	r24, 0x4F	; 79
+ 468:	93 ec       	ldi	r25, 0xC3	; 195
+ 46a:	01 97       	sbiw	r24, 0x01	; 1
+ 46c:	f1 f7       	brne	.-4      	; 0x46a <eeprom_write_string+0x2c>
+ 46e:	00 c0       	rjmp	.+0      	; 0x470 <eeprom_write_string+0x32>
+ 470:	00 00       	nop
+ 472:	cf 5f       	subi	r28, 0xFF	; 255
+ 474:	f8 01       	movw	r30, r16
+ 476:	20 81       	ld	r18, Z
+ 478:	c7 01       	movw	r24, r14
+ 47a:	21 11       	cpse	r18, r1
+ 47c:	e9 cf       	rjmp	.-46     	; 0x450 <eeprom_write_string+0x12>
+ 47e:	cf 91       	pop	r28
+ 480:	1f 91       	pop	r17
+ 482:	0f 91       	pop	r16
+ 484:	ff 90       	pop	r15
+ 486:	ef 90       	pop	r14
+ 488:	df 90       	pop	r13
+ 48a:	cf 90       	pop	r12
+ 48c:	08 95       	ret
+
+0000048e <eeprom_read_string>:
+ 48e:	cf 92       	push	r12
+ 490:	df 92       	push	r13
+ 492:	ef 92       	push	r14
+ 494:	ff 92       	push	r15
+ 496:	0f 93       	push	r16
+ 498:	1f 93       	push	r17
+ 49a:	cf 93       	push	r28
+ 49c:	6b 01       	movw	r12, r22
+ 49e:	c0 e0       	ldi	r28, 0x00	; 0
+ 4a0:	86 01       	movw	r16, r12
+ 4a2:	0c 0f       	add	r16, r28
+ 4a4:	11 1d       	adc	r17, r1
+ 4a6:	7c 01       	movw	r14, r24
+ 4a8:	2f ef       	ldi	r18, 0xFF	; 255
+ 4aa:	e2 1a       	sub	r14, r18
+ 4ac:	f2 0a       	sbc	r15, r18
+ 4ae:	0e 94 02 02 	call	0x404	; 0x404 <eeprom_read_byte>
+ 4b2:	f8 01       	movw	r30, r16
+ 4b4:	80 83       	st	Z, r24
+ 4b6:	8f e4       	ldi	r24, 0x4F	; 79
+ 4b8:	93 ec       	ldi	r25, 0xC3	; 195
+ 4ba:	01 97       	sbiw	r24, 0x01	; 1
+ 4bc:	f1 f7       	brne	.-4      	; 0x4ba <eeprom_read_string+0x2c>
+ 4be:	00 c0       	rjmp	.+0      	; 0x4c0 <eeprom_read_string+0x32>
+ 4c0:	00 00       	nop
+ 4c2:	cf 5f       	subi	r28, 0xFF	; 255
+ 4c4:	20 81       	ld	r18, Z
+ 4c6:	c7 01       	movw	r24, r14
+ 4c8:	21 11       	cpse	r18, r1
+ 4ca:	ea cf       	rjmp	.-44     	; 0x4a0 <eeprom_read_string+0x12>
+ 4cc:	cf 91       	pop	r28
+ 4ce:	1f 91       	pop	r17
+ 4d0:	0f 91       	pop	r16
+ 4d2:	ff 90       	pop	r15
+ 4d4:	ef 90       	pop	r14
+ 4d6:	df 90       	pop	r13
+ 4d8:	cf 90       	pop	r12
+ 4da:	08 95       	ret
+
+000004dc <HSPI_SlaveInit>:
+ 4dc:	60 e0       	ldi	r22, 0x00	; 0
+ 4de:	8d e0       	ldi	r24, 0x0D	; 13
+ 4e0:	0e 94 c1 02 	call	0x582	; 0x582 <DIO_s8SETPinDir>
+ 4e4:	60 e0       	ldi	r22, 0x00	; 0
+ 4e6:	8f e0       	ldi	r24, 0x0F	; 15
+ 4e8:	0e 94 c1 02 	call	0x582	; 0x582 <DIO_s8SETPinDir>
+ 4ec:	60 e0       	ldi	r22, 0x00	; 0
+ 4ee:	8c e0       	ldi	r24, 0x0C	; 12
+ 4f0:	0e 94 c1 02 	call	0x582	; 0x582 <DIO_s8SETPinDir>
+ 4f4:	61 e0       	ldi	r22, 0x01	; 1
+ 4f6:	8c e0       	ldi	r24, 0x0C	; 12
+ 4f8:	0e 94 01 03 	call	0x602	; 0x602 <DIO_s8SETPinVal>
+ 4fc:	61 e0       	ldi	r22, 0x01	; 1
+ 4fe:	8e e0       	ldi	r24, 0x0E	; 14
+ 500:	0e 94 c1 02 	call	0x582	; 0x582 <DIO_s8SETPinDir>
+ 504:	61 e0       	ldi	r22, 0x01	; 1
+ 506:	88 e0       	ldi	r24, 0x08	; 8
+ 508:	0e 94 c1 02 	call	0x582	; 0x582 <DIO_s8SETPinDir>
+ 50c:	0e 94 c0 03 	call	0x780	; 0x780 <SPI_SlaveInit>
+ 510:	61 e0       	ldi	r22, 0x01	; 1
+ 512:	8c e0       	ldi	r24, 0x0C	; 12
+ 514:	0e 94 01 03 	call	0x602	; 0x602 <DIO_s8SETPinVal>
+ 518:	08 95       	ret
+
+0000051a <HSPI_SlaveRequest>:
+ 51a:	10 92 e7 01 	sts	0x01E7, r1	; 0x8001e7 <u8_g_SlaveTxIndex>
+ 51e:	90 93 e5 01 	sts	0x01E5, r25	; 0x8001e5 <pu8_g_SlaveTxPtr+0x1>
+ 522:	80 93 e4 01 	sts	0x01E4, r24	; 0x8001e4 <pu8_g_SlaveTxPtr>
+ 526:	60 93 15 02 	sts	0x0215, r22	; 0x800215 <u8_g_SlaveTxLen>
+ 52a:	88 e0       	ldi	r24, 0x08	; 8
+ 52c:	0e 94 41 03 	call	0x682	; 0x682 <DIO_s8TOGPinVal>
+ 530:	08 95       	ret
+
+00000532 <HSPI_SlaveSetData>:
+ 532:	10 92 e7 01 	sts	0x01E7, r1	; 0x8001e7 <u8_g_SlaveTxIndex>
+ 536:	90 93 e5 01 	sts	0x01E5, r25	; 0x8001e5 <pu8_g_SlaveTxPtr+0x1>
+ 53a:	80 93 e4 01 	sts	0x01E4, r24	; 0x8001e4 <pu8_g_SlaveTxPtr>
+ 53e:	60 93 15 02 	sts	0x0215, r22	; 0x800215 <u8_g_SlaveTxLen>
+ 542:	08 95       	ret
+
+00000544 <HUSART_enInit>:
+ 544:	0e 94 1b 04 	call	0x836	; 0x836 <USART_init>
+ 548:	81 11       	cpse	r24, r1
+ 54a:	81 e0       	ldi	r24, 0x01	; 1
+ 54c:	08 95       	ret
+
+0000054e <HUSART_enSendData>:
+ 54e:	0e 94 27 04 	call	0x84e	; 0x84e <USART_sendData>
+ 552:	81 11       	cpse	r24, r1
+ 554:	81 e0       	ldi	r24, 0x01	; 1
+ 556:	08 95       	ret
+
+00000558 <HUSART_enRecieveData>:
+ 558:	cf 93       	push	r28
+ 55a:	df 93       	push	r29
+ 55c:	ec 01       	movw	r28, r24
+ 55e:	0e 94 2c 04 	call	0x858	; 0x858 <USART_receiveData>
+ 562:	88 83       	st	Y, r24
+ 564:	80 e0       	ldi	r24, 0x00	; 0
+ 566:	df 91       	pop	r29
+ 568:	cf 91       	pop	r28
+ 56a:	08 95       	ret
+
+0000056c <HUSART_sendSTRING>:
+ 56c:	0e 94 30 04 	call	0x860	; 0x860 <USART_sendSTRING>
+ 570:	08 95       	ret
+
+00000572 <HUSART_receiveSTRING>:
+ 572:	0e 94 43 04 	call	0x886	; 0x886 <USART_receiveSTRING>
+ 576:	08 95       	ret
+
+00000578 <main>:
+ 578:	0e 94 49 00 	call	0x92	; 0x92 <APP_Init>
+ 57c:	0e 94 51 00 	call	0xa2	; 0xa2 <APP_Start>
+ 580:	fd cf       	rjmp	.-6      	; 0x57c <main+0x4>
+
+00000582 <DIO_s8SETPinDir>:
+ 582:	80 32       	cpi	r24, 0x20	; 32
+ 584:	c0 f5       	brcc	.+112    	; 0x5f6 <DIO_s8SETPinDir+0x74>
+ 586:	62 30       	cpi	r22, 0x02	; 2
+ 588:	c0 f5       	brcc	.+112    	; 0x5fa <DIO_s8SETPinDir+0x78>
+ 58a:	e8 2f       	mov	r30, r24
+ 58c:	e6 95       	lsr	r30
+ 58e:	e6 95       	lsr	r30
+ 590:	e6 95       	lsr	r30
+ 592:	87 70       	andi	r24, 0x07	; 7
+ 594:	61 11       	cpse	r22, r1
+ 596:	17 c0       	rjmp	.+46     	; 0x5c6 <DIO_s8SETPinDir+0x44>
+ 598:	f0 e0       	ldi	r31, 0x00	; 0
+ 59a:	ee 0f       	add	r30, r30
+ 59c:	ff 1f       	adc	r31, r31
+ 59e:	e0 5a       	subi	r30, 0xA0	; 160
+ 5a0:	ff 4f       	sbci	r31, 0xFF	; 255
+ 5a2:	01 90       	ld	r0, Z+
+ 5a4:	f0 81       	ld	r31, Z
+ 5a6:	e0 2d       	mov	r30, r0
+ 5a8:	40 81       	ld	r20, Z
+ 5aa:	21 e0       	ldi	r18, 0x01	; 1
+ 5ac:	30 e0       	ldi	r19, 0x00	; 0
+ 5ae:	b9 01       	movw	r22, r18
+ 5b0:	02 c0       	rjmp	.+4      	; 0x5b6 <DIO_s8SETPinDir+0x34>
+ 5b2:	66 0f       	add	r22, r22
+ 5b4:	77 1f       	adc	r23, r23
+ 5b6:	8a 95       	dec	r24
+ 5b8:	e2 f7       	brpl	.-8      	; 0x5b2 <DIO_s8SETPinDir+0x30>
+ 5ba:	cb 01       	movw	r24, r22
+ 5bc:	80 95       	com	r24
+ 5be:	84 23       	and	r24, r20
+ 5c0:	80 83       	st	Z, r24
+ 5c2:	80 e0       	ldi	r24, 0x00	; 0
+ 5c4:	08 95       	ret
+ 5c6:	61 30       	cpi	r22, 0x01	; 1
+ 5c8:	d1 f4       	brne	.+52     	; 0x5fe <DIO_s8SETPinDir+0x7c>
+ 5ca:	f0 e0       	ldi	r31, 0x00	; 0
+ 5cc:	ee 0f       	add	r30, r30
+ 5ce:	ff 1f       	adc	r31, r31
+ 5d0:	e0 5a       	subi	r30, 0xA0	; 160
+ 5d2:	ff 4f       	sbci	r31, 0xFF	; 255
+ 5d4:	01 90       	ld	r0, Z+
+ 5d6:	f0 81       	ld	r31, Z
+ 5d8:	e0 2d       	mov	r30, r0
+ 5da:	40 81       	ld	r20, Z
+ 5dc:	21 e0       	ldi	r18, 0x01	; 1
+ 5de:	30 e0       	ldi	r19, 0x00	; 0
+ 5e0:	b9 01       	movw	r22, r18
+ 5e2:	02 c0       	rjmp	.+4      	; 0x5e8 <DIO_s8SETPinDir+0x66>
+ 5e4:	66 0f       	add	r22, r22
+ 5e6:	77 1f       	adc	r23, r23
+ 5e8:	8a 95       	dec	r24
+ 5ea:	e2 f7       	brpl	.-8      	; 0x5e4 <DIO_s8SETPinDir+0x62>
+ 5ec:	cb 01       	movw	r24, r22
+ 5ee:	84 2b       	or	r24, r20
+ 5f0:	80 83       	st	Z, r24
+ 5f2:	80 e0       	ldi	r24, 0x00	; 0
+ 5f4:	08 95       	ret
+ 5f6:	8f ef       	ldi	r24, 0xFF	; 255
+ 5f8:	08 95       	ret
+ 5fa:	8f ef       	ldi	r24, 0xFF	; 255
+ 5fc:	08 95       	ret
+ 5fe:	80 e0       	ldi	r24, 0x00	; 0
+ 600:	08 95       	ret
+
+00000602 <DIO_s8SETPinVal>:
+ 602:	80 32       	cpi	r24, 0x20	; 32
+ 604:	c0 f5       	brcc	.+112    	; 0x676 <DIO_s8SETPinVal+0x74>
+ 606:	62 30       	cpi	r22, 0x02	; 2
+ 608:	c0 f5       	brcc	.+112    	; 0x67a <DIO_s8SETPinVal+0x78>
+ 60a:	e8 2f       	mov	r30, r24
+ 60c:	e6 95       	lsr	r30
+ 60e:	e6 95       	lsr	r30
+ 610:	e6 95       	lsr	r30
+ 612:	87 70       	andi	r24, 0x07	; 7
+ 614:	61 11       	cpse	r22, r1
+ 616:	17 c0       	rjmp	.+46     	; 0x646 <DIO_s8SETPinVal+0x44>
+ 618:	f0 e0       	ldi	r31, 0x00	; 0
+ 61a:	ee 0f       	add	r30, r30
+ 61c:	ff 1f       	adc	r31, r31
+ 61e:	e8 59       	subi	r30, 0x98	; 152
+ 620:	ff 4f       	sbci	r31, 0xFF	; 255
+ 622:	01 90       	ld	r0, Z+
+ 624:	f0 81       	ld	r31, Z
+ 626:	e0 2d       	mov	r30, r0
+ 628:	40 81       	ld	r20, Z
+ 62a:	21 e0       	ldi	r18, 0x01	; 1
+ 62c:	30 e0       	ldi	r19, 0x00	; 0
+ 62e:	b9 01       	movw	r22, r18
+ 630:	02 c0       	rjmp	.+4      	; 0x636 <DIO_s8SETPinVal+0x34>
+ 632:	66 0f       	add	r22, r22
+ 634:	77 1f       	adc	r23, r23
+ 636:	8a 95       	dec	r24
+ 638:	e2 f7       	brpl	.-8      	; 0x632 <DIO_s8SETPinVal+0x30>
+ 63a:	cb 01       	movw	r24, r22
+ 63c:	80 95       	com	r24
+ 63e:	84 23       	and	r24, r20
+ 640:	80 83       	st	Z, r24
+ 642:	80 e0       	ldi	r24, 0x00	; 0
+ 644:	08 95       	ret
+ 646:	61 30       	cpi	r22, 0x01	; 1
+ 648:	d1 f4       	brne	.+52     	; 0x67e <DIO_s8SETPinVal+0x7c>
+ 64a:	f0 e0       	ldi	r31, 0x00	; 0
+ 64c:	ee 0f       	add	r30, r30
+ 64e:	ff 1f       	adc	r31, r31
+ 650:	e8 59       	subi	r30, 0x98	; 152
+ 652:	ff 4f       	sbci	r31, 0xFF	; 255
+ 654:	01 90       	ld	r0, Z+
+ 656:	f0 81       	ld	r31, Z
+ 658:	e0 2d       	mov	r30, r0
+ 65a:	40 81       	ld	r20, Z
+ 65c:	21 e0       	ldi	r18, 0x01	; 1
+ 65e:	30 e0       	ldi	r19, 0x00	; 0
+ 660:	b9 01       	movw	r22, r18
+ 662:	02 c0       	rjmp	.+4      	; 0x668 <DIO_s8SETPinVal+0x66>
+ 664:	66 0f       	add	r22, r22
+ 666:	77 1f       	adc	r23, r23
+ 668:	8a 95       	dec	r24
+ 66a:	e2 f7       	brpl	.-8      	; 0x664 <DIO_s8SETPinVal+0x62>
+ 66c:	cb 01       	movw	r24, r22
+ 66e:	84 2b       	or	r24, r20
+ 670:	80 83       	st	Z, r24
+ 672:	80 e0       	ldi	r24, 0x00	; 0
+ 674:	08 95       	ret
+ 676:	8f ef       	ldi	r24, 0xFF	; 255
+ 678:	08 95       	ret
+ 67a:	8f ef       	ldi	r24, 0xFF	; 255
+ 67c:	08 95       	ret
+ 67e:	80 e0       	ldi	r24, 0x00	; 0
+ 680:	08 95       	ret
+
+00000682 <DIO_s8TOGPinVal>:
+ 682:	80 32       	cpi	r24, 0x20	; 32
+ 684:	d8 f4       	brcc	.+54     	; 0x6bc <DIO_s8TOGPinVal+0x3a>
+ 686:	e8 2f       	mov	r30, r24
+ 688:	e6 95       	lsr	r30
+ 68a:	e6 95       	lsr	r30
+ 68c:	e6 95       	lsr	r30
+ 68e:	87 70       	andi	r24, 0x07	; 7
+ 690:	f0 e0       	ldi	r31, 0x00	; 0
+ 692:	ee 0f       	add	r30, r30
+ 694:	ff 1f       	adc	r31, r31
+ 696:	e8 59       	subi	r30, 0x98	; 152
+ 698:	ff 4f       	sbci	r31, 0xFF	; 255
+ 69a:	01 90       	ld	r0, Z+
+ 69c:	f0 81       	ld	r31, Z
+ 69e:	e0 2d       	mov	r30, r0
+ 6a0:	40 81       	ld	r20, Z
+ 6a2:	21 e0       	ldi	r18, 0x01	; 1
+ 6a4:	30 e0       	ldi	r19, 0x00	; 0
+ 6a6:	b9 01       	movw	r22, r18
+ 6a8:	02 c0       	rjmp	.+4      	; 0x6ae <DIO_s8TOGPinVal+0x2c>
+ 6aa:	66 0f       	add	r22, r22
+ 6ac:	77 1f       	adc	r23, r23
+ 6ae:	8a 95       	dec	r24
+ 6b0:	e2 f7       	brpl	.-8      	; 0x6aa <DIO_s8TOGPinVal+0x28>
+ 6b2:	cb 01       	movw	r24, r22
+ 6b4:	84 27       	eor	r24, r20
+ 6b6:	80 83       	st	Z, r24
+ 6b8:	80 e0       	ldi	r24, 0x00	; 0
+ 6ba:	08 95       	ret
+ 6bc:	8f ef       	ldi	r24, 0xFF	; 255
+ 6be:	08 95       	ret
+
+000006c0 <i2c_init_master>:
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
  6c0:	81 b1       	in	r24, 0x01	; 1
  6c2:	8d 7f       	andi	r24, 0xFD	; 253
  6c4:	81 b9       	out	0x01, r24	; 1
@@ -1435,6 +2220,7 @@ Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
  6e6:	e1 f7       	brne	.-8      	; 0x6e0 <i2c_start+0xa>
  6e8:	08 95       	ret
 
+<<<<<<< HEAD
 000006ea <i2c_repeated_start>:
  6ea:	84 ea       	ldi	r24, 0xA4	; 164
  6ec:	86 bf       	out	0x36, r24	; 54
@@ -1486,9 +2272,72 @@ Uchar8_t DIO_s8SETPinVal (enu_pin enPinCopy, enu_val enPortVal)
  73c:	86 b7       	in	r24, 0x36	; 54
  73e:	80 68       	ori	r24, 0x80	; 128
  740:	86 bf       	out	0x36, r24	; 54
+=======
+000006dc <i2c_start>:
+ 6dc:	84 ea       	ldi	r24, 0xA4	; 164
+ 6de:	86 bf       	out	0x36, r24	; 54
+ 6e0:	06 b6       	in	r0, 0x36	; 54
+ 6e2:	07 fe       	sbrs	r0, 7
+ 6e4:	fd cf       	rjmp	.-6      	; 0x6e0 <i2c_start+0x4>
+ 6e6:	81 b1       	in	r24, 0x01	; 1
+ 6e8:	88 7f       	andi	r24, 0xF8	; 248
+ 6ea:	88 30       	cpi	r24, 0x08	; 8
+ 6ec:	e1 f7       	brne	.-8      	; 0x6e6 <i2c_start+0xa>
+ 6ee:	08 95       	ret
+
+000006f0 <i2c_repeated_start>:
+ 6f0:	84 ea       	ldi	r24, 0xA4	; 164
+ 6f2:	86 bf       	out	0x36, r24	; 54
+ 6f4:	06 b6       	in	r0, 0x36	; 54
+ 6f6:	07 fe       	sbrs	r0, 7
+ 6f8:	fd cf       	rjmp	.-6      	; 0x6f4 <i2c_repeated_start+0x4>
+ 6fa:	81 b1       	in	r24, 0x01	; 1
+ 6fc:	88 7f       	andi	r24, 0xF8	; 248
+ 6fe:	80 31       	cpi	r24, 0x10	; 16
+ 700:	e1 f7       	brne	.-8      	; 0x6fa <i2c_repeated_start+0xa>
+ 702:	08 95       	ret
+
+00000704 <i2c_send_slave_address_with_write_req>:
+ 704:	88 0f       	add	r24, r24
+ 706:	83 b9       	out	0x03, r24	; 3
+ 708:	83 b1       	in	r24, 0x03	; 3
+ 70a:	8e 7f       	andi	r24, 0xFE	; 254
+ 70c:	83 b9       	out	0x03, r24	; 3
+ 70e:	84 e8       	ldi	r24, 0x84	; 132
+ 710:	86 bf       	out	0x36, r24	; 54
+ 712:	06 b6       	in	r0, 0x36	; 54
+ 714:	07 fe       	sbrs	r0, 7
+ 716:	fd cf       	rjmp	.-6      	; 0x712 <i2c_send_slave_address_with_write_req+0xe>
+ 718:	81 b1       	in	r24, 0x01	; 1
+ 71a:	88 7f       	andi	r24, 0xF8	; 248
+ 71c:	88 31       	cpi	r24, 0x18	; 24
+ 71e:	e1 f7       	brne	.-8      	; 0x718 <i2c_send_slave_address_with_write_req+0x14>
+ 720:	08 95       	ret
+
+00000722 <i2c_send_slave_address_with_read_req>:
+ 722:	88 0f       	add	r24, r24
+ 724:	83 b9       	out	0x03, r24	; 3
+ 726:	83 b1       	in	r24, 0x03	; 3
+ 728:	81 60       	ori	r24, 0x01	; 1
+ 72a:	83 b9       	out	0x03, r24	; 3
+ 72c:	84 e8       	ldi	r24, 0x84	; 132
+ 72e:	86 bf       	out	0x36, r24	; 54
+ 730:	06 b6       	in	r0, 0x36	; 54
+ 732:	07 fe       	sbrs	r0, 7
+ 734:	fd cf       	rjmp	.-6      	; 0x730 <i2c_send_slave_address_with_read_req+0xe>
+ 736:	81 b1       	in	r24, 0x01	; 1
+ 738:	88 7f       	andi	r24, 0xF8	; 248
+ 73a:	80 34       	cpi	r24, 0x40	; 64
+ 73c:	e1 f7       	brne	.-8      	; 0x736 <i2c_send_slave_address_with_read_req+0x14>
+ 73e:	08 95       	ret
+
+00000740 <i2c_write_byte>:
+ 740:	83 b9       	out	0x03, r24	; 3
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
  742:	86 b7       	in	r24, 0x36	; 54
  744:	84 60       	ori	r24, 0x04	; 4
  746:	86 bf       	out	0x36, r24	; 54
+<<<<<<< HEAD
  748:	06 b6       	in	r0, 0x36	; 54
  74a:	07 fe       	sbrs	r0, 7
  74c:	fd cf       	rjmp	.-6      	; 0x748 <i2c_write_byte+0xe>
@@ -1544,6 +2393,42 @@ Uchar8_t i2c_read_byte_nack(void)
  77a:	8d b1       	in	r24, 0x0d	; 13
  77c:	87 7f       	andi	r24, 0xF7	; 247
  77e:	8d b9       	out	0x0d, r24	; 13
+=======
+ 748:	86 b7       	in	r24, 0x36	; 54
+ 74a:	84 60       	ori	r24, 0x04	; 4
+ 74c:	86 bf       	out	0x36, r24	; 54
+ 74e:	06 b6       	in	r0, 0x36	; 54
+ 750:	07 fe       	sbrs	r0, 7
+ 752:	fd cf       	rjmp	.-6      	; 0x74e <i2c_write_byte+0xe>
+ 754:	81 b1       	in	r24, 0x01	; 1
+ 756:	88 7f       	andi	r24, 0xF8	; 248
+ 758:	88 32       	cpi	r24, 0x28	; 40
+ 75a:	e1 f7       	brne	.-8      	; 0x754 <i2c_write_byte+0x14>
+ 75c:	08 95       	ret
+
+0000075e <i2c_read_byte>:
+ 75e:	84 e8       	ldi	r24, 0x84	; 132
+ 760:	86 bf       	out	0x36, r24	; 54
+ 762:	06 b6       	in	r0, 0x36	; 54
+ 764:	07 fe       	sbrs	r0, 7
+ 766:	fd cf       	rjmp	.-6      	; 0x762 <i2c_read_byte+0x4>
+ 768:	83 b1       	in	r24, 0x03	; 3
+ 76a:	08 95       	ret
+
+0000076c <i2c_stop>:
+ 76c:	86 b7       	in	r24, 0x36	; 54
+ 76e:	80 68       	ori	r24, 0x80	; 128
+ 770:	86 bf       	out	0x36, r24	; 54
+ 772:	86 b7       	in	r24, 0x36	; 54
+ 774:	80 61       	ori	r24, 0x10	; 16
+ 776:	86 bf       	out	0x36, r24	; 54
+ 778:	86 b7       	in	r24, 0x36	; 54
+ 77a:	84 60       	ori	r24, 0x04	; 4
+ 77c:	86 bf       	out	0x36, r24	; 54
+ 77e:	08 95       	ret
+
+00000780 <SPI_SlaveInit>:
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
  780:	8d b1       	in	r24, 0x0d	; 13
  782:	8b 7f       	andi	r24, 0xFB	; 251
  784:	8d b9       	out	0x0d, r24	; 13
@@ -1555,6 +2440,7 @@ Uchar8_t i2c_read_byte_nack(void)
  790:	8d b9       	out	0x0d, r24	; 13
  792:	08 95       	ret
 
+<<<<<<< HEAD
 00000794 <__vector_12>:
 
 /*************************************************************************************************************
@@ -1817,6 +2703,155 @@ void USART_receiveSTRING(Uchar8_t * str ,Uchar8_t size )
  8bc:	1f 91       	pop	r17
  8be:	0f 91       	pop	r16
  8c0:	08 95       	ret
+=======
+000007a0 <__vector_12>:
+ 7a0:	1f 92       	push	r1
+ 7a2:	0f 92       	push	r0
+ 7a4:	0f b6       	in	r0, 0x3f	; 63
+ 7a6:	0f 92       	push	r0
+ 7a8:	11 24       	eor	r1, r1
+ 7aa:	2f 93       	push	r18
+ 7ac:	3f 93       	push	r19
+ 7ae:	8f 93       	push	r24
+ 7b0:	9f 93       	push	r25
+ 7b2:	ef 93       	push	r30
+ 7b4:	ff 93       	push	r31
+ 7b6:	8f b1       	in	r24, 0x0f	; 15
+ 7b8:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <u8_g_SlaveReceive>
+ 7bc:	90 91 e6 01 	lds	r25, 0x01E6	; 0x8001e6 <u8_g_SlaveRxIndex>
+ 7c0:	9f 30       	cpi	r25, 0x0F	; 15
+ 7c2:	11 f4       	brne	.+4      	; 0x7c8 <__vector_12+0x28>
+ 7c4:	10 92 e6 01 	sts	0x01E6, r1	; 0x8001e6 <u8_g_SlaveRxIndex>
+ 7c8:	83 32       	cpi	r24, 0x23	; 35
+ 7ca:	59 f0       	breq	.+22     	; 0x7e2 <__vector_12+0x42>
+ 7cc:	90 91 e6 01 	lds	r25, 0x01E6	; 0x8001e6 <u8_g_SlaveRxIndex>
+ 7d0:	e9 2f       	mov	r30, r25
+ 7d2:	f0 e0       	ldi	r31, 0x00	; 0
+ 7d4:	eb 52       	subi	r30, 0x2B	; 43
+ 7d6:	fe 4f       	sbci	r31, 0xFE	; 254
+ 7d8:	80 83       	st	Z, r24
+ 7da:	9f 5f       	subi	r25, 0xFF	; 255
+ 7dc:	90 93 e6 01 	sts	0x01E6, r25	; 0x8001e6 <u8_g_SlaveRxIndex>
+ 7e0:	04 c0       	rjmp	.+8      	; 0x7ea <__vector_12+0x4a>
+ 7e2:	80 91 e6 01 	lds	r24, 0x01E6	; 0x8001e6 <u8_g_SlaveRxIndex>
+ 7e6:	80 93 14 02 	sts	0x0214, r24	; 0x800214 <u8_g_SlaveRxLen>
+ 7ea:	80 91 e7 01 	lds	r24, 0x01E7	; 0x8001e7 <u8_g_SlaveTxIndex>
+ 7ee:	90 91 15 02 	lds	r25, 0x0215	; 0x800215 <u8_g_SlaveTxLen>
+ 7f2:	89 17       	cp	r24, r25
+ 7f4:	88 f4       	brcc	.+34     	; 0x818 <__DATA_REGION_LENGTH__+0x18>
+ 7f6:	20 91 e4 01 	lds	r18, 0x01E4	; 0x8001e4 <pu8_g_SlaveTxPtr>
+ 7fa:	30 91 e5 01 	lds	r19, 0x01E5	; 0x8001e5 <pu8_g_SlaveTxPtr+0x1>
+ 7fe:	21 15       	cp	r18, r1
+ 800:	31 05       	cpc	r19, r1
+ 802:	51 f0       	breq	.+20     	; 0x818 <__DATA_REGION_LENGTH__+0x18>
+ 804:	91 e0       	ldi	r25, 0x01	; 1
+ 806:	98 0f       	add	r25, r24
+ 808:	90 93 e7 01 	sts	0x01E7, r25	; 0x8001e7 <u8_g_SlaveTxIndex>
+ 80c:	f9 01       	movw	r30, r18
+ 80e:	e8 0f       	add	r30, r24
+ 810:	f1 1d       	adc	r31, r1
+ 812:	80 81       	ld	r24, Z
+ 814:	8f b9       	out	0x0f, r24	; 15
+ 816:	04 c0       	rjmp	.+8      	; 0x820 <__DATA_REGION_LENGTH__+0x20>
+ 818:	89 17       	cp	r24, r25
+ 81a:	10 f0       	brcs	.+4      	; 0x820 <__DATA_REGION_LENGTH__+0x20>
+ 81c:	83 e2       	ldi	r24, 0x23	; 35
+ 81e:	8f b9       	out	0x0f, r24	; 15
+ 820:	ff 91       	pop	r31
+ 822:	ef 91       	pop	r30
+ 824:	9f 91       	pop	r25
+ 826:	8f 91       	pop	r24
+ 828:	3f 91       	pop	r19
+ 82a:	2f 91       	pop	r18
+ 82c:	0f 90       	pop	r0
+ 82e:	0f be       	out	0x3f, r0	; 63
+ 830:	0f 90       	pop	r0
+ 832:	1f 90       	pop	r1
+ 834:	18 95       	reti
+
+00000836 <USART_init>:
+ 836:	8a b1       	in	r24, 0x0a	; 10
+ 838:	8b 7f       	andi	r24, 0xFB	; 251
+ 83a:	9b b1       	in	r25, 0x0b	; 11
+ 83c:	9d 7f       	andi	r25, 0xFD	; 253
+ 83e:	9b b9       	out	0x0b, r25	; 11
+ 840:	88 61       	ori	r24, 0x18	; 24
+ 842:	8a b9       	out	0x0a, r24	; 10
+ 844:	83 e3       	ldi	r24, 0x33	; 51
+ 846:	89 b9       	out	0x09, r24	; 9
+ 848:	10 bc       	out	0x20, r1	; 32
+ 84a:	80 e0       	ldi	r24, 0x00	; 0
+ 84c:	08 95       	ret
+
+0000084e <USART_sendData>:
+ 84e:	5d 9b       	sbis	0x0b, 5	; 11
+ 850:	fe cf       	rjmp	.-4      	; 0x84e <USART_sendData>
+ 852:	8c b9       	out	0x0c, r24	; 12
+ 854:	80 e0       	ldi	r24, 0x00	; 0
+ 856:	08 95       	ret
+
+00000858 <USART_receiveData>:
+ 858:	5f 9b       	sbis	0x0b, 7	; 11
+ 85a:	fe cf       	rjmp	.-4      	; 0x858 <USART_receiveData>
+ 85c:	8c b1       	in	r24, 0x0c	; 12
+ 85e:	08 95       	ret
+
+00000860 <USART_sendSTRING>:
+ 860:	0f 93       	push	r16
+ 862:	1f 93       	push	r17
+ 864:	cf 93       	push	r28
+ 866:	8c 01       	movw	r16, r24
+ 868:	c0 e0       	ldi	r28, 0x00	; 0
+ 86a:	03 c0       	rjmp	.+6      	; 0x872 <USART_sendSTRING+0x12>
+ 86c:	0e 94 27 04 	call	0x84e	; 0x84e <USART_sendData>
+ 870:	cf 5f       	subi	r28, 0xFF	; 255
+ 872:	f8 01       	movw	r30, r16
+ 874:	ec 0f       	add	r30, r28
+ 876:	f1 1d       	adc	r31, r1
+ 878:	80 81       	ld	r24, Z
+ 87a:	81 11       	cpse	r24, r1
+ 87c:	f7 cf       	rjmp	.-18     	; 0x86c <USART_sendSTRING+0xc>
+ 87e:	cf 91       	pop	r28
+ 880:	1f 91       	pop	r17
+ 882:	0f 91       	pop	r16
+ 884:	08 95       	ret
+
+00000886 <USART_receiveSTRING>:
+ 886:	0f 93       	push	r16
+ 888:	1f 93       	push	r17
+ 88a:	cf 93       	push	r28
+ 88c:	df 93       	push	r29
+ 88e:	8c 01       	movw	r16, r24
+ 890:	d6 2f       	mov	r29, r22
+ 892:	c0 e0       	ldi	r28, 0x00	; 0
+ 894:	0b c0       	rjmp	.+22     	; 0x8ac <USART_receiveSTRING+0x26>
+ 896:	0e 94 2c 04 	call	0x858	; 0x858 <USART_receiveData>
+ 89a:	f8 01       	movw	r30, r16
+ 89c:	ec 0f       	add	r30, r28
+ 89e:	f1 1d       	adc	r31, r1
+ 8a0:	80 83       	st	Z, r24
+ 8a2:	8d 30       	cpi	r24, 0x0D	; 13
+ 8a4:	59 f0       	breq	.+22     	; 0x8bc <USART_receiveSTRING+0x36>
+ 8a6:	0e 94 27 04 	call	0x84e	; 0x84e <USART_sendData>
+ 8aa:	cf 5f       	subi	r28, 0xFF	; 255
+ 8ac:	2c 2f       	mov	r18, r28
+ 8ae:	30 e0       	ldi	r19, 0x00	; 0
+ 8b0:	8d 2f       	mov	r24, r29
+ 8b2:	90 e0       	ldi	r25, 0x00	; 0
+ 8b4:	01 97       	sbiw	r24, 0x01	; 1
+ 8b6:	28 17       	cp	r18, r24
+ 8b8:	39 07       	cpc	r19, r25
+ 8ba:	6c f3       	brlt	.-38     	; 0x896 <USART_receiveSTRING+0x10>
+ 8bc:	f8 01       	movw	r30, r16
+ 8be:	ec 0f       	add	r30, r28
+ 8c0:	f1 1d       	adc	r31, r1
+ 8c2:	10 82       	st	Z, r1
+ 8c4:	df 91       	pop	r29
+ 8c6:	cf 91       	pop	r28
+ 8c8:	1f 91       	pop	r17
+ 8ca:	0f 91       	pop	r16
+ 8cc:	08 95       	ret
+>>>>>>> 9ec338d53a2fcc5d16aac9966bd08564fcf3ff7a
 
 000008c2 <_exit>:
  8c2:	f8 94       	cli
