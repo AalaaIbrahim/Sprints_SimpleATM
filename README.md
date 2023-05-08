@@ -1,2 +1,9 @@
-# SimpleATM
-Simple ATM project implementing ATM MCU &amp; Card MCU on ATMega32 Controllers
+# Sprints_SimpleATM
+#### Sprints Automotive Bootcamp
+#### Embedded Systems Level 2
+>Project 2:\
+Simple ATM
+
+## Videos
+>#### Individual roles + simulation: 
+Google drive [link](https://clipchamp.com/watch/6RaLsbiGE9a)
