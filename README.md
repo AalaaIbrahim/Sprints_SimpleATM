@@ -5,5 +5,4 @@
 Simple ATM
 
 ## Videos
->#### Individual roles + simulation: 
-Google drive [link](https://clipchamp.com/watch/6RaLsbiGE9a)
+>#### Individual roles + simulation: [link](https://clipchamp.com/watch/6RaLsbiGE9a)
